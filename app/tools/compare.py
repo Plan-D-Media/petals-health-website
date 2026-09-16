@@ -19,7 +19,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DESIGN = os.path.join(ROOT, "..", "design", "render", "2.png")
 CHROME = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
 
-def screenshot(height=4860):
+def screenshot(height=4930):
     out = os.path.join(ROOT, "..", "design", "render", "build_page.png")
     srv = subprocess.Popen([sys.executable, "-m", "http.server", "4173", "--directory", os.path.join(ROOT, "dist"), "--bind", "127.0.0.1"],
                            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -62,9 +62,6 @@ SECTIONS = {
         ("pill text", (100, 830, 300, 860), navy, (0, 0, 7, 0), "opsz/weight: 18 px label 4% wider"),
         ("stat 100+", (1110, 780, 1200, 815), navy, None, ""),
         ("stat label L", (1110, 818, 1200, 860), navy, (-5, -3, 5, 0), "13 px floor: label raised from 11.2 px"),
-        ("utility Book", (690, 50, 790, 70), navy, (2, 0, -4, 0), "13 px vs 13.33: utility links 3% narrower"),
-        ("nav About", (330, 115, 395, 135), white, (0, 0, 4, 0), "13 px floor: nav raised from 12 px"),
-        ("nav Petals Clinic", (885, 115, 1060, 135), white, (0, 0, 10, 0), "13 px floor: nav raised from 12 px"),
         ("logo", (190, 15, 270, 100), lambda a: a.min(axis=2) < 235, None, ""),
         ("photo", (110, 190, 630, 880), lambda a: a.min(axis=2) < 200, None, ""),
     ],
@@ -160,14 +157,38 @@ SECTIONS = {
     ],
 }
 
+# Deliberate whole-element moves (2026-09-16: spacing scale §3, hero column §4, header §5 of design/polish-proposals.md).
+# (dx, dy) in px: the build-side box and the intended delta are both offset by these. Later sections carry the
+# cumulative band growth: care +8, process −10, stories +8, specialists +10, hcard +10, insights +41 (page +67).
+SHIFT = {
+    "hero": {"button box": (0, -30.4), "button text": (0, -30.4), "stat 100+": (-420, -77), "stat label L": (-420, -77), "logo": (-106.6, 0)},
+    "care": {"H2": (0, 2), "sub-line": (0, 4), "card2 chip row1": (0, 5.4), "card1 chip row1": (0, 5.4), "card3 chips row1": (0, 5.4)},
+    "process": {"_all": (0, 8), "circle 1 ring (top arc)": (0, 4), "circle 2 fill (top arc)": (0, 4), "circle 3 ring (top arc)": (0, 4), "circle 4 ring (top arc)": (0, 4),
+                "digit 1": (0, 4), "digit 3": (0, 4), "title 1": (0, 4), "title 3": (0, 4), "desc 1": (0, 4), "desc 4": (0, 4)},
+    "stories": {"_all": (0, -2), "H2 line 1": (0, -10), "H2 line 2": (0, -10), "card 1 border": (0, -17), "card 2 border": (0, -17), "card 3 border": (0, -17),
+                "stars 1": (0, -17), "quote 1 text": (0, -17), "avatar 1": (0, -17), "name 1": (0, -17), "role 1": (0, -17), "avatar 3": (0, -17)},
+    "specialists": {"_all": (0, 6), "H2": (0, 3), "sub-line": (0, 18), "card1 white body": (0, 19), "card2 white body": (0, 19), "card4 white body": (0, 19),
+                    "name 1": (0, 19), "avatar 1 disc": (0, 19), "stars 1": (0, 19), "cta 1 text": (0, 19), "view-all text": (0, 21)},
+    "hcard": {"_all": (0, 16)},
+    "insights": {"_all": (0, 26), "H2": (0, 20), "sub-line": (0, 12), "card1 border": (0, 22), "card2 border": (0, 22), "card3 border": (0, 22),
+                 "topic 1": (0, 22), "excerpt 1": (0, 22), "meta 1": (0, 22), "read-more text": (0, 33)},
+    "footer": {"_all": (0, 67)},
+}
+
 def run(section, B, D):
     checks = SECTIONS[section]; residuals = []; rows = []; deviations = []
+    sh = SHIFT.get(section, {})
     for name, box, test, intended, reason in checks:
-        d = ink(D, box, test); b = ink(B, box, test)
+        dx, dy = sh.get(name, sh.get("_all", (0, 0)))
+        bbox = tuple(int(round(v)) for v in (box[0] + dx, box[1] + dy, box[2] + dx, box[3] + dy))
+        d = ink(D, box, test); b = ink(B, bbox, test)
         if d is None or b is None:
             rows.append((name, d, b, "n/a")); continue
         delta = tuple(b[i] - d[i] for i in range(4))
         intended = intended or (0, 0, 0, 0)
+        if dx or dy:
+            intended = (intended[0] + dx, intended[1] + dy, intended[2] + dx, intended[3] + dy)
+            reason = (reason + "; " if reason else "") + f"moved ({dx}, {dy}) by the 2026-09-16 spacing/layout decisions"
         resid = tuple(delta[i] - intended[i] for i in range(4))
         residuals += [abs(r) for r in resid]
         rows.append((name, delta, intended if any(intended) else "-", resid))

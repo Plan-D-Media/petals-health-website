@@ -1,6 +1,6 @@
 /* Values: design/section4-values.md. Inner y = page y − 2040. */
-.stories { width: 100%; height: 459.9px; }   /* 2040 (ESTIMATED) – 2499.9 (SVG) */
-.stories__inner { height: 459.9px; }
+.stories { width: 100%; height: 467.9px; }   /* 2038 (ESTIMATED) – 2505.9; +8 (cards -15, -> next section 80) */
+.stories__inner { height: 467.9px; }
 
 /* eyebrow baseline 2099 → top 2083.2 → inner 43.2 */
 .stories__eyebrow {
@@ -10,13 +10,13 @@
 }
 /* H2: 58/700 opsz 96, pitch 50 (mock 58.9 — regularised); line-1 baseline 2166 → top 2121.86 → inner 81.86 */
 .stories__title {
-  position: absolute; left: 0; right: 0; top: 79.86px; margin: 0; text-align: center;   /* 81.86 by formula; −2 after render comparison */
+  position: absolute; left: 0; right: 0; top: 71.86px; margin: 0; text-align: center;   /* 81.86 by formula; −2 after render comparison; -8: eyebrow -> H2 16 */
   font-size: var(--fs-display-lg); font-weight: var(--fw-display-lg); line-height: 50px; color: var(--blue-900);
   font-variation-settings: var(--opsz-display-alt);   /* matches the mock: opsz 12 width 618 vs design 625; opsz 96 gave 557 */
 }
 
 /* cards: 377.4 × 208.2 at y 2270 (inner 230); x 97.7 + i × 396.25 (equal 18.85 gaps) */
-.stories__cards { position: absolute; left: 97.7px; top: 230px; width: 1169.9px; height: 208.2px; }
+.stories__cards { position: absolute; left: 97.7px; top: 215px;   /* -15: H2 -> content 48 */ width: 1169.9px; height: 208.2px; }
 .story {
   position: absolute; top: 0; width: 377.4px; height: 208.2px; box-sizing: border-box;
   background: var(--white); border: 1.5px solid var(--blue-900); border-radius: var(--radius-card-lg);

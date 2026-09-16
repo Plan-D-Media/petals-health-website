@@ -1,6 +1,6 @@
 /* Values: design/sections5-8-values.md §6. Inner y = page y − 3120.9; panel-relative y = page y − 3150.9. */
-.hcard { width: 100%; height: 759.1px; }   /* 3120.9–3880 (bottom ESTIMATED) */
-.hcard__inner { height: 759.1px; }
+.hcard { width: 100%; height: 769.1px; }   /* 3120.9–3880 (bottom ESTIMATED); +10 (-> next section 80) */
+.hcard__inner { height: 769.1px; }
 
 .hcard__panel {
   position: absolute; left: 94.1px; top: 30px; width: 1164px; height: 697.8px; overflow: hidden;

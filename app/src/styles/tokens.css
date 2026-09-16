@@ -98,8 +98,9 @@
   --fs-footer-heading: 16px; --fw-footer-heading: 400;
   --fs-quote: 13px;       --fw-quote: 400;
   --fs-link: 13px;        --fw-link: 400;
-  --fs-footer-link: 13px; --fw-footer-link: 400;
-  --fs-nav: 13px;         --fw-nav: 500;      /* raised from 12 (readability floor) */
+  --fs-footer-link: 14px; --fw-footer-link: 400;   /* 2026-09-16 small-text hierarchy: links 14 */
+  --fs-nav: 15px;         --fw-nav: 500;      /* raised from 12 (floor) -> 15 (2026-09-16 small-text hierarchy: nav is the top small level) */
+  --fs-utility: 14px;     --fw-utility: 400;    /* utility-bar links (was caption 13) */
   --fs-caption: 13px;     --fw-caption: 400;  --lh-caption: 14px;   /* raised from 10.7; line-height ESTIMATED (hero) */
   --fs-label-lg: 18px;    --fw-label-lg: 500;   /* weight ESTIMATED (hero pill) */
   --fs-stat-value: 28px;  --fw-stat-value: 400; /* Lora: outline match + '100+' width 58 vs 57 in the mock; ESTIMATED size */
@@ -127,4 +128,21 @@
 
   /* ---- layout ---- */
   --page-width: 1366px;
+}
+
+/* ---------- motion, elevation, focus (approved 2026-09-16; see design/polish-proposals.md 1) ---------- */
+:root {
+  --dur-fast: 150ms;
+  --dur: 220ms;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  /* shadows are blue-900 at low alpha so depth reads brand-tinted on the pale bands, not grey */
+  --shadow-card-rest: 0 1px 0 rgba(0, 66, 126, 0.06);
+  --shadow-card: 0 12px 28px rgba(0, 66, 126, 0.14);        /* 4 px lift: doctor, story and article cards */
+  --shadow-card-lg: 0 8px 20px rgba(0, 66, 126, 0.12);      /* 2 px lift: the 426 px family cards (4 px read as floating at 1:1) */
+  --shadow-button: 0 4px 12px rgba(0, 66, 126, 0.22);
+  --shadow-pressed: inset 0 2px 4px rgba(0, 0, 0, 0.18);
+  --shadow-secondary: 0 2px 6px rgba(0, 66, 126, 0.16), 0 0 0 1px rgba(0, 66, 126, 0.12);   /* secondary button option B */
+  --shadow-menu: 0 12px 28px rgba(0, 66, 126, 0.18);
+  --focus-ring: var(--blue-900);           /* 8.9:1 on white */
+  --focus-ring-on-dark: var(--orange-500); /* 6.7:1 on blue-900 */
 }

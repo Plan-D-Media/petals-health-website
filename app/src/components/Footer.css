@@ -7,7 +7,7 @@
 .footer__bottom-inner { height: 116.2px; }
 
 /* about column: left 67, width 376, footer-link 13/14 (raised from 11.2/12.7), justified; first baseline 4478.5 → 38.1 → top = 38.1 − 11.29 = 26.81 */
-.footer__about { position: absolute; left: 67px; top: 26.81px; width: 430px; font-size: var(--fs-footer-link); font-weight: var(--fw-footer-link); line-height: 14px; text-align: justify; }   /* mock 376 wide at 11.2 px; 430 at 13 px keeps ~12 lines so the block fits above the ISO heading (deviation) */
+.footer__about { position: absolute; left: 67px; top: 26.81px; width: 430px; font-size: var(--fs-caption); font-weight: var(--fw-caption); line-height: 14px; text-align: justify; }   /* mock 376 wide at 11.2 px; 430 at 13 px keeps ~12 lines so the block fits above the ISO heading (deviation) */
 .footer__about p { margin: 0 0 14px; }
 .footer__about--highlight { color: var(--orange-500); }   /* mock #ffd591 → orange-500 (consolidated) */
 /* ISO block anchored to the design: heading baseline 4698.7 → 258.3 → top 243.42; line baseline 4725.5 → 285.1 → top 273.8 (13/14) */
@@ -18,12 +18,12 @@
 .footer__col { position: absolute; top: 28.12px; }   /* +4 after render comparison */
 .footer__heading { margin: 0; font-size: var(--fs-footer-heading); font-weight: var(--fw-footer-heading); line-height: 16px; color: var(--orange-500); white-space: nowrap; }
 .footer__col ul { list-style: none; margin: 12px 0 0; padding: 0; }
-.footer__col li { font-size: var(--fs-footer-link); font-weight: var(--fw-footer-link); line-height: 14px; white-space: nowrap; }
+.footer__col li { font-size: var(--fs-footer-link); font-weight: var(--fw-footer-link); line-height: 15px; white-space: nowrap; }   /* 14/15 (2026-09-16 small-text hierarchy) */
 .footer__col li + li { margin-top: 13px; }
 .footer__col a { color: var(--white); }
 
 /* copyright: 13/14, baseline 4779.4 → 41.1 in the bottom band → top 29.8; phone footer-phone 22/400, baseline 4838.3 → 100 → top = 100 − ((22−26.4)/2 + 20.46) = 81.74 */
-.footer__copy { position: absolute; left: 67px; top: 29.8px; margin: 0; font-size: var(--fs-footer-link); font-weight: var(--fw-footer-link); line-height: 14px; white-space: nowrap; }
+.footer__copy { position: absolute; left: 67px; top: 29.8px; margin: 0; font-size: var(--fs-caption); font-weight: var(--fw-caption); line-height: 14px; white-space: nowrap; }
 .footer__phone { position: absolute; left: 68px; top: 81.74px; display: flex; align-items: center; gap: 12px; font-size: var(--fs-footer-phone); font-weight: var(--fw-footer-phone); line-height: 22px; color: var(--white); white-space: nowrap; }
 .footer__phone-icon { color: var(--white); }
 .footer__phone-icon svg { width: 15.4px; height: 20.8px; display: block; }

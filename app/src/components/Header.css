@@ -1,4 +1,8 @@
-/* Values: design/hero-values.md — "Bars". All px at the 1366 canvas, 1:1 from the SVG. */
+/* Values: design/hero-values.md — "Bars" for sizes (bar heights, icon sizes, separator heights, logo box).
+   Layout re-cut 2026-09-16 (design/polish-proposals.md §5): both bars are flex rows on the 1366 content container
+   (95 px margins, the same edge as the health-card panel, testimonial and article cards). Rhythm: nav 15 px either
+   side of each separator, chevron 6 px after its label; utility 15 px either side of each separator, icon 9 px
+   before its label. The mock's hand-placed lefts (gaps 13–18) are logged as regularised. */
 
 .site-header { position: relative; width: 100%; }
 
@@ -7,7 +11,7 @@
 .utility__inner { height: 108px; }
 
 .utility__logo {
-  position: absolute; left: 201.6px; top: 24px; width: 54.4px; height: 69.3px; display: block;
+  position: absolute; left: 95px; top: 24px; width: 54.4px; height: 69.3px; display: block;   /* left 201.6 → 95 (container edge) */
 }
 .utility__logo img {
   display: block; width: 54.4px; height: 69.3px;
@@ -17,41 +21,29 @@
   -webkit-mask-size: 100% 100%; mask-size: 100% 100%;
 }
 
-.utility__item { position: absolute; top: 0; height: 108px; color: var(--blue-900); }
-.utility__icon { position: absolute; }
-.utility__icon--phone    { left: 541.1px; top: 47.7px; }
-.utility__icon--calendar { left: 665.1px; top: 48.8px; }
-.utility__icon--find     { left: 813.5px; top: 47.2px; }
-.utility__icon--ask      { left: 952.6px; top: 47.2px; }
-
-/* 13 px / 400 (caption). Baseline 63.8: top = 63.8 - ((13 - 15.6)/2 + 12.09) = 53.0 */
-.utility__text {
-  position: absolute; top: 53px; white-space: nowrap;
-  font-size: var(--fs-caption); font-weight: var(--fw-caption); line-height: 13px;
-}
-.utility__item--phone .utility__text { left: 563px; }   /* ESTIMATED — see hero-values.md */
-.utility__text--book { left: 697px; }
-.utility__text--find { left: 843px; }
-.utility__text--ask  { left: 985px; }
-
-.utility__sep { position: absolute; width: 1px; background: var(--blue-900); }
-.utility__sep--1 { left: 649.5px; top: 39.1px; height: 37.9px; }
-.utility__sep--2 { left: 801.4px; top: 40.7px; height: 37.9px; }
-.utility__sep--3 { left: 937.1px; top: 40.7px; height: 37.9px; }
+/* right group ends on the container's right edge (1271); content centre ≈ 58.5 as in the mock (bar centre 54 + 4.5) */
+.utility__links { position: absolute; right: 95px; top: 0; height: 108px; padding-top: 9px; box-sizing: border-box; display: flex; align-items: center; }
+.utility__item { display: flex; align-items: center; gap: 9px; padding: 0 15px; color: var(--blue-900); }
+.utility__item:last-child { padding-right: 0; }
+.utility__icon { display: block; line-height: 0; }
+.utility__icon--phone svg      { width: 15.41px; height: 20.8px; }
+.utility__icon--calendar svg   { width: 18.43px; height: 18.51px; }
+.utility__icon--findDoctor svg { width: 19.58px; height: 21.84px; }
+.utility__icon--askDoctor svg  { width: 25.49px; height: 20.83px; }
+/* 14 px / 400 (utility level, small-text hierarchy 2026-09-16) */
+.utility__text { white-space: nowrap; font-size: var(--fs-utility); font-weight: var(--fw-utility); line-height: 14px; }
+.utility__sep { flex: none; width: 1px; height: 37.9px; background: var(--blue-900); }
 
 /* ---------- nav bar: 108–142 ---------- */
 .nav { height: 34px; background: var(--blue-900); color: var(--white); }
-.nav__inner { height: 34px; }
+.nav__inner { height: 34px; display: flex; align-items: center; padding-left: 95px; box-sizing: border-box; }   /* Home tab on the container edge (was 261.3) */
 
-/* 13 px / 500 (nav, raised from 12). Baseline 128 → top = 128 - 108 - 10.79 = 9.2 */
+/* 15 px / 500 (nav level); text centred in the 34 px bar */
 .nav__item {
-  position: absolute; top: 10.7px; white-space: nowrap;   /* 9.2 computed; +1.5 after render comparison */
-  font-size: var(--fs-nav); font-weight: var(--fw-nav); line-height: 13px;
+  position: relative; display: inline-flex; align-items: center; padding: 0 15px; height: 34px; white-space: nowrap;
+  font-size: var(--fs-nav); font-weight: var(--fw-nav); line-height: 34px; color: var(--white);
 }
-.nav__item--active {
-  left: 261.3px; top: 0; width: 62.7px; height: 34px; background: var(--orange-500); color: var(--blue-900);
-  display: flex; align-items: center; justify-content: center;  /* centred: ESTIMATED */
-  padding-top: 0.6px; /* nudges baseline to 128 with the flex centring */
-}
-.nav__chevron { position: absolute; top: 11.3px; color: var(--white); }   /* 119.3 - 108 */
-.nav__sep { position: absolute; top: 7.8px; width: 1px; height: 18.4px; background: var(--white); } /* 115.8 - 108 */
+.nav__item--active { background: var(--orange-500); color: var(--blue-900); }   /* orange tab = current page */
+.nav__chevron { display: block; line-height: 0; margin-left: 6px; color: var(--white); }
+.nav__chevron svg { width: 17.94px; height: 10.99px; display: block; }
+.nav__sep { flex: none; width: 1px; height: 18.4px; background: var(--white); }

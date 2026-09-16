@@ -1,16 +1,16 @@
 /* Values: design/sections5-8-values.md §7. Inner y = page y − 3880. */
-.insights { width: 100%; height: 560.4px; }   /* 3880 (ESTIMATED) – 4440.4 (footer top, SVG) */
-.insights__inner { height: 560.4px; }
+.insights { width: 100%; height: 601.4px; }   /* 3880 (ESTIMATED) – 4440.4 in the mock; +41 (button +7, -> footer 80, was 46) */
+.insights__inner { height: 601.4px; }
 
 /* eyebrow baseline 3931.6 → 51.6 → top 35.8 */
 .insights__eyebrow { position: absolute; left: 0; right: 0; top: 35.8px; margin: 0; text-align: center; font-size: var(--fs-eyebrow); font-weight: var(--fw-eyebrow); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; line-height: 19px; color: var(--grey-600); }
 /* H2 baseline 3995.2 → 115.2; top = 115.2 − 48.14 = 67.06 */
-.insights__title { position: absolute; left: 0; right: 0; top: 67.06px; margin: 0; text-align: center; font-size: var(--fs-display-lg); font-weight: var(--fw-display-lg); line-height: 58px; color: var(--blue-900); font-variation-settings: var(--opsz-display-alt); }   /* opsz 12: 663 wide vs 669.5 in the mock; opsz 96 gave 602 */
+.insights__title { position: absolute; left: 0; right: 0; top: 61.06px;   /* -6: eyebrow -> H2 16 */ margin: 0; text-align: center; font-size: var(--fs-display-lg); font-weight: var(--fw-display-lg); line-height: 58px; color: var(--blue-900); font-variation-settings: var(--opsz-display-alt); }   /* opsz 12: 663 wide vs 669.5 in the mock; opsz 96 gave 602 */
 /* sub-line body 21/400; baseline 4043.6 → 163.6; 21/21 → top = 163.6 − ((21−25.2)/2 + 19.53) = 146.17 */
-.insights__subline { position: absolute; left: 0; right: 0; top: 146.17px; margin: 0; text-align: center; font-size: var(--fs-body); font-weight: var(--fw-body); line-height: 21px; color: var(--black); }
+.insights__subline { position: absolute; left: 0; right: 0; top: 132.17px;   /* -14: H2 -> sub-line 24 */ margin: 0; text-align: center; font-size: var(--fs-body); font-weight: var(--fw-body); line-height: 21px; color: var(--black); }
 
 /* cards 330.4 × 225.5 at y 4085.5 → 205.5; x 142.1 + i × 373.15 (regularised gaps 42.75) */
-.insights__cards { position: absolute; left: 142.1px; top: 205.5px; width: 1076.7px; height: 225.5px; }
+.insights__cards { position: absolute; left: 142.1px; top: 201.5px;   /* -4: sub-line -> cards 48 */ width: 1076.7px; height: 225.5px; }
 .post { position: absolute; top: 0; width: 330.4px; height: 225.5px; box-sizing: border-box; background: var(--white); border: 1.5px solid var(--blue-900); border-radius: var(--radius-card-lg); }
 /* topic: title 24/600 black; baseline 4164.5 → 79 in card; top = 79 − 19.92 = 59.08 (minus 1.5 border) */
 .post__topic { position: absolute; left: 18.3px; top: 57.58px; margin: 0; white-space: nowrap; font-size: var(--fs-title); font-weight: var(--fw-title); line-height: 24px; color: var(--black); font-variation-settings: var(--opsz-display-alt); }   /* 24/600 at opsz 12 = 166 wide vs 168.7 in the mock (opsz 24 gave 162) */
@@ -20,4 +20,4 @@
 .post__meta { position: absolute; left: 20.4px; top: 187.98px; margin: 0; white-space: nowrap; font-size: var(--fs-meta); font-weight: var(--fw-meta); line-height: 14px; color: var(--green-500); }
 
 /* "Read More Articles" 235.2 × 46 at y 4347.9 → 467.9, centred */
-.insights__more { position: absolute; left: 50%; transform: translateX(-50%); top: 467.9px; width: 235.2px; height: 46px; }
+.insights__more { position: absolute; left: 50%; transform: translateX(-50%); top: 474.9px;   /* +7: cards -> button 48 */ width: 235.2px; height: 46px; }

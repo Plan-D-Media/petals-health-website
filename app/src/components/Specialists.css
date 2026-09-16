@@ -1,10 +1,10 @@
 /* Values: design/sections5-8-values.md §5. Inner y = page y − 2499.9. */
 .specialists {
-  width: 100%; height: 621px;
+  width: 100%; height: 631px;   /* +10 (button +15, -> next section 80) */
   /* SVG radial gradient (white → #e3f2ff) at 64% over white: outer colour #edf7ff; centre (682.7, 310.5), r 750 */
   background: radial-gradient(750px circle at calc(50% - 0.3px) 310.5px, #ffffff 0%, #edf7ff 100%);
 }
-.specialists__inner { height: 621px; }
+.specialists__inner { height: 631px; }
 
 /* shared soft button: the design's PNG buttons (white centre → #e3f2ff edge radial), radius 11 */
 .btn-soft {
@@ -19,12 +19,12 @@
 .specialists__eyebrow { position: absolute; left: 0; right: 0; top: 31.9px; margin: 0; text-align: center; font-size: var(--fs-eyebrow); font-weight: var(--fw-eyebrow); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; line-height: 19px; color: var(--grey-600); }
 /* H2 baseline 2610.7 → inner 110.8; 58/58 → top = 110.8 − 48.14 = 62.66 */
 /* display-xl 64/700 at automatic optical size: 'M' cap 42 px → 64; 'M' legs 9 px = Bold (ExtraBold 10.1); 64/700 auto sets 606 wide vs 623 in the mock (logged). Baseline = M top 2567 + 42 = 2609 → inner 109.1; 64/64 → top = 109.1 − 53.12 = 55.98 */
-.specialists__title { position: absolute; left: 0; right: 0; top: 55.98px; margin: 0; text-align: center; font-size: var(--fs-display-xl); font-weight: var(--fw-display-xl); line-height: 64px; color: var(--blue-900); }
+.specialists__title { position: absolute; left: 0; right: 0; top: 52.98px;   /* -3: eyebrow -> H2 16 */ margin: 0; text-align: center; font-size: var(--fs-display-xl); font-weight: var(--fw-display-xl); line-height: 64px; color: var(--blue-900); }
 /* sub-line 18/400, baseline 2641.5 → inner 141.6; 18/18 → top = 141.6 − 14.94 = 126.66 */
-.specialists__subline { position: absolute; left: 0; right: 0; top: 126.66px; margin: 0; text-align: center; font-size: 18px; font-weight: 400; line-height: 18px; color: var(--black); }
+.specialists__subline { position: absolute; left: 0; right: 0; top: 138.66px;   /* +12: H2 -> sub-line 24 (was 9) */ margin: 0; text-align: center; font-size: 18px; font-weight: 400; line-height: 18px; color: var(--black); }
 
 /* cards 258.2 × 281.3 at y 2692.3 → inner 192.4; x 135.2 + i × 286.3 */
-.specialists__cards { position: absolute; left: 135.2px; top: 192.4px; width: 1117.2px; height: 281.3px; }
+.specialists__cards { position: absolute; left: 135.2px; top: 205.4px;   /* +13: sub-line -> cards 48 */ width: 1117.2px; height: 281.3px; }
 .doc {
   position: absolute; top: 0; width: 258.2px; height: 281.3px; overflow: hidden; border-radius: 20px;
   background: radial-gradient(circle farthest-corner at 50% 50%, var(--card-bg-inner) 0%, var(--card-bg-outer) 100%);
@@ -48,4 +48,4 @@
 .doc__cta { position: absolute; left: 25.8px; top: 237.4px; width: 206.6px; height: 34px; }
 
 /* "View all" 235.1 × 45.8 at y 3020.3 → inner 520.4, centred */
-.specialists__all { position: absolute; left: 50%; transform: translateX(-50%); top: 520.4px; width: 235.1px; height: 45.8px; }
+.specialists__all { position: absolute; left: 50%; transform: translateX(-50%); top: 535.4px;   /* +15: cards -> button 48 */ width: 235.1px; height: 45.8px; }

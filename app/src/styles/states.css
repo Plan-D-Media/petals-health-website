@@ -1,0 +1,46 @@
+/* Interaction states, approved 2026-09-16 (design/polish-proposals.md 1, 2). Tokens in tokens.css. */
+
+a, button, .chip, .care-card, .story, .doc, .post, .btn-soft, .hero__cta, .care-card__cta, .hcard__cta,
+.nav__item, .utility__item {
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease),
+              opacity var(--dur-fast) var(--ease), background-color var(--dur-fast) var(--ease),
+              color var(--dur-fast) var(--ease), text-decoration-color var(--dur-fast) var(--ease);
+}
+
+/* focus-visible: 2 px ring, 3 px offset; blue-900 on light bands, orange-500 on navy */
+:is(a, button, [tabindex]):focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 3px; border-radius: 4px; }
+:is(.nav, .footer, .hcard__panel) :is(a, button):focus-visible, .hero__cta:focus-visible { outline-color: var(--focus-ring-on-dark); }
+.nav__item:focus-visible { outline-offset: -4px; border-radius: 2px; }   /* inside the 34 px bar */
+
+/* nav items: 2 px orange underline (the active tab's colour) grows from the left; text colour unchanged */
+.nav__item:not(.nav__item--active)::after {
+  content: ''; position: absolute; left: 15px; right: 15px; bottom: 6px; height: 2px;
+  background: var(--orange-500); transform: scaleX(0); transform-origin: left; transition: transform var(--dur) var(--ease);
+}
+.nav__item:not(.nav__item--active):hover::after, .nav__item:not(.nav__item--active):focus-visible::after { transform: scaleX(1); }
+.nav__item--active:hover { filter: brightness(1.04); }
+
+/* utility and footer links: underline reveals in the text colour */
+.utility__text, .footer__col a { text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 3px; text-decoration-thickness: 1.5px; }
+.utility__item:hover .utility__text, .utility__item:focus-visible .utility__text, .footer__col a:hover, .footer__col a:focus-visible { text-decoration-color: currentColor; }
+
+/* cards: lift + brand-tinted shadow, no colour change. Family cards lift 2 px (large), the rest 4 px */
+.care-card, .story, .doc, .post { box-shadow: var(--shadow-card-rest); }
+.story:hover, .doc:hover, .post:hover, .story:focus-within, .doc:focus-within, .post:focus-within { transform: translateY(-4px); box-shadow: var(--shadow-card); }
+.care-card:hover, .care-card:focus-within { transform: translateY(-2px); box-shadow: var(--shadow-card-lg); }
+
+/* buttons: hover lift 1 px + shadow; pressed 1 px down + inset, 60 ms */
+:is(.hero__cta, .hcard__cta, .btn-soft, .care-card__cta):hover { transform: translateY(-1px); box-shadow: var(--shadow-button); }
+:is(.hero__cta, .hcard__cta, .btn-soft, .care-card__cta):active { transform: translateY(1px); box-shadow: var(--shadow-pressed); transition-duration: 60ms; }
+.chip:hover { transform: translateY(-1px); }
+
+/* secondary button, option B: 1 px blue-900 12 % ring + soft shadow; the cream buttons also get a warm foot */
+.care-card__cta {
+  background: linear-gradient(180deg, var(--button-cream-top) 0%, var(--button-cream-bottom) 70%, color-mix(in srgb, var(--orange-500) 18%, var(--white)) 100%);
+  box-shadow: var(--shadow-secondary);
+}
+.btn-soft { box-shadow: var(--shadow-secondary); }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: 0.01ms !important; }
+}

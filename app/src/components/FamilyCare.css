@@ -1,8 +1,8 @@
 /* Values: design/section2-values.md. Inner y = page y − 880. Baseline → top uses
    top = baseline − ((L − 1.2S)/2 + 0.93S) for Bricolage (typo metrics). */
 
-.care { width: 100%; height: 720px; }   /* 880–1600; bottom ESTIMATED */
-.care__inner { height: 720px; }
+.care { width: 100%; height: 728px; }   /* 880–1608; bottom ESTIMATED; +8 (spacing scale: -> next section 80) */
+.care__inner { height: 728px; }
 
 /* eyebrow line: 32/400, black, baseline 961 → top 934.44 → inner 54.44 */
 .care__eyebrow {
@@ -11,13 +11,13 @@
 }
 /* H2: 58/700 opsz 96, blue-900, baseline 1022.4 → top 974.26 → inner 94.26 */
 .care__title {
-  position: absolute; left: 0; right: 0; top: 94.26px; margin: 0; text-align: center; white-space: nowrap;
+  position: absolute; left: 0; right: 0; top: 96.26px; margin: 0; text-align: center; white-space: nowrap;   /* +2: eyebrow -> H2 16 */
   font-size: var(--fs-display-lg); font-weight: var(--fw-display-lg); line-height: 58px; color: var(--blue-900);
   font-variation-settings: var(--opsz-display);
 }
 /* sub-line: 32/400, black, baseline 1075.5 → top 1048.94 → inner 168.94 */
 .care__subline {
-  position: absolute; left: 0; right: 0; top: 168.94px; margin: 0; text-align: center;
+  position: absolute; left: 0; right: 0; top: 172.94px; margin: 0; text-align: center;   /* +4: H2 -> sub-line 24 (cards stay: sub-line -> cards 48) */
   font-size: var(--fs-heading-line); font-weight: var(--fw-heading-line); line-height: 32px; color: var(--black);
 }
 
@@ -50,14 +50,14 @@
 
 /* subtitle: 16/300 body-sm, line-height 18, baseline 1253.1 → 120.3 → top 106.02; width 300 to keep the mock's wrap */
 .care-card__subtitle {
-  position: absolute; left: 48px; top: 106.02px; margin: 0;   /* width per card, see FamilyCare.jsx */
+  position: absolute; left: 48px; top: 106.02px; margin: 0; min-height: 36px;   /* width per card, see FamilyCare.jsx; min-height reserves two lines (2026-09-16) */
   font-size: var(--fs-body-sm); font-weight: var(--fw-body-sm); line-height: 18px;
 }
 .care-card--orange .care-card__subtitle { color: var(--card-orange-subtitle); }
 .care-card--blue   .care-card__subtitle { color: var(--black); }
 
 /* chips: rows from 1289.4 → 156.6 in card; pitch 38.5; height 27.2; gap 10; padding 0 11 */
-.care-card__chips { position: absolute; left: 48px; top: 156.6px; }
+.care-card__chips { position: absolute; left: 48px; top: 162px; }   /* 106 + 36 (two-line subtitle reserve) + 20: one chip top for all three cards (2026-09-16) */
 .care-card__row { display: flex; gap: 10px; height: 38.5px; align-items: flex-start; white-space: nowrap; }
 .chip {
   display: inline-flex; align-items: center; height: 27.2px; padding: 0 11px;

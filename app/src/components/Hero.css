@@ -40,7 +40,7 @@
 
 /* ---------- button: 304.3 × 64.8 at (687.5, 609.4); pill radius from render ---------- */
 .hero__cta {
-  position: absolute; left: 687.5px; top: 467.4px; width: 304.3px; height: 64.8px;
+  position: absolute; left: 687.5px; top: 437px; width: 304.3px; height: 64.8px;   /* 2026-09-16 spacing: paragraph ink bottom 531 + 48 = 579 page -> 437 (was 467.4) */
   border-radius: var(--radius-pill); background: var(--blue-900); color: var(--white);
   display: flex; align-items: center; justify-content: center;
   font-size: var(--fs-button); font-weight: var(--fw-button); line-height: 22px; white-space: nowrap;
@@ -62,7 +62,7 @@
 }
 
 /* ---------- stat blocks: 92 × 92 at x 1107.5 / 1207.2, y 769 (inner 627) ---------- */
-.hero__stats { position: absolute; left: 1107.5px; top: 627px; width: 191.7px; height: 92px; }
+.hero__stats { position: absolute; left: 687.5px; top: 550px; width: 191.7px; height: 92px; }   /* 2026-09-16: 48 under the button, left edge on the button's (was 1107.5, 627 bottom-right) */
 .stat {
   position: absolute; top: 0; width: 92px; height: 92px;
   border-radius: var(--radius-card-sm);
@@ -70,7 +70,7 @@
   color: var(--blue-900); text-align: center;
 }
 .stat--doctors { left: 0; }
-.stat--rating  { left: 99.7px; }
+.stat--rating  { left: 108px; }   /* 92 + 16 (spacing scale) — was 99.7 */
 /* stat-value: Lora 28 / 400; baseline 808.2 page → 39.2 in block */
 .stat__value {
   position: absolute; left: 0; right: 0; top: 14.95px;
