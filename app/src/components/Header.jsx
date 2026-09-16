@@ -1,18 +1,35 @@
+import { useCallback, useRef, useState } from 'react'
 import Icon from './Icon.jsx'
+import NavMenu from './NavMenu.jsx'
 import './Header.css'
 
 // Geometry: design/hero-values.md ("Bars") for sizes; layout re-cut 2026-09-16 (design/polish-proposals.md §5):
 // both bars are flex rows aligned to the 1366 content container (95 px margins), with a regular rhythm instead of the
-// mock's hand-placed lefts. Nav dropdowns are out of scope here: every item is a static link.
+// mock's hand-placed lefts.
+// Dropdowns: NavMenu.jsx. DEMO STAGE — only Treatments is wired (design/svg/8.svg); the other items stay static links
+// until the behaviour is approved.
 // TODO(breakpoints): desktop only; no narrower frames exist in the design.
 
+const TREATMENTS = [   // nine items, in the mock's order (spellings corrected: Womans, Cosmetice, Welness, Rejuvination)
+  { label: "Women's Care", href: '/treatments/womens-care' },
+  { label: 'Child Care', href: '/treatments/child-care' },
+  { label: 'Fertility Care', href: '/treatments/fertility-care' },
+  { label: 'Cosmetic Gynaecology & Aesthetics', href: '/treatments/cosmetic-gynaecology-aesthetics' },
+  { label: 'Dentistry', href: '/treatments/dentistry' },
+  { label: 'Multispecialty Clinic', href: '/treatments/multispecialty-clinic' },
+  { label: 'Yoga & Wellness', href: '/treatments/yoga-wellness' },
+  { label: 'Pain Management & Rejuvenation', href: '/treatments/pain-management-rejuvenation' },
+  { label: 'Audiology', href: '/treatments/audiology' },
+]
+
 const NAV = [
-  { label: 'About us' },
-  { label: 'Clinics', chevron: true },
-  { label: 'Treatments', chevron: true },
-  { label: 'Diagnostic Services' },
-  { label: 'For Patients', chevron: true },
-  { label: 'Petals Clinic in Bangladesh' },
+  { id: 'home', label: 'Home', href: '/', current: true },
+  { id: 'about', label: 'About us', href: '#' },
+  { id: 'clinics', label: 'Clinics', href: '#', chevron: true },
+  { id: 'treatments', label: 'Treatments', items: TREATMENTS },
+  { id: 'diagnostics', label: 'Diagnostic Services', href: '#' },
+  { id: 'patients', label: 'For Patients', href: '#', chevron: true },
+  { id: 'bangladesh', label: 'Petals Clinic in Bangladesh', href: '#' },
 ]
 
 const UTILITY = [
@@ -23,6 +40,21 @@ const UTILITY = [
 ]
 
 export default function Header() {
+  const [openId, setOpenId] = useState(null)
+  const tops = useRef({})   // id → top-level focusable (link or menu trigger)
+  const close = useCallback(() => setOpenId(null), [])
+
+  // ArrowLeft / ArrowRight between top-level items; carries an open menu across to the neighbour if it has one
+  const onArrow = (fromId, dir, wasOpen) => {
+    const i = NAV.findIndex((n) => n.id === fromId)
+    const next = NAV[(i + dir + NAV.length) % NAV.length]
+    tops.current[next.id]?.focus()
+    setOpenId(wasOpen && next.items ? next.id : null)
+  }
+  const onTopKey = (id) => (e) => {
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { e.preventDefault(); onArrow(id, e.key === 'ArrowRight' ? 1 : -1, false) }
+  }
+
   return (
     <header className="site-header">
       <div className="utility band"><div className="inner utility__inner">
@@ -40,14 +72,34 @@ export default function Header() {
         </div>
       </div></div>
 
-      <nav className="nav band" aria-label="Primary"><div className="inner nav__inner">
-        <a className="nav__item nav__item--active" href="/" aria-current="page">Home</a>
+      <nav className={'nav band' + (openId ? ' nav--menu-open' : '')} aria-label="Primary"><div className="inner nav__inner">
         {NAV.map((n, i) => [
-          i > 0 && <span key={'sep' + i} className="nav__sep" aria-hidden="true" />,
-          <a key={n.label} className="nav__item" href="#">
-            {n.label}
-            {n.chevron && <Icon name="chevron" className="nav__chevron" />}
-          </a>,
+          i > 1 && <span key={'sep' + i} className="nav__sep" aria-hidden="true" />,
+          n.items ? (
+            <NavMenu
+              key={n.id}
+              id={n.id}
+              label={n.label}
+              items={n.items}
+              open={openId === n.id}
+              onOpen={setOpenId}
+              onClose={close}
+              onArrow={onArrow}
+              triggerRef={(el) => { tops.current[n.id] = el }}
+            />
+          ) : (
+            <a
+              key={n.id}
+              ref={(el) => { tops.current[n.id] = el }}
+              className={'nav__item' + (n.current ? ' nav__item--active' : '')}
+              href={n.href}
+              aria-current={n.current ? 'page' : undefined}
+              onKeyDown={onTopKey(n.id)}
+            >
+              {n.label}
+              {n.chevron && <Icon name="chevron" className="nav__chevron" />}
+            </a>
+          ),
         ])}
       </div></nav>
     </header>

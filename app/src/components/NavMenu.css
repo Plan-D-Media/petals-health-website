@@ -1,0 +1,39 @@
+/* Values: design/svg/8.svg (Treatments dropdown mock), px at 1366.
+   Open tab: orange-500 fill, navy text, spans the full 34 px bar (mock 494.8–620.1 × 107.1–140.6).
+   Panel: 188.8 wide, hangs from the bar bottom (y 140.6), left edge = tab left; raster background white → warm cream
+   (#fff → #f3efe7 → #e7dfcf) built as white → cream-100 (no new colours); rows 32 (one line) / 48 (two lines) = 8 px
+   padding + 16 px line pitch; text navy, cap 9.9 → 14 px, semi-bold; label left inset 18.5; hairline separators fade
+   at both ends (mock: 1 px light-blue gradient strokes inset 3–7 px); highlighted row = full-width orange-500. */
+
+.nav__entry { position: relative; display: inline-flex; align-items: center; height: 34px; }
+
+.nav__item--trigger { background: none; border: 0; margin: 0; font-family: inherit; cursor: pointer; }
+.nav__item--open, .nav__item--open:hover { background: var(--orange-500); color: var(--blue-900); }
+.nav__item--open .nav__chevron { color: var(--blue-900); transform: rotate(180deg); }
+.nav__chevron { transition: transform var(--dur) var(--ease), color var(--dur-fast) var(--ease); }
+/* while a menu is open the orange moves to it: the current-page tab drops to the plain white-on-navy state (mock) */
+.nav--menu-open .nav__item--active { background: transparent; color: var(--white); }
+
+.nav__menu {
+  position: absolute; left: 0; top: 34px; z-index: 20; min-width: 188.8px; margin: 0; padding: 0; list-style: none;
+  background: linear-gradient(180deg, var(--white) 0%, var(--cream-100) 100%);
+  box-shadow: var(--shadow-menu);
+  opacity: 0; visibility: hidden; transform: translateY(-4px);
+  transition: opacity var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease), visibility 0s linear var(--dur-fast);
+}
+.nav__menu--open { opacity: 1; visibility: visible; transform: none; transition-delay: 0s; }
+
+.nav__menu li + li { border-top: 1px solid transparent; border-image: linear-gradient(90deg, transparent 0, color-mix(in srgb, var(--blue-200) 45%, transparent) 4%, color-mix(in srgb, var(--blue-200) 45%, transparent) 96%, transparent 100%) 1; }
+
+.nav__menu-item {
+  display: block; box-sizing: border-box; min-height: 32px; padding: 8px 12px 8px 18.5px; width: 188.8px;
+  font-size: 14px; font-weight: 600; line-height: 16px; color: var(--blue-900); text-decoration: none;
+  transition: background-color var(--dur-fast) var(--ease);
+}
+.nav__menu-item:hover, .nav__menu-item:focus-visible { background: var(--orange-500); }
+.nav__menu-item:focus-visible { outline: 2px solid var(--blue-900); outline-offset: -2px; border-radius: 0; }   /* keyboard focus = orange row + inset ring, distinct from hover */
+
+@media (prefers-reduced-motion: reduce) {
+  .nav__menu { transition: none; transform: none; }
+  .nav__chevron { transition: none; }
+}

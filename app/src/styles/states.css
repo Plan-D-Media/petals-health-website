@@ -13,11 +13,11 @@ a, button, .chip, .care-card, .story, .doc, .post, .btn-soft, .hero__cta, .care-
 .nav__item:focus-visible { outline-offset: -4px; border-radius: 2px; }   /* inside the 34 px bar */
 
 /* nav items: 2 px orange underline (the active tab's colour) grows from the left; text colour unchanged */
-.nav__item:not(.nav__item--active)::after {
+.nav__item:not(.nav__item--active):not(.nav__item--open)::after {
   content: ''; position: absolute; left: 15px; right: 15px; bottom: 6px; height: 2px;
   background: var(--orange-500); transform: scaleX(0); transform-origin: left; transition: transform var(--dur) var(--ease);
 }
-.nav__item:not(.nav__item--active):hover::after, .nav__item:not(.nav__item--active):focus-visible::after { transform: scaleX(1); }
+.nav__item:not(.nav__item--active):not(.nav__item--open):hover::after, .nav__item:not(.nav__item--active):not(.nav__item--open):focus-visible::after { transform: scaleX(1); }
 .nav__item--active:hover { filter: brightness(1.04); }
 
 /* utility and footer links: underline reveals in the text colour */
