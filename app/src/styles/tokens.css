@@ -1,0 +1,130 @@
+/* Petals Health — design tokens
+   Source of truth: design/tokens.md (colour), design/type-scale.md (type).
+   Layout is desktop-only at 1366 px; geometry is 1:1 from the Canva SVG. */
+
+@font-face {
+  font-family: 'Bricolage Grotesque';
+  src: url('/fonts/BricolageGrotesque-Variable.woff2') format('woff2-variations'),
+       url('/fonts/BricolageGrotesque-Variable.woff2') format('woff2');
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+/* opsz-12 static cuts, fallback only (see type-scale.md §2 "Optical size") */
+@font-face {
+  font-family: 'Bricolage Grotesque Static';
+  src: url('/fonts/BricolageGrotesque-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Bricolage Grotesque Static';
+  src: url('/fonts/BricolageGrotesque-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Lora';
+  src: url('/fonts/Lora-Variable.woff2') format('woff2-variations'),
+       url('/fonts/Lora-Variable.woff2') format('woff2');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Playfair Display';
+  src: url('/fonts/PlayfairDisplay-Variable.woff2') format('woff2-variations'),
+       url('/fonts/PlayfairDisplay-Variable.woff2') format('woff2');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ---- colour (tokens.md, consolidated by usage count / role) ---- */
+  --blue-900: #00427e;   /* nav, footer, headings, buttons; absorbs #17447e and #1c4e8f */
+  --blue-800: #1c4e8f;   /* footer main band only — reinstated 2026-09-15: with both footer bands on blue-900 the boundary needed a hairline that read as a seam */
+  --blue-500: #366db3;
+  --blue-200: #9ebff5;
+  --accent: #ed1941;       /* headline accent, large text only (4.36:1 on white) */
+  --accent-dark: #be1234;  /* small-text accent: links, sub-headings (6.31:1 on white) */
+  --orange-500: #ffb43a;   /* logo orange, active nav tab, amber CTAs */
+  --cta-start: #f86800;    /* sampled from the pasted raster CTA, darkened for 3:1 */
+  --cta-end: #ff4b1d;      /* sampled from the pasted raster CTA, unchanged */
+  --green-500: #00bf63;
+  --purple-500: #6e5fa1;
+  --grey-800: #1a1a1a;
+  --grey-600: #4d4d4d;     /* also the eyebrow labels */
+  --grey-500: #808080;
+  --cream-100: #f6f5e6;
+  --black: #000000;
+  --white: #ffffff;
+
+  /* Home "How we care" cards (design/section2-values.md) */
+  --card-orange-start: #e77500;   /* darkened from the PNG's #ff982e so the white 32 px Bold title clears 3:1 along the ramp */
+  --card-orange-end: #ff4b1d;
+  --card-blue-start: #d4e3ff;
+  --card-blue-end: #ffffff;
+  --chip-salmon: #ff8e7a;         /* salmon-300; text in grey-800 (7.79:1) — unified with the subtitle; navy was visibly a second dark tone */
+  --chip-cream: #fffbf4;
+  --button-cream-top: #ffffff;    /* the design's button PNG is a vertical gradient: white at the top */
+  --button-cream-bottom: #fff8eb; /* ...to warm cream at the bottom — this is what gives it an edge on the pale cards */
+  --button-cream: #fffcf5;        /* flat mean; superseded by the gradient pair */
+  --card-orange-subtitle: var(--grey-800);   /* navy only reaches 3.15:1 on the darkened ramp; grey-800 gives 5.2:1. Pending choice. */
+
+  /* gradient endpoints (DESIGN-SPEC §5.4, reduced from 41/257-stop Canva ramps) */
+  --hero-bg-inner: #ffffff;
+  --hero-bg-outer: #e3f2ff;     /* rgb(89.02%, 94.90%, 100%) */
+  --card-bg-inner: #ffffff;
+  --card-bg-outer: #7aadd9;     /* rgb(47.84%, 67.84%, 85.10%) */
+
+  /* ---- type (type-scale.md; px already converted from Canva points) ---- */
+  --font-sans: 'Bricolage Grotesque', 'Bricolage Grotesque Static', system-ui, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;   /* monogram initials only */
+  --font-stat: 'Lora', Georgia, serif;                 /* stat block numbers only (Lora is in the Canva document; OFL) */
+
+  --fs-display-xl: 64px;  --fw-display-xl: 700;   /* "Meet your care team": M cap 42 px → 64; stems 9 px = Bold; auto opsz (first-pass Canva 45.8 pt = 61 was this heading, mislabelled) */
+  --fs-display-lg: 58px;  --fw-display-lg: 700;
+  --fs-display-md: 53px;  --fw-display-md: 700;
+  --fs-heading-sm: 32px;  --fw-heading-sm: 700;
+  --fs-button-lg: 27px;   --fw-button-lg: 700;
+  --fs-title: 24px;       --fw-title: 600;
+  --fs-button: 22px;      --fw-button: 700;   /* Canva said Medium + B toggle. Rule: "Medium + B" renders as true Bold (700) — the label width matches the mock exactly at 700 (type-scale.md §2). */
+  --fs-footer-phone: 22px;--fw-footer-phone: 400;
+  --fs-body: 21px;        --fw-body: 400;
+  --fs-eyebrow: 19px;     --fw-eyebrow: 300;  --ls-eyebrow: 0.12em;
+  --fs-body-sm: 16px;     --fw-body-sm: 300;
+  --fs-body-sm-regular: 16px; --fw-body-sm-regular: 400; --lh-body-sm-regular: 19px;  /* Regular sibling of body-sm: step descriptions; weight ESTIMATED from a 1 px stem, line pitch measured */
+  --fs-footer-heading: 16px; --fw-footer-heading: 400;
+  --fs-quote: 13px;       --fw-quote: 400;
+  --fs-link: 13px;        --fw-link: 400;
+  --fs-footer-link: 13px; --fw-footer-link: 400;
+  --fs-nav: 13px;         --fw-nav: 500;      /* raised from 12 (readability floor) */
+  --fs-caption: 13px;     --fw-caption: 400;  --lh-caption: 14px;   /* raised from 10.7; line-height ESTIMATED (hero) */
+  --fs-label-lg: 18px;    --fw-label-lg: 500;   /* weight ESTIMATED (hero pill) */
+  --fs-stat-value: 28px;  --fw-stat-value: 400; /* Lora: outline match + '100+' width 58 vs 57 in the mock; ESTIMATED size */
+  --fs-heading-line: 32px; --fw-heading-line: 400; /* eyebrow line / sub-line around a section H2; weight ESTIMATED (stem 3 px) */
+  --fs-body-md: 19px;     --fw-body-md: 400;    /* article excerpts, step titles; ESTIMATED (asc 14.1 → 19) */
+  --fs-meta: 14px;        --fw-meta: 400;       /* dates, roles; ESTIMATED */
+  --fs-chip: 16px;        --fw-chip: 300;       /* ESTIMATED (ink 15.5 px); weight revised to Light after the render comparison — chip text matches the Light subtitle */
+  --fs-button-sm: 14px;   --fw-button-sm: 400;  /* ESTIMATED (ink 14.5 px) */
+
+  /* Canva rendered these at the variable font's default instance (opsz 96). */
+  /* Optical size — UNIFIED 2026-09-15 to automatic (font-optical-sizing: auto, opsz = px).
+     Canva rendered the Home headings at three different opsz values (96 / 12 / auto): drift, not intent.
+     By rendered width, 12 and 96 each match four headings and auto two, but auto has the lowest total
+     error (61 % summed vs 63 % / 69 %) and keeps every heading within 10 % of the mock, where either
+     pin leaves three headings 11–16 % off. Both variables now reset to `normal`; the width cost per
+     heading is recorded in design/type-scale.md §2. */
+  --opsz-display: normal;
+  --opsz-display-alt: normal;
+
+  /* ---- radius (all ESTIMATED from the render, see tokens.md) ---- */
+  --radius-pill: 9999px;
+  --radius-card-sm: 10px;
+  --radius-card: 12px;      /* from the SVG rounded clip (9 pt) — measured, not estimated */
+  --radius-card-lg: 21px;   /* testimonial cards, from the SVG rounded clip — measured */
+
+  /* ---- layout ---- */
+  --page-width: 1366px;
+}

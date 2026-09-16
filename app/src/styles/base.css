@@ -1,0 +1,22 @@
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--font-sans);
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Desktop-only container: the design exists at 1366 px and nothing narrower.
+   TODO(breakpoints): no mobile/tablet frames exist in the design; do not invent behaviour. */
+.page { width: 100%; min-width: var(--page-width); position: relative; overflow-x: clip; }
+/* A band spans the viewport and carries the background; its .inner is the 1366 px content box.
+   Content coordinates already include the design's own side margins, so .inner has no padding. */
+.band { position: relative; width: 100%; }
+.inner { position: relative; width: var(--page-width); margin-inline: auto; }
+
+a { color: inherit; text-decoration: none; }
+button { font: inherit; }

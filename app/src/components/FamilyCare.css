@@ -1,0 +1,77 @@
+/* Values: design/section2-values.md. Inner y = page y − 880. Baseline → top uses
+   top = baseline − ((L − 1.2S)/2 + 0.93S) for Bricolage (typo metrics). */
+
+.care { width: 100%; height: 720px; }   /* 880–1600; bottom ESTIMATED */
+.care__inner { height: 720px; }
+
+/* eyebrow line: 32/400, black, baseline 961 → top 934.44 → inner 54.44 */
+.care__eyebrow {
+  position: absolute; left: 0; right: 0; top: 54.44px; margin: 0; text-align: center;
+  font-size: var(--fs-heading-line); font-weight: var(--fw-heading-line); line-height: 32px; color: var(--black);
+}
+/* H2: 58/700 opsz 96, blue-900, baseline 1022.4 → top 974.26 → inner 94.26 */
+.care__title {
+  position: absolute; left: 0; right: 0; top: 94.26px; margin: 0; text-align: center; white-space: nowrap;
+  font-size: var(--fs-display-lg); font-weight: var(--fw-display-lg); line-height: 58px; color: var(--blue-900);
+  font-variation-settings: var(--opsz-display);
+}
+/* sub-line: 32/400, black, baseline 1075.5 → top 1048.94 → inner 168.94 */
+.care__subline {
+  position: absolute; left: 0; right: 0; top: 168.94px; margin: 0; text-align: center;
+  font-size: var(--fs-heading-line); font-weight: var(--fw-heading-line); line-height: 32px; color: var(--black);
+}
+
+/* ---------- cards: 426 × 410 at y 1132.8 (inner 252.8); x 32.3 / 471.9 / 911.5 (equal 13.6 gaps) ---------- */
+.care__cards { position: absolute; left: 32.3px; top: 252.8px; width: 1305.2px; height: 410px; }
+.care-card {
+  position: absolute; top: 0; width: 426px; height: 410px; overflow: hidden;
+  border-radius: var(--radius-card);
+  padding: 0 48px;                        /* regularised inner padding (mock: 29–35 on card 1, 47.5–50 on cards 2/3) */
+}
+.care-card:nth-child(1) { left: 0; }
+.care-card:nth-child(2) { left: 439.6px; }
+.care-card:nth-child(3) { left: 879.2px; }
+.care-card--orange { background: linear-gradient(135deg, var(--card-orange-start) 0%, var(--card-orange-end) 50%); }
+.care-card--blue   { background: linear-gradient(135deg, var(--card-blue-start) 0%, var(--card-blue-end) 100%); }
+
+/* petal outlines: 212 × 220.3 white path at opacity 0.19, page (352, 1062.8) and (793, 1062) → inner y 182.8 / 182;
+   drawn above the cards, not clipped: they run across the card gaps as in the design. */
+.care__petal { position: absolute; color: var(--white); opacity: 0.19; z-index: 1; pointer-events: none; }
+.care__petal--1 { left: 352px; top: 182.8px; }
+.care__petal--2 { left: 793px; top: 182px; }
+
+/* title: 32/700 heading-sm, baseline 1232 → 99.2 in card → top 72.64 */
+.care-card__title {
+  position: absolute; left: 48px; top: 72.64px; margin: 0; white-space: nowrap;
+  font-size: var(--fs-heading-sm); font-weight: var(--fw-heading-sm); line-height: 32px;
+}
+.care-card--orange .care-card__title { color: var(--white); }
+.care-card--blue   .care-card__title { color: var(--blue-900); }
+
+/* subtitle: 16/300 body-sm, line-height 18, baseline 1253.1 → 120.3 → top 106.02; width 300 to keep the mock's wrap */
+.care-card__subtitle {
+  position: absolute; left: 48px; top: 106.02px; margin: 0;   /* width per card, see FamilyCare.jsx */
+  font-size: var(--fs-body-sm); font-weight: var(--fw-body-sm); line-height: 18px;
+}
+.care-card--orange .care-card__subtitle { color: var(--card-orange-subtitle); }
+.care-card--blue   .care-card__subtitle { color: var(--black); }
+
+/* chips: rows from 1289.4 → 156.6 in card; pitch 38.5; height 27.2; gap 10; padding 0 11 */
+.care-card__chips { position: absolute; left: 48px; top: 156.6px; }
+.care-card__row { display: flex; gap: 10px; height: 38.5px; align-items: flex-start; white-space: nowrap; }
+.chip {
+  display: inline-flex; align-items: center; height: 27.2px; padding: 0 11px;
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-chip); font-weight: var(--fw-chip); line-height: 27.2px;
+}
+.care-card--orange .chip { background: var(--chip-salmon); color: var(--grey-800); }
+.care-card--blue   .chip { background: var(--chip-cream);  color: var(--black); }
+
+/* button: 242.4 × 32.6 pill, cream, centred; top 1462.7 → 329.9 in card; text 14/400 blue-900 */
+.care-card__cta {
+  position: absolute; left: 50%; top: 329.9px; transform: translateX(-50%);
+  width: 242.4px; height: 32.6px; border-radius: var(--radius-pill);
+  background: linear-gradient(180deg, var(--button-cream-top) 0%, var(--button-cream-bottom) 100%);   /* matches the PNG: #ffffff → #fff8eb */
+  display: flex; align-items: center; justify-content: center;
+  font-size: var(--fs-button-sm); font-weight: var(--fw-button-sm); line-height: 14px; color: var(--blue-900); white-space: nowrap;
+}

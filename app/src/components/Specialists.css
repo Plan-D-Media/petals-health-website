@@ -1,0 +1,51 @@
+/* Values: design/sections5-8-values.md §5. Inner y = page y − 2499.9. */
+.specialists {
+  width: 100%; height: 621px;
+  /* SVG radial gradient (white → #e3f2ff) at 64% over white: outer colour #edf7ff; centre (682.7, 310.5), r 750 */
+  background: radial-gradient(750px circle at calc(50% - 0.3px) 310.5px, #ffffff 0%, #edf7ff 100%);
+}
+.specialists__inner { height: 621px; }
+
+/* shared soft button: the design's PNG buttons (white centre → #e3f2ff edge radial), radius 11 */
+.btn-soft {
+  background: radial-gradient(circle farthest-side at 50% 50%, #ffffff 0%, var(--hero-bg-outer) 100%);
+  border-radius: 11px; color: var(--black);
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px; white-space: nowrap;
+  font-size: 16px; font-weight: 500;   /* button label 16/500 ESTIMATED */
+}
+.arrow { display: block; }
+
+/* eyebrow baseline 2547.6 → inner 47.7 → top 31.9 (19/19: −15.8) */
+.specialists__eyebrow { position: absolute; left: 0; right: 0; top: 31.9px; margin: 0; text-align: center; font-size: var(--fs-eyebrow); font-weight: var(--fw-eyebrow); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; line-height: 19px; color: var(--grey-600); }
+/* H2 baseline 2610.7 → inner 110.8; 58/58 → top = 110.8 − 48.14 = 62.66 */
+/* display-xl 64/700 at automatic optical size: 'M' cap 42 px → 64; 'M' legs 9 px = Bold (ExtraBold 10.1); 64/700 auto sets 606 wide vs 623 in the mock (logged). Baseline = M top 2567 + 42 = 2609 → inner 109.1; 64/64 → top = 109.1 − 53.12 = 55.98 */
+.specialists__title { position: absolute; left: 0; right: 0; top: 55.98px; margin: 0; text-align: center; font-size: var(--fs-display-xl); font-weight: var(--fw-display-xl); line-height: 64px; color: var(--blue-900); }
+/* sub-line 18/400, baseline 2641.5 → inner 141.6; 18/18 → top = 141.6 − 14.94 = 126.66 */
+.specialists__subline { position: absolute; left: 0; right: 0; top: 126.66px; margin: 0; text-align: center; font-size: 18px; font-weight: 400; line-height: 18px; color: var(--black); }
+
+/* cards 258.2 × 281.3 at y 2692.3 → inner 192.4; x 135.2 + i × 286.3 */
+.specialists__cards { position: absolute; left: 135.2px; top: 192.4px; width: 1117.2px; height: 281.3px; }
+.doc {
+  position: absolute; top: 0; width: 258.2px; height: 281.3px; overflow: hidden; border-radius: 20px;
+  background: radial-gradient(circle farthest-corner at 50% 50%, var(--card-bg-inner) 0%, var(--card-bg-outer) 100%);
+}
+.doc__body { position: absolute; left: 0; right: 0; top: 71.7px; height: 154.8px; background: var(--white); }
+/* avatar: white disc 61.9 at inset (15.3, 38.2); navy disc 51.8 inside; Playfair 28 */
+.doc__avatar { position: absolute; left: 15.3px; top: 38.2px; width: 61.9px; height: 61.9px; border-radius: 50%; background: var(--white); }
+.doc__avatar span { position: absolute; inset: 5px; border-radius: 50%; background: var(--blue-900); color: var(--white); display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 28px; font-weight: 400; line-height: 1; }
+/* badge: white pill, right inset 24.2, top 50.3; text raised to 13 px (floor) */
+.doc__badge { position: absolute; right: 24.2px; top: 47px; height: 22px; padding: 0 10px; border-radius: var(--radius-pill); background: var(--white); color: var(--black); font-size: var(--fs-caption); font-weight: var(--fw-caption); line-height: 22px; white-space: nowrap; }
+/* name: title 24/600, baseline 2819.4 → 127.1 in card; 24/24 → top = 127.1 − 19.92 = 107.18 */
+.doc__name { position: absolute; left: 20px; top: 107.18px; margin: 0; white-space: nowrap; font-size: var(--fs-title); font-weight: var(--fw-title); line-height: 24px; color: var(--blue-900); }
+/* role: caption 13/14, baseline 2836.7 → 144.4; top = 144.4 − 11.29 = 133.11 */
+.doc__role { position: absolute; left: 20px; top: 133.11px; margin: 0; white-space: nowrap; font-size: var(--fs-caption); font-weight: var(--fw-caption); line-height: var(--lh-caption); color: var(--black); }
+/* stars at inset (18.6, 204.8), 14.4 px, gap 3 */
+.doc__stars { position: absolute; left: 18.6px; top: 204.8px; display: flex; gap: 3px; color: var(--orange-500); }
+.doc__star svg { width: 14.4px; height: 13.7px; display: block; }
+/* location: right-aligned caption, bottom of the last line at 2910.6 → 218.3 in card */
+.doc__where { position: absolute; right: 16.4px; bottom: 63px; margin: 0; text-align: right; white-space: nowrap; font-size: var(--fs-caption); font-weight: var(--fw-caption); line-height: var(--lh-caption); color: var(--black); }
+/* button 206.6 × 34 at inset (25.8, 237.4) */
+.doc__cta { position: absolute; left: 25.8px; top: 237.4px; width: 206.6px; height: 34px; }
+
+/* "View all" 235.1 × 45.8 at y 3020.3 → inner 520.4, centred */
+.specialists__all { position: absolute; left: 50%; transform: translateX(-50%); top: 520.4px; width: 235.1px; height: 45.8px; }

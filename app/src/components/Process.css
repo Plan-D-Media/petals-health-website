@@ -1,0 +1,45 @@
+/* Values: design/section3-values.md. Inner y = page y − 1600. */
+.process { width: 100%; height: 440px; }   /* 1600–2040; both ends ESTIMATED */
+.process__inner { height: 440px; }
+
+/* eyebrow: 19/300 uppercase 0.12em grey-600; baseline 1627.6 → top = 1627.6 − ((19 − 22.8)/2 + 17.67) = 1611.8 → inner 11.8 */
+.process__eyebrow {
+  position: absolute; left: 0; right: 0; top: 11.8px; margin: 0; text-align: center;
+  font-size: var(--fs-eyebrow); font-weight: var(--fw-eyebrow); letter-spacing: var(--ls-eyebrow); text-transform: uppercase;
+  line-height: 19px; color: var(--grey-600);
+}
+/* H2: 58/700 opsz 96, line-height 50; baseline 1688.2 → top = 1688.2 − ((50 − 69.6)/2 + 53.94) = 1644.06 → inner 44.06 */
+.process__title {
+  position: absolute; left: 0; right: 0; top: 42.06px; margin: 0; text-align: center;   /* 44.06 by formula; −2 after render comparison (opsz-12 ascenders) */
+  font-size: var(--fs-display-lg); font-weight: var(--fw-display-lg); line-height: 50px; color: var(--blue-900);
+  font-variation-settings: var(--opsz-display-alt);   /* matches the mock: opsz 12 width 625 vs design 630; opsz 96 gave 563 */
+}
+
+/* steps: circles 108 at y 1789.3 → inner 189.3; x 190.9 + i × 296.17 (regularised) */
+.process__steps { position: absolute; left: 0; top: 189.3px; width: 1366px; height: 220px; margin: 0; padding: 0; list-style: none; }
+.step { position: absolute; top: 0; width: 108px; }
+.step__circle {
+  width: 108px; height: 108px; border-radius: 50%; box-sizing: border-box;
+  border: 3px solid var(--purple-500); background: var(--white);           /* ring 3 px (render) */
+  display: flex; align-items: center; justify-content: center;
+  font-size: 60px; font-weight: 400; line-height: 60px; color: var(--blue-900);   /* step-number: ESTIMATED 60/400 */
+}
+.step--filled .step__circle { background: var(--purple-500); border-color: var(--purple-500); color: var(--white); }
+
+/* connector: dash 5 / gap 3, 2 px, purple; from circle edge + 7 to next circle edge − 7 (296.17 − 108 − 14 = 174.17) */
+.step__connector {
+  position: absolute; left: 115px; top: 53px; width: 174.17px; height: 2px;
+  background: repeating-linear-gradient(90deg, var(--purple-500) 0 5px, transparent 5px 8px);
+}
+
+/* title: 18/400 black, centred under the circle; baseline 1932.1 → top = 1932.1 − ((18 − 21.6)/2 + 16.74) = 1917.16 → 127.86 in the step */
+.step__title {
+  position: absolute; left: 50%; transform: translateX(-50%); top: 127.4px; white-space: nowrap;   /* baseline 1932.1 at 19/19 */
+  font-size: 19px; font-weight: 400; line-height: 19px; color: var(--black);   /* step-title: ESTIMATED; 18 rendered 8% narrower than the mock, 19 matches */
+}
+/* description: body-sm-regular 16/400, line-height 19; baseline 1958.8 → top = 1958.8 − ((19 − 19.2)/2 + 14.88) = 1944.02 → 154.72 */
+.step__desc {
+  position: absolute; left: 50%; transform: translateX(-50%); top: 154.72px; width: 200px; margin: 0; text-align: center;
+  font-size: var(--fs-body-sm-regular); font-weight: var(--fw-body-sm-regular); line-height: var(--lh-body-sm-regular); color: var(--black);
+  white-space: nowrap;
+}

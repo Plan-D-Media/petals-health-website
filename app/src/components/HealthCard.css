@@ -1,0 +1,31 @@
+/* Values: design/sections5-8-values.md §6. Inner y = page y − 3120.9; panel-relative y = page y − 3150.9. */
+.hcard { width: 100%; height: 759.1px; }   /* 3120.9–3880 (bottom ESTIMATED) */
+.hcard__inner { height: 759.1px; }
+
+.hcard__panel {
+  position: absolute; left: 94.1px; top: 30px; width: 1164px; height: 697.8px; overflow: hidden;
+  border-radius: var(--radius-card-lg); background: var(--blue-900); color: var(--white);
+}
+/* decorative blue-500 shapes at 41%: (711.1,3150.9) 537.1×300.8 and a circle segment (771.1,3688.6) 402.2×160.1 — APPROXIMATED */
+.hcard__blob { position: absolute; background: var(--blue-500); opacity: 0.41; }
+.hcard__blob--top { left: 617px; top: 0; width: 537.1px; height: 300.8px; border-radius: 0 0 0 300px; }
+.hcard__blob--bottom { left: 677px; top: 537.7px; width: 402.2px; height: 402.2px; border-radius: 50%; }
+/* photo: image at page (5.6, 3082.0) 1250.4 × 824.6, clipped to (579.9, 3150.9)–(1256.5, 3848.7) → panel-relative clip left 485.8 */
+.hcard__photo { position: absolute; left: 485.8px; top: 0; width: 676.6px; height: 697.8px; overflow: hidden; }
+.hcard__photo img {
+  position: absolute; left: -574.3px; top: -68.9px; width: 1250.4px; height: 824.6px; display: block;
+  -webkit-mask-image: url('/assets/2_6ecce174.png'); mask-image: url('/assets/2_6ecce174.png');
+  -webkit-mask-mode: luminance; mask-mode: luminance; -webkit-mask-size: 100% 100%; mask-size: 100% 100%;
+}
+
+/* eyebrow 26/300 uppercase 0.12em white; baseline 3211.6 → panel 60.7; 26/26 → top = 60.7 − ((26−31.2)/2 + 24.18) = 39.12; left 187.5 − 94.1 = 93.4 */
+.hcard__eyebrow { position: absolute; left: 93.4px; top: 39.12px; margin: 0; font-size: 26px; font-weight: 300; letter-spacing: 0.155em;   /* 0.12em rendered 307 wide vs 323 in the mock; 0.155em matches */ text-transform: uppercase; line-height: 26px; white-space: nowrap; }
+/* H2 display-md 53/700 opsz 96, pitch 50; baseline 3271 → 120.1; top = 120.1 − 42.49 = 77.61; left 185.4 − 94.1 = 91.3 */
+.hcard__title { position: absolute; left: 91.3px; top: 77.61px; margin: 0; font-size: var(--fs-display-md); font-weight: var(--fw-display-md); line-height: 50px; font-variation-settings: var(--opsz-display); white-space: nowrap; }
+/* lead 21/400 lh 26; baseline 3404.1 → 253.2; top = 253.2 − 19.93 = 233.27; width 362 (wraps "Benefits") */
+.hcard__lead { position: absolute; left: 92.5px; top: 233.27px; width: 400px; margin: 0; font-size: var(--fs-body); font-weight: 300; line-height: 26px; font-variation-settings: 'opsz' 96; }   /* body copy, not a heading token: kept at opsz 96 where its width and wraps were matched (auto renders it 9% wider); Light at opsz 96; width 400 keeps 'Other' on line 1 as in the mock;: stem 1 px on the render (Light 1.6 / Regular 1.9); 300@96 sets the line 381 wide vs 360 in the mock */
+/* list 21/400 lh 24, item gap 6; first baseline 3505.8 → 354.9; top = 354.9 − ((24−25.2)/2 + 19.53) = 335.97; text left 212 − 94.1 = 117.9, bullet at 195 */
+.hcard__list { position: absolute; left: 100.9px; top: 335.97px; margin: 0; padding-left: 17px; width: 345px; font-size: var(--fs-body); font-weight: 300; line-height: 24px; font-variation-settings: 'opsz' 96; }   /* Light at opsz 96, as the lead (body copy, not a heading token) */
+.hcard__list li + li { margin-top: 6px; }
+/* button: white pill 265.1 × 32.2 at (193.2, 3688.6) → panel (99.1, 537.7); text 18/700 blue-900 */
+.hcard__cta { position: absolute; left: 99.1px; top: 537.7px; width: 265.1px; height: 32.2px; border-radius: var(--radius-pill); background: var(--white); color: var(--blue-900); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; line-height: 18px; white-space: nowrap; }

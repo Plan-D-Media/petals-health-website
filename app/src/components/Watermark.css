@@ -1,0 +1,21 @@
+/* See Watermark.jsx for provenance. Values in page px from design/svg/2.svg. */
+.watermark {
+  position: absolute; overflow: hidden; pointer-events: none;
+  opacity: 0.07;              /* mask rect fill-opacity 0.07 in the SVG */
+  z-index: 0;
+}
+.watermark__box {
+  position: absolute;
+}
+/* The image is 1800 × 1200 rotated -90° into a 1079.4 × 1619.2 box:
+   rendered unrotated at 1619.2 × 1079.4 and turned about the box centre. */
+.watermark__box img {
+  position: absolute;
+  width: 1619.2px; height: 1079.4px;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%) rotate(-90deg);
+  -webkit-mask-image: url('/assets/2_3bcc21fb.png'); mask-image: url('/assets/2_3bcc21fb.png');
+  -webkit-mask-mode: luminance; mask-mode: luminance;
+  -webkit-mask-size: 100% 100%; mask-size: 100% 100%;
+  display: block;
+}
