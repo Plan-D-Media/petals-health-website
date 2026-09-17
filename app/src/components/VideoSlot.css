@@ -5,10 +5,22 @@
 
 .video-slot__video {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;
-  border-radius: var(--radius-card-lg);   /* the poster is a masked cut-out; footage fills the 11:15 slot as a rounded panel */
   opacity: 0; transition: opacity var(--dur) var(--ease); pointer-events: none;
 }
 .video-slot--playing .video-slot__video, .video-slot--paused .video-slot__video { opacity: 1; }
+
+/* Footage fills the 11:15 rectangle where the poster is a masked cut-out. Two treatments (design/video-options.md):
+   flush — square-cornered, no edge: relies on footage shot on a backdrop close to the hero gradient (Option A)
+   card  — rounded corners + soft brand shadow, read as an intentional media panel; works with any footage (Option B) */
+.video-slot--card .video-slot__video { border-radius: var(--radius-card-lg); }
+.video-slot--card.video-slot--playing::after, .video-slot--card.video-slot--paused::after {
+  content: ''; position: absolute; inset: 0; border-radius: var(--radius-card-lg); box-shadow: var(--shadow-card), inset 0 0 0 1px rgba(0, 66, 126, 0.08); pointer-events: none;
+}
+.video-slot--card .video-slot__control { right: 20px; bottom: 20px; }
+/* once footage shows, the card lets its shadow out (two classes outrank .hero__photo's overflow: hidden) and hides the
+   oversized poster so nothing spills past the rounded panel */
+.video-slot--card.video-slot--playing, .video-slot--card.video-slot--paused { overflow: visible; }
+.video-slot--card.video-slot--playing .video-slot__poster, .video-slot--card.video-slot--paused .video-slot__poster { visibility: hidden; }
 
 /* control: 40 px white disc, blue-900 glyph, 16 px inside the slot's bottom-right corner */
 .video-slot__control {

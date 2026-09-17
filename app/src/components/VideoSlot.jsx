@@ -11,7 +11,7 @@ import './VideoSlot.css'
 //   - prefers-reduced-motion: no autoplay and nothing is preloaded; the poster stays, the control offers a manual play
 //   - a source that fails to load unmounts the video and hides the control; the poster stays (no broken player)
 //   - visible play/pause control (aria-label reflects the state)
-export default function VideoSlot({ poster, posterAlt = '', src, label = 'video', className = '' }) {
+export default function VideoSlot({ poster, posterAlt = '', src, label = 'video', className = '', variant = 'flush' }) {
   const root = useRef(null)
   const video = useRef(null)
   const [armed, setArmed] = useState(false)          // slot has entered the viewport → attach the source
@@ -51,7 +51,7 @@ export default function VideoSlot({ poster, posterAlt = '', src, label = 'video'
   const playing = status === 'playing'
 
   return (
-    <div ref={root} className={`video-slot video-slot--${status} ${className}`.trim()}>
+    <div ref={root} className={`video-slot video-slot--${variant} video-slot--${status} ${className}`.trim()}>
       <img className="video-slot__poster" src={poster} alt={posterAlt} />
       {hasVideo && (
         <video

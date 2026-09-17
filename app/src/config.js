@@ -8,3 +8,7 @@ export const HERO_VIDEO_SRC = '/media/hero-placeholder.mp4'
 
 // The design's hero photo: poster frame and the fallback when there is no video or it fails to load.
 export const HERO_POSTER = '/assets/2_04c0f486.png'
+
+// Footage treatment: 'flush' (Option A, matched backdrop, no visible edge) or 'card' (Option B, rounded panel + shadow).
+// Overridable for mock-ups with ?videoStyle=card|flush.
+export const HERO_VIDEO_STYLE = 'flush'
