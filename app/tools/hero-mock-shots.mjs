@@ -15,14 +15,15 @@ for (const name of names) {
   // inline the shared header into each mock at capture time
   const src = readFileSync(resolve(here, `${name}.src.html`), 'utf8').replace('<!--HEADER-->', header)
   const file = resolve(here, `${name}.html`); writeFileSync(file, src)
-  for (const width of [1366, 1920]) {
+  const widths = process.env.WIDTHS ? process.env.WIDTHS.split(',').map(Number) : [1366, 1920]
+  for (const width of widths) {
     const page = await browser.newPage()
     await page.setViewport({ width, height: 900 })
     const tall = process.argv[4] ? Number(process.argv[4]) : 900
     await page.goto(pathToFileURL(file).href, { waitUntil: 'networkidle0' })
     await page.evaluate(() => document.fonts.ready)
     await new Promise((r) => setTimeout(r, 300))
-    await page.screenshot({ path: resolve(here, `concept_${name}_${width}.png`), clip: { x: 0, y: 0, width, height: tall } })
+    await page.screenshot({ path: resolve(here, `concept_${name}_${width}.png`), fullPage: !process.argv[4] })
     console.log('captured', name, width)
     await page.close()
   }
