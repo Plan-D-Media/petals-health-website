@@ -38,7 +38,7 @@
 /* name: title 24/600, baseline 2819.4 → 127.1 in card; 24/24 → top = 127.1 − 19.92 = 107.18 */
 .doc__name { position: absolute; left: 20px; top: 107.18px; margin: 0; white-space: nowrap; font-size: var(--fs-title); font-weight: var(--fw-title); line-height: 24px; color: var(--blue-900); }
 /* role: caption 13/14, baseline 2836.7 → 144.4; top = 144.4 − 11.29 = 133.11 */
-.doc__role { position: absolute; left: 20px; top: 133.11px; margin: 0; white-space: nowrap; font-size: var(--fs-caption); font-weight: var(--fw-caption); line-height: var(--lh-caption); color: var(--black); }
+.doc__role { position: absolute; left: 20px; right: 16px; top: 133.11px; margin: 0; white-space: normal;   /* 2026-09-17: wraps inside the card (the mock's second line for Dr Siddiqui overflowed at 13 px); stars at 204.8 leave room for four lines */ font-size: var(--fs-caption); font-weight: var(--fw-caption); line-height: var(--lh-caption); color: var(--black); }
 /* stars at inset (18.6, 204.8), 14.4 px, gap 3 */
 .doc__stars { position: absolute; left: 18.6px; top: 204.8px; display: flex; gap: 3px; color: var(--orange-500); }
 .doc__star svg { width: 14.4px; height: 13.7px; display: block; }

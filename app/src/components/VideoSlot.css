@@ -1,0 +1,26 @@
+/* VideoSlot: poster underneath, video on top (fades in once it is playing), a round play/pause control.
+   Sizing and the poster's crop are the caller's (e.g. Hero.css .hero__photo); the slot itself is position: relative. */
+.video-slot { position: relative; overflow: hidden; }
+.video-slot__poster { display: block; }
+
+.video-slot__video {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;
+  border-radius: var(--radius-card-lg);   /* the poster is a masked cut-out; footage fills the 11:15 slot as a rounded panel */
+  opacity: 0; transition: opacity var(--dur) var(--ease); pointer-events: none;
+}
+.video-slot--playing .video-slot__video, .video-slot--paused .video-slot__video { opacity: 1; }
+
+/* control: 40 px white disc, blue-900 glyph, 16 px inside the slot's bottom-right corner */
+.video-slot__control {
+  position: absolute; right: 16px; bottom: 16px; width: 40px; height: 40px; padding: 0; border: 0; border-radius: 50%;
+  background: var(--white); color: var(--blue-900); box-shadow: var(--shadow-button); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.video-slot__control:hover { transform: translateY(-1px); }
+.video-slot__control:active { transform: translateY(1px); box-shadow: var(--shadow-pressed); }
+.video-slot__control svg { display: block; }
+
+@media (prefers-reduced-motion: reduce) {
+  .video-slot__video { transition: none; }
+}

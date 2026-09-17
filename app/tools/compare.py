@@ -27,7 +27,7 @@ def screenshot(height=4930):
         try:
             with socket.create_connection(("127.0.0.1", 4173), timeout=1): break
         except OSError: time.sleep(0.5)
-    subprocess.run([CHROME, "--headless=new", "--disable-gpu", "--hide-scrollbars", "--no-sandbox", f"--window-size=1366,{height}",
+    subprocess.run([CHROME, "--headless=new", "--disable-gpu", "--hide-scrollbars", "--no-sandbox", "--force-prefers-reduced-motion", f"--window-size=1366,{height}",   # reduced motion: the hero video slot renders its poster
                     "--virtual-time-budget=10000", f"--screenshot={out}", "http://127.0.0.1:4173/"], capture_output=True, text=True, timeout=120)
     srv.kill()
     return out
@@ -63,7 +63,7 @@ SECTIONS = {
         ("stat 100+", (1110, 780, 1200, 815), navy, None, ""),
         ("stat label L", (1110, 818, 1200, 860), navy, (-5, -3, 5, 0), "13 px floor: label raised from 11.2 px"),
         ("logo", (190, 15, 270, 100), lambda a: a.min(axis=2) < 235, None, ""),
-        ("photo", (110, 190, 630, 880), lambda a: a.min(axis=2) < 200, None, ""),
+        ("photo", (110, 190, 630, 815), lambda a: a.min(axis=2) < 200, None, ""),   # box stops above the video-slot control (y 824–864)
     ],
     "care": [
         ("eyebrow line", (300, 925, 1066, 975), black, (-5, 0, 5, 0), "opsz: 32 px line 3% wider, centred"),

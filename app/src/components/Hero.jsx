@@ -1,6 +1,8 @@
 import Icon from './Icon.jsx'
 import Watermark from './Watermark.jsx'
-import './Hero.css'
+import VideoSlot from './VideoSlot.jsx'
+import { HERO_VIDEO_SRC, HERO_POSTER } from '../config.js'
+import './Hero.css'   /* after VideoSlot.css so .hero__photo's absolute box wins */
 
 // Geometry and provenance: design/hero-values.md ("Hero band").
 // TODO(breakpoints): desktop only — no narrower frames exist in the design.
@@ -14,9 +16,7 @@ export default function Hero() {
       <Watermark part="hero" offsetTop={142} />
       <div className="inner hero__inner">
       {/* photo travels with the 1366 content box (the design's clip starts 120.5 px in; there is no bleed) */}
-      <div className="hero__photo">
-        <img src="/assets/2_04c0f486.png" alt="A mother holding her smiling baby" />
-      </div>
+      <VideoSlot className="hero__photo" poster={HERO_POSTER} posterAlt="A mother holding her smiling baby" src={HERO_VIDEO_SRC} label="hero video" />
 
       <h1 id="hero-title" className="hero__title">
         <span className="hero__title-line hero__title-line--primary">Caring for All,</span>
