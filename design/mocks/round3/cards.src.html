@@ -1,0 +1,82 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Family cards — three directions</title>
+<link rel="stylesheet" href="mock.css">
+<style>
+.page { min-width: 0; --card-orange-start: #e77500; --card-orange-end: #ff4b1d; --chip-salmon: #ff8e7a; --chip-cream: #fffbf4; --grey-800: #1a1a1a; --shadow-secondary: 0 2px 6px rgba(0,66,126,.16), 0 0 0 1px rgba(0,66,126,.12); }
+.wrap { width: min(1176px, 100% - 32px); margin: 0 auto; }
+.label { position: static; display: block; }
+.sec { padding: 40px 0 56px; }
+.eyebrow { margin: 0; text-align: center; font-size: 32px; line-height: 1.2; font-weight: 400; }
+.h2 { margin: 16px 0 0; text-align: center; color: var(--blue-900); font-size: 58px; line-height: 1.05; font-weight: 700; }
+.sub { margin: 24px 0 0; text-align: center; font-size: 32px; line-height: 1.2; }
+.grid { display: grid; gap: 24px; margin-top: 48px; }
+.cta { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; padding: 0 22px; border-radius: 999px; background: linear-gradient(180deg,#fff 0%,#fff8eb 70%,#fff2d9 100%); box-shadow: var(--shadow-secondary); color: var(--blue-900); font-size: 15px; font-weight: 500; }
+.chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.chip { display: inline-flex; align-items: center; min-height: 30px; padding: 0 12px; border-radius: 999px; font-size: 16px; font-weight: 300; }
+.orange { background: linear-gradient(135deg, var(--card-orange-start) 0%, var(--card-orange-end) 50%); color: #fff; }
+.orange .chip { background: var(--chip-salmon); color: var(--grey-800); }
+.pale { background: linear-gradient(135deg, #d4e3ff 0%, #fff 100%); box-shadow: var(--ring-card); }
+.pale .chip { background: var(--chip-cream); color: var(--black); }
+.pale h3, .pale .num { color: var(--blue-900); }
+h3 { margin: 0; font-size: 32px; line-height: 1.1; font-weight: 700; }
+.subt { margin: 6px 0 0; font-size: 16px; line-height: 1.3; font-weight: 300; }
+.orange .subt { color: var(--grey-800); }
+
+/* C1 · EDITORIAL — tonal top band with a big petal, title block, the treatments as a list of links, CTA as a text link */
+.c1 .grid { grid-template-columns: repeat(3, 1fr); }
+.c1 .card { border-radius: 21px; overflow: hidden; display: flex; flex-direction: column; min-height: 460px; }
+.c1 .top { height: 120px; position: relative; }
+.c1 .card.orange .top { background: rgba(255,255,255,.12); } .c1 .card.pale .top { background: radial-gradient(circle farthest-corner at 50% 50%, #fff 0%, #7aadd9 100%); }
+.c1 .top .petal { position: absolute; right: -30px; top: -40px; width: 180px; height: 180px; border-radius: 50% 50% 50% 0; background: rgba(255,255,255,.22); transform: rotate(-20deg); }
+.c1 .body { padding: 28px 32px 28px; display: flex; flex-direction: column; flex: 1; }
+.c1 ul.list { list-style: none; margin: 22px 0 0; padding: 0; font-size: 18px; line-height: 1.2; }
+.c1 ul.list li { display: flex; justify-content: space-between; padding: 10px 0; border-top: 1px solid rgba(0,66,126,.14); }
+.c1 .orange ul.list li { border-top-color: rgba(255,255,255,.35); } .c1 .orange ul.list li::after { content: '→'; opacity: .8; } .c1 .pale ul.list li::after { content: '→'; color: var(--blue-900); }
+.c1 .link { margin-top: auto; padding-top: 22px; font-size: 16px; font-weight: 700; } .c1 .pale .link { color: var(--blue-900); }
+
+/* C2 · RIBBONS — three full-width rows: title block | chips | CTA. Uses the width, reads as a directory */
+.c2 .grid { grid-template-columns: 1fr; gap: 16px; }
+.c2 .card { border-radius: 21px; display: grid; grid-template-columns: 300px 1fr auto; gap: 32px; align-items: center; padding: 32px 40px; }
+.c2 .chips { gap: 12px; } .c2 .chip { min-height: 34px; font-size: 17px; }
+
+/* C3 · TILES — equal tiles, generous padding, a large numeral in the corner, chips in a tight cluster, full-width CTA pill at the foot */
+.c3 .grid { grid-template-columns: repeat(3, 1fr); }
+.c3 .card { position: relative; border-radius: 24px; padding: 40px 32px 32px; display: flex; flex-direction: column; min-height: 440px; overflow: hidden; }
+.c3 .num { position: absolute; right: 24px; top: 8px; font-family: 'Lora', serif; font-size: 120px; line-height: 1; opacity: .16; }
+.c3 .orange .num { color: #fff; }
+.c3 h3 { font-size: 34px; }
+.c3 .chips { margin-top: 24px; gap: 8px; }
+.c3 .cta { margin-top: auto; width: 100%; min-height: 48px; margin-block-start: 28px; }
+
+@media (max-width: 767px) {
+  .eyebrow, .sub { font-size: 22px; } .h2 { font-size: 34px; }
+  .c1 .grid, .c3 .grid { grid-template-columns: 1fr; gap: 16px; }
+  .c1 .card { min-height: 0; } .c1 .top { height: 90px; } .c1 .body { padding: 20px; }
+  .c2 .card { grid-template-columns: 1fr; gap: 16px; padding: 24px 20px; }
+  .c3 .card { min-height: 0; padding: 28px 20px 24px; } .c3 .num { font-size: 90px; }
+}
+</style></head><body><div class="page">
+
+<div class="label">C1 · EDITORIAL — tonal top band, treatments as a linked list, text-link CTA</div>
+<section class="sec c1"><div class="wrap"><p class="eyebrow">How we care for your family</p><h2 class="h2">For her health, her children, her family</h2><p class="sub">Every stage of life, under one roof</p>
+<div class="grid">
+  <article class="card orange"><div class="top"><span class="petal"></span></div><div class="body"><h3>For Her Health</h3><p class="subt">From adolescence to motherhood and beyond</p><ul class="list"><li>Gynaecology</li><li>Pregnancy Care</li><li>High-Risk Pregnancy</li><li>Fertility Treatment</li><li>Cosmetic Gynaecology &amp; Aesthetics</li><li>Yoga &amp; Wellness</li></ul><span class="link">Explore Treatment →</span></div></article>
+  <article class="card pale"><div class="top"></div><div class="body"><h3>For Her Children</h3><p class="subt">Dedicated support for every growing smile and milestone.</p><ul class="list"><li>Paediatrics</li><li>Paediatric Dentistry</li><li>Vaccinations</li></ul><span class="link">Explore Treatment →</span></div></article>
+  <article class="card pale"><div class="top"></div><div class="body"><h3>For Whole Family</h3><p class="subt">Keeping every generation healthier, together.</p><ul class="list"><li>Cardiology</li><li>Dentistry</li><li>Diagnostics</li><li>Physiotherapy &amp; Pain Management</li><li>Audiology</li></ul><span class="link">Explore Treatment →</span></div></article>
+</div></div></section>
+
+<div class="label">C2 · RIBBONS — three full-width rows, title | chips | CTA (uses the whole width; strongest fix for the 1920 gutters)</div>
+<section class="sec c2"><div class="wrap"><p class="eyebrow">How we care for your family</p><h2 class="h2">For her health, her children, her family</h2><p class="sub">Every stage of life, under one roof</p>
+<div class="grid">
+  <article class="card orange"><div><h3>For Her Health</h3><p class="subt">From adolescence to motherhood and beyond</p></div><ul class="chips"><li class="chip">Gynaecology</li><li class="chip">Pregnancy Care</li><li class="chip">High-Risk Pregnancy</li><li class="chip">Fertility Treatment</li><li class="chip">Cosmetic Gynaecology &amp; Aesthetics</li><li class="chip">Yoga &amp; Wellness</li></ul><a class="cta">Explore Treatment →</a></article>
+  <article class="card pale"><div><h3>For Her Children</h3><p class="subt">Dedicated support for every growing smile and milestone.</p></div><ul class="chips"><li class="chip">Paediatrics</li><li class="chip">Paediatric Dentistry</li><li class="chip">Vaccinations</li></ul><a class="cta">Explore Treatment →</a></article>
+  <article class="card pale"><div><h3>For Whole Family</h3><p class="subt">Keeping every generation healthier, together.</p></div><ul class="chips"><li class="chip">Cardiology</li><li class="chip">Dentistry</li><li class="chip">Diagnostics</li><li class="chip">Physiotherapy &amp; Pain Management</li><li class="chip">Audiology</li></ul><a class="cta">Explore Treatment →</a></article>
+</div></div></section>
+
+<div class="label">C3 · TILES — equal tiles with a large numeral, generous padding, chips as a cluster, full-width CTA at the foot</div>
+<section class="sec c3"><div class="wrap"><p class="eyebrow">How we care for your family</p><h2 class="h2">For her health, her children, her family</h2><p class="sub">Every stage of life, under one roof</p>
+<div class="grid">
+  <article class="card orange"><span class="num">1</span><h3>For Her Health</h3><p class="subt">From adolescence to motherhood and beyond</p><ul class="chips"><li class="chip">Gynaecology</li><li class="chip">Pregnancy Care</li><li class="chip">High-Risk Pregnancy</li><li class="chip">Fertility Treatment</li><li class="chip">Cosmetic Gynaecology &amp; Aesthetics</li><li class="chip">Yoga &amp; Wellness</li></ul><a class="cta">Explore Treatment →</a></article>
+  <article class="card pale"><span class="num">2</span><h3>For Her Children</h3><p class="subt">Dedicated support for every growing smile and milestone.</p><ul class="chips"><li class="chip">Paediatrics</li><li class="chip">Paediatric Dentistry</li><li class="chip">Vaccinations</li></ul><a class="cta">Explore Treatment →</a></article>
+  <article class="card pale"><span class="num">3</span><h3>For Whole Family</h3><p class="subt">Keeping every generation healthier, together.</p><ul class="chips"><li class="chip">Cardiology</li><li class="chip">Dentistry</li><li class="chip">Diagnostics</li><li class="chip">Physiotherapy &amp; Pain Management</li><li class="chip">Audiology</li></ul><a class="cta">Explore Treatment →</a></article>
+</div></div></section>
+</div></body></html>

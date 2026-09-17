@@ -12,6 +12,15 @@
 }
 /* opsz-12 static cuts, fallback only (see type-scale.md §2 "Optical size") */
 @font-face {
+  font-family: 'Bricolage Fallback';   /* metric-matched Arial: text renders in this until Bricolage arrives, and the swap moves nothing
+                                          (size-adjust measured 100.7–103.6 % across 14–21 px; vertical metrics from the font) */
+  src: local('Arial');
+  size-adjust: 101.5%;
+  ascent-override: 93%;
+  descent-override: 27%;
+  line-gap-override: 0%;
+}
+@font-face {
   font-family: 'Bricolage Grotesque Static';
   src: url('/fonts/BricolageGrotesque-Regular.woff2') format('woff2');
   font-weight: 400;
@@ -79,7 +88,7 @@
   --card-bg-outer: #7aadd9;     /* rgb(47.84%, 67.84%, 85.10%) */
 
   /* ---- type (type-scale.md; px already converted from Canva points) ---- */
-  --font-sans: 'Bricolage Grotesque', 'Bricolage Grotesque Static', system-ui, sans-serif;
+  --font-sans: 'Bricolage Grotesque', 'Bricolage Fallback', 'Bricolage Grotesque Static', system-ui, sans-serif;
   --font-serif: 'Playfair Display', Georgia, serif;   /* monogram initials only */
   --font-stat: 'Lora', Georgia, serif;                 /* stat block numbers only (Lora is in the Canva document; OFL) */
 
