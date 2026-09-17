@@ -7,14 +7,14 @@
 .site-header { position: relative; width: 100%; }
 
 /* ---------- utility bar: 0–108 ---------- */
-.utility { height: 108px; background: var(--white); }
-.utility__inner { height: 108px; }
+.utility { height: 124px; background: var(--white); }   /* header ×1.2 (2026-09-17): 108 → 124 */
+.utility__inner { height: 124px; }
 
 .utility__logo {
-  position: absolute; left: 95px; top: 24px; width: 54.4px; height: 69.3px; display: block;   /* left 201.6 → 95 (container edge) */
+  position: absolute; left: 95px; top: 20.5px; width: 65px; height: 83px; display: block;   /* left 201.6 → 95 (container edge); ×1.2: 54.4 × 69.3 → 65 × 83 */
 }
 .utility__logo img {
-  display: block; width: 54.4px; height: 69.3px;
+  display: block; width: 65px; height: 83px;
   /* logo PNG is RGB on black; its alpha is the luminance mask that ships beside it in the SVG */
   -webkit-mask-image: url('/assets/2_bfab15d2.png'); mask-image: url('/assets/2_bfab15d2.png');
   -webkit-mask-mode: luminance; mask-mode: luminance;
@@ -22,28 +22,28 @@
 }
 
 /* right group ends on the container's right edge (1271); content centre ≈ 58.5 as in the mock (bar centre 54 + 4.5) */
-.utility__links { position: absolute; right: 95px; top: 0; height: 108px; padding-top: 9px; box-sizing: border-box; display: flex; align-items: center; }
-.utility__item { display: flex; align-items: center; gap: 9px; padding: 0 15px; color: var(--blue-900); }
+.utility__links { position: absolute; right: 95px; top: 0; height: 124px; padding-top: 9px; box-sizing: border-box; display: flex; align-items: center; }
+.utility__item { display: flex; align-items: center; gap: 10px; padding: 0 18px; color: var(--blue-900); }
 .utility__item:last-child { padding-right: 0; }
 .utility__icon { display: block; line-height: 0; }
-.utility__icon--phone svg      { width: 15.41px; height: 20.8px; }
-.utility__icon--calendar svg   { width: 18.43px; height: 18.51px; }
-.utility__icon--findDoctor svg { width: 19.58px; height: 21.84px; }
-.utility__icon--askDoctor svg  { width: 25.49px; height: 20.83px; }
+.utility__icon--phone svg      { width: 18.5px; height: 25px; }
+.utility__icon--calendar svg   { width: 22.1px; height: 22.2px; }
+.utility__icon--findDoctor svg { width: 23.5px; height: 26.2px; }
+.utility__icon--askDoctor svg  { width: 30.6px; height: 25px; }   /* ×1.2 */
 /* 14 px / 400 (utility level, small-text hierarchy 2026-09-16) */
-.utility__text { white-space: nowrap; font-size: var(--fs-utility); font-weight: var(--fw-utility); line-height: 14px; }
-.utility__sep { flex: none; width: 1px; height: 37.9px; background: var(--blue-900); }
+.utility__text { white-space: nowrap; font-size: var(--fs-utility); font-weight: var(--fw-utility); line-height: 16px; }
+.utility__sep { flex: none; width: 1px; height: 45.5px; background: var(--blue-900); }
 
 /* ---------- nav bar: 108–142 ---------- */
-.nav { height: 34px; background: var(--blue-900); color: var(--white); }
-.nav__inner { height: 34px; display: flex; align-items: center; padding-left: 95px; box-sizing: border-box; }   /* Home tab on the container edge (was 261.3) */
+.nav { height: 42px; background: var(--blue-900); color: var(--white); }   /* ×1.2: 34 → 42 */
+.nav__inner { height: 42px; display: flex; align-items: center; padding-left: 95px; box-sizing: border-box; }   /* Home tab on the container edge (was 261.3) */
 
 /* 15 px / 500 (nav level); text centred in the 34 px bar */
 .nav__item {
-  position: relative; display: inline-flex; align-items: center; padding: 0 15px; height: 34px; white-space: nowrap;
-  font-size: var(--fs-nav); font-weight: var(--fw-nav); line-height: 34px; color: var(--white);
+  position: relative; display: inline-flex; align-items: center; padding: 0 17px; height: 42px; white-space: nowrap;
+  font-size: var(--fs-nav); font-weight: var(--fw-nav); line-height: 42px; color: var(--white);
 }
 .nav__item--active { background: var(--orange-500); color: var(--blue-900); }   /* orange tab = current page */
-.nav__chevron { display: block; line-height: 0; margin-left: 6px; color: var(--white); }
-.nav__chevron svg { width: 17.94px; height: 10.99px; display: block; }
-.nav__sep { flex: none; width: 1px; height: 18.4px; background: var(--white); }
+.nav__chevron { display: block; line-height: 0; margin-left: 7px; color: var(--white); }
+.nav__chevron svg { width: 21.5px; height: 13.2px; display: block; }
+.nav__sep { flex: none; width: 1px; height: 22px; background: var(--white); }

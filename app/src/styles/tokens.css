@@ -99,8 +99,8 @@
   --fs-quote: 13px;       --fw-quote: 400;
   --fs-link: 13px;        --fw-link: 400;
   --fs-footer-link: 14px; --fw-footer-link: 400;   /* 2026-09-16 small-text hierarchy: links 14 */
-  --fs-nav: 15px;         --fw-nav: 500;      /* raised from 12 (floor) -> 15 (2026-09-16 small-text hierarchy: nav is the top small level) */
-  --fs-utility: 14px;     --fw-utility: 400;    /* utility-bar links (was caption 13) */
+  --fs-nav: 18px;         --fw-nav: 500;      /* header ×1.2 (2026-09-17): 15 → 18 */      /* raised from 12 (floor) -> 15 (2026-09-16 small-text hierarchy: nav is the top small level) */
+  --fs-utility: 16px;     --fw-utility: 400;    /* header ×1.2: 14 → 16 */    /* utility-bar links (was caption 13) */
   --fs-caption: 13px;     --fw-caption: 400;  --lh-caption: 14px;   /* raised from 10.7; line-height ESTIMATED (hero) */
   --fs-label-lg: 18px;    --fw-label-lg: 500;   /* weight ESTIMATED (hero pill) */
   --fs-stat-value: 28px;  --fw-stat-value: 400; /* Lora: outline match + '100+' width 58 vs 57 in the mock; ESTIMATED size */
