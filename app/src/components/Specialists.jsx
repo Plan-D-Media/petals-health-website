@@ -1,10 +1,10 @@
 import DoctorCard from './DoctorCard.jsx'
+import Carousel from './Carousel.jsx'
 import { DOCTORS } from '../data/doctors.js'
 import './Specialists.css'
 
 // Home section 5 — "OUR SPECIALISTS / Meet your care team". Rebuilt 2026-09-17 (design pass, round2-report §4):
-// a 740 px soft tint band with the new 300 × 410 doctor cards from the data file. The row is a track: the carousel
-// block adds arrows, drag, autoplay and keyboard behaviour on top of this markup.
+// a 740 px soft tint band with the new 300 × 410 doctor cards from the data file, in the shared Carousel.
 
 export function Arrow() {
   // 15 px arrow: 2 pt line + head, as drawn in the design (stroke path + small filled head)
@@ -24,13 +24,16 @@ export default function Specialists() {
         <h2 id="specialists-title" className="specialists__title">Meet your care team</h2>
         <p className="specialists__subline">Experienced, empathetic doctors who take time to truly understand your health.</p>
       </div>
-      <div className="specialists__track">
-        <div className="inner specialists__row-inner">
-          <div className="specialists__row">
-            {DOCTORS.map((d) => <DoctorCard key={d.id} doctor={d} />)}
-          </div>
-        </div>
-      </div>
+      <Carousel
+        className="specialists__carousel"
+        label="Our doctors"
+        items={DOCTORS}
+        renderItem={(d) => <DoctorCard doctor={d} />}
+        slideWidth={300}
+        gap={24}
+        autoplayMs={5000}
+        edgeArrows
+      />
       <div className="inner specialists__foot">
         <a className="specialists__all btn-soft" href="#doctors">View all 50+ Doctor <Arrow /></a>
       </div>

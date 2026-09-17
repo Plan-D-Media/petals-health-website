@@ -16,9 +16,11 @@
 }
 
 /* cards: 377.4 × 208.2 at y 2270 (inner 230); x 97.7 + i × 396.25 (equal 18.85 gaps) */
-.stories__cards { position: absolute; left: 97.7px; top: 215px;   /* -15: H2 -> content 48 */ width: 1169.9px; height: 208.2px; }
+/* the carousel viewport takes the cards' box: left 97.7, top 215 (−10 for the track's top padding), width 1169.9 */
+.stories__carousel { position: absolute; left: 97.7px; top: 205px; width: 1169.9px; }
+.stories__carousel .carousel__viewport { width: 1169.9px; }
 .story {
-  position: absolute; top: 0; width: 377.4px; height: 208.2px; box-sizing: border-box;
+  position: relative; width: 377.4px; height: 208.2px; box-sizing: border-box;
   background: var(--white); border: 1.5px solid var(--blue-900); border-radius: var(--radius-card-lg);
 }
 /* stars: 14.4 px, pitch 17.4 (3 px gap), top 19.7, right inset 29.7; vector star in orange-500 */
@@ -43,3 +45,8 @@
 .story__name { position: absolute; left: 82px; top: 143.8px;   /* 146.82 by formula; −3 after render comparison */ white-space: nowrap; font-size: 16px; font-weight: 700; line-height: 16px; color: var(--black); }
 /* role: 14/400, baseline 2447 → top = 2447 − ((14 − 16.8)/2 + 13.02) = 2435.38 → 165.38 */
 .story__role { position: absolute; left: 82.3px; top: 163.4px;   /* 165.38 by formula; −2 */ white-space: nowrap; font-size: 14px; font-weight: 400; line-height: 14px; color: var(--black); }
+
+/* placeholder tag: dummy content until real stories arrive */
+.story__placeholder { position: absolute; left: 22.4px; top: 16px; height: 18px; padding: 0 8px; border-radius: var(--radius-pill); background: var(--orange-500); color: var(--blue-900); font-size: 11px; font-weight: 700; line-height: 18px; letter-spacing: 0.04em; text-transform: uppercase; }
+.story__star--off { opacity: 0.25; }
+

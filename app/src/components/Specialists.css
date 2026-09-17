@@ -21,11 +21,12 @@
 .specialists__title { position: absolute; left: 0; right: 0; top: 75.1px; margin: 0; text-align: center; font-size: var(--fs-display-xl); font-weight: var(--fw-display-xl); line-height: 64px; color: var(--blue-900); }
 .specialists__subline { position: absolute; left: 0; right: 0; top: 163px; margin: 0; text-align: center; font-size: 18px; font-weight: 400; line-height: 18px; color: var(--black); }
 
-/* track: viewport-wide clip; the row starts on the 1366 container's left (47 px in, so four 300 px cards + 24 px gaps
-   fill 1272 of the 1366 box) and runs to the right — cards 5+ are reached by the carousel */
-.specialists__track { position: relative; width: 100%; height: 430px; overflow: hidden; }
-.specialists__row-inner { height: 430px; overflow: visible; }
-.specialists__row { position: absolute; left: 47px; top: 10px; display: flex; gap: 24px; padding-bottom: 10px; }
+/* carousel: viewport-wide; the track starts on the 1366 container's left (47 px in, so four 300 px cards + 24 px gaps
+   fill 1272 of the 1366 box) and runs to the right edge; arrows on the band edges */
+.specialists__carousel { width: 100%; height: 434px; }
+.specialists__carousel .carousel__viewport { margin-left: calc(50% - 636px); }
+.specialists__carousel .carousel__btn--prev { left: max(0px, calc(50% - 683px - 8px)); }
+.specialists__carousel .carousel__btn--next { right: 24px; }
 
 .specialists__foot { height: 78px; }
 .specialists__all { position: absolute; left: 50%; transform: translateX(-50%); top: 12px; width: 235.1px; height: 45.8px; }
