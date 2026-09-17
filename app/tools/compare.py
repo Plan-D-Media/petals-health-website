@@ -19,7 +19,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DESIGN = os.path.join(ROOT, "..", "design", "render", "2.png")
 CHROME = r"C:\Program Files\Google\Chrome\Application\chrome.exe"
 
-def screenshot(height=4930):
+def screenshot(height=5120):
     out = os.path.join(ROOT, "..", "design", "render", "build_page.png")
     srv = subprocess.Popen([sys.executable, "-m", "http.server", "4173", "--directory", os.path.join(ROOT, "dist"), "--bind", "127.0.0.1"],
                            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -53,18 +53,6 @@ def ink(arr, box, test):
 # Each check: (name, search box, colour test, intended delta (dx0, dy0, dx1, dy1) or None, reason)
 # Intended deltas are the documented deviations; "opsz" widths use ±width-growth on the right edge only.
 SECTIONS = {
-    "hero": [
-        ("H1 line 1", (640, 330, 1100, 396), navy, (0, 0, 30, 0), "opsz unified to auto: 53 px H1 renders 10% wider than Canva's opsz-96"),
-        ("H1 line 2", (640, 396, 1100, 445), red, (0, 0, 20, 0), "opsz auto: accent line 6% wider than Canva's opsz-96"),
-        ("paragraph", (660, 450, 1330, 545), black, None, ""),
-        ("button box", (670, 600, 1010, 690), navy, None, ""),
-        ("button text", (700, 620, 980, 665), white, (7, 0, -1, 0), "label at 700 renders 8 px narrower than the Canva Bold+toggle; centred in the button"),
-        ("pill text", (100, 830, 300, 860), navy, (0, 0, 7, 0), "opsz/weight: 18 px label 4% wider"),
-        ("stat 100+", (1110, 780, 1200, 815), navy, None, ""),
-        ("stat label L", (1110, 818, 1200, 860), navy, (-5, -3, 5, 0), "13 px floor: label raised from 11.2 px"),
-        ("logo", (190, 15, 270, 100), lambda a: a.min(axis=2) < 235, None, ""),
-        ("photo", (110, 190, 630, 790), lambda a: a.min(axis=2) < 200, None, ""),   # box stops above the video-slot control (card variant: y 796–836)
-    ],
     "care": [
         ("eyebrow line", (300, 925, 1066, 975), black, (-5, 0, 5, 0), "opsz: 32 px line 3% wider, centred"),
         ("H2", (150, 975, 1250, 1040), navy, (-34, 0, 33, 0), "opsz auto: 7% wider than Canva's opsz-96; centred"),
@@ -81,21 +69,6 @@ SECTIONS = {
         ("btn2 text", (590, 1468, 800, 1495), navy, (-4, 0, -9, 0), "button centred (mock +8.7 off)"),
         ("btn3 text", (1030, 1468, 1240, 1495), navy, (-14, 0, -6, 0), "button centred (mock +8.7 off)"),
     ],
-    "process": [
-        ("eyebrow SIMPLE PROCESS", (500, 1608, 866, 1635), lambda a: a.max(axis=2) < 140, (-15, 0, -15, 0), "eyebrow centred (mock sits 15 px right of centre)"),
-        ("H2 line 1", (300, 1636, 1100, 1690), navy, (-3, 0, -37, 0), "H2 centred (mock 20 px right); opsz auto 5% narrower than Canva's opsz-12"),
-        ("H2 line 2", (500, 1690, 900, 1742), navy, (-14, 0, -26, 0), "H2 centred (mock 20 px right); opsz auto narrower"),
-        ("circle 1 ring (top arc)", (180, 1782, 310, 1800), purple, None, ""),
-        ("circle 2 fill (top arc)", (470, 1782, 600, 1800), purple, (6, 0, 6, 0), "spacing regularised (481.5 → 487.1)"),
-        ("circle 3 ring (top arc)", (770, 1782, 900, 1800), purple, (5, 0, 5, 0), "spacing regularised (778.5 → 783.2)"),
-        ("circle 4 ring (top arc)", (1070, 1782, 1200, 1800), purple, None, ""),
-        ("digit 1", (200, 1815, 290, 1875), navy, None, ""),
-        ("digit 3", (790, 1815, 880, 1875), navy, (5, 0, 5, 0), "spacing regularised"),
-        ("title 1", (160, 1912, 335, 1938), lambda a: a.max(axis=2) < 140, None, ""),
-        ("title 3", (740, 1912, 910, 1938), lambda a: a.max(axis=2) < 140, (5, 0, 5, 0), "spacing regularised"),
-        ("desc 1", (140, 1940, 350, 2002), lambda a: a.max(axis=2) < 140, (-3, 0, 3, 0), "16 px text ~2% wider, centred"),
-        ("desc 4", (1040, 1940, 1220, 2002), lambda a: a.max(axis=2) < 140, (-3, 0, 3, 0), "16 px text ~2% wider, centred"),
-    ],
     "stories": [
         ("eyebrow PATIENT STORIES", (500, 2078, 866, 2105), lambda a: a.max(axis=2) < 140, (7, 0, 7, 0), "eyebrow centred (mock sits 7 px left of centre); width −10 tracking"),
         ("H2 line 1", (300, 2115, 1066, 2180), navy, (24, 0, -13, 0), "H2 centred (mock 6 px left); opsz auto 6% narrower than Canva's opsz-12"),
@@ -108,20 +81,7 @@ SECTIONS = {
         ("avatar 1", (115, 2405, 175, 2465), purple, (0, -1, 0, -1), "card top regularised"),
         ("name 1", (172, 2412, 300, 2436), black, (2, 0, 5, 0), "16/700 renders 3 px wider"),
         ("role 1", (172, 2434, 400, 2455), black, (3, 0, -11, 0), "14 px Regular 11 px narrower than the mock line (14.4 px + tracking)"),
-        ("avatar 3", (925, 2402, 985, 2462), purple, (-15, 1, -15, 1), "card 3 regularised (x −15.4, top +1.3)"),
-    ],
-    "specialists": [
-        ("eyebrow", (450, 2528, 916, 2555), lambda a: a.max(axis=2) < 140, (-3, 0, -3, 0), "centred (mock 3 px right)"),
-        ("H2", (300, 2555, 1066, 2632), navy, (7, 0, -7, 0), "64/700 auto opsz renders 14 px narrower; centred"),
-        ("sub-line", (200, 2624, 1166, 2650), black, (-8, 0, 8, 0), "18 px estimate; centred"),
-        ("card1 white body", (130, 2760, 400, 2925), white, None, ""),
-        ("card2 white body", (415, 2760, 685, 2925), white, (1, 0, 1, 0), "gaps regularised 27.5 → 28.1"),
-        ("card4 white body", (990, 2760, 1260, 2925), white, None, ""),
-        ("name 1", (150, 2795, 400, 2830), navy, (0, 0, 17, 0), "24/600 opsz auto 9% wider than Canva's opsz-96"),
-        ("avatar 1 disc", (148, 2728, 216, 2796), navy, None, ""),
-        ("stars 1", (150, 2892, 245, 2915), lambda a: (a[:, :, 0] > 220) & (a[:, :, 1] > 130) & (a[:, :, 1] < 200) & (a[:, :, 2] < 120), None, "vector star"),
-        ("cta 1 text", (170, 2935, 340, 2960), black, (0, 0, 4, 0), "16/500 estimate"),
-        ("view-all text", (590, 3030, 780, 3055), black, (0, 0, 2, 0), "16/500 estimate"),
+        ("avatar 3", (900, 2402, 985, 2462), purple, (-15, 1, -15, 1), "card 3 regularised (x −15.4, top +1.3)"),   # box widened left so the regularised disc is not clipped
     ],
     "hcard": [
         ("panel left edge/top", (85, 3140, 600, 3400), navy, None, ""),
@@ -132,18 +92,6 @@ SECTIONS = {
         ("bullet 1", (205, 3485, 560, 3512), white, (0, 0, -4, 0), "Light@opsz96 renders 294 vs 298"),
         ("button", (185, 3680, 470, 3730), white, None, ""),
         ("photo cutout", (600, 3160, 1250, 3840), lambda a: a.max(axis=2) > 150, None, ""),
-    ],
-    "insights": [
-        ("eyebrow", (450, 3912, 916, 3940), lambda a: a.max(axis=2) < 140, (2, 0, 2, 0), "centred (mock 2 px left)"),
-        ("H2", (300, 3945, 1066, 4002), navy, (17, 0, -18, 0), "opsz auto 5% narrower than Canva's opsz-12; centred"),
-        ("sub-line", (300, 4022, 1066, 4050), black, (-6, 0, 6, 0), "21 px render; centred"),
-        ("card1 border", (135, 4078, 480, 4318), lambda a: (np.abs(a - np.array((0, 66, 126))).max(axis=2) <= 90), None, ""),
-        ("card2 border", (510, 4078, 860, 4318), lambda a: (np.abs(a - np.array((0, 66, 126))).max(axis=2) <= 90), (-3, 0, -3, 0), "gaps regularised 46.1/39.4 → 42.75"),
-        ("card3 border", (880, 4078, 1230, 4318), lambda a: (np.abs(a - np.array((0, 66, 126))).max(axis=2) <= 90), None, ""),
-        ("topic 1", (155, 4140, 400, 4170), black, (0, 0, -7, 0), "24/600 opsz auto 4% narrower"),
-        ("excerpt 1", (155, 4174, 470, 4225), black, (0, 0, 6, 0), "19/400 width"),
-        ("meta 1", (155, 4272, 400, 4295), lambda a: (a[:, :, 1] > 150) & (a[:, :, 0] < 100), (0, 0, 4, 0), "14 px"),
-        ("read-more text", (590, 4358, 760, 4382), black, (0, 0, 2, 0), "16/500"),
     ],
     "footer": [
         ("main band", (0, 4436, 1366, 4762), navy, (0, 0, 0, 0), ""),
@@ -161,19 +109,17 @@ SECTIONS = {
 # (dx, dy) in px: the build-side box and the intended delta are both offset by these. Later sections carry the
 # cumulative band growth: care +8, process −10, stories +8, specialists +10, hcard +10, insights +41 (page +67).
 SHIFT = {
-    "hero": {"button box": (0, -30.4), "button text": (0, -30.4), "stat 100+": (-420, -77), "stat label L": (-420, -77), "logo": (-106.6, 0)},
-    "care": {"H2": (0, 2), "sub-line": (0, 4), "card2 chip row1": (0, 5.4), "card1 chip row1": (0, 5.4), "card3 chips row1": (0, 5.4)},
-    "process": {"_all": (0, 8), "circle 1 ring (top arc)": (0, 4), "circle 2 fill (top arc)": (0, 4), "circle 3 ring (top arc)": (0, 4), "circle 4 ring (top arc)": (0, 4),
-                "digit 1": (0, 4), "digit 3": (0, 4), "title 1": (0, 4), "title 3": (0, 4), "desc 1": (0, 4), "desc 4": (0, 4)},
-    "stories": {"_all": (0, -2), "H2 line 1": (0, -10), "H2 line 2": (0, -10), "card 1 border": (0, -17), "card 2 border": (0, -17), "card 3 border": (0, -17),
-                "stars 1": (0, -17), "quote 1 text": (0, -17), "avatar 1": (0, -17), "name 1": (0, -17), "role 1": (0, -17), "avatar 3": (0, -17)},
-    "specialists": {"_all": (0, 6), "H2": (0, 3), "sub-line": (0, 18), "card1 white body": (0, 19), "card2 white body": (0, 19), "card4 white body": (0, 19),
-                    "name 1": (0, 19), "avatar 1 disc": (0, 19), "stars 1": (0, 19), "cta 1 text": (0, 19), "view-all text": (0, 21)},
-    "hcard": {"_all": (0, 16)},
-    "insights": {"_all": (0, 26), "H2": (0, 20), "sub-line": (0, 12), "card1 border": (0, 22), "card2 border": (0, 22), "card3 border": (0, 22),
-                 "topic 1": (0, 22), "excerpt 1": (0, 22), "meta 1": (0, 22), "read-more text": (0, 33)},
-    "footer": {"_all": (0, 67)},
+    # 2026-09-17 round 2: header 166 (was 142) and hero 640 (was 738) put section 2 at page 806 (design 880): −74.
+    # Process is a 320 strip (was 430), the doctor band 740 (was 631); stories/care/health-card/footer keep their
+    # internal geometry, so one band offset per section covers every check.
+    "care": {"_all": (0, -74), "H2": (0, -72), "sub-line": (0, -70), "card2 chip row1": (0, -68.6), "card1 chip row1": (0, -68.6), "card3 chips row1": (0, -68.6)},
+    "stories": {"_all": (0, -186), "H2 line 1": (0, -194), "H2 line 2": (0, -194), "card 1 border": (0, -201), "card 2 border": (0, -201), "card 3 border": (0, -201),
+                "stars 1": (0, -201), "quote 1 text": (0, -201), "avatar 1": (0, -201), "name 1": (0, -201), "role 1": (0, -201), "avatar 3": (0, -201)},
+    "hcard": {"_all": (0, -59)},
+    "footer": {"_all": (0, 250.6)},
 }
+# Rebuilt by decision (design/round2-report.md): hero (concept B), process (strip), specialists (doctor band + carousel),
+# insights (new card). Their mock checks were removed on 2026-09-17; they are logged as deviations, not drift.
 
 def run(section, B, D):
     checks = SECTIONS[section]; residuals = []; rows = []; deviations = []
