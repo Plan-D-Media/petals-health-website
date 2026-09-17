@@ -9,6 +9,7 @@ import HealthCard from './components/HealthCard.jsx'
 import Insights from './components/Insights.jsx'
 import ClosingBand from './components/ClosingBand.jsx'
 import Footer from './components/Footer.jsx'
+import FormDialog from './components/FormDialog.jsx'
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
       <Insights />
       <ClosingBand />
       <Footer />
+      <FormDialog />
     </div>
   )
 }

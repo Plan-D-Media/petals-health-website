@@ -12,3 +12,11 @@ export const HERO_POSTER = '/media/hero-poster-landscape.jpg'   // landscape pos
 // Footage treatment: 'flush' (Option A, matched backdrop, no visible edge) or 'card' (Option B, rounded panel + shadow).
 // Overridable for mock-ups with ?videoStyle=card|flush.
 export const HERO_VIDEO_STYLE = 'film'   // hero concept B (design/round2-report.md §2): 16:9 film card bleeding to the right edge. 'card' / 'flush' remain for the portrait slot
+
+// ---- forms (decided 2026-09-17): every form posts to ONE Google Apps Script web app, which appends a row to a Google
+// Sheet and sends an email notification. Replace the placeholder with the client's deployed web-app URL
+// (https://script.google.com/macros/s/…/exec). While it says PLACEHOLDER, submissions are simulated (forms/submit.js).
+export const FORM_ENDPOINT = 'https://script.google.com/macros/s/PLACEHOLDER/exec'
+// Privacy notice linked from the consent line on every form. The page does not exist yet — client to supply the text.
+export const PRIVACY_URL = '/privacy-policy'
+

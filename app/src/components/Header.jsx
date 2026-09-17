@@ -34,7 +34,7 @@ const NAV = [
 
 const UTILITY = [
   { icon: 'phone', label: '9147405955', href: 'tel:9147405955' },
-  { icon: 'calendar', label: 'Book an Appt', href: '#book' },
+  { icon: 'calendar', label: 'Book an Appt', href: '#book', form: 'book-appointment' },
   { icon: 'findDoctor', label: 'Find a Doctor', href: '#find' },
   { icon: 'askDoctor', label: 'Ask a Doctor', href: '#ask' },
 ]
@@ -71,7 +71,7 @@ export default function Header() {
         <div className="utility__links">
           {UTILITY.map((u, i) => [
             i > 0 && <span key={'sep' + i} className="utility__sep" aria-hidden="true" />,
-            <a key={u.label} className="utility__item" href={u.href}>
+            <a key={u.label} className="utility__item" href={u.href} data-form={u.form}>
               <Icon name={u.icon} className={`utility__icon utility__icon--${u.icon}`} />
               <span className="utility__text">{u.label}</span>
             </a>,

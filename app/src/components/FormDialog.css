@@ -1,0 +1,6 @@
+/* Modal for the lead form: native <dialog>, 480 wide, white card on a blue-900 40 % backdrop. */
+.fdialog { border: 0; padding: 0; background: transparent; max-width: none; max-height: none; }
+.fdialog::backdrop { background: rgba(0, 66, 126, 0.4); }
+.fdialog__panel { position: relative; width: 480px; max-width: calc(100vw - 32px); max-height: calc(100vh - 32px); overflow: auto; padding: 32px; background: var(--white); border-radius: var(--radius-card-lg); box-shadow: var(--shadow-card); }
+.fdialog__close { position: absolute; right: 12px; top: 12px; width: 36px; height: 36px; border: 0; border-radius: 50%; background: transparent; color: var(--grey-600); font-size: 26px; line-height: 36px; cursor: pointer; }
+.fdialog__close:hover { background: var(--cream-100); color: var(--blue-900); }
