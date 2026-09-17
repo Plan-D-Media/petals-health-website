@@ -3,10 +3,8 @@ import Carousel from './Carousel.jsx'
 import { TESTIMONIALS } from '../data/testimonials.js'
 import './Testimonials.css'
 
-// Home section 4 — "PATIENT STORIES / Trusted by thousands of Kolkata families". Values: design/section4-values.md.
-// 2026-09-17: the three static cards became an auto-scrolling carousel (Carousel.jsx) over data/testimonials.js —
-// PLACEHOLDER content, tagged on each card until real stories arrive. Card geometry unchanged (377.4 × 208.2,
-// 18.85 gaps). TODO(breakpoints): desktop only.
+// Home section 4 — "PATIENT STORIES". Carousel over data/testimonials.js (PLACEHOLDER content, tagged on each card).
+// Flow rewrite 2026-09-17: one card + peek on mobile, two on tablet, three at ≥1024.
 
 function Story({ s }) {
   return (
@@ -17,9 +15,13 @@ function Story({ s }) {
       </div>
       <Icon name="quoteMark" className="story__mark" />
       <p className="story__quote">{s.quote}</p>
-      <div className="story__avatar" aria-hidden="true">{s.initials}</div>
-      <div className="story__name">{s.name}</div>
-      <div className="story__role">{s.role}</div>
+      <div className="story__who">
+        <div className="story__avatar" aria-hidden="true">{s.initials}</div>
+        <div>
+          <div className="story__name">{s.name}</div>
+          <div className="story__role">{s.role}</div>
+        </div>
+      </div>
     </article>
   )
 }
@@ -29,18 +31,8 @@ export default function Testimonials() {
     <section className="stories band" aria-labelledby="stories-title">
       <div className="inner stories__inner">
         <p className="stories__eyebrow">Patient stories</p>
-        <h2 id="stories-title" className="stories__title">
-          Trusted by thousands<br />of Kolkata families
-        </h2>
-        <Carousel
-          className="stories__carousel"
-          label="Patient stories"
-          items={TESTIMONIALS}
-          renderItem={(s) => <Story s={s} />}
-          slideWidth={377.4}
-          gap={18.85}
-          autoplayMs={6000}
-        />
+        <h2 id="stories-title" className="stories__title">Trusted by thousands of Kolkata families</h2>
+        <Carousel className="stories__carousel" label="Patient stories" items={TESTIMONIALS} renderItem={(s) => <Story s={s} />} autoplayMs={6000} />
       </div>
     </section>
   )

@@ -1,52 +1,30 @@
-/* Values: design/section4-values.md. Inner y = page y − 2040. */
-.stories { width: 100%; height: 467.9px; }   /* 2038 (ESTIMATED) – 2505.9; +8 (cards -15, -> next section 80) */
-.stories__inner { height: 467.9px; }
+/* Patient stories — flow rewrite 2026-09-17. Card content from design/section4-values.md (377.4 × 208.2 at desktop). */
+.stories { padding: 40px 0 8px; }
+.stories__eyebrow { margin: 0; text-align: center; font-size: var(--fs-eyebrow); font-weight: var(--fw-eyebrow); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; line-height: 1.2; color: var(--grey-600); }
+.stories__title { margin: 16px 0 0; text-align: center; font-size: var(--fs-display-lg); font-weight: var(--fw-display-lg); line-height: 1.05; color: var(--blue-900); font-variation-settings: var(--opsz-display-alt); text-wrap: balance; }
+.stories__carousel { margin-top: 24px; }
 
-/* eyebrow baseline 2099 → top 2083.2 → inner 43.2 */
-.stories__eyebrow {
-  position: absolute; left: 0; right: 0; top: 43.2px; margin: 0; text-align: center;
-  font-size: var(--fs-eyebrow); font-weight: var(--fw-eyebrow); letter-spacing: var(--ls-eyebrow); text-transform: uppercase;
-  line-height: 19px; color: var(--grey-600);
-}
-/* H2: 58/700 opsz 96, pitch 50 (mock 58.9 — regularised); line-1 baseline 2166 → top 2121.86 → inner 81.86 */
-.stories__title {
-  position: absolute; left: 0; right: 0; top: 71.86px; margin: 0; text-align: center;   /* 81.86 by formula; −2 after render comparison; -8: eyebrow -> H2 16 */
-  font-size: var(--fs-display-lg); font-weight: var(--fw-display-lg); line-height: 50px; color: var(--blue-900);
-  font-variation-settings: var(--opsz-display-alt);   /* matches the mock: opsz 12 width 618 vs design 625; opsz 96 gave 557 */
-}
-
-/* cards: 377.4 × 208.2 at y 2270 (inner 230); x 97.7 + i × 396.25 (equal 18.85 gaps) */
-/* the carousel viewport takes the cards' box: left 97.7, top 215 (−10 for the track's top padding), width 1169.9 */
-.stories__carousel { position: absolute; left: 97.7px; top: 205px; width: 1169.9px; }
-.stories__carousel .carousel__viewport { width: 1169.9px; }
-.story {
-  position: relative; width: 377.4px; height: 208.2px; box-sizing: border-box;
-  background: var(--white); border: 1.5px solid var(--blue-900); border-radius: var(--radius-card-lg);
-}
-/* stars: 14.4 px, pitch 17.4 (3 px gap), top 19.7, right inset 29.7; vector star in orange-500 */
-.story__stars { position: absolute; top: 19.7px; right: 29.7px; display: flex; gap: 3px; color: var(--orange-500); }
+.story { position: relative; display: flex; flex-direction: column; min-height: 100%; padding: 20px 20px 18px; background: var(--white); border: 1.5px solid var(--blue-900); border-radius: var(--radius-card-lg); }
+.story__placeholder { align-self: flex-start; height: 20px; padding: 0 8px; border-radius: var(--radius-pill); background: var(--orange-500); color: var(--blue-900); font-size: 13px; font-weight: 700; line-height: 20px; letter-spacing: 0.04em; text-transform: uppercase; }
+.story__stars { position: absolute; top: 19.7px; right: 20px; display: flex; gap: 3px; color: var(--orange-500); }
 .story__star svg { width: 14.4px; height: 13.7px; display: block; }
-
-/* quote mark: the design's own glyph pair lifted from the SVG (31.9 × 23.2), blue-200, at inset (19.8, 42.1) */
-.story__mark { position: absolute; left: 19.8px; top: 42.1px; color: var(--blue-200); }
-/* quote: 13/400 upright, line-height 20; first baseline 2334.8 → top = 2334.8 − ((20 − 15.6)/2 + 12.09) = 2320.51 → 50.51 in card;
-   text-indent 42.4 clears the mark (162.4 − 120); left 22.4 (120.1 − 97.7); width 330 */
-.story__quote {
-  position: absolute; left: 22.4px; top: 46.5px; width: 330px; margin: 0; text-indent: 42.4px;   /* 50.51 by formula; −4 so the ink top matches the mock's Canva Sans line */
-  font-size: var(--fs-quote); font-weight: var(--fw-quote); font-style: normal; font-synthesis: none; line-height: 20px; color: var(--black);
-}
-/* avatar: 44.1 purple disc at inset (25.6, 140.6); Playfair 400 / 24 white, centred */
-.story__avatar {
-  position: absolute; left: 25.6px; top: 140.6px; width: 44.1px; height: 44.1px; border-radius: 50%; background: var(--purple-500);
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-serif); font-size: 24px; font-weight: 400; line-height: 1; color: var(--white);
-}
-/* name: 16/700, baseline 2430.1 → top = 2430.1 − ((16 − 19.2)/2 + 14.88) = 2416.82 → 146.82; left 82 (179.7 − 97.7) */
-.story__name { position: absolute; left: 82px; top: 143.8px;   /* 146.82 by formula; −3 after render comparison */ white-space: nowrap; font-size: 16px; font-weight: 700; line-height: 16px; color: var(--black); }
-/* role: 14/400, baseline 2447 → top = 2447 − ((14 − 16.8)/2 + 13.02) = 2435.38 → 165.38 */
-.story__role { position: absolute; left: 82.3px; top: 163.4px;   /* 165.38 by formula; −2 */ white-space: nowrap; font-size: 14px; font-weight: 400; line-height: 14px; color: var(--black); }
-
-/* placeholder tag: dummy content until real stories arrive */
-.story__placeholder { position: absolute; left: 22.4px; top: 16px; height: 18px; padding: 0 8px; border-radius: var(--radius-pill); background: var(--orange-500); color: var(--blue-900); font-size: 11px; font-weight: 700; line-height: 18px; letter-spacing: 0.04em; text-transform: uppercase; }
 .story__star--off { opacity: 0.25; }
+.story__mark { display: block; margin-top: 14px; color: var(--blue-200); }
+.story__mark svg { width: 31.9px; height: 23.2px; display: block; }
+.story__quote { margin: 6px 0 16px; font-size: 15px; font-weight: var(--fw-quote); font-style: normal; font-synthesis: none; line-height: 1.5; color: var(--black); }
+.story__who { display: flex; align-items: center; gap: 12px; margin-top: auto; }
+.story__avatar { flex: none; width: 44.1px; height: 44.1px; border-radius: 50%; background: var(--purple-500); display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 24px; font-weight: 400; line-height: 1; color: var(--white); }
+.story__name { font-size: 16px; font-weight: 700; line-height: 1.1; color: var(--black); }
+.story__role { margin-top: 3px; font-size: 14px; font-weight: 400; line-height: 1.1; color: var(--black); }
 
+@media (min-width: 1024px) {
+  .stories { padding: 48px 0 8px; }
+  .stories__carousel { margin-top: 32px; }
+  .stories .carousel__slide { width: 377.4px; }
+  .stories .carousel { --carousel-gap: 18.85px; }
+  .story { height: 208.2px; padding: 46px 22px 18px; }
+  .story__placeholder { position: absolute; left: 22px; top: 16px; }
+  .story__mark { position: absolute; left: 19.8px; top: 42.1px; margin: 0; }
+  .story__quote { margin: 0 0 0; text-indent: 42.4px; font-size: var(--fs-quote); line-height: 20px; }
+  .story__who { margin-top: auto; }
+}

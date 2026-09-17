@@ -38,7 +38,8 @@ export default function VideoSlot({ poster, posterAlt = '', src, label = 'video'
   // autoplay once the browser can play, unless the user prefers reduced motion
   const onCanPlay = () => {
     setStatus((s) => (s === 'poster' ? 'ready' : s))
-    if (!reduced && video.current && video.current.paused) video.current.play().catch(() => {})   // autoplay refusal → poster + control
+    const saveData = typeof navigator !== 'undefined' && navigator.connection && navigator.connection.saveData
+    if (!reduced && !saveData && video.current && video.current.paused) video.current.play().catch(() => {})   // autoplay refusal / data saver → poster + control
   }
   const onError = () => setStatus('failed')
   const toggle = () => {
@@ -52,7 +53,7 @@ export default function VideoSlot({ poster, posterAlt = '', src, label = 'video'
 
   return (
     <div ref={root} className={`video-slot video-slot--${variant} video-slot--${status} ${className}`.trim()}>
-      <img className="video-slot__poster" src={poster} alt={posterAlt} />
+      <img className="video-slot__poster" src={poster} alt={posterAlt} fetchPriority="high" decoding="async" />
       {hasVideo && (
         <video
           ref={video}

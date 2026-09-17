@@ -1,32 +1,33 @@
-/* Home section 5, design pass 2026-09-17. Band 740: eyebrow 56, H2 80, sub-line 160, cards 232–642, button 674–720.
-   Ground: the design's radial tint (white → #edf7ff) with 80 px soft top and bottom (polish 2, folded in). */
+/* Our specialists — flow rewrite 2026-09-17: soft tint band, heading stack, the doctor carousel, "View all". */
 .specialists {
-  width: 100%; height: 740px;
+  padding: 40px 0 48px;
   background:
     linear-gradient(to bottom, var(--white) 0, rgba(255, 255, 255, 0) 80px, rgba(255, 255, 255, 0) calc(100% - 80px), var(--white) 100%),
-    radial-gradient(750px circle at calc(50% - 0.3px) 370px, #ffffff 0%, #edf7ff 100%);
+    radial-gradient(750px circle at calc(50% - 0.3px) 50%, #ffffff 0%, #edf7ff 100%);
 }
-.specialists__inner { height: 232px; }
-
-/* shared soft button: the design's PNG buttons (white centre → #e3f2ff edge radial), radius 11 */
 .btn-soft {
   background: radial-gradient(circle farthest-side at 50% 50%, #ffffff 0%, var(--hero-bg-outer) 100%);
-  border-radius: 11px; color: var(--black);
-  display: inline-flex; align-items: center; justify-content: center; gap: 10px; white-space: nowrap;
-  font-size: 16px; font-weight: 500;   /* button label 16/500 ESTIMATED */
+  border-radius: 11px; color: var(--black); box-shadow: var(--shadow-secondary);
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px; white-space: nowrap; min-height: 44px; padding: 0 24px;
+  font-size: 16px; font-weight: 500;
 }
 .arrow { display: block; }
+.specialists__eyebrow { margin: 0; text-align: center; font-size: var(--fs-eyebrow); font-weight: var(--fw-eyebrow); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; line-height: 1.2; color: var(--grey-600); }
+.specialists__title { margin: 16px 0 0; text-align: center; font-size: var(--fs-display-xl); font-weight: var(--fw-display-xl); line-height: 1.05; color: var(--blue-900); text-wrap: balance; }
+.specialists__subline { margin: 24px 0 0; text-align: center; font-size: 18px; font-weight: 400; line-height: 1.3; color: var(--black); text-wrap: balance; }
+.specialists__carousel { margin-top: 24px; }
+.specialists__foot { display: flex; justify-content: center; margin-top: 24px; }
+.specialists__all { width: 235.1px; height: 45.8px; }
 
-.specialists__eyebrow { position: absolute; left: 0; right: 0; top: 40.1px; margin: 0; text-align: center; font-size: var(--fs-eyebrow); font-weight: var(--fw-eyebrow); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; line-height: 19px; color: var(--grey-600); }
-.specialists__title { position: absolute; left: 0; right: 0; top: 75.1px; margin: 0; text-align: center; font-size: var(--fs-display-xl); font-weight: var(--fw-display-xl); line-height: 64px; color: var(--blue-900); }
-.specialists__subline { position: absolute; left: 0; right: 0; top: 163px; margin: 0; text-align: center; font-size: 18px; font-weight: 400; line-height: 18px; color: var(--black); }
-
-/* carousel: viewport-wide; the track starts on the 1366 container's left (47 px in, so four 300 px cards + 24 px gaps
-   fill 1272 of the 1366 box) and runs to the right edge; arrows on the band edges */
-.specialists__carousel { width: 100%; height: 434px; }
-.specialists__carousel .carousel__viewport { margin-left: calc(50% - 636px); }
-.specialists__carousel .carousel__btn--prev { left: max(0px, calc(50% - 683px - 8px)); }
-.specialists__carousel .carousel__btn--next { right: 24px; }
-
-.specialists__foot { height: 78px; }
-.specialists__all { position: absolute; left: 50%; transform: translateX(-50%); top: 12px; width: 235.1px; height: 45.8px; }
+@media (min-width: 1024px) {
+  .specialists { padding: 56px 0 24px; }
+  .specialists__carousel { margin-top: 32px; }
+  .specialists .carousel__slide { width: 300px; }
+  /* the track starts on the content box and runs to the viewport edge; the band is the positioning context */
+  .specialists__carousel .carousel__viewport { margin-right: calc(-1 * var(--gutter)); }
+  .specialists__foot { margin-top: 20px; }
+}
+@media (min-width: 1366px) {
+  .specialists__carousel { margin-left: -48px; }   /* four 300 px cards + 24 px gaps = 1272 inside the 1366 box (47 px in) */
+  .specialists__carousel .carousel__viewport { margin-right: calc(-1 * var(--gutter) + 48px); }
+}

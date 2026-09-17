@@ -1,33 +1,51 @@
-/* Values: design/sections5-8-values.md §6. Inner y = page y − 3120.9; panel-relative y = page y − 3150.9. */
-.hcard { width: 100%; height: 769.1px; }   /* 3120.9–3880 (bottom ESTIMATED); +10 (-> next section 80) */
-.hcard__inner { height: 769.1px; }
-
-.hcard__panel {
-  position: absolute; left: 94.1px; top: 30px; width: 1164px; height: 697.8px; overflow: hidden;
-  border-radius: var(--radius-card-lg); background: var(--blue-900); color: var(--white);
-}
-/* decorative blue-500 shapes at 41%: (711.1,3150.9) 537.1×300.8 and a circle segment (771.1,3688.6) 402.2×160.1 — APPROXIMATED */
-.hcard__blob { position: absolute; background: var(--blue-500); opacity: 0.41; }
-.hcard__blob--top { left: 617px; top: 0; width: 537.1px; height: 300.8px; border-radius: 0 0 0 300px; }
-.hcard__blob--bottom { left: 677px; top: 537.7px; width: 402.2px; height: 402.2px; border-radius: 50%; }
-/* photo: image at page (5.6, 3082.0) 1250.4 × 824.6, clipped to (579.9, 3150.9)–(1256.5, 3848.7) → panel-relative clip left 485.8 */
-/* design pass 2026-09-17: the photo sits at band level, 40 px above the panel top (the source has 69 px above the
-   design's clip), clipped to the panel's right/bottom radius so it breaks the frame only upward */
-.hcard__photo { position: absolute; left: 579.9px; top: -10px; width: 676.6px; height: 737.8px; overflow: hidden; border-radius: 0 var(--radius-card-lg) var(--radius-card-lg) 0; z-index: 1; }
-.hcard__photo img {
-  position: absolute; left: -574.3px; top: -28.9px; width: 1250.4px; height: 824.6px; display: block;
-  -webkit-mask-image: url('/assets/2_6ecce174.png'); mask-image: url('/assets/2_6ecce174.png');
-  -webkit-mask-mode: luminance; mask-mode: luminance; -webkit-mask-size: 100% 100%; mask-size: 100% 100%;
-}
-
-/* eyebrow 26/300 uppercase 0.12em white; baseline 3211.6 → panel 60.7; 26/26 → top = 60.7 − ((26−31.2)/2 + 24.18) = 39.12; left 187.5 − 94.1 = 93.4 */
-.hcard__eyebrow { position: absolute; left: 93.4px; top: 39.12px; margin: 0; font-size: 26px; font-weight: 300; letter-spacing: 0.155em;   /* 0.12em rendered 307 wide vs 323 in the mock; 0.155em matches */ text-transform: uppercase; line-height: 26px; white-space: nowrap; }
-/* H2 display-md 53/700 opsz 96, pitch 50; baseline 3271 → 120.1; top = 120.1 − 42.49 = 77.61; left 185.4 − 94.1 = 91.3 */
-.hcard__title { position: absolute; left: 91.3px; top: 77.61px; margin: 0; font-size: var(--fs-display-md); font-weight: var(--fw-display-md); line-height: 50px; font-variation-settings: var(--opsz-display); white-space: nowrap; }
-/* lead 21/400 lh 26; baseline 3404.1 → 253.2; top = 253.2 − 19.93 = 233.27; width 362 (wraps "Benefits") */
-.hcard__lead { position: absolute; left: 92.5px; top: 233.27px; width: 400px; margin: 0; font-size: var(--fs-body); font-weight: 300; line-height: 26px; font-variation-settings: 'opsz' 96; }   /* body copy, not a heading token: kept at opsz 96 where its width and wraps were matched (auto renders it 9% wider); Light at opsz 96; width 400 keeps 'Other' on line 1 as in the mock;: stem 1 px on the render (Light 1.6 / Regular 1.9); 300@96 sets the line 381 wide vs 360 in the mock */
-/* list 21/400 lh 24, item gap 6; first baseline 3505.8 → 354.9; top = 354.9 − ((24−25.2)/2 + 19.53) = 335.97; text left 212 − 94.1 = 117.9, bullet at 195 */
-.hcard__list { position: absolute; left: 100.9px; top: 335.97px; margin: 0; padding-left: 17px; width: 345px; font-size: var(--fs-body); font-weight: 300; line-height: 24px; font-variation-settings: 'opsz' 96; }   /* Light at opsz 96, as the lead (body copy, not a heading token) */
+/* Family health card — flow rewrite 2026-09-17. */
+.hcard { padding: 32px 0 8px; }
+.hcard__panel { position: relative; display: grid; overflow: hidden; border-radius: var(--radius-card-lg); background: var(--blue-900); color: var(--white); }
+.hcard__blob { display: none; position: absolute; background: var(--blue-500); opacity: 0.41; }
+/* photo: a rectangular crop of the hand and card on small screens */
+/* the source photo is a cut-out on black: keep its luminance mask on small screens too (mask and image both cover the
+   same box at the same position, so they stay aligned) and show it on the pale ground */
+.hcard__photo { position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: radial-gradient(circle at 50% 60%, var(--hero-bg-inner) 0%, var(--hero-bg-outer) 100%); }
+.hcard__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 62% 40%; display: block;
+  -webkit-mask-image: url('/assets/2_6ecce174.png'); mask-image: url('/assets/2_6ecce174.png'); -webkit-mask-mode: luminance; mask-mode: luminance;
+  -webkit-mask-size: cover; mask-size: cover; -webkit-mask-position: 62% 40%; mask-position: 62% 40%; }
+.hcard__copy { padding: 24px 20px 24px; }
+.hcard__eyebrow { margin: 0; font-size: 16px; font-weight: 300; letter-spacing: 0.12em; text-transform: uppercase; line-height: 1.2; }
+.hcard__title { margin: 10px 0 0; font-size: var(--fs-display-md); font-weight: var(--fw-display-md); line-height: 1.1; font-variation-settings: var(--opsz-display); }
+.hcard__lead { margin: 14px 0 0; font-size: var(--fs-body); font-weight: 300; line-height: 1.3; font-variation-settings: 'opsz' 96; }
+.hcard__list { margin: 12px 0 0; padding-left: 20px; font-size: var(--fs-body); font-weight: 300; line-height: 1.25; font-variation-settings: 'opsz' 96; }
 .hcard__list li + li { margin-top: 6px; }
-/* button: white pill 265.1 × 32.2 at (193.2, 3688.6) → panel (99.1, 537.7); text 18/700 blue-900 */
-.hcard__cta { position: absolute; left: 99.1px; top: 537.7px; width: 265.1px; height: 32.2px; border-radius: var(--radius-pill); background: var(--white); color: var(--blue-900); display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 700; line-height: 18px; white-space: nowrap; }
+.hcard__cta { display: flex; align-items: center; justify-content: center; margin-top: 20px; min-height: 48px; padding: 0 24px; border-radius: var(--radius-pill); background: var(--white); color: var(--blue-900); font-size: 18px; font-weight: 700; line-height: 1; white-space: nowrap; }
+
+@media (min-width: 768px) {
+  .hcard__panel { grid-template-columns: 1fr 1fr; }
+  .hcard__photo { aspect-ratio: auto; min-height: 100%; }
+  .hcard__copy { padding: 36px 32px; }
+  .hcard__cta { align-self: flex-start; width: max-content; }
+}
+
+/* ---- ≥1024: the design pass composition (panel 697.8 tall at 1366; photo breaks the panel's top edge) ---- */
+@media (min-width: 1024px) {
+  .hcard { padding: 30px 0 41px; }
+  .hcard__panel { display: block; height: 697.8px; overflow: visible; background: transparent; }
+  .hcard__panel::before { content: ''; position: absolute; inset: 0; border-radius: var(--radius-card-lg); background: var(--blue-900); }
+  .hcard__blob { display: block; z-index: 0; }
+  .hcard__blob--top { left: 53%; top: 0; width: 46.1%; height: 300.8px; border-radius: 0 var(--radius-card-lg) 0 300px; }
+  .hcard__blob--bottom { left: 58.2%; top: 537.7px; width: 34.5%; height: 160.1px; border-radius: 50% 50% 0 0 / 100% 100% 0 0; }
+  .hcard__photo { position: absolute; right: 0; top: -40px; width: 58.1%; height: calc(100% + 40px); aspect-ratio: auto; background: transparent; border-radius: 0 var(--radius-card-lg) var(--radius-card-lg) 0; z-index: 1; }
+  .hcard__photo img {
+    position: absolute; inset: auto; left: -574.3px; top: -28.9px; width: 1250.4px; max-width: none; height: 824.6px; object-fit: fill;
+    -webkit-mask-image: url('/assets/2_6ecce174.png'); mask-image: url('/assets/2_6ecce174.png');
+    -webkit-mask-mode: luminance; mask-mode: luminance; -webkit-mask-size: 100% 100%; mask-size: 100% 100%;
+  }
+  .hcard__copy { position: relative; z-index: 2; width: 440px; padding: 39px 0 0 93px; }
+  .hcard__eyebrow { font-size: 26px; letter-spacing: 0.155em; line-height: 26px; }
+  .hcard__title { margin-top: 12px; line-height: 50px; }
+  .hcard__lead { margin-top: 40px; width: 400px; line-height: 26px; }
+  .hcard__list { margin-top: 40px; width: 345px; padding-left: 17px; line-height: 24px; }
+  .hcard__cta { margin-top: 44px; min-height: 32.2px; height: 32.2px; width: 265.1px; padding: 0; font-size: 18px; }
+}
+@media (min-width: 1024px) and (max-width: 1365px) {
+  .hcard__photo { width: 52%; }
+  .hcard__photo img { left: -520px; }
+}

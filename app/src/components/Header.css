@@ -1,59 +1,96 @@
-/* Values: design/hero-values.md — "Bars" for sizes (bar heights, icon sizes, separator heights, logo box).
-   Layout re-cut 2026-09-16 (design/polish-proposals.md §5): both bars are flex rows on the 1366 content container
-   (95 px margins, the same edge as the health-card panel, testimonial and article cards). Rhythm: nav 15 px either
-   side of each separator, chevron 6 px after its label; utility 15 px either side of each separator, icon 9 px
-   before its label. The mock's hand-placed lefts (gaps 13–18) are logged as regularised. */
-
-/* display: contents — a sticky child can never leave its parent's box, and the header box is only 166 px tall; with no
-   box of its own the nav sticks against the page. The <header> element stays in the accessibility tree. */
+/* Header — flow rewrite 2026-09-17. Sizes from design/hero-values.md ("Bars") ×1.2 at ≥1366.
+   display: contents on the header element so the sticky bars stick against the page, not a 166 px box. */
 .site-header { display: contents; }
 
-/* ---------- utility bar: 0–108 ---------- */
-.utility { height: 124px; background: var(--white); }   /* header ×1.2 (2026-09-17): 108 → 124 */
-.utility__inner { height: 124px; }
-
-.utility__logo {
-  position: absolute; left: 95px; top: 20.5px; width: 65px; height: 83px; display: block;   /* left 201.6 → 95 (container edge); ×1.2: 54.4 × 69.3 → 65 × 83 */
+/* ================= compact bar + drawer (<1024) ================= */
+.mbar { position: sticky; top: 0; z-index: 30; height: 56px; background: var(--white); display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 var(--gutter); box-shadow: 0 1px 0 rgba(0, 66, 126, 0.08); }
+.mbar__logo { display: flex; align-items: center; min-width: 44px; min-height: 44px; padding: 0 4px; }
+.mbar__logo img { display: block; height: 40px; width: auto; -webkit-mask-image: url('/assets/2_bfab15d2.png'); mask-image: url('/assets/2_bfab15d2.png'); -webkit-mask-mode: luminance; mask-mode: luminance; -webkit-mask-size: 100% 100%; mask-size: 100% 100%; }
+.mbar__util { display: none; }
+.mbar__actions { display: flex; gap: 8px; }
+.mbar__btn { width: 44px; height: 44px; border-radius: 50%; border: 0; padding: 0; display: flex; align-items: center; justify-content: center; background: var(--hero-bg-outer); color: var(--blue-900); cursor: pointer; }
+.mbar__btn svg { width: 16px; height: 22px; display: block; }
+.mbar__btn--menu { background: var(--blue-900); flex-direction: column; gap: 4px; }
+.mbar__btn--menu span { display: block; width: 18px; height: 2px; background: var(--white); border-radius: 1px; }
+@media (min-width: 768px) {
+  .mbar { height: 64px; }
+  .mbar__logo img { height: 48px; }
+  .mbar__util { display: flex; align-items: center; gap: 24px; font-size: 15px; font-weight: 500; color: var(--blue-900); }
+  .mbar__util a { display: inline-flex; align-items: center; min-height: 44px; }
+  .mbar__cta { height: 40px; padding: 0 16px; border-radius: var(--radius-pill); background: var(--orange-500); color: var(--blue-900); font-weight: 700; }
 }
-.utility__logo img {
-  display: block; width: 65px; height: 83px;
-  /* logo PNG is RGB on black; its alpha is the luminance mask that ships beside it in the SVG */
-  -webkit-mask-image: url('/assets/2_bfab15d2.png'); mask-image: url('/assets/2_bfab15d2.png');
-  -webkit-mask-mode: luminance; mask-mode: luminance;
-  -webkit-mask-size: 100% 100%; mask-size: 100% 100%;
+@media (min-width: 1024px) { .mbar { display: none; } }
+
+.drawer { position: fixed; inset: 0; z-index: 50; visibility: hidden; }
+.drawer--open { visibility: visible; }
+.drawer__scrim { position: absolute; inset: 0; background: rgba(0, 66, 126, 0.4); opacity: 0; transition: opacity var(--dur) var(--ease); }
+.drawer--open .drawer__scrim { opacity: 1; }
+.drawer__panel { position: absolute; top: 0; right: 0; bottom: 0; width: min(360px, 100%); background: var(--white); overflow: auto; padding: 64px 20px 32px; transform: translateX(100%); transition: transform var(--dur) var(--ease); }
+.drawer--open .drawer__panel { transform: none; }
+.drawer__close { position: absolute; right: 12px; top: 10px; width: 44px; height: 44px; border: 0; border-radius: 50%; background: transparent; color: var(--grey-600); font-size: 28px; cursor: pointer; }
+.drawer__utility, .drawer__nav, .drawer__sub { list-style: none; margin: 0; padding: 0; }
+.drawer__utility { display: grid; gap: 4px; padding-bottom: 16px; margin-bottom: 8px; border-bottom: 1px solid var(--rule-card); }
+.drawer__utility a { display: flex; align-items: center; gap: 12px; min-height: 44px; font-size: 16px; color: var(--blue-900); }
+.drawer__icon svg { width: 20px; height: 20px; display: block; }
+.drawer__nav > li > a, .drawer__acc { display: flex; align-items: center; justify-content: space-between; width: 100%; min-height: 48px; padding: 0 4px; border: 0; background: none; text-align: left; font-size: 18px; font-weight: 500; color: var(--blue-900); cursor: pointer; }
+.drawer__item--current > a { background: var(--orange-500); border-radius: 8px; padding: 0 12px; }
+.drawer__chev svg { width: 18px; height: 11px; display: block; transition: transform var(--dur) var(--ease); }
+.drawer__acc[aria-expanded="true"] .drawer__chev { transform: rotate(180deg); }
+.drawer__sub { padding: 4px 0 8px 12px; }
+.drawer__sub a { display: flex; align-items: center; min-height: 44px; font-size: 16px; font-weight: 500; color: var(--blue-900); }
+html[data-drawer] body { overflow: hidden; }
+@media (min-width: 1024px) { .drawer { display: none; } }
+
+/* ================= desktop bars (≥1024) ================= */
+.utility, .nav { display: none; }
+@media (min-width: 1024px) {
+  .utility { display: block; height: 124px; background: var(--white); }
+  .utility__inner { height: 124px; display: flex; align-items: center; justify-content: space-between; }
+  .utility__logo { display: block; width: 65px; height: 83px; }
+  .utility__logo img { display: block; width: 65px; height: 83px; -webkit-mask-image: url('/assets/2_bfab15d2.png'); mask-image: url('/assets/2_bfab15d2.png'); -webkit-mask-mode: luminance; mask-mode: luminance; -webkit-mask-size: 100% 100%; mask-size: 100% 100%; }
+  .utility__links { display: flex; align-items: center; padding-top: 9px; }
+  .utility__item { display: flex; align-items: center; gap: 10px; padding: 0 18px; min-height: 44px; color: var(--blue-900); }
+  .utility__item:last-child { padding-right: 0; }
+  .utility__icon { display: block; line-height: 0; }
+  .utility__icon--phone svg      { width: 18.5px; height: 25px; }
+  .utility__icon--calendar svg   { width: 22.1px; height: 22.2px; }
+  .utility__icon--findDoctor svg { width: 23.5px; height: 26.2px; }
+  .utility__icon--askDoctor svg  { width: 30.6px; height: 25px; }
+  .utility__text { white-space: nowrap; font-size: var(--fs-utility); font-weight: var(--fw-utility); line-height: 1; }
+  .utility__sep { flex: none; width: 1px; height: 45.5px; background: var(--blue-900); }
+
+  .nav { display: block; position: sticky; top: 0; z-index: 30; height: 42px; background: var(--blue-900); color: var(--white); }
+  .nav__inner { height: 42px; display: flex; align-items: center; }
+  .nav__item { position: relative; display: inline-flex; align-items: center; padding: 0 17px; height: 42px; white-space: nowrap; font-size: var(--fs-nav); font-weight: var(--fw-nav); line-height: 42px; color: var(--white); }
+  .nav__item--active { background: var(--orange-500); color: var(--blue-900); }
+  .nav__chevron { display: block; line-height: 0; margin-left: 7px; color: var(--white); }
+  .nav__chevron svg { width: 21.5px; height: 13.2px; display: block; }
+  .nav__sep { flex: none; width: 1px; height: 22px; background: var(--white); }
+  /* sticky CTA at the viewport's right edge, once the hero has scrolled out */
+  .nav__cta { position: absolute; right: 16px; top: 6px; height: 30px; padding: 0 12px; border-radius: var(--radius-pill); background: var(--orange-500); color: var(--blue-900); font-size: 14px; font-weight: 700; line-height: 30px; white-space: nowrap; opacity: 0; transform: translateY(-4px); pointer-events: none; transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease); }
+  .nav--cta .nav__cta { opacity: 1; transform: none; pointer-events: auto; }
+}
+/* laptop band: the nav row (1055 px at 18/17) must fit 944 px at 1024 */
+@media (min-width: 1024px) and (max-width: 1365px) {
+  .nav__item { font-size: 16px; padding: 0 12px; }
+  .nav__chevron svg { width: 18px; height: 11px; }
+  .utility__item { padding: 0 12px; }
+}
+/* 1024–1279: the row (~830 px) and the sticky CTA must share 984 px */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .nav__item { font-size: 15px; padding: 0 8px; }
+  .nav__chevron { margin-left: 5px; }
+  .nav__cta { right: 8px; font-size: 13px; padding: 0 10px; }
 }
 
-/* right group ends on the container's right edge (1271); content centre ≈ 58.5 as in the mock (bar centre 54 + 4.5) */
-.utility__links { position: absolute; right: 95px; top: 0; height: 124px; padding-top: 9px; box-sizing: border-box; display: flex; align-items: center; }
-.utility__item { display: flex; align-items: center; gap: 10px; padding: 0 18px; color: var(--blue-900); }
-.utility__item:last-child { padding-right: 0; }
-.utility__icon { display: block; line-height: 0; }
-.utility__icon--phone svg      { width: 18.5px; height: 25px; }
-.utility__icon--calendar svg   { width: 22.1px; height: 22.2px; }
-.utility__icon--findDoctor svg { width: 23.5px; height: 26.2px; }
-.utility__icon--askDoctor svg  { width: 30.6px; height: 25px; }   /* ×1.2 */
-/* 14 px / 400 (utility level, small-text hierarchy 2026-09-16) */
-.utility__text { white-space: nowrap; font-size: var(--fs-utility); font-weight: var(--fw-utility); line-height: 16px; }
-.utility__sep { flex: none; width: 1px; height: 45.5px; background: var(--blue-900); }
-
-/* ---------- nav bar: 108–142 ---------- */
-.nav { position: sticky; top: 0; z-index: 30; height: 42px; background: var(--blue-900); color: var(--white); }   /* x1.2: 34 -> 42; sticky so the CTA path never leaves the screen */
-.nav__inner { height: 42px; display: flex; align-items: center; padding-left: 95px; box-sizing: border-box; }   /* Home tab on the container edge (was 261.3) */
-
-/* 15 px / 500 (nav level); text centred in the 34 px bar */
-.nav__item {
-  position: relative; display: inline-flex; align-items: center; padding: 0 17px; height: 42px; white-space: nowrap;
-  font-size: var(--fs-nav); font-weight: var(--fw-nav); line-height: 42px; color: var(--white);
+/* ================= bottom action bar (<768) ================= */
+.actionbar { display: none; }
+@media (max-width: 767px) {
+  .actionbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; height: 64px; padding: 10px var(--gutter); display: flex; gap: 10px; background: var(--white); box-shadow: 0 -4px 16px rgba(0, 66, 126, 0.14); transform: translateY(100%); transition: transform var(--dur) var(--ease); }
+  .actionbar--on { transform: none; }
+  html[data-dialog] .actionbar, html[data-drawer] .actionbar { transform: translateY(100%); }
+  .actionbar a { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: var(--radius-pill); font-size: 16px; font-weight: 700; min-height: 44px; }
+  .actionbar__call { background: var(--white); color: var(--blue-900); box-shadow: 0 0 0 1px var(--outline-card); }
+  .actionbar__call svg { width: 14px; height: 19px; }
+  .actionbar__book { background: var(--orange-500); color: var(--blue-900); }
 }
-.nav__item--active { background: var(--orange-500); color: var(--blue-900); }   /* orange tab = current page */
-.nav__chevron { display: block; line-height: 0; margin-left: 7px; color: var(--white); }
-.nav__chevron svg { width: 21.5px; height: 13.2px; display: block; }
-.nav__sep { flex: none; width: 1px; height: 22px; background: var(--white); }
-
-/* sticky CTA: viewport right edge (the nav row ends at 1190 at 1366, so the container edge would collide) */
-.nav__cta {
-  position: absolute; right: 16px; top: 6px; height: 30px; padding: 0 12px; border-radius: var(--radius-pill);
-  background: var(--orange-500); color: var(--blue-900); font-size: 14px; font-weight: 700; line-height: 30px; white-space: nowrap;   /* ~130 px: clears the nav row (ends 1193 at 1366) by ~27 px */
-  opacity: 0; transform: translateY(-4px); pointer-events: none; transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
-}
-.nav--cta .nav__cta { opacity: 1; transform: none; pointer-events: auto; }

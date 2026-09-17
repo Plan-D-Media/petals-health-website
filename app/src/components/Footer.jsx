@@ -1,20 +1,24 @@
+import { useEffect, useState } from 'react'
 import Icon from './Icon.jsx'
 import './Footer.css'
 
-// Shared site footer (every page). Values: design/sections5-8-values.md §8.
-// Local y = page y − 4440.4 on the Home page. TODO(breakpoints): desktop only.
+// Shared site footer. Flow rewrite 2026-09-17: about text + six link groups — accordions on mobile (Information open),
+// three columns on tablet, six on desktop; copyright band below with bottom padding that clears the mobile action bar.
+// Content: design/sections5-8-values.md §8.
 
 const COLUMNS = [
-  { heading: 'Information', left: 523.1, links: ['About Us', 'Our Story', ['Petal’s App', '& Community'], 'Career', 'Vlogs', 'Contact Us'] },
-  { heading: ['At Home', 'Services'], left: 645.3, links: [['Upload', 'Prescription']] },
-  { heading: 'In Clinic', left: 761.7, links: [['Polyclinic/', 'Multispecialty', 'OPD']] },
-  { heading: ['Patient', 'Connect'], left: 893.3, links: ['Clinic Guide', 'Know your Tests', 'Health Packages'] },
-  { heading: 'Our Partners', left: 1035.7, links: ['Petals Inner Circle'] },
-  { heading: 'Policies', left: 1190.4, links: ['Terms of Service', 'Social Media Policy', 'Privacy Policy', 'Grievance Redressal', 'Code of Ethics', ['Mobile Application', 'Privacy Policy'], ['Mobile Application', 'Terms of Service']] },
+  { heading: 'Information', links: ['About Us', 'Our Story', 'Petal’s App & Community', 'Career', 'Vlogs', 'Contact Us'] },
+  { heading: 'At Home Services', links: ['Upload Prescription'] },
+  { heading: 'In Clinic', links: ['Polyclinic/Multispecialty OPD'] },
+  { heading: 'Patient Connect', links: ['Clinic Guide', 'Know your Tests', 'Health Packages'] },
+  { heading: 'Our Partners', links: ['Petals Inner Circle'] },
+  { heading: 'Policies', links: ['Terms of Service', 'Social Media Policy', 'Privacy Policy', 'Grievance Redressal', 'Code of Ethics', 'Mobile Application Privacy Policy', 'Mobile Application Terms of Service'] },
 ]
-const lines = (v) => (Array.isArray(v) ? v.map((l, k) => <span key={k}>{l}{k < v.length - 1 && <br />}</span>) : v)
 
 export default function Footer() {
+  // accordions only on mobile: from 768 up every group is open (a closed <details> hides its content)
+  const [wide, setWide] = useState(() => typeof window !== 'undefined' && window.matchMedia('(min-width: 768px)').matches)
+  useEffect(() => { const mq = window.matchMedia('(min-width: 768px)'); const on = (e) => setWide(e.matches); mq.addEventListener('change', on); return () => mq.removeEventListener('change', on) }, [])
   return (
     <footer className="footer band">
       <div className="inner footer__inner">
@@ -25,20 +29,20 @@ export default function Footer() {
           <p className="footer__iso">We are ISO Certified</p>
           <p className="footer__iso-line">ISO Certification - Tollygunge | ISO Certification - Kankurgachi</p>
         </div>
-
-        {COLUMNS.map((c) => (
-          <nav key={c.left} className="footer__col" style={{ left: c.left }} aria-label={Array.isArray(c.heading) ? c.heading.join(' ') : c.heading}>
-            <h3 className="footer__heading">{lines(c.heading)}</h3>
-            <ul>
-              {c.links.map((l, k) => <li key={k}><a href="#">{lines(l)}</a></li>)}
-            </ul>
-          </nav>
-        ))}
+        <div className="footer__cols">
+          {COLUMNS.map((c, i) => (
+            <details key={c.heading} className="footer__col" open={wide || i === 0}>
+              <summary className="footer__heading">{c.heading}</summary>
+              <ul>
+                {c.links.map((l) => <li key={l}><a href={l === 'Privacy Policy' ? '/privacy-policy.html' : '#'}>{l}</a></li>)}
+              </ul>
+            </details>
+          ))}
+        </div>
       </div>
-
       <div className="footer__bottom band">
         <div className="inner footer__bottom-inner">
-          <p className="footer__copy">Copyright 2026 www.petalshealth.in -All Rights Reserved |<br />1st Floor, VIP Complex, P 30/1, Kankurgachi Rd, Kadapara,<br />Phool Bagan, Kankurgachi, Kolkata, West Bengal 700054</p>
+          <p className="footer__copy">Copyright 2026 www.petalshealth.in - All Rights Reserved | 1st Floor, VIP Complex, P 30/1, Kankurgachi Rd, Kadapara, Phool Bagan, Kankurgachi, Kolkata, West Bengal 700054</p>
           <a className="footer__phone" href="tel:9147405955"><Icon name="phone" className="footer__phone-icon" />9147405955</a>
         </div>
       </div>

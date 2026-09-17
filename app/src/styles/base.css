@@ -8,17 +8,31 @@ html, body {
   font-family: var(--font-sans);
   font-optical-sizing: auto;
   -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
 }
-
 body { background: transparent; }   /* z-index -1 tint layers (Process) paint above the canvas but below body's own background */
 
-/* Desktop-only container: the design exists at 1366 px and nothing narrower.
-   TODO(breakpoints): no mobile/tablet frames exist in the design; do not invent behaviour. */
-.page { width: 100%; min-width: var(--page-width); position: relative; overflow-x: clip; }
-/* A band spans the viewport and carries the background; its .inner is the 1366 px content box.
-   Content coordinates already include the design's own side margins, so .inner has no padding. */
+/* ---------- responsive foundation (flow rewrite 2026-09-17) ----------
+   Breakpoints: <768 mobile (designed at 390) · 768–1023 tablet · 1024–1365 laptop · ≥1366 desktop (the mock's canvas).
+   The content box is 1176 wide at ≥1366 (1366 − 2 × 95, the mock's own margins) and fluid below it. */
+:root { --gutter: 16px; --content-width: 1176px; }
+@media (min-width: 768px)  { :root { --gutter: 32px; } }
+@media (min-width: 1024px) { :root { --gutter: 40px; } }
+@media (min-width: 1366px) { :root { --gutter: 95px; } }
+
+.page { width: 100%; position: relative; overflow-x: clip; }
 .band { position: relative; width: 100%; }
-.inner { position: relative; width: var(--page-width); margin-inline: auto; }
+.inner { position: relative; width: min(var(--content-width), calc(100% - 2 * var(--gutter))); margin-inline: auto; }
 
 a { color: inherit; text-decoration: none; }
 button { font: inherit; }
+img, video { max-width: 100%; }
+
+/* visually hidden (screen readers only) */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* section heading stack: eyebrow → H2 → sub-line, on the spacing scale (16 / 24) */
+.sec-head { text-align: center; }
+.sec-head__eyebrow { margin: 0; font-size: var(--fs-eyebrow); font-weight: var(--fw-eyebrow); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; line-height: 1.2; color: var(--grey-600); }
+.sec-head__title { margin: 16px 0 0; font-size: var(--fs-display-lg); font-weight: var(--fw-display-lg); line-height: 1.05; color: var(--blue-900); font-variation-settings: var(--opsz-display); text-wrap: balance; }
+.sec-head__sub { margin: 24px 0 0; font-size: var(--fs-body); font-weight: var(--fw-body); line-height: 1.3; color: var(--black); text-wrap: balance; }

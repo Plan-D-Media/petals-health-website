@@ -1,37 +1,45 @@
-/* Hero concept B (design/round2-report.md §2). Band 640 tall, full-bleed gradient (design/hero-values.md), content on
-   the 1366 container. Inner y = page y − 166 (header ×1.2). */
-
+/* Hero — flow rewrite 2026-09-17. Mobile first; ≥1024 reproduces concept B's desktop composition. */
 .hero {
-  position: relative; width: 100%; height: 640px; overflow: hidden;
-  /* SVG radial gradient aed0135220: centre (682.2 = 1366/2 − 0.8, 368.2 inner), r 786.5; 41 linear stops → 2. */
+  position: relative; width: 100%; overflow: hidden; padding: 28px 0 32px;
   background:
-    linear-gradient(to bottom, rgba(255, 255, 255, 0) calc(100% - 120px), var(--white) 100%),   /* soft seam into section 2 (polish 2) */
+    linear-gradient(to bottom, rgba(255, 255, 255, 0) calc(100% - 120px), var(--white) 100%),   /* soft seam into section 2 */
     radial-gradient(786.5px circle at calc(50% - 0.8px) 368.2px, var(--hero-bg-inner) 0%, var(--hero-bg-outer) 100%);
 }
-.hero__inner { height: 640px; }
-
-/* ---------- text column: container left edge (95), 470 wide ---------- */
-.hero__copy { position: absolute; left: 95px; top: 96px; width: 470px; }
-/* paragraph: body 21/400, lh 30 (the message with no headline; type scale unchanged) */
-.hero__body { margin: 0; font-size: var(--fs-body); font-weight: var(--fw-body); line-height: 30px; color: var(--black); }
-
-/* two equal buttons, stacked, 14 apart; primary navy, secondary white (approved option B) — colour tells them apart */
-.hero__actions { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; margin-top: 36px; }
+.hero__inner { display: grid; gap: 20px; }
+.hero__body { margin: 0; font-size: var(--fs-body); font-weight: var(--fw-body); line-height: 1.45; color: var(--black); }
+.hero__actions { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
 .hero__cta {
-  width: 304.3px; height: 64.8px; border-radius: var(--radius-pill); background: var(--blue-900); color: var(--white);
-  display: flex; align-items: center; justify-content: center;
-  font-size: var(--fs-button); font-weight: var(--fw-button); line-height: 22px; white-space: nowrap;
+  display: flex; align-items: center; justify-content: center; min-height: 56px; padding: 0 28px; border-radius: var(--radius-pill);
+  background: var(--blue-900); color: var(--white); font-size: var(--fs-button); font-weight: var(--fw-button); line-height: 1; white-space: nowrap;
 }
-.hero__cta--secondary {
-  background: var(--white); color: var(--blue-900);
-  box-shadow: var(--shadow-secondary);
+.hero__cta--secondary { background: var(--white); color: var(--blue-900); box-shadow: var(--shadow-secondary); }
+/* film: contained 16:9 card below the copy */
+.hero__film { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-card); }
+.hero__proof { margin-top: 4px; }
+
+@media (min-width: 768px) {
+  .hero { padding: 40px 0 44px; }
+  .hero__actions { flex-direction: row; }
+  .hero__cta { flex: 1; }
 }
 
-/* ---------- film card: inner x 646 → viewport right edge; 16:9 at 1366 (720 × 405 + a little), top 56 ---------- */
-.hero__film {
-  position: absolute; left: calc(50% - 683px + 646px); right: 0; top: 56px; height: 468px;
-  overflow: hidden;
+/* ---- ≥1024: concept B — text column 470, film bleeding right, proof strip on the card corner ---- */
+@media (min-width: 1024px) {
+  .hero { padding: 0; height: 640px; }
+  .hero__inner { display: block; height: 640px; }
+  .hero__copy { position: absolute; left: 0; top: 96px; width: 470px; }
+  .hero__body { line-height: 30px; }
+  .hero__actions { flex-direction: column; align-items: flex-start; gap: 14px; margin-top: 36px; }
+  .hero__cta { flex: none; width: 304.3px; height: 64.8px; padding: 0; }
+  /* the film is placed from the band, not the container, so it can reach the viewport edge: left = container left + 551 */
+  .hero__film { position: absolute; top: 56px; height: 468px; aspect-ratio: auto; right: calc(-1 * (100vw - 100%) / 2 - 0.5px); left: 551px; border-radius: var(--radius-card-lg) 0 0 var(--radius-card-lg); }
+  .hero__proof { position: absolute; left: 511px; top: 484px; margin: 0; z-index: 2; }
 }
-
-/* ---------- proof strip (Proof.jsx): overlaps the card's bottom-left corner ---------- */
-.hero__proof { position: absolute; left: calc(50% - 683px + 606px); top: 484px; z-index: 2; }
+@media (min-width: 1024px) and (max-width: 1365px) {
+  .hero, .hero__inner { height: 560px; }
+  .hero__film { top: 48px; height: 380px; left: 510px; }
+  .hero__proof { left: 470px; top: 392px; }
+}
+@media (min-width: 1366px) {
+  .hero__film { left: 551px; }   /* 646 − 95: unchanged geometry from the design pass */
+}

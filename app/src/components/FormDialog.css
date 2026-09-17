@@ -4,3 +4,8 @@
 .fdialog__panel { position: relative; width: 480px; max-width: calc(100vw - 32px); max-height: calc(100vh - 32px); overflow: auto; padding: 32px; background: var(--white); border-radius: var(--radius-card-lg); box-shadow: var(--shadow-card); }
 .fdialog__close { position: absolute; right: 12px; top: 12px; width: 36px; height: 36px; border: 0; border-radius: 50%; background: transparent; color: var(--grey-600); font-size: 26px; line-height: 36px; cursor: pointer; }
 .fdialog__close:hover { background: var(--cream-100); color: var(--blue-900); }
+@media (max-width: 767px) {
+  .fdialog { width: 100%; max-width: 100%; margin: auto 0 0; }
+  .fdialog__panel { width: 100%; max-width: 100%; max-height: calc(100vh - 24px); border-radius: var(--radius-card-lg) var(--radius-card-lg) 0 0; padding: 28px 20px 32px; }
+}
+

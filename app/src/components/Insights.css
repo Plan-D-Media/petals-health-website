@@ -1,26 +1,21 @@
-/* Home section 7 — design pass 2026-09-17: band 560; the article card takes the doctor card's language (tonal top band,
-   chip, title, hairline, anchored meta). Copy unchanged. */
-.insights { width: 100%; height: 560px; }
-.insights__inner { height: 560px; }
-
-.insights__eyebrow { position: absolute; left: 0; right: 0; top: 40px; margin: 0; text-align: center; font-size: var(--fs-eyebrow); font-weight: var(--fw-eyebrow); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; line-height: 19px; color: var(--grey-600); }
-.insights__title { position: absolute; left: 0; right: 0; top: 75px; margin: 0; text-align: center; font-size: var(--fs-display-lg); font-weight: var(--fw-display-lg); line-height: 58px; color: var(--blue-900); font-variation-settings: var(--opsz-display-alt); }
-.insights__subline { position: absolute; left: 0; right: 0; top: 157px; margin: 0; text-align: center; font-size: var(--fs-body); font-weight: var(--fw-body); line-height: 21px; color: var(--black); }
-
-/* cards 330.4 × 250 at y 210; x 142.1 + i × 373.15 (gaps 42.75, regularised earlier) */
-.insights__cards { position: absolute; left: 142.1px; top: 210px; width: 1076.7px; height: 250px; }
-.post {
-  position: absolute; top: 0; width: 330.4px; height: 250px; box-sizing: border-box; overflow: hidden;
-  background: var(--white); border-radius: var(--radius-card-lg); box-shadow: var(--shadow-card-rest), var(--ring-card);
+/* Health insights — flow rewrite 2026-09-17: stacked → 3 across at ≥768; the article card in the doctor card's language. */
+.insights { padding: 40px 0 8px; }
+.insights__eyebrow { margin: 0; text-align: center; font-size: var(--fs-eyebrow); font-weight: var(--fw-eyebrow); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; line-height: 1.2; color: var(--grey-600); }
+.insights__title { margin: 16px 0 0; text-align: center; font-size: var(--fs-display-lg); font-weight: var(--fw-display-lg); line-height: 1.05; color: var(--blue-900); font-variation-settings: var(--opsz-display-alt); text-wrap: balance; }
+.insights__subline { margin: 24px 0 0; text-align: center; font-size: var(--fs-body); font-weight: var(--fw-body); line-height: 1.3; color: var(--black); text-wrap: balance; }
+.insights__cards { display: grid; gap: 14px; margin-top: 24px; }
+.post { position: relative; display: flex; flex-direction: column; overflow: hidden; background: var(--white); border-radius: var(--radius-card-lg); box-shadow: var(--shadow-card-rest), var(--ring-card); padding: 0 20px 16px; }
+.post__top { display: block; height: 64px; margin: 0 -20px; background: radial-gradient(circle farthest-corner at 50% 50%, var(--card-bg-inner) 0%, var(--card-bg-outer) 100%); }
+.post__topic { align-self: flex-start; margin: -16px 0 0; display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border-radius: var(--radius-pill); background: var(--chip-cream); box-shadow: var(--ring-card); font-size: var(--fs-chip); font-weight: var(--fw-chip); line-height: 28px; color: var(--black); white-space: nowrap; }
+.post__title { margin: 14px 0 16px; font-size: var(--fs-body-md); font-weight: var(--fw-body-md); line-height: 1.25; color: var(--black); }
+.post__meta { margin: auto 0 0; padding-top: 12px; border-top: 1px solid var(--rule-card); font-size: var(--fs-meta); font-weight: var(--fw-meta); line-height: 1; color: var(--green-500); white-space: nowrap; }
+.insights__foot { display: flex; justify-content: center; margin-top: 24px; }
+.insights__more { width: 235.2px; height: 46px; }
+@media (min-width: 768px) { .insights__cards { grid-template-columns: repeat(3, 1fr); gap: 16px; } }
+@media (min-width: 1024px) {
+  .insights { padding: 40px 0 8px; }
+  .insights__cards { gap: 42.75px; margin-top: 48px; }
+  .post { min-height: 250px; }
+  .insights__foot { margin-top: 48px; }
 }
-.post__top { position: absolute; left: 0; right: 0; top: 0; height: 64px; background: radial-gradient(circle farthest-corner at 50% 50%, var(--card-bg-inner) 0%, var(--card-bg-outer) 100%); }
-.post__topic {
-  position: absolute; left: 20px; top: 48px; margin: 0; display: inline-flex; align-items: center; height: 28px; padding: 0 12px;
-  border-radius: var(--radius-pill); background: var(--chip-cream); box-shadow: var(--ring-card);
-  font-size: var(--fs-chip); font-weight: var(--fw-chip); line-height: 28px; color: var(--black); white-space: nowrap;
-}
-.post__title { position: absolute; left: 20px; right: 20px; top: 96px; margin: 0; font-size: var(--fs-body-md); font-weight: var(--fw-body-md); line-height: 22px; color: var(--black); }
-.post__meta { position: absolute; left: 20px; right: 20px; bottom: 18px; margin: 0; padding-top: 12px; border-top: 1px solid var(--rule-card); font-size: var(--fs-meta); font-weight: var(--fw-meta); line-height: 14px; color: var(--green-500); white-space: nowrap; }
-
-/* "Read More Articles" 235.2 × 46, centred, 48 under the cards */
-.insights__more { position: absolute; left: 50%; transform: translateX(-50%); top: 496px; width: 235.2px; height: 46px; }
+@media (min-width: 1366px) { .insights__cards { margin-inline: 47px; } }   /* the design's 330 px cards on 42.75 gaps: 1076.7 wide, centred */

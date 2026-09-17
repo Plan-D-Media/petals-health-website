@@ -1,21 +1,23 @@
-/* Home section 3, design pass 2026-09-17: strip 320 tall on a soft tint band. */
-.process { width: 100%; height: 320px; position: relative; }
-.process__inner { height: 320px; }
-/* tint on a z-index −1 layer: beneath every positioned sibling, so the family-care petal runs through it (body is
-   transparent in base.css for this reason) */
+/* Process strip — flow rewrite 2026-09-17: list (mobile) → 2 × 2 (tablet) → one row (≥1024), on a soft tint band. */
+.process { position: relative; padding: 40px 0 44px; }
 .process::before {
   content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
   background:
     linear-gradient(to bottom, var(--white) 0, rgba(255, 255, 255, 0) 80px, rgba(255, 255, 255, 0) calc(100% - 80px), var(--white) 100%),
     radial-gradient(750px circle at 50% 50%, #ffffff 0%, #edf7ff 100%);
 }
-
-.process__eyebrow { position: absolute; left: 0; right: 0; top: 40px; margin: 0; text-align: center; font-size: var(--fs-eyebrow); font-weight: var(--fw-eyebrow); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; line-height: 19px; color: var(--grey-600); }
-.process__title { position: absolute; left: 0; right: 0; top: 75px; margin: 0; text-align: center; font-size: var(--fs-display-lg); font-weight: var(--fw-display-lg); line-height: 58px; color: var(--blue-900); font-variation-settings: var(--opsz-display-alt); white-space: nowrap; }
-
-/* one row: four steps across the 1176 container, ring 64 + text */
-.process__steps { position: absolute; left: 95px; top: 181px; width: 1176px; margin: 0; padding: 0; list-style: none; display: flex; justify-content: space-between; }
-.step { width: 270px; display: flex; gap: 16px; align-items: flex-start; }
-.step__circle { flex: none; width: 64px; height: 64px; border-radius: 50%; box-sizing: border-box; border: 3px solid var(--purple-500); background: var(--white); display: flex; align-items: center; justify-content: center; font-size: 34px; font-weight: 400; line-height: 34px; color: var(--blue-900); }
-.step__title { font-size: 19px; font-weight: 400; line-height: 22px; color: var(--black); }
-.step__desc { margin: 6px 0 0; font-size: var(--fs-body-sm-regular); font-weight: var(--fw-body-sm-regular); line-height: var(--lh-body-sm-regular); color: var(--grey-800); }
+.process__eyebrow { margin: 0; text-align: center; font-size: var(--fs-eyebrow); font-weight: var(--fw-eyebrow); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; line-height: 1.2; color: var(--grey-600); }
+.process__title { margin: 16px 0 0; text-align: center; font-size: var(--fs-display-lg); font-weight: var(--fw-display-lg); line-height: 1.05; color: var(--blue-900); font-variation-settings: var(--opsz-display-alt); text-wrap: balance; }
+.process__steps { display: grid; gap: 18px; margin: 32px 0 0; padding: 0; list-style: none; }
+.step { display: flex; gap: 14px; align-items: flex-start; }
+.step__circle { flex: none; width: 48px; height: 48px; border-radius: 50%; border: 3px solid var(--purple-500); background: var(--white); display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 400; line-height: 1; color: var(--blue-900); }
+.step__title { font-size: var(--fs-body-md); font-weight: 500; line-height: 1.2; color: var(--black); }
+.step__desc { margin: 4px 0 0; font-size: var(--fs-body-sm-regular); font-weight: var(--fw-body-sm-regular); line-height: var(--lh-body-sm-regular); color: var(--grey-800); }
+@media (min-width: 768px) { .process__steps { grid-template-columns: 1fr 1fr; gap: 24px 32px; } }
+@media (min-width: 1024px) {
+  .process { padding: 40px 0 44px; }
+  .process__steps { grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 48px; }
+  .step { gap: 16px; }
+  .step__circle { width: 64px; height: 64px; font-size: 34px; }
+  .step__title { font-size: 19px; font-weight: 400; }
+}

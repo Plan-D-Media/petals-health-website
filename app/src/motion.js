@@ -13,9 +13,11 @@ export function initReveals() {
       if (!e.isIntersecting) continue
       e.target.classList.add('is-revealed'); io.unobserve(e.target)
     }
-  }, { threshold: 0.2, rootMargin: '0px 0px -5% 0px' })
+  }, { threshold: 0.05 })
   const arm = () => document.querySelectorAll('[data-reveal]:not(.is-revealed)').forEach((el) => io.observe(el))
   arm()
+  // safety net: nothing may stay hidden if the observer never fires for it (fast scrolls, print, odd viewports)
+  setTimeout(() => document.querySelectorAll('[data-reveal]:not(.is-revealed)').forEach((el) => el.classList.add('is-revealed')), 2500)
   // elements rendered later (carousel slides, route changes) get armed too
   new MutationObserver(arm).observe(document.body, { childList: true, subtree: true })
 }

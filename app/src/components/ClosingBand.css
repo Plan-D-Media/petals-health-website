@@ -1,9 +1,17 @@
-/* Closing band: 300 tall on the hero's ground; paragraph left, buttons right, proof strip below. */
-.closing { width: 100%; height: 300px; background: radial-gradient(786.5px circle at 50% 50%, var(--hero-bg-inner) 0%, var(--hero-bg-outer) 100%); }
-.closing__inner { height: 300px; }
-.closing__body { position: absolute; left: 95px; top: 64px; width: 560px; margin: 0; font-size: var(--fs-body); font-weight: var(--fw-body); line-height: 30px; color: var(--black); }
-.closing__actions { position: absolute; right: 95px; top: 72px; display: flex; gap: 16px; }
-.closing__cta { width: 260px; height: 60px; border-radius: var(--radius-pill); background: var(--blue-900); color: var(--white); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: var(--fw-button); line-height: 22px; white-space: nowrap; }
+/* Closing band — flow rewrite 2026-09-17. */
+.closing { padding: 32px 0 40px; background: radial-gradient(786.5px circle at 50% 50%, var(--hero-bg-inner) 0%, var(--hero-bg-outer) 100%); }
+.closing__inner { display: grid; gap: 20px; }
+.closing__body { margin: 0; font-size: var(--fs-body); font-weight: var(--fw-body); line-height: 1.4; color: var(--black); }
+.closing__actions { display: flex; flex-direction: column; gap: 12px; }
+.closing__cta { display: flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 24px; border-radius: var(--radius-pill); background: var(--blue-900); color: var(--white); font-size: var(--fs-button); font-weight: var(--fw-button); line-height: 1; white-space: nowrap; }
 .closing__cta--secondary { background: var(--white); color: var(--blue-900); box-shadow: var(--shadow-secondary); }
 .closing__cta:hover { transform: translateY(-1px); box-shadow: var(--shadow-button); }
-.closing__proof { position: absolute; left: 95px; top: 196px; }
+@media (min-width: 768px) { .closing__actions { flex-direction: row; } .closing__cta { flex: 1; } }
+@media (min-width: 1024px) {
+  .closing { padding: 64px 0 48px; }
+  .closing__inner { grid-template-columns: 1fr auto; grid-template-areas: 'body actions' 'proof proof'; align-items: center; gap: 32px 40px; }
+  .closing__body { grid-area: body; max-width: 560px; line-height: 30px; }
+  .closing__actions { grid-area: actions; gap: 16px; }
+  .closing__cta { flex: none; width: 260px; height: 60px; font-size: 20px; }
+  .closing__proof { grid-area: proof; }
+}

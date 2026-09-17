@@ -153,3 +153,21 @@
   --rule-card: rgba(0, 66, 126, 0.10);             /* hairline inside a card */
   --outline-card: rgba(0, 66, 126, 0.30);          /* softened outline */
 }
+
+/* ---------- responsive type (approved 2026-09-17): same fonts, weights and hierarchy; sizes only. 13 px floor holds.
+   Desktop values above are the ≥1024 scale; tablet takes the midpoint, mobile the sizes that fit 358 px. ---------- */
+@media (max-width: 1023px) {
+  :root {
+    --fs-display-xl: 48px; --fs-display-lg: 44px; --fs-display-md: 40px;
+    --fs-heading-sm: 28px; --fs-heading-line: 26px; --fs-body: 20px; --fs-eyebrow: 16px;
+    --fs-button: 20px; --fs-button-lg: 24px;
+  }
+}
+@media (max-width: 767px) {
+  :root {
+    --fs-display-xl: 36px; --fs-display-lg: 34px; --fs-display-md: 30px;
+    --fs-heading-sm: 26px; --fs-heading-line: 22px; --fs-title: 22px; --fs-body: 19px; --fs-eyebrow: 14px;
+    --fs-button: 18px; --fs-button-lg: 22px; --fs-label-lg: 16px; --fs-stat-value: 24px; --fs-body-md: 18px;
+  }
+}
+

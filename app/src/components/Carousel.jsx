@@ -2,57 +2,62 @@ import { useCallback, useEffect, useId, useMemo, useRef, useState } from 'react'
 import Icon from './Icon.jsx'
 import './Carousel.css'
 
-// Shared carousel (testimonials, doctors). Takes an items array and a render function.
-//   slideWidth / gap   px at the 1366 layout; the visible count is derived from the viewport width
-//   autoplayMs         0 disables; autoplay pauses on hover and on focus-within, and is off under prefers-reduced-motion
-//   label              accessible name (aria-roledescription="carousel")
-// Behaviour
-//   - arrows (buttons), pointer drag (pointer events, 40 px threshold, snaps to the nearest slide), ArrowLeft/Right,
-//     Home/End on the region
-//   - every slide is in the Tab order; focusing a slide that is not fully visible slides it into view once, and
-//     autoplay stays paused while focus is inside — the carousel never moves under a keyboard user
-//   - moves via controls are announced ("Slide n of N", polite); autoplay moves are not
-//   - loops: after the last slide autoplay and the next arrow return to the first
-export default function Carousel({ items, renderItem, slideWidth, gap = 24, autoplayMs = 5000, label, className = '', startAt = 0, edgeArrows = false }) {
+// Shared carousel (testimonials, doctors). Takes an items array and a render function; slide width comes from CSS
+// (the caller sets .carousel__slide width per breakpoint) and is measured from the DOM, so the same component works
+// at every width.
+//   autoplayMs   0 disables; pauses on hover and focus-within; off under prefers-reduced-motion and, by the caller's
+//                choice, on small screens (autoplayBelow)
+// Behaviour: arrows, pointer drag (40 px threshold, snaps), ArrowLeft/Right, Home/End; every slide is in the Tab order
+// and a focused off-screen slide slides into view once; control moves are announced (polite); loops.
+export default function Carousel({ items, renderItem, autoplayMs = 5000, autoplayBelow = 768, label, className = '', startAt = 0, edgeArrows = false, dots = true }) {
   const id = useId()
   const viewport = useRef(null)
-  const track = useRef(null)
   const [index, setIndex] = useState(startAt)
   const [visible, setVisible] = useState(1)
+  const [step, setStep] = useState(0)
   const [paused, setPaused] = useState(false)
-  const [dragX, setDragX] = useState(0)          // live drag offset in px
+  const [dragX, setDragX] = useState(0)
+  const [narrow, setNarrow] = useState(false)
   const drag = useRef(null)
   const [announce, setAnnounce] = useState('')
   const reduced = useMemo(() => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches, [])
   const n = items.length
-  const step = slideWidth + gap
   const maxIndex = Math.max(0, n - visible)
 
-  // visible count from the viewport width
+  // measure the slide pitch and the visible count from the DOM
   useEffect(() => {
     const el = viewport.current; if (!el) return undefined
-    const measure = () => setVisible(Math.max(1, Math.floor((el.clientWidth + gap) / step)))
+    const measure = () => {
+      const slides = el.querySelectorAll('.carousel__slide')
+      if (slides.length < 1) return
+      const w = slides[0].getBoundingClientRect().width
+      const pitch = slides.length > 1 ? slides[1].getBoundingClientRect().left - slides[0].getBoundingClientRect().left + dragX * 0 : w
+      const gap = Math.max(0, pitch - w)
+      setStep(pitch)
+      setVisible(Math.max(1, Math.floor((el.clientWidth + gap + 1) / pitch)))
+      setNarrow(window.innerWidth < autoplayBelow)
+    }
     measure()
     const ro = new ResizeObserver(measure); ro.observe(el)
-    return () => ro.disconnect()
-  }, [gap, step])
+    window.addEventListener('resize', measure)
+    return () => { ro.disconnect(); window.removeEventListener('resize', measure) }
+  }, [n, autoplayBelow]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const goTo = useCallback((i, { announceIt = true } = {}) => {
-    const clamped = ((i % (maxIndex + 1)) + (maxIndex + 1)) % (maxIndex + 1)
+    const m = maxIndex + 1
+    const clamped = ((i % m) + m) % m
     setIndex(clamped)
-    if (announceIt) setAnnounce(`Slide ${clamped + 1} of ${maxIndex + 1}`)
+    if (announceIt) setAnnounce(`Slide ${clamped + 1} of ${m}`)
   }, [maxIndex])
-  const next = useCallback((opts) => goTo(index + 1, opts), [goTo, index])
-  const prev = useCallback((opts) => goTo(index - 1, opts), [goTo, index])
+  const next = useCallback((o) => goTo(index + 1, o), [goTo, index])
+  const prev = useCallback((o) => goTo(index - 1, o), [goTo, index])
 
-  // autoplay
   useEffect(() => {
-    if (!autoplayMs || reduced || paused || n <= visible) return undefined
+    if (!autoplayMs || reduced || paused || narrow || n <= visible) return undefined
     const t = setInterval(() => goTo(index + 1, { announceIt: false }), autoplayMs)
     return () => clearInterval(t)
-  }, [autoplayMs, reduced, paused, n, visible, index, goTo])
+  }, [autoplayMs, reduced, paused, narrow, n, visible, index, goTo])
 
-  // keyboard on the region
   const onKey = (e) => {
     if (e.target.closest('input, textarea, select')) return
     switch (e.key) {
@@ -63,7 +68,6 @@ export default function Carousel({ items, renderItem, slideWidth, gap = 24, auto
       default:
     }
   }
-  // a focused slide that is off-screen slides into view (once), and focus inside pauses autoplay
   const onFocusIn = (e) => {
     setPaused(true)
     const slide = e.target.closest('[data-slide]'); if (!slide) return
@@ -73,18 +77,12 @@ export default function Carousel({ items, renderItem, slideWidth, gap = 24, auto
   }
   const onFocusOut = (e) => { if (!e.currentTarget.contains(e.relatedTarget)) setPaused(false) }
 
-  // pointer drag
   const onPointerDown = (e) => {
     if (e.button !== 0 || e.target.closest('a, button')) return
-    drag.current = { x: e.clientX, moved: false }
+    drag.current = { x: e.clientX }
     e.currentTarget.setPointerCapture(e.pointerId)
   }
-  const onPointerMove = (e) => {
-    if (!drag.current) return
-    const dx = e.clientX - drag.current.x
-    if (Math.abs(dx) > 4) drag.current.moved = true
-    setDragX(dx)
-  }
+  const onPointerMove = (e) => { if (drag.current) setDragX(e.clientX - drag.current.x) }
   const endDrag = (e) => {
     if (!drag.current) return
     const dx = e.clientX - drag.current.x
@@ -93,40 +91,34 @@ export default function Carousel({ items, renderItem, slideWidth, gap = 24, auto
   }
 
   const offset = -index * step + dragX
+  const pages = maxIndex + 1
   return (
     <section
       className={`carousel${edgeArrows ? ' carousel--edge' : ''} ${className}`.trim()}
-      aria-roledescription="carousel"
-      aria-label={label}
+      aria-roledescription="carousel" aria-label={label}
       onKeyDown={onKey}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => { if (!viewport.current?.contains(document.activeElement)) setPaused(false) }}
-      onFocus={onFocusIn}
-      onBlur={onFocusOut}
+      onFocus={onFocusIn} onBlur={onFocusOut}
     >
-      <div
-        ref={viewport}
-        className="carousel__viewport"
-        onPointerDown={onPointerDown}
-        onPointerMove={onPointerMove}
-        onPointerUp={endDrag}
-        onPointerCancel={endDrag}
-      >
-        <ul
-          ref={track}
-          className={`carousel__track${drag.current ? ' carousel__track--dragging' : ''}`}
-          style={{ gap, transform: `translate3d(${offset}px, 0, 0)` }}
-          id={`${id}-track`}
-        >
+      <div ref={viewport} className="carousel__viewport" onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={endDrag} onPointerCancel={endDrag}>
+        <ul className={`carousel__track${drag.current ? ' carousel__track--dragging' : ''}`} style={{ transform: `translate3d(${offset}px, 0, 0)` }} id={`${id}-track`}>
           {items.map((it, i) => (
-            <li key={it.id ?? i} className="carousel__slide" style={{ width: slideWidth }} data-slide={i} role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${n}`}>
+            <li key={it.id ?? i} className="carousel__slide" data-slide={i} role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${n}`}>
               {renderItem(it, i)}
             </li>
           ))}
         </ul>
       </div>
-      <button type="button" className="carousel__btn carousel__btn--prev" onClick={() => prev()} aria-label="Previous"><Icon name="chevron" /></button>
-      <button type="button" className="carousel__btn carousel__btn--next" onClick={() => next()} aria-label="Next"><Icon name="chevron" /></button>
+      <div className="carousel__controls">
+        <button type="button" className="carousel__btn carousel__btn--prev" onClick={() => prev()} aria-label="Previous"><Icon name="chevron" /></button>
+        {dots && (
+          <div className="carousel__dots" aria-hidden="true">
+            {Array.from({ length: pages }, (_, i) => <span key={i} className={'carousel__dot' + (i === index ? ' carousel__dot--on' : '')} />)}
+          </div>
+        )}
+        <button type="button" className="carousel__btn carousel__btn--next" onClick={() => next()} aria-label="Next"><Icon name="chevron" /></button>
+      </div>
       <div className="carousel__status" aria-live="polite" aria-atomic="true">{announce}</div>
     </section>
   )

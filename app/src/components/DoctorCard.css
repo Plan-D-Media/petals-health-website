@@ -1,32 +1,44 @@
-/* Doctor card 300 × 410 (design/round2-report.md §4). Tokens only. */
+/* Doctor card — flow rewrite 2026-09-17. Fills its slide; 300 × 410 at ≥1024, compact on small screens. */
 .doctor {
-  position: relative; width: 300px; height: 410px; flex: none; display: flex; flex-direction: column; overflow: hidden;
+  position: relative; width: 100%; height: 100%; min-height: 330px; display: flex; flex-direction: column; overflow: hidden;
   border-radius: var(--radius-card-lg); background: var(--white); box-shadow: var(--shadow-card-rest), var(--ring-card);
 }
 .doctor:hover, .doctor:focus-within { transform: translateY(-4px); box-shadow: var(--shadow-card), var(--ring-card); }
-
-.doctor__top { position: relative; flex: none; height: 150px; background: radial-gradient(circle farthest-corner at 50% 50%, var(--card-bg-inner) 0%, var(--card-bg-outer) 100%); }
-.doctor__badge { position: absolute; right: 20px; top: 16px; height: 24px; padding: 0 12px; border-radius: var(--radius-pill); background: var(--white); color: var(--black); font-size: var(--fs-caption); font-weight: var(--fw-caption); line-height: 24px; white-space: nowrap; }
-.doctor__video { position: absolute; right: 20px; bottom: 14px; display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 12px 0 10px; border-radius: var(--radius-pill); background: rgba(255, 255, 255, 0.92); color: var(--blue-900); font-size: var(--fs-caption); font-weight: 500; line-height: 26px; white-space: nowrap; }
+.doctor__top { position: relative; flex: none; height: 120px; background: radial-gradient(circle farthest-corner at 50% 50%, var(--card-bg-inner) 0%, var(--card-bg-outer) 100%); }
+.doctor__badge { position: absolute; right: 16px; top: 14px; height: 24px; padding: 0 12px; border-radius: var(--radius-pill); background: var(--white); color: var(--black); font-size: var(--fs-caption); font-weight: var(--fw-caption); line-height: 24px; white-space: nowrap; }
+.doctor__video { position: absolute; right: 16px; bottom: 14px; display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 12px 0 10px; border-radius: var(--radius-pill); background: rgba(255, 255, 255, 0.92); color: var(--blue-900); font-size: var(--fs-caption); font-weight: 500; line-height: 26px; white-space: nowrap; }
 .doctor__video-icon svg { width: 16px; height: 13px; display: block; }
-.doctor__avatar { position: absolute; left: 24px; bottom: -34px; width: 92px; height: 92px; border-radius: 50%; background: var(--white); box-shadow: var(--ring-card); overflow: hidden; }
-.doctor__avatar span { position: absolute; inset: 6px; border-radius: 50%; background: var(--blue-900); color: var(--white); display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 32px; font-weight: 400; line-height: 1; }
-.doctor__avatar img { position: absolute; inset: 6px; width: calc(100% - 12px); height: calc(100% - 12px); border-radius: 50%; object-fit: cover; }
+.doctor__avatar { position: absolute; left: 20px; bottom: -28px; width: 76px; height: 76px; border-radius: 50%; background: var(--white); box-shadow: var(--ring-card); overflow: hidden; }
+.doctor__avatar span { position: absolute; inset: 5px; border-radius: 50%; background: var(--blue-900); color: var(--white); display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 26px; font-weight: 400; line-height: 1; }
+.doctor__avatar img { position: absolute; inset: 5px; width: calc(100% - 10px); height: calc(100% - 10px); border-radius: 50%; object-fit: cover; }
 
-.doctor__body { flex: 1; display: flex; flex-direction: column; padding: 42px 24px 0; min-height: 0; }
-.doctor__name { margin: 0; font-size: var(--fs-title); font-weight: var(--fw-title); line-height: 26px; color: var(--blue-900); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }   /* wraps to two lines; the foot stays anchored */
-.doctor__spec { margin: 4px 0 0; font-size: var(--fs-meta); font-weight: var(--fw-meta); line-height: 18px; color: var(--grey-800); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.doctor__sessions { margin: 12px 0 0; padding: 0; list-style: none; font-size: var(--fs-meta); font-weight: var(--fw-meta); line-height: 18px; color: var(--black); }
+.doctor__body { flex: 1; display: flex; flex-direction: column; padding: 38px 20px 0; min-height: 0; }
+.doctor__name { margin: 0; font-size: var(--fs-title); font-weight: var(--fw-title); line-height: 1.1; color: var(--blue-900); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.doctor__spec { margin: 4px 0 0; font-size: var(--fs-meta); font-weight: var(--fw-meta); line-height: 1.3; color: var(--grey-800); }
+.doctor__sessions { margin: 10px 0 0; padding: 0; list-style: none; font-size: var(--fs-meta); font-weight: var(--fw-meta); line-height: 1.3; color: var(--black); }
 .doctor__sessions li { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
 .doctor__sessions li + li { margin-top: 4px; }
 .doctor__pin svg { width: 10px; height: 14px; display: block; }
 .doctor__more { color: var(--grey-600); padding-left: 18px; }
-.doctor__langs { margin: auto 0 10px; font-size: var(--fs-caption); font-weight: var(--fw-caption); line-height: 14px; color: var(--grey-600); }
+.doctor__langs { margin: auto 0 10px; padding-top: 8px; font-size: var(--fs-caption); font-weight: var(--fw-caption); line-height: 1.1; color: var(--grey-600); }
 
-.doctor__foot { flex: none; padding: 0 24px 20px; }
-.doctor__rating { display: flex; align-items: center; gap: 8px; height: 16px; }
+.doctor__foot { flex: none; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 0 20px 18px; }
+.doctor__rating { display: flex; align-items: center; gap: 8px; }
 .doctor__stars { display: flex; gap: 3px; color: var(--orange-500); }
 .doctor__star svg { width: 14.4px; height: 13.7px; display: block; }
-.doctor__score { font-size: var(--fs-caption); font-weight: var(--fw-caption); line-height: 14px; color: var(--grey-600); }
-.doctor__book { display: flex; align-items: center; justify-content: center; margin-top: 12px; height: 40px; border-radius: var(--radius-pill); background: var(--blue-900); color: var(--white); font-size: 16px; font-weight: 700; line-height: 16px; white-space: nowrap; }
+.doctor__score { font-size: var(--fs-caption); font-weight: var(--fw-caption); line-height: 1; color: var(--grey-600); }
+.doctor__book { display: flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 20px; border-radius: var(--radius-pill); background: var(--blue-900); color: var(--white); font-size: 15px; font-weight: 700; line-height: 1; white-space: nowrap; }
 .doctor__book:hover { transform: translateY(-1px); box-shadow: var(--shadow-button); }
+
+@media (min-width: 1024px) {
+  .doctor { min-height: 410px; }
+  .doctor__top { height: 150px; }
+  .doctor__badge { right: 20px; top: 16px; }
+  .doctor__video { right: 20px; }
+  .doctor__avatar { left: 24px; bottom: -34px; width: 92px; height: 92px; }
+  .doctor__avatar span { inset: 6px; font-size: 32px; }
+  .doctor__body { padding: 42px 24px 0; }
+  .doctor__foot { flex-direction: column; align-items: stretch; padding: 0 24px 20px; }
+  .doctor__rating { height: 16px; }
+  .doctor__book { min-height: 40px; height: 40px; font-size: 16px; }
+}

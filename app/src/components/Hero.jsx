@@ -5,13 +5,12 @@ import { HERO_VIDEO_SRC, HERO_POSTER, HERO_VIDEO_STYLE } from '../config.js'
 import { HEADER_HEIGHT } from '../layout.js'
 import './Hero.css'   /* after VideoSlot.css so .hero__film's box wins */
 
-// Hero concept B (design/round2-report.md §2, approved 2026-09-17): no headline; the paragraph carries the message;
-// a 16:9 film card starts at the text column's right and bleeds to the viewport edge; two equal buttons; the proof
-// strip (location pill + stats) overlaps the card's bottom-left corner. Values: design/hero-values.md ("Hero band")
-// for the atoms that survive (band gradient, button size, pill, stat tiles, watermark).
-// The design's portrait photo and its mask stay in /assets, unused.
+// Hero concept B (design/round2-report.md §2), flow rewrite 2026-09-17.
+//   ≥1024: text column on the container's left; the 16:9 film card is absolutely placed from the column's right edge to
+//          the viewport edge (a deliberate bleed); the proof strip overlaps the card's bottom-left corner.
+//   <1024: paragraph, buttons (row on tablet, stacked on mobile), film card full width, proof row.
+// The headline went with the client's brief; a visually hidden h1 keeps the page's document outline and SEO title.
 
-// mock-up switch: ?videoStyle=film|card|flush and ?video=<url> override config
 const qs = () => new URLSearchParams(window.location.search)
 const videoStyle = () => qs().get('videoStyle') || HERO_VIDEO_STYLE
 const videoSrc = () => qs().get('video') || HERO_VIDEO_SRC
@@ -19,14 +18,8 @@ const videoSrc = () => qs().get('video') || HERO_VIDEO_SRC
 export default function Hero() {
   return (
     <section className="hero band" aria-label="Petals Health">
+      <h1 className="sr-only">Petals Health — your family clinic in Kolkata</h1>
       <Watermark part="hero" offsetTop={HEADER_HEIGHT} />
-
-      {/* film card: left edge at inner x 646, right edge = viewport edge */}
-      <VideoSlot className="hero__film" poster={HERO_POSTER} posterAlt="A parent holding a baby at a Petals clinic" src={videoSrc()} label="hero video" variant={videoStyle()} />
-
-      {/* proof strip on the card's bottom-left corner */}
-      <Proof className="hero__proof" />
-
       <div className="inner hero__inner">
         <div className="hero__copy">
           <p className="hero__body">
@@ -34,10 +27,12 @@ export default function Hero() {
             the whole family, everything you need is available under one trusted roof.
           </p>
           <div className="hero__actions">
-            <a className="hero__cta btn-primary" href="#book" data-form="book-appointment">Book Appointment</a>
-            <a className="hero__cta hero__cta--secondary btn-secondary" href="#callback" data-form="request-callback">Request a Call Back</a>
+            <a className="hero__cta" href="#book" data-form="book-appointment">Book Appointment</a>
+            <a className="hero__cta hero__cta--secondary" href="#callback" data-form="request-callback">Request a Call Back</a>
           </div>
         </div>
+        <VideoSlot className="hero__film" poster={HERO_POSTER} posterAlt="A parent holding a baby at a Petals clinic" src={videoSrc()} label="hero video" variant={videoStyle()} />
+        <Proof className="hero__proof" />
       </div>
     </section>
   )

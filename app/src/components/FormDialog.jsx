@@ -27,8 +27,8 @@ export default function FormDialog() {
 
   useEffect(() => {
     const d = ref.current; if (!d) return undefined
-    if (req && !d.open) { d.showModal(); requestAnimationFrame(() => d.querySelector('input, select, textarea')?.focus()) }   // showModal focuses the close button; move to the first field
-    const onClose = () => { setReq(null); returnFocus.current?.focus?.() }
+    if (req && !d.open) { d.showModal(); document.documentElement.dataset.dialog = 'open'; requestAnimationFrame(() => d.querySelector('input, select, textarea')?.focus()) }   // showModal focuses the close button; move to the first field
+    const onClose = () => { setReq(null); delete document.documentElement.dataset.dialog; returnFocus.current?.focus?.() }
     d.addEventListener('close', onClose)
     return () => d.removeEventListener('close', onClose)
   }, [req])

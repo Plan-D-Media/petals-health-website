@@ -1,29 +1,36 @@
-/* Shared carousel. The caller sizes the viewport (width/height); slides are `slideWidth` wide. */
-.carousel { position: relative; }
+/* Shared carousel. Slide widths are set by the caller per breakpoint (.carousel__slide). Controls sit below the track on
+   small screens (thumb zone) and become side arrows at ≥1024 (outside the viewport, or on the band edges with
+   .carousel--edge). */
+.carousel { position: relative; --carousel-gap: 12px; }
 .carousel__viewport { overflow: hidden; touch-action: pan-y; cursor: grab; }
 .carousel__viewport:active { cursor: grabbing; }
-.carousel__track { display: flex; margin: 0; padding: 10px 0 14px; list-style: none; transition: transform 400ms var(--ease); will-change: transform; }
+.carousel__track { display: flex; gap: var(--carousel-gap); margin: 0; padding: 10px 0 14px; list-style: none; transition: transform 400ms var(--ease); will-change: transform; }
 .carousel__track--dragging { transition: none; }
-.carousel__slide { flex: none; }
+.carousel__slide { flex: none; width: calc(100% - 40px); }   /* one card + a 40 px peek */
 
-/* arrows: 48 px white discs with the brand shadow, the nav chevron rotated; outside the viewport by default, on the
-   band's edges with .carousel--edge (doctor band) */
+.carousel__controls { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 6px; }
 .carousel__btn {
-  position: absolute; top: 50%; width: 48px; height: 48px; margin-top: -24px; padding: 0; border: 0; border-radius: 50%;
-  background: var(--white); color: var(--blue-900); box-shadow: var(--shadow-button); cursor: pointer; z-index: 2;
+  width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%; flex: none;
+  background: var(--white); color: var(--blue-900); box-shadow: var(--shadow-button); cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
 }
 .carousel__btn svg { width: 18px; height: 11px; display: block; }
-.carousel__btn--prev { left: -24px; } .carousel__btn--prev svg { transform: rotate(90deg); }
-.carousel__btn--next { right: -24px; } .carousel__btn--next svg { transform: rotate(-90deg); }
-.carousel--edge .carousel__btn--prev { left: 24px; }
-.carousel--edge .carousel__btn--next { right: 24px; }
+.carousel__btn--prev svg { transform: rotate(90deg); }
+.carousel__btn--next svg { transform: rotate(-90deg); }
 .carousel__btn:hover { transform: translateY(-1px); box-shadow: var(--shadow-card); }
 .carousel__btn:active { transform: translateY(1px); box-shadow: var(--shadow-pressed); }
-
+.carousel__dots { display: flex; gap: 8px; }
+.carousel__dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(0, 66, 126, 0.25); }
+.carousel__dot--on { background: var(--blue-900); }
 .carousel__status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-@media (prefers-reduced-motion: reduce) {
-  .carousel__track { transition: none; }
+@media (min-width: 768px) {
+  .carousel__slide { width: calc(50% - var(--carousel-gap) / 2); }
 }
+@media (min-width: 1024px) {
+  .carousel { --carousel-gap: 24px; }
+  .carousel__controls { margin-top: 12px; }
+  .carousel__btn { width: 48px; height: 48px; }
+}
+@media (prefers-reduced-motion: reduce) { .carousel__track { transition: none; } }

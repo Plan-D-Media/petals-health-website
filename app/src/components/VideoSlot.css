@@ -27,7 +27,7 @@
 
 /* control: 40 px white disc, blue-900 glyph, 16 px inside the slot's bottom-right corner */
 .video-slot__control {
-  position: absolute; right: 16px; bottom: 16px; width: 40px; height: 40px; padding: 0; border: 0; border-radius: 50%;
+  position: absolute; right: 16px; bottom: 16px; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 50%;
   background: var(--white); color: var(--blue-900); box-shadow: var(--shadow-button); cursor: pointer;
   display: flex; align-items: center; justify-content: center;
   transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
@@ -45,5 +45,6 @@
 .video-slot--film { --video-inset: 0px; border-radius: var(--radius-card-lg) 0 0 var(--radius-card-lg); box-shadow: var(--shadow-card); }
 .video-slot--film .video-slot__poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .video-slot--film .video-slot__video { border-radius: 0; }
-.video-slot--film .video-slot__control { right: auto; left: 316px; bottom: 24px; }   /* clear of the proof strip, which covers the card's bottom-left 290 px */
+.video-slot--film .video-slot__control { right: auto; left: 12px; bottom: 12px; }
+@media (min-width: 1024px) { .video-slot--film .video-slot__control { left: auto; right: 24px; bottom: 24px; } }   /* the proof strip covers the card's bottom-left on desktop */
 
