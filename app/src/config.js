@@ -11,7 +11,7 @@ export const HERO_POSTER = '/media/hero-poster-landscape.jpg'   // landscape pos
 
 // Footage treatment: 'flush' (Option A, matched backdrop, no visible edge) or 'card' (Option B, rounded panel + shadow).
 // Overridable for mock-ups with ?videoStyle=card|flush.
-export const HERO_VIDEO_STYLE = 'film'   // hero concept B (design/round2-report.md §2): 16:9 film card bleeding to the right edge. 'card' / 'flush' remain for the portrait slot
+export const HERO_VIDEO_STYLE = 'full'   // round 3: full-width 16:9 video (Shelf hero). 'film' (concept B card), 'card' and 'flush' remain available
 
 // ---- forms (decided 2026-09-17): every form posts to ONE Google Apps Script web app, which appends a row to a Google
 // Sheet and sends an email notification. Replace the placeholder with the client's deployed web-app URL

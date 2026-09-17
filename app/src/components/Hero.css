@@ -1,45 +1,37 @@
-/* Hero — flow rewrite 2026-09-17. Mobile first; ≥1024 reproduces concept B's desktop composition. */
+/* Hero, round 3: full-width video; Shelf (≥768) / Stack (<768). Tokens only. */
 .hero {
-  position: relative; width: 100%; overflow: hidden; padding: 28px 0 32px;
+  position: relative; width: 100%; padding: 0 0 32px;
   background:
-    linear-gradient(to bottom, rgba(255, 255, 255, 0) calc(100% - 120px), var(--white) 100%),   /* soft seam into section 2 */
-    radial-gradient(786.5px circle at calc(50% - 0.8px) 368.2px, var(--hero-bg-inner) 0%, var(--hero-bg-outer) 100%);
+    linear-gradient(to bottom, rgba(255, 255, 255, 0) calc(100% - 120px), var(--white) 100%),
+    radial-gradient(786.5px circle at 50% 60%, var(--hero-bg-inner) 0%, var(--hero-bg-outer) 100%);
 }
-.hero__inner { display: grid; gap: 20px; }
-.hero__body { margin: 0; font-size: var(--fs-body); font-weight: var(--fw-body); line-height: 1.45; color: var(--black); }
-.hero__actions { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
+/* the film: full width, 16:9, capped at 560 tall from 1024 up (cover-crop — footage keeps faces in the vertical middle) */
+.hero__film { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; }
+.hero__inner { display: grid; gap: 20px; margin-top: 24px; }
+.hero__shelf { display: grid; gap: 16px; }
+.hero__title { position: relative; margin: 0; font-size: var(--fs-display-md); font-weight: var(--fw-display-md); line-height: 1.1; color: var(--blue-900); font-variation-settings: var(--opsz-display); text-wrap: balance; }
+.hero__title-dash { color: var(--accent); }
+.hero__body { margin: 12px 0 0; font-size: var(--fs-body); font-weight: var(--fw-body); line-height: 1.45; color: var(--black); }
+.hero__actions { display: flex; flex-direction: column; gap: 12px; }
 .hero__cta {
   display: flex; align-items: center; justify-content: center; min-height: 56px; padding: 0 28px; border-radius: var(--radius-pill);
   background: var(--blue-900); color: var(--white); font-size: var(--fs-button); font-weight: var(--fw-button); line-height: 1; white-space: nowrap;
 }
 .hero__cta--secondary { background: var(--white); color: var(--blue-900); box-shadow: var(--shadow-secondary); }
-/* film: contained 16:9 card below the copy */
-.hero__film { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 16px; overflow: hidden; box-shadow: var(--shadow-card); }
-.hero__proof { margin-top: 4px; }
+/* pending-copy tag (same device as the placeholder testimonials) */
+.pending { display: inline-block; vertical-align: middle; margin-left: 10px; height: 20px; padding: 0 8px; border-radius: var(--radius-pill); background: var(--orange-500); color: var(--blue-900); font-size: 13px; font-weight: 700; line-height: 20px; letter-spacing: 0.04em; text-transform: uppercase; }
 
 @media (min-width: 768px) {
-  .hero { padding: 40px 0 44px; }
-  .hero__actions { flex-direction: row; }
-  .hero__cta { flex: 1; }
+  .hero { padding-bottom: 40px; }
+  .hero__inner { margin-top: -56px; gap: 28px; }
+  /* the shelf: a white card overlapping the video's bottom edge */
+  .hero__shelf { grid-template-columns: 1fr; gap: 20px; width: min(920px, 100%); margin: 0 auto; padding: 28px 32px; background: var(--white); border-radius: var(--radius-card-lg); box-shadow: var(--shadow-card); }   /* tablet: proof row under the copy */
+  .hero__actions { flex-direction: row; justify-content: center; gap: 16px; }
+  .hero__cta { min-width: 260px; height: 60px; }
 }
-
-/* ---- ≥1024: concept B — text column 470, film bleeding right, proof strip on the card corner ---- */
 @media (min-width: 1024px) {
-  .hero { padding: 0; height: 640px; }
-  .hero__inner { display: block; height: 640px; }
-  .hero__copy { position: absolute; left: 0; top: 96px; width: 470px; }
+  .hero__film { max-height: 560px; }
+  .hero__shelf { grid-template-columns: 1fr auto; align-items: center; gap: 24px 40px; width: min(1120px, 100%); padding: 32px 40px; }
   .hero__body { line-height: 30px; }
-  .hero__actions { flex-direction: column; align-items: flex-start; gap: 14px; margin-top: 36px; }
-  .hero__cta { flex: none; width: 304.3px; height: 64.8px; padding: 0; }
-  /* the film is placed from the band, not the container, so it can reach the viewport edge: left = container left + 551 */
-  .hero__film { position: absolute; top: 56px; height: 468px; aspect-ratio: auto; right: calc(-1 * (100vw - 100%) / 2 - 0.5px); left: 551px; border-radius: var(--radius-card-lg) 0 0 var(--radius-card-lg); }
-  .hero__proof { position: absolute; left: 511px; top: 484px; margin: 0; z-index: 2; }
-}
-@media (min-width: 1024px) and (max-width: 1365px) {
-  .hero, .hero__inner { height: 560px; }
-  .hero__film { top: 48px; height: 380px; left: 510px; }
-  .hero__proof { left: 470px; top: 392px; }
-}
-@media (min-width: 1366px) {
-  .hero__film { left: 551px; }   /* 646 − 95: unchanged geometry from the design pass */
+  .hero__cta { width: 304.3px; height: 64.8px; }
 }
