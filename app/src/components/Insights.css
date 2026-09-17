@@ -10,7 +10,7 @@
 .post__topic { align-self: flex-start; margin: -16px 0 0; display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border-radius: var(--radius-pill); background: var(--chip-cream); box-shadow: var(--ring-card); font-size: var(--fs-chip); font-weight: var(--fw-chip); line-height: 28px; color: var(--black); white-space: nowrap; }
 .post__title { margin: 14px 0 20px; font-size: var(--fs-title); font-weight: var(--fw-title); line-height: 1.2; color: var(--blue-900); }
 .post__meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: auto 0 0; padding-top: 12px; border-top: 1px solid var(--rule-card); font-size: var(--fs-meta); font-weight: var(--fw-meta); line-height: 1; color: var(--green-500); white-space: nowrap; }
-.post__read { display: inline-flex; align-items: center; gap: 6px; color: var(--blue-900); font-weight: 500; }
+.post__read { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 10px; margin: -15px -10px; color: var(--blue-900); font-weight: 500; }   /* 44 px hit area, small footprint */
 .post:hover .post__read, .post:focus-within .post__read { text-decoration: underline; text-underline-offset: 3px; }
 .insights__foot { display: flex; justify-content: center; margin-top: 24px; }
 .insights__more { width: 235.2px; height: 46px; }
