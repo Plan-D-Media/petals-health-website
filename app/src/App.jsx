@@ -5,7 +5,7 @@ import FamilyCare from './components/FamilyCare.jsx'
 import Process from './components/Process.jsx'
 import Testimonials from './components/Testimonials.jsx'
 import Specialists from './components/Specialists.jsx'
-import HealthCard from './components/HealthCard.jsx'
+import CaringBlock from './components/CaringBlock.jsx'   // round 3, item 6: replaces the Family Health Card panel
 import Insights from './components/Insights.jsx'
 import ClosingBand from './components/ClosingBand.jsx'
 import Footer from './components/Footer.jsx'
@@ -21,7 +21,7 @@ export default function App() {
       <Process />
       <Testimonials />
       <Specialists />
-      <HealthCard />
+      <CaringBlock />
       <Insights />
       <ClosingBand />
       <Footer />
