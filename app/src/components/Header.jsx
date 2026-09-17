@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import Icon from './Icon.jsx'
 import NavMenu from './NavMenu.jsx'
 import './Header.css'
@@ -43,6 +43,13 @@ export default function Header() {
   const [openId, setOpenId] = useState(null)
   const tops = useRef({})   // id → top-level focusable (link or menu trigger)
   const close = useCallback(() => setOpenId(null), [])
+  // CTA path: the nav is sticky; its orange "Book Appointment" appears once the hero has scrolled out of view
+  const [showCta, setShowCta] = useState(false)
+  useEffect(() => {
+    const hero = document.querySelector('.hero'); if (!hero || !('IntersectionObserver' in window)) return undefined
+    const io = new IntersectionObserver(([e]) => setShowCta(!e.isIntersecting), { threshold: 0 })
+    io.observe(hero); return () => io.disconnect()
+  }, [])
 
   // ArrowLeft / ArrowRight between top-level items; carries an open menu across to the neighbour if it has one
   const onArrow = (fromId, dir, wasOpen) => {
@@ -72,7 +79,9 @@ export default function Header() {
         </div>
       </div></div>
 
-      <nav className={'nav band' + (openId ? ' nav--menu-open' : '')} aria-label="Primary"><div className="inner nav__inner">
+      <nav className={'nav band' + (openId ? ' nav--menu-open' : '') + (showCta ? ' nav--cta' : '')} aria-label="Primary">
+        <a className="nav__cta" href="#book" data-form="book-appointment" tabIndex={showCta ? 0 : -1} aria-hidden={!showCta}>Book Appointment</a>
+        <div className="inner nav__inner">
         {NAV.map((n, i) => [
           i > 1 && <span key={'sep' + i} className="nav__sep" aria-hidden="true" />,
           n.items ? (

@@ -146,3 +146,10 @@
   --focus-ring: var(--blue-900);           /* 8.9:1 on white */
   --focus-ring-on-dark: var(--orange-500); /* 6.7:1 on blue-900 */
 }
+
+/* ---------- card edges (polish 2, folded in 2026-09-17) ---------- */
+:root {
+  --ring-card: 0 0 0 1px rgba(0, 66, 126, 0.08);   /* rest edge for cards on white */
+  --rule-card: rgba(0, 66, 126, 0.10);             /* hairline inside a card */
+  --outline-card: rgba(0, 66, 126, 0.30);          /* softened outline */
+}

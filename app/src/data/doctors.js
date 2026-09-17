@@ -101,7 +101,7 @@ export const DOCTORS = [
 export const SOURCE_FLAGS = DOCTORS.filter((d) => d.sourceNote).map((d) => ({ id: d.id, note: d.sourceNote }))
 
 // ---- helpers shared by the components ----
-export const monogram = (name) => name.replace(/^Dr\.?\s+/i, '').split(/\s+/).filter(Boolean).map((w) => w[0]).join('').slice(0, 2).toUpperCase()
+export const monogram = (name) => { const w = name.replace(/^Dr\.?\s+/i, '').split(/\s+/).filter(Boolean); return ((w[0]?.[0] ?? '') + (w.length > 1 ? w[w.length - 1][0] : '')).toUpperCase() }   // first + last initials: 'K N Siddiqui' → KS
 
 const fmt = (t) => { const [h, m] = t.split(':').map(Number); const ap = h >= 12 ? 'pm' : 'am'; const hh = ((h + 11) % 12) + 1; return m ? `${hh}:${String(m).padStart(2, '0')}${ap}` : `${hh}${ap}` }
 export const sessionLabel = (s) => `${CLINICS[s.clinicId].short} · ${fmt(s.from)}–${fmt(s.to)}`

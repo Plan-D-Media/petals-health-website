@@ -4,7 +4,9 @@
 .hero {
   position: relative; width: 100%; height: 640px; overflow: hidden;
   /* SVG radial gradient aed0135220: centre (682.2 = 1366/2 − 0.8, 368.2 inner), r 786.5; 41 linear stops → 2. */
-  background: radial-gradient(786.5px circle at calc(50% - 0.8px) 368.2px, var(--hero-bg-inner) 0%, var(--hero-bg-outer) 100%);
+  background:
+    linear-gradient(to bottom, rgba(255, 255, 255, 0) calc(100% - 120px), var(--white) 100%),   /* soft seam into section 2 (polish 2) */
+    radial-gradient(786.5px circle at calc(50% - 0.8px) 368.2px, var(--hero-bg-inner) 0%, var(--hero-bg-outer) 100%);
 }
 .hero__inner { height: 640px; }
 
@@ -31,26 +33,5 @@
   overflow: hidden;
 }
 
-/* ---------- proof strip: overlaps the card's bottom-left corner ---------- */
-.hero__proof {
-  position: absolute; left: calc(50% - 683px + 606px); top: 484px; z-index: 2;
-  display: flex; align-items: center; gap: 16px; padding: 14px 20px;
-  background: var(--white); border-radius: var(--radius-card); box-shadow: var(--shadow-card);
-}
-/* pill: 220.4 × 32.8 (design atom), flat inside the strip */
-.hero__pill { position: relative; width: 220.4px; height: 32.8px; border-radius: var(--radius-pill); background: radial-gradient(circle farthest-side at 50% 50%, #ffffff 0%, var(--hero-bg-outer) 100%); color: var(--blue-900); }
-.hero__pill-icon { position: absolute; left: 20.8px; top: 6.9px; }
-.hero__pill-text { position: absolute; left: 43.1px; top: 6.2px; white-space: nowrap; font-size: var(--fs-label-lg); font-weight: var(--fw-label-lg); line-height: 18px; }
-
-/* stat tiles: 84 × 84 in the strip (92 in the design), 12 apart */
-.hero__stats { position: relative; width: 180px; height: 84px; }
-.stat {
-  position: absolute; top: 0; width: 84px; height: 84px; border-radius: var(--radius-card-sm);
-  background: radial-gradient(circle farthest-corner at 50% 50%, var(--card-bg-inner) 0%, var(--card-bg-outer) 100%);
-  box-shadow: var(--ring-card); color: var(--blue-900); text-align: center;
-}
-.stat--doctors { left: 0; }
-.stat--rating  { left: 96px; }
-.stat__value { position: absolute; left: 0; right: 0; top: 12px; font-family: var(--font-stat); font-size: var(--fs-stat-value); font-weight: var(--fw-stat-value); line-height: 28px; white-space: nowrap; display: flex; justify-content: center; align-items: flex-start; }
-.stat__star { margin-left: 5px; margin-top: 1.5px; }
-.stat__label { position: absolute; left: 0; right: 0; top: 48px; font-size: var(--fs-caption); font-weight: var(--fw-caption); line-height: var(--lh-caption); }
+/* ---------- proof strip (Proof.jsx): overlaps the card's bottom-left corner ---------- */
+.hero__proof { position: absolute; left: calc(50% - 683px + 606px); top: 484px; z-index: 2; }

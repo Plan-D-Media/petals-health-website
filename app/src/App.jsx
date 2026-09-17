@@ -7,6 +7,7 @@ import Testimonials from './components/Testimonials.jsx'
 import Specialists from './components/Specialists.jsx'
 import HealthCard from './components/HealthCard.jsx'
 import Insights from './components/Insights.jsx'
+import ClosingBand from './components/ClosingBand.jsx'
 import Footer from './components/Footer.jsx'
 
 export default function App() {
@@ -21,6 +22,7 @@ export default function App() {
       <Specialists />
       <HealthCard />
       <Insights />
+      <ClosingBand />
       <Footer />
     </div>
   )

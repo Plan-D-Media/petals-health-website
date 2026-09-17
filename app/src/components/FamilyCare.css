@@ -32,7 +32,8 @@
 .care-card:nth-child(2) { left: 439.6px; }
 .care-card:nth-child(3) { left: 879.2px; }
 .care-card--orange { background: linear-gradient(135deg, var(--card-orange-start) 0%, var(--card-orange-end) 50%); }
-.care-card--blue   { background: linear-gradient(135deg, var(--card-blue-start) 0%, var(--card-blue-end) 100%); }
+.care-card--blue   { background: linear-gradient(135deg, var(--card-blue-start) 0%, var(--card-blue-end) 100%); box-shadow: var(--shadow-card-rest), var(--ring-card); }   /* rest edge on white (polish 2) */
+.care-card--blue:hover, .care-card--blue:focus-within { box-shadow: var(--shadow-card-lg), var(--ring-card); }
 
 /* petal outlines: 212 × 220.3 white path at opacity 0.19, page (352, 1062.8) and (793, 1062) → inner y 182.8 / 182;
    drawn above the cards, not clipped: they run across the card gaps as in the design. */

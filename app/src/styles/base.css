@@ -10,6 +10,8 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
+body { background: transparent; }   /* z-index -1 tint layers (Process) paint above the canvas but below body's own background */
+
 /* Desktop-only container: the design exists at 1366 px and nothing narrower.
    TODO(breakpoints): no mobile/tablet frames exist in the design; do not invent behaviour. */
 .page { width: 100%; min-width: var(--page-width); position: relative; overflow-x: clip; }

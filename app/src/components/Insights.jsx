@@ -21,6 +21,7 @@ export default function Insights() {
         <div className="insights__cards">
           {ARTICLES.map((a, i) => (
             <article key={a.topic} className="post" style={{ left: i * 373.15 }}>
+              <span className="post__top" aria-hidden="true" />
               <h3 className="post__topic">{a.topic}</h3>
               <p className="post__title">{a.lines.map((l, k) => <span key={k}>{l}{k < a.lines.length - 1 && <br />}</span>)}</p>
               <p className="post__meta">{a.meta}</p>

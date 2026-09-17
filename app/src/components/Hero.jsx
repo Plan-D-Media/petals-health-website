@@ -1,6 +1,6 @@
-import Icon from './Icon.jsx'
 import Watermark from './Watermark.jsx'
 import VideoSlot from './VideoSlot.jsx'
+import Proof from './Proof.jsx'
 import { HERO_VIDEO_SRC, HERO_POSTER, HERO_VIDEO_STYLE } from '../config.js'
 import { HEADER_HEIGHT } from '../layout.js'
 import './Hero.css'   /* after VideoSlot.css so .hero__film's box wins */
@@ -25,22 +25,7 @@ export default function Hero() {
       <VideoSlot className="hero__film" poster={HERO_POSTER} posterAlt="A parent holding a baby at a Petals clinic" src={videoSrc()} label="hero video" variant={videoStyle()} />
 
       {/* proof strip on the card's bottom-left corner */}
-      <div className="hero__proof">
-        <div className="hero__pill">
-          <Icon name="pin" className="hero__pill-icon" />
-          <span className="hero__pill-text">3 Clinics in Kolkata</span>
-        </div>
-        <div className="hero__stats">
-          <div className="stat stat--doctors">
-            <div className="stat__value">100+</div>
-            <div className="stat__label">Specialist<br />Doctor</div>
-          </div>
-          <div className="stat stat--rating">
-            <div className="stat__value">4.8<Icon name="star" className="stat__star" /></div>
-            <div className="stat__label">Google<br />Rating</div>
-          </div>
-        </div>
-      </div>
+      <Proof className="hero__proof" />
 
       <div className="inner hero__inner">
         <div className="hero__copy">

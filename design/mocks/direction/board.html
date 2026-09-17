@@ -1,0 +1,126 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Direction board — design pass</title><link rel="stylesheet" href="mock.css">
+<style>
+/* DIRECTION BOARD (static). Sections mocked: doctor carousel band (new card), process strip, health-card panel with
+   the photo breaking its frame, article cards, closing CTA band, sticky nav CTA. Same copy, same tokens. */
+body { background: #fff; }
+.band { position: relative; width: 100%; }
+.eyebrow { margin: 0; text-align: center; letter-spacing: .12em; text-transform: uppercase; color: var(--grey-600); font-size: 16px; line-height: 19px; font-weight: 400; }
+.h2 { margin: 16px 0 0; text-align: center; color: var(--blue-900); font-size: 58px; line-height: 58px; font-weight: 700; }
+.sub { margin: 24px 0 0; text-align: center; font-size: 18px; line-height: 18px; }
+.soft { background: linear-gradient(to bottom, #fff 0, rgba(255,255,255,0) 80px, rgba(255,255,255,0) calc(100% - 80px), #fff 100%), radial-gradient(750px circle at 50% 50%, #fff 0%, #edf7ff 100%); }
+.sticky-note { position: absolute; right: 95px; top: 0; height: 42px; display: flex; align-items: center; }
+.sticky-note a { display: inline-flex; align-items: center; height: 30px; padding: 0 16px; border-radius: 999px; background: var(--orange-500); color: var(--blue-900); font-size: 15px; font-weight: 700; text-decoration: none; }
+.note { position: absolute; left: 95px; top: -1px; background: #333; color: #fff; font: 12px/18px system-ui; padding: 2px 8px; z-index: 5; }
+
+/* ---- 1 doctor band: 760 tall, cards 300 × 400 overhanging the band's bottom edge ---- */
+.docs { height: 700px; padding-top: 72px; }
+.docs .row { position: absolute; left: calc(50% - 683px + 95px); top: 232px; display: flex; gap: 24px; }
+.doc { width: 300px; height: 400px; border-radius: var(--radius-card-lg); background: #fff; box-shadow: var(--shadow-card), var(--ring-card); overflow: hidden; position: relative; }
+.doc .top { height: 176px; background: radial-gradient(circle farthest-corner at 50% 50%, var(--card-bg-inner) 0%, var(--card-bg-outer) 100%); position: relative; }
+.doc .avatar { position: absolute; left: 24px; bottom: -36px; width: 96px; height: 96px; border-radius: 50%; background: #fff; box-shadow: var(--ring-card); }
+.doc .avatar span { position: absolute; inset: 6px; border-radius: 50%; background: var(--blue-900); color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Lora', serif; font-size: 34px; }
+.doc .badge { position: absolute; right: 20px; top: 20px; height: 26px; padding: 0 12px; border-radius: 999px; background: #fff; font-size: 13px; line-height: 26px; }
+.doc .video { position: absolute; right: 20px; bottom: 16px; height: 26px; padding: 0 12px 0 10px; border-radius: 999px; background: rgba(255,255,255,.92); color: var(--blue-900); font-size: 13px; line-height: 26px; font-weight: 500; }
+.doc .video::before { content: ''; display: inline-block; width: 10px; height: 8px; margin-right: 6px; background: var(--blue-900); border-radius: 2px; vertical-align: -1px; }
+.doc .body { padding: 52px 24px 0; }
+.doc .name { margin: 0; font-size: 24px; line-height: 26px; font-weight: 600; color: var(--blue-900); }
+.doc .spec { margin: 6px 0 0; font-size: 14px; line-height: 16px; color: var(--grey-800); }
+.doc .meta { margin: 14px 0 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; line-height: 16px; color: var(--black); }
+.doc .meta span::before { content: ''; display: inline-block; width: 10px; height: 13px; margin-right: 8px; background: var(--blue-900); border-radius: 5px 5px 7px 7px; vertical-align: -2px; }
+.doc .langs { margin: 12px 0 0; font-size: 13px; color: var(--grey-600); }
+.doc .stars { position: absolute; left: 24px; bottom: 74px; color: var(--orange-500); font-size: 14px; letter-spacing: 2px; }
+.doc .rating { position: absolute; left: 100px; bottom: 74px; font-size: 13px; color: var(--grey-600); }
+.doc .book { position: absolute; left: 24px; right: 24px; bottom: 20px; height: 40px; border-radius: 999px; background: var(--blue-900); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 700; text-decoration: none; }
+.docs .arrow { position: absolute; top: 400px; width: 48px; height: 48px; border-radius: 50%; background: #fff; box-shadow: var(--shadow-button); }
+.docs .arrow.l { left: calc(50% - 683px + 24px); } .docs .arrow.r { right: 24px; }
+
+/* ---- 2 process strip: 320 tall, single row ---- */
+.process { height: 320px; padding-top: 56px; }
+.process .steps { position: absolute; left: calc(50% - 683px + 95px); width: 1176px; top: 176px; display: flex; justify-content: space-between; }
+.step { width: 260px; display: flex; gap: 16px; align-items: flex-start; }
+.step .ring { flex: none; width: 64px; height: 64px; border-radius: 50%; border: 3px solid #6e5fa1; display: flex; align-items: center; justify-content: center; font-size: 34px; color: var(--blue-900); }
+.step b { display: block; font-size: 19px; font-weight: 400; line-height: 22px; }
+.step p { margin: 6px 0 0; font-size: 16px; line-height: 19px; color: var(--grey-800); }
+
+/* ---- 3 health card: photo breaks the panel top ---- */
+.hc { height: 820px; }
+.hc .panel { position: absolute; left: calc(50% - 683px + 94px); top: 110px; width: 1164px; height: 640px; border-radius: 21px; background: var(--blue-900); color: #fff; }
+.hc .photo { position: absolute; left: calc(50% - 683px + 94px + 520px); top: 30px; width: 740px; height: 720px; background: url('hcard-photo.png') -420px -20px / 1250px 824px no-repeat; -webkit-mask: url('hcard-mask.png') -420px -20px / 1250px 824px no-repeat luminance; mask: url('hcard-mask.png') -420px -20px / 1250px 824px no-repeat; -webkit-mask-mode: luminance; mask-mode: luminance; }
+.hc .copy { position: absolute; left: 96px; top: 60px; width: 420px; }
+.hc .copy .ey { letter-spacing: .155em; text-transform: uppercase; font-size: 26px; font-weight: 300; }
+.hc .copy .t { margin: 18px 0 0; font-size: 53px; line-height: 50px; font-weight: 700; }
+.hc .copy .p { margin: 32px 0 0; font-size: 21px; line-height: 26px; font-weight: 300; }
+.hc .copy ul { margin: 24px 0 0; padding-left: 20px; font-size: 21px; line-height: 24px; font-weight: 300; }
+.hc .copy .cta { display: inline-flex; margin-top: 40px; height: 40px; padding: 0 28px; border-radius: 999px; background: #fff; color: var(--blue-900); font-size: 18px; font-weight: 700; align-items: center; }
+
+/* ---- 4 article cards, same card language ---- */
+.posts { height: 560px; padding-top: 64px; }
+.posts .row { position: absolute; left: calc(50% - 683px + 142px); top: 232px; display: flex; gap: 42px; }
+.post { width: 330px; height: 250px; border-radius: 21px; background: #fff; box-shadow: var(--shadow-card), var(--ring-card); position: relative; overflow: hidden; }
+.post .top { height: 64px; background: radial-gradient(circle farthest-corner at 50% 50%, var(--card-bg-inner) 0%, var(--card-bg-outer) 100%); }
+.post .chip { position: absolute; left: 20px; top: 48px; height: 28px; padding: 0 12px; border-radius: 999px; background: #fffbf4; box-shadow: var(--ring-card); font-size: 16px; font-weight: 300; line-height: 28px; }
+.post .t { position: absolute; left: 20px; right: 20px; top: 96px; margin: 0; font-size: 19px; line-height: 22px; }
+.post .m { position: absolute; left: 20px; right: 20px; bottom: 18px; padding-top: 12px; border-top: 1px solid rgba(0,66,126,.1); font-size: 14px; color: #00bf63; }
+
+/* ---- 5 closing band: hero buttons + proof, reused ---- */
+.close { height: 300px; background: radial-gradient(786px circle at 50% 50%, #fff 0%, #e3f2ff 100%); }
+.close .in { position: absolute; left: calc(50% - 683px + 95px); width: 1176px; top: 64px; display: flex; align-items: center; justify-content: space-between; }
+.close .para { width: 560px; font-size: 21px; line-height: 30px; }
+.close .actions { display: flex; gap: 16px; }
+.close .proof { position: absolute; left: calc(50% - 683px + 95px); top: 208px; display: flex; gap: 16px; align-items: center; }
+</style></head><body><div class="page">
+<div class="utility"><div class="inner">
+  <a class="logo" href="#"><img src="logo.png" alt=""></a>
+  <div class="ulinks">
+    <a href="#"><span class="ic"></span>9147405955</a><span class="sep"></span>
+    <a href="#"><span class="ic"></span>Book an Appt</a><span class="sep"></span>
+    <a href="#"><span class="ic"></span>Find a Doctor</a><span class="sep"></span>
+    <a href="#"><span class="ic"></span>Ask a Doctor</a>
+  </div>
+</div></div>
+<div class="nav"><div class="inner">
+  <a class="active" href="#">Home</a><a href="#">About us</a><span class="sep"></span><a href="#">Clinics<span class="chev"></span></a><span class="sep"></span><a href="#">Treatments<span class="chev"></span></a><span class="sep"></span><a href="#">Diagnostic Services</a><span class="sep"></span><a href="#">For Patients<span class="chev"></span></a><span class="sep"></span><a href="#">Petals Clinic in Bangladesh</a>
+</div></div>
+
+<div style="position:relative;height:0"><div class="sticky-note" style="top:-42px"><a href="#">Book Appointment</a></div></div>
+
+<section class="band docs soft"><span class="note">1 · DOCTOR CAROUSEL BAND — 300 × 400 cards from the data file; band 700, cards overhang the next section</span>
+  <p class="eyebrow">Our specialists</p><h2 class="h2">Meet your care team</h2><p class="sub">Experienced, empathetic doctors who take time to truly understand your health.</p>
+  <div class="row">
+    <article class="doc"><div class="top"><span class="badge">Gynaecology</span><div class="avatar"><span>SG</span></div><span class="video">Video consult</span></div><div class="body"><h3 class="name">Dr. Smita Gutgutia</h3><p class="spec">Gynaecology &amp; Obstetrics</p><div class="meta"><span>Loudon Street · 10am–4pm</span><span>Tollygunge · 10am–4pm</span></div><p class="langs">Bengali · Hindi · English</p></div><div class="stars">★★★★★</div><div class="rating">4.8</div><a class="book" href="#">Book Consultation</a></article>
+    <article class="doc"><div class="top"><span class="badge">Cardiology</span><div class="avatar"><span>KS</span></div><span class="video">Video consult</span></div><div class="body"><h3 class="name">Dr. K N Siddiqui</h3><p class="spec">Cardio-Metabolic disorders</p><div class="meta"><span>Loudon Street · 4pm–8pm</span></div><p class="langs">Bengali · Hindi · English</p></div><div class="stars">★★★★★</div><div class="rating">4.8</div><a class="book" href="#">Book Consultation</a></article>
+    <article class="doc"><div class="top"><span class="badge">Family medicine</span><div class="avatar"><span>SA</span></div><span class="video">Video consult</span></div><div class="body"><h3 class="name">Dr. Sunil Agarwal</h3><p class="spec">Family Physician</p><div class="meta"><span>Tollygunge · 12pm–2pm</span></div><p class="langs">Bengali · Hindi · English</p></div><div class="stars">★★★★★</div><div class="rating">4.8</div><a class="book" href="#">Book Consultation</a></article>
+    <article class="doc"><div class="top"><span class="badge">Paediatrics</span><div class="avatar"><span>UB</span></div><span class="video">Video consult</span></div><div class="body"><h3 class="name">Dr. Uttara Bhar</h3><p class="spec">Consultant Paediatrics</p><div class="meta"><span>Kankurgachi · 10am–12pm</span></div><p class="langs">Bengali · Hindi · English</p></div><div class="stars">★★★★★</div><div class="rating">4.8</div><a class="book" href="#">Book Consultation</a></article>
+  </div>
+  <span class="arrow l"></span><span class="arrow r"></span>
+</section>
+
+<section class="band process"><span class="note">2 · PROCESS STRIP — one row, 320 tall (was 430 with stacked circles)</span>
+  <p class="eyebrow">Simple process</p><h2 class="h2" style="font-size:44px;line-height:44px">From search to care in minutes</h2>
+  <div class="steps">
+    <div class="step"><span class="ring">1</span><div><b>Search &amp; choose</b><p>Find the right doctor or test by specialty, location, or concern.</p></div></div>
+    <div class="step"><span class="ring">2</span><div><b>Book a slot</b><p>Pick a time that works for you — online, by phone, or via our app.</p></div></div>
+    <div class="step"><span class="ring">3</span><div><b>Visit or consult</b><p>In-clinic or video consultation with your chosen specialist.</p></div></div>
+    <div class="step"><span class="ring">4</span><div><b>Get your reports</b><p>Digital prescriptions and lab reports delivered instantly.</p></div></div>
+  </div>
+</section>
+
+<section class="band hc"><span class="note">3 · HEALTH-CARD PANEL — the photo breaks the panel's top edge (the source has 69 px above the clip)</span>
+  <div class="panel"><div class="copy"><div class="ey">Family health card</div><h2 class="t">Your family's health,<br>in your pocket</h2><p class="p">Get Your Card To Avail Discounts &amp; Other Benefits</p><ul><li>20% discount on Diagnostic Tests</li><li>Complimentary ECG (Twice in a year)</li><li>Free OPD registration</li><li>Free Home Blood Collection (single visit, net bill value ₹2000/-)</li></ul><a class="cta" href="#">Click here we will call back</a></div></div>
+  <div class="photo"></div>
+</section>
+
+<section class="band posts"><span class="note">4 · ARTICLE CARDS — the doctor card's language: tonal top band, chip, hairline, anchored meta</span>
+  <p class="eyebrow">Health insights</p><h2 class="h2">Latest from our doctors</h2><p class="sub" style="font-size:21px;line-height:21px">Evidence-based health advice written by our specialists — in plain language.</p>
+  <div class="row">
+    <article class="post"><div class="top"></div><span class="chip">IVF Treatment</span><p class="t">Is IVF Right for You ?<br>Signs, Eligibility &amp; Expert Advice</p><div class="m">Jun 4, 2026 · 6 min read</div></article>
+    <article class="post"><div class="top"></div><span class="chip">Gynaecology</span><p class="t">Your Periods Aren't Supposed to Be Painful — When Cramping Signals Something More</p><div class="m">Feb 13, 2026 · 5 min read</div></article>
+    <article class="post"><div class="top"></div><span class="chip">Paediatrics</span><p class="t">Child Fever Guide: When Home Care Is Enough and When It's Not</p><div class="m">May 14, 2026 · 4 min read</div></article>
+  </div>
+</section>
+
+<section class="band close"><span class="note">5 · CLOSING BAND before the footer — the hero's paragraph, buttons and proof, reused (no new copy)</span>
+  <div class="in"><p class="para">From fertility and pregnancy to paediatric care, diagnostics and specialist services for the whole family, everything you need is available under one trusted roof.</p><div class="actions"><a class="btn btn--primary" href="#">Book Appointment</a><a class="btn btn--secondary" href="#">Request a Call Back</a></div></div>
+  <div class="proof"><span class="pill">3 Clinics in Kolkata</span><div class="stat"><b>100+</b><span>Specialist<br>Doctor</span></div><div class="stat"><b>4.8 ★</b><span>Google<br>Rating</span></div></div>
+</section>
+</div></body></html>

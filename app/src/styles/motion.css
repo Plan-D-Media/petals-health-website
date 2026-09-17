@@ -1,0 +1,10 @@
+/* Reveal layer (motion.js). Only under html.js — set by motion.js when JavaScript runs and reduced motion is off —
+   so the hidden start state never applies without script or under prefers-reduced-motion. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js [data-reveal] { opacity: 0; transform: translateY(12px); transition: opacity 240ms var(--ease), transform 240ms var(--ease); transition-delay: calc(var(--reveal-order, 0) * 60ms); will-change: opacity, transform; }
+  html.js [data-reveal].is-revealed { opacity: 1; transform: none; will-change: auto; }
+  html.js [data-reveal-order="1"] { --reveal-order: 1; }
+  html.js [data-reveal-order="2"] { --reveal-order: 2; }
+  html.js [data-reveal-order="3"] { --reveal-order: 3; }
+  html.js [data-reveal-order="4"] { --reveal-order: 4; }
+}
