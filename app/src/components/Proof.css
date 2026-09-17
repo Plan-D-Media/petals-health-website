@@ -20,3 +20,5 @@
 .stat__label { position: absolute; left: 0; right: 0; top: 48px; font-size: var(--fs-caption); font-weight: var(--fw-caption); line-height: var(--lh-caption); }
 /* mobile sizes last, so they override the base offsets above */
 @media (max-width: 767px) { .proof__stats { width: 156px; height: 72px; } .stat { width: 72px; height: 72px; } .stat--rating { left: 84px; } .stat__value { top: 10px; line-height: 24px; } .stat__label { top: 40px; font-size: 13px; } }
+/* narrow screens: the pill takes its own line so its label never clips beside the two tiles */
+@media (max-width: 767px) { .proof { flex-wrap: wrap; } .proof__pill { flex: 1 1 100%; max-width: none; } }
