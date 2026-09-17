@@ -63,3 +63,10 @@ pixels. Nothing else changes size.
 The small capital-letter labels above section headings (for example "PATIENT STORIES") and
 the testimonial quote text are being measured from the design now, before those sections
 are built.
+
+## The second step circle is no longer filled in
+
+In the "From search to care in minutes" steps, the design colours in the second circle
+and leaves the other three as outlines. On a page where nothing is being chosen, a filled
+circle reads as a selected option, so all four steps are now outlined the same way. The
+numbers, words and colours are unchanged.

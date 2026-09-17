@@ -6,8 +6,9 @@ import './Process.css'
 
 const STEPS = [
   { n: '1', title: 'Search & choose', lines: ['Find the right doctor or', 'test by specialty, location,', 'or concern.'] },
-  // step 2 is the filled circle on every stepper in the design (Home: purple; Petals IVF page: navy) — deliberate, built permanent
-  { n: '2', title: 'Book a slot', lines: ['Pick a time that works', 'for you — online, by', 'phone, or via our app.'], filled: true },
+  // The design fills step 2 on every stepper (Home: purple; Petals IVF: navy). Decided 2026-09-17: all rings — a solid
+  // circle reads as a selection state with nothing selected (design/decisions.md; client note).
+  { n: '2', title: 'Book a slot', lines: ['Pick a time that works', 'for you — online, by', 'phone, or via our app.'] },
   { n: '3', title: 'Visit or consult', lines: ['In-clinic or video', 'consultation with your', 'chosen specialist.'] },
   { n: '4', title: 'Get your reports', lines: ['Digital prescriptions', 'and lab reports', 'delivered instantly.'] },
 ]

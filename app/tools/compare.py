@@ -63,7 +63,7 @@ SECTIONS = {
         ("stat 100+", (1110, 780, 1200, 815), navy, None, ""),
         ("stat label L", (1110, 818, 1200, 860), navy, (-5, -3, 5, 0), "13 px floor: label raised from 11.2 px"),
         ("logo", (190, 15, 270, 100), lambda a: a.min(axis=2) < 235, None, ""),
-        ("photo", (110, 190, 630, 815), lambda a: a.min(axis=2) < 200, None, ""),   # box stops above the video-slot control (y 824–864)
+        ("photo", (110, 190, 630, 790), lambda a: a.min(axis=2) < 200, None, ""),   # box stops above the video-slot control (card variant: y 796–836)
     ],
     "care": [
         ("eyebrow line", (300, 925, 1066, 975), black, (-5, 0, 5, 0), "opsz: 32 px line 3% wider, centred"),

@@ -24,7 +24,7 @@
   display: flex; align-items: center; justify-content: center;
   font-size: 60px; font-weight: 400; line-height: 60px; color: var(--blue-900);   /* step-number: ESTIMATED 60/400 */
 }
-.step--filled .step__circle { background: var(--purple-500); border-color: var(--purple-500); color: var(--white); }
+/* .step--filled removed 2026-09-17: all four steps are rings (design/decisions.md) */
 
 /* connector: dash 5 / gap 3, 2 px, purple; from circle edge + 7 to next circle edge − 7 (296.17 − 108 − 14 = 174.17) */
 .step__connector {
