@@ -90,3 +90,30 @@ glance (what · which · act), and on mobile each row folds into the card we hav
 - **Item 2**: the 1440 container described above.
 
 Commits before and after each item; layout-check must be green at all six widths after each.
+
+---
+
+## Built (2026-09-17, after approval) — one commit per item, layout-check green at 390/768/1024/1280/1366/1920 after each
+1. **Gutter fix** — content box 1440 from 1440 up; 1920 now uses 75 % (was 61–68 %); 1366 unchanged.
+2. **Hero** — full-width 16:9 video capped at 560 tall from 1024; Shelf card (h1 **"Petals Health — Your Family Clinic in
+   Kolkata"**, tagged *copy pending*, paragraph, proof strip) overlapping the video's bottom edge, buttons centred beneath;
+   Stack on mobile. Control moves to the video's top-right on tablet where the shelf covers the bottom edge.
+3. **Ribbons** — three full-width rows from 1024 (title block · chips · CTA), stacked below. In context the section is
+   ~260 px tall at 1366, shorter than the three cards it replaces; the page rhythm tightens rather than lengthens.
+4–5. **Marquees** — one CSS keyframe on a duplicated track (no per-frame script); stories right-to-left, doctors
+   left-to-right at 40 px/s; hover and focus pause; keyboard focus or reduced motion switches to a scrollable row with
+   arrows and snap, and a focused card scrolls into view. Verified: −40.9 / +40.9 px per second, paused on hover, manual
+   mode with the focused card in view and ArrowRight scrolling one card, animation none under reduced motion.
+6. **Caring block** replaces the health-card panel: the original mother-and-baby cut-out beside "Caring for All, / You
+   Care About" and the original paragraph, tagged *copy pending* ("Complete IWC integrated concept").
+7. **Insights** — taller tonal band, headline at the title weight in navy, date row with a Read link (44 px hit area).
+   **Closing band** — a navy panel on the pale ground with the orange primary, white secondary and the proof strip.
+
+### Shooting spec line (item 2 condition)
+Shoot 16:9 landscape at 1920 × 1080 or larger and keep every face and the action inside the middle 70 % of the frame's
+height: on desktop the top and bottom 15 % are cropped away, on phones nothing is.
+
+### Pending with the client
+- The visible h1 wording (tagged on the page).
+- The caring block's final copy and the meaning of "IWC" (tagged on the page).
+

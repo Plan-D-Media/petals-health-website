@@ -41,3 +41,10 @@ call-back requests if we add a WhatsApp option?
 **Already decided, for your records.** Doctors' menus, the family health card panel, the process steps (now all
 outlined rings), the header sizes, the hero layout and the placement of the "Book Appointment" button that follows
 the visitor down the page.
+
+**8. Two wordings to approve (added after round 3).** The main heading at the top of the Home page now reads "Petals
+Health — Your Family Clinic in Kolkata"; it is built from your logo's tagline and your three-clinic pill so the page
+can rank for family-clinic searches in Kolkata. Please confirm or send the line you prefer. And the block that replaced
+the Family Health Card panel shows the original "Caring for All, You Care About" heading and paragraph until you send
+the final text; please also tell us what "IWC" stands for in "Complete IWC integrated concept".
+
