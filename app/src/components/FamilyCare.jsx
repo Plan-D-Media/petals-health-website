@@ -53,7 +53,7 @@ export default function FamilyCare() {
       <Icon name="petalOutline" className="care__petal care__petal--2" />
       <div className="care__cards">
         {CARDS.map((c) => (
-          <article key={c.key} className={`care-card care-card--${c.variant}`}>
+          <article key={c.key} className={`care-card care-card--${c.variant}`} data-reveal data-reveal-order={CARDS.indexOf(c)}>
             <h3 className="care-card__title">{c.title}</h3>
             <p className="care-card__subtitle" style={{ width: c.subtitleWidth }}>{c.subtitle}</p>
             <div className="care-card__chips">

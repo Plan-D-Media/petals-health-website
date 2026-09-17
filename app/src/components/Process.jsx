@@ -19,7 +19,7 @@ export default function Process() {
         <h2 id="process-title" className="process__title">From search to care in minutes</h2>
         <ol className="process__steps">
           {STEPS.map((s) => (
-            <li key={s.n} className="step">
+            <li key={s.n} className="step" data-reveal data-reveal-order={Number(s.n) - 1}>
               <div className="step__circle">{s.n}</div>
               <div className="step__text">
                 <div className="step__title">{s.title}</div>

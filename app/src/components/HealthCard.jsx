@@ -14,8 +14,8 @@ export default function HealthCard() {
   return (
     <section className="hcard band" aria-labelledby="hcard-title">
       <div className="inner hcard__inner">
-        <div className="hcard__photo"><img src="/assets/2_d818a07d.png" alt="A doctor holding up the Petals Family Health Card" /></div>
-        <div className="hcard__panel">
+        <div className="hcard__photo" data-reveal data-reveal-order={1}><img src="/assets/2_d818a07d.png" alt="A doctor holding up the Petals Family Health Card" /></div>
+        <div className="hcard__panel" data-reveal>
           <span className="hcard__blob hcard__blob--top" aria-hidden="true" />
           <span className="hcard__blob hcard__blob--bottom" aria-hidden="true" />
           <p className="hcard__eyebrow">Family health card</p>

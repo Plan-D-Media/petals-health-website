@@ -26,7 +26,7 @@ export default function Testimonials() {
 
       <div className="stories__cards">
         {STORIES.map((s, i) => (
-          <article key={s.initials} className="story" style={{ left: i * 396.25 }}>
+          <article key={s.initials} className="story" style={{ left: i * 396.25 }} data-reveal data-reveal-order={i}>
             <div className="story__stars" aria-label="5 out of 5 stars">
               {[0, 1, 2, 3, 4].map((k) => <Icon key={k} name="star" className="story__star" />)}
             </div>

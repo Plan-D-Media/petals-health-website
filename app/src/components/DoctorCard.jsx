@@ -9,7 +9,7 @@ export default function DoctorCard({ doctor }) {
   const sessions = doctor.sessions.slice(0, 2)
   const more = doctor.sessions.length - sessions.length
   return (
-    <article className="doctor" aria-label={doctor.name}>
+    <article className="doctor" aria-label={doctor.name} data-reveal>
       <div className="doctor__top">
         <span className="doctor__badge">{doctor.specialty.split(' & ')[0].split(',')[0]}</span>
         {doctor.videoConsult && <span className="doctor__video"><Icon name="askDoctor" className="doctor__video-icon" />Video consult</span>}
