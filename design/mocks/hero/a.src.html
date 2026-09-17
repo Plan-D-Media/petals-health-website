@@ -1,0 +1,36 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Hero concept A — full-bleed film</title><link rel="stylesheet" href="mock.css">
+<style>
+/* A · FULL-BLEED FILM. The video is the band: viewport-wide, 560 tall, subject centre-right. No dark wash over faces —
+   a navy gradient only on the left third carries the copy. The proof strip (pill + stats) is a white card that
+   straddles the band's bottom edge, so the seam is a shelf, not a line. */
+.hero { position: relative; height: 620px; background: var(--hero-bg-outer); }
+.film { position: absolute; inset: 0 0 60px 0; background: url('frame_landscape.jpg') center 30% / cover no-repeat; }
+.film::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,66,126,.78) 0%, rgba(0,66,126,.55) 30%, rgba(0,66,126,0) 58%); }
+.copy { position: absolute; left: 95px; top: 118px; width: 520px; color: var(--white); }
+.copy .para { color: var(--white); font-size: 24px; line-height: 34px; font-weight: 400; }
+.actions { display: flex; gap: 16px; margin-top: 40px; }
+.proof { position: absolute; left: 95px; bottom: 0; height: 120px; width: 620px; background: var(--white); border-radius: var(--radius-card-lg); box-shadow: var(--shadow-card); display: flex; align-items: center; gap: 24px; padding: 0 28px; }
+.proof .stat { width: 92px; height: 92px; }
+.proof .pill { box-shadow: none; padding-left: 0; }
+.hero .playbtn { right: 95px; bottom: 84px; }
+.next { height: 140px; }
+.next .eyebrow { text-align: center; padding-top: 56px; letter-spacing: .12em; text-transform: uppercase; color: var(--grey-600); font-size: 16px; }
+</style></head><body><div class="label">CONCEPT A · full-bleed film, proof shelf</div><div class="page">
+<!--HEADER-->
+<section class="hero">
+  <div class="film"></div>
+  <div class="inner" style="height:620px">
+    <div class="copy">
+      <p class="para">From fertility and pregnancy to paediatric care, diagnostics and specialist services for the whole family, everything you need is available under one trusted roof.</p>
+      <div class="actions"><a class="btn btn--primary" href="#">Book Appointment</a><a class="btn btn--secondary on-dark" href="#">Request a Call Back</a></div>
+    </div>
+    <div class="proof">
+      <span class="pill">3 Clinics in Kolkata</span>
+      <div class="stat"><b>100+</b><span>Specialist<br>Doctor</span></div>
+      <div class="stat"><b>4.8 ★</b><span>Google<br>Rating</span></div>
+    </div>
+    <span class="playbtn"></span>
+  </div>
+</section>
+<section class="next"><div class="inner"><p class="eyebrow">How we care for your family</p></div></section>
+</div></body></html>

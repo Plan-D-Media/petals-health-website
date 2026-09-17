@@ -1,0 +1,48 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Hero concept C — petal-masked film</title><link rel="stylesheet" href="mock.css">
+<style>
+/* C · PETAL-MASKED FILM. The brand's petal (the watermark shape) masks the video on the right, bleeding off the edge.
+   Text column left. Distinctive and warm, but the mask crops unpredictably: footage must keep the subject inside the
+   petal's centre and the shape wastes ~35 % of the frame. */
+.hero { position: relative; height: 640px; background: radial-gradient(786.5px circle at calc(50% - .8px) 368px, var(--hero-bg-inner) 0%, var(--hero-bg-outer) 100%); overflow: hidden; }
+.hero .inner { height: 640px; }
+.copy { position: absolute; left: 95px; top: 110px; width: 470px; }
+.copy .para { font-size: 24px; line-height: 34px; }
+.actions { display: flex; gap: 14px; margin-top: 36px; flex-wrap: wrap; }
+.petal { position: absolute; left: calc(50% + 683px - 760px); top: 8px; width: 900px; height: 640px; background: url('frame_landscape.jpg') 55% 30% / cover no-repeat;
+  -webkit-mask: url('petal-mask.svg') center / contain no-repeat; mask: url('petal-mask.svg') center / contain no-repeat; }
+.proof { position: absolute; left: 95px; top: 470px; display: flex; align-items: center; gap: 16px; }
+.proof .pill { box-shadow: var(--ring-card); }
+.hero .playbtn { left: calc(50% + 683px - 760px + 120px); top: 540px; }
+.next { height: 140px; }
+.next .eyebrow { text-align: center; padding-top: 56px; letter-spacing: .12em; text-transform: uppercase; color: var(--grey-600); font-size: 16px; }
+</style></head><body><div class="label">CONCEPT C · petal-masked film</div><div class="page">
+<div class="utility"><div class="inner">
+  <a class="logo" href="#"><img src="logo.png" alt=""></a>
+  <div class="ulinks">
+    <a href="#"><span class="ic"></span>9147405955</a><span class="sep"></span>
+    <a href="#"><span class="ic"></span>Book an Appt</a><span class="sep"></span>
+    <a href="#"><span class="ic"></span>Find a Doctor</a><span class="sep"></span>
+    <a href="#"><span class="ic"></span>Ask a Doctor</a>
+  </div>
+</div></div>
+<div class="nav"><div class="inner">
+  <a class="active" href="#">Home</a><a href="#">About us</a><span class="sep"></span><a href="#">Clinics<span class="chev"></span></a><span class="sep"></span><a href="#">Treatments<span class="chev"></span></a><span class="sep"></span><a href="#">Diagnostic Services</a><span class="sep"></span><a href="#">For Patients<span class="chev"></span></a><span class="sep"></span><a href="#">Petals Clinic in Bangladesh</a>
+</div></div>
+
+<section class="hero">
+  <div class="petal"></div>
+  <div class="inner">
+    <div class="copy">
+      <p class="para">From fertility and pregnancy to paediatric care, diagnostics and specialist services for the whole family, everything you need is available under one trusted roof.</p>
+      <div class="actions"><a class="btn btn--primary" href="#">Book Appointment</a><a class="btn btn--secondary" href="#">Request a Call Back</a></div>
+    </div>
+    <div class="proof">
+      <span class="pill">3 Clinics in Kolkata</span>
+      <div class="stat"><b>100+</b><span>Specialist<br>Doctor</span></div>
+      <div class="stat"><b>4.8 ★</b><span>Google<br>Rating</span></div>
+    </div>
+    <span class="playbtn"></span>
+  </div>
+</section>
+<section class="next"><div class="inner"><p class="eyebrow">How we care for your family</p></div></section>
+</div></body></html>

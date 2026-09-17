@@ -1,0 +1,50 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Hero concept B — film card bleeding right</title><link rel="stylesheet" href="mock.css">
+<style>
+/* B · CONTAINED FILM CARD, BLEEDING RIGHT (recommended). Text column on the container's left edge on the pale ground;
+   the 16:9 video card starts at the column's right and runs to the viewport edge (rounded on the left only), so it
+   grows with the screen. Proof strip overlaps the card's bottom-left corner. No wash over the film at all. */
+.hero { position: relative; height: 640px; background: radial-gradient(786.5px circle at calc(50% - .8px) 368px, var(--hero-bg-inner) 0%, var(--hero-bg-outer) 100%); overflow: hidden; }
+.hero .inner { height: 640px; }
+.copy { position: absolute; left: 95px; top: 96px; width: 470px; }
+.copy .para { font-size: 24px; line-height: 34px; color: var(--black); }
+.actions { display: flex; flex-direction: column; align-items: flex-start; gap: 14px; margin-top: 36px; }
+.actions .btn { min-width: 300px; }
+.card { position: absolute; left: calc(50% + 683px - 720px); top: 56px; right: 0; height: 468px; border-radius: var(--radius-card-lg) 0 0 var(--radius-card-lg); background: url('frame_landscape.jpg') center 35% / cover no-repeat; box-shadow: var(--shadow-card); }
+.card .playbtn { left: 24px; bottom: 24px; }
+.proof { position: absolute; left: calc(50% + 683px - 720px - 40px); top: 56px + 468px; }
+.proof { top: 484px; display: flex; align-items: center; gap: 16px; background: var(--white); border-radius: var(--radius-card); box-shadow: var(--shadow-card); padding: 14px 20px; }
+.proof .stat { width: 84px; height: 84px; padding-top: 12px; }
+.proof .stat b { font-size: 26px; }
+.proof .pill { box-shadow: none; padding-left: 0; }
+.next { height: 140px; }
+.next .eyebrow { text-align: center; padding-top: 56px; letter-spacing: .12em; text-transform: uppercase; color: var(--grey-600); font-size: 16px; }
+</style></head><body><div class="label">CONCEPT B · contained film card bleeding right, proof strip on the corner (recommended)</div><div class="page">
+<div class="utility"><div class="inner">
+  <a class="logo" href="#"><img src="logo.png" alt=""></a>
+  <div class="ulinks">
+    <a href="#"><span class="ic"></span>9147405955</a><span class="sep"></span>
+    <a href="#"><span class="ic"></span>Book an Appt</a><span class="sep"></span>
+    <a href="#"><span class="ic"></span>Find a Doctor</a><span class="sep"></span>
+    <a href="#"><span class="ic"></span>Ask a Doctor</a>
+  </div>
+</div></div>
+<div class="nav"><div class="inner">
+  <a class="active" href="#">Home</a><a href="#">About us</a><span class="sep"></span><a href="#">Clinics<span class="chev"></span></a><span class="sep"></span><a href="#">Treatments<span class="chev"></span></a><span class="sep"></span><a href="#">Diagnostic Services</a><span class="sep"></span><a href="#">For Patients<span class="chev"></span></a><span class="sep"></span><a href="#">Petals Clinic in Bangladesh</a>
+</div></div>
+
+<section class="hero">
+  <div class="card"><span class="playbtn"></span></div>
+  <div class="proof">
+    <span class="pill">3 Clinics in Kolkata</span>
+    <div class="stat"><b>100+</b><span>Specialist<br>Doctor</span></div>
+    <div class="stat"><b>4.8 ★</b><span>Google<br>Rating</span></div>
+  </div>
+  <div class="inner">
+    <div class="copy">
+      <p class="para">From fertility and pregnancy to paediatric care, diagnostics and specialist services for the whole family, everything you need is available under one trusted roof.</p>
+      <div class="actions"><a class="btn btn--primary" href="#">Book Appointment</a><a class="btn btn--secondary" href="#">Request a Call Back</a></div>
+    </div>
+  </div>
+</section>
+<section class="next"><div class="inner"><p class="eyebrow">How we care for your family</p></div></section>
+</div></body></html>
