@@ -1,8 +1,9 @@
 import Icon from './Icon.jsx'
+import { Arrow } from './Specialists.jsx'
 import './FamilyCare.css'
 
-// Home section 2 — "How we care for your family". Flow rewrite 2026-09-17: three cards on a grid (3 / orange + 2 / 1),
-// chips as one wrapping list (the mock's row grouping was hand placement), the button anchored at the card's foot.
+// Home section 2 — "How we care for your family". Round 3 (approved): Ribbons — three full-width rows (title block ·
+// chips · CTA) from 1024 up; stacked cards below. Chips are one wrapping list; copy unchanged.
 // Content: design/section2-values.md.
 
 const CARDS = [
@@ -27,12 +28,14 @@ export default function FamilyCare() {
           {CARDS.map((c, i) => (
             <article key={c.key} className={`care-card care-card--${c.variant}`} data-reveal data-reveal-order={i}>
               {c.variant === 'orange' && <Icon name="petalOutline" className="care__petal" />}
-              <h3 className="care-card__title">{c.title}</h3>
-              <p className="care-card__subtitle">{c.subtitle}</p>
+              <div className="care-card__head">
+                <h3 className="care-card__title">{c.title}</h3>
+                <p className="care-card__subtitle">{c.subtitle}</p>
+              </div>
               <ul className="care-card__chips">
                 {c.chips.map((label) => <li key={label} className="chip">{label}</li>)}
               </ul>
-              <a className="care-card__cta" href="#treatments">Explore Treatment</a>
+              <a className="care-card__cta" href="#treatments">Explore Treatment <Arrow /></a>
             </article>
           ))}
         </div>
