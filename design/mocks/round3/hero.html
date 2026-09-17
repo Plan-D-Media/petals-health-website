@@ -1,0 +1,85 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Hero — full-width video directions</title>
+<link rel="stylesheet" href="mock.css">
+<style>
+.page { min-width: 0; --shadow-secondary: 0 2px 6px rgba(0,66,126,.16), 0 0 0 1px rgba(0,66,126,.12); }
+.wrap { width: min(1176px, 100% - 32px); margin: 0 auto; }
+.label { position: static; display: block; }
+.mockhead { height: 56px; background: #fff; box-shadow: 0 1px 0 rgba(0,66,126,.08); display: flex; align-items: center; padding: 0 16px; gap: 12px; }
+.mockhead img { height: 40px; -webkit-mask: url('logo-mask.png') 0 0/100% 100% luminance; mask: url('logo-mask.png') 0 0/100% 100% luminance; -webkit-mask-mode: luminance; mask-mode: luminance; }
+.mockhead .navline { margin-left: auto; height: 32px; padding: 0 14px; border-radius: 999px; background: var(--blue-900); color: #fff; font-size: 14px; display: flex; align-items: center; }
+.hero { position: relative; background: radial-gradient(786px circle at 50% 30%, var(--hero-bg-inner) 0%, var(--hero-bg-outer) 100%); }
+.film { position: relative; background: url('frame_landscape.jpg') center 30% / cover no-repeat; }
+.film .playbtn { left: 24px; bottom: 24px; }
+.actions { display: flex; gap: 16px; justify-content: center; }
+.btn { height: 60px; padding: 0 34px; }
+.para { font-size: 21px; line-height: 30px; }
+.proofrow { display: flex; align-items: center; justify-content: center; gap: 16px; }
+.proofrow .stat { width: 84px; height: 84px; padding-top: 12px; }
+.sep { height: 40px; }
+.nextsec { padding: 40px 0 24px; text-align: center; color: var(--grey-600); letter-spacing: .12em; text-transform: uppercase; font-size: 16px; }
+
+/* H1 — stack: video, paragraph, buttons, proof row */
+.h1 .film { width: 100%; aspect-ratio: 16 / 9; max-height: 560px; }
+.h1 .para { max-width: 760px; margin: 32px auto 0; text-align: center; }
+.h1 .actions { margin-top: 28px; }
+.h1 .proofrow { margin-top: 28px; padding-bottom: 40px; }
+
+/* H2 — shelf: proof card overlaps the video's bottom edge with the paragraph; buttons beneath */
+.h2 .film { width: 100%; aspect-ratio: 16 / 9; max-height: 560px; }
+.h2 .shelf { position: relative; margin: -56px auto 0; width: min(920px, 100% - 32px); background: #fff; border-radius: 21px; box-shadow: var(--shadow-card); padding: 28px 32px; display: grid; grid-template-columns: 1fr auto; gap: 24px 32px; align-items: center; }
+.h2 .shelf .para { margin: 0; }
+.h2 .actions { margin-top: 28px; }
+.h2 .sep { height: 40px; }
+
+/* H3 — full-bleed with the content on a navy band under the video (video and band read as one object) */
+.h3 .film { width: 100%; aspect-ratio: 21 / 9; max-height: 520px; }
+.h3 .band { background: var(--blue-900); color: #fff; padding: 28px 0 32px; }
+.h3 .band .row { display: grid; grid-template-columns: 1fr auto; gap: 24px 40px; align-items: center; }
+.h3 .para { margin: 0; color: #fff; max-width: 640px; }
+.h3 .pill { background: rgba(255,255,255,.14); color: #fff; box-shadow: none; } .h3 .pill::before { background: #fff; }
+.h3 .stat { box-shadow: none; }
+.h3 .actions { margin-top: 24px; }
+.h3 .btn--secondary.on-dark { background: rgba(255,255,255,.92); }
+
+@media (max-width: 767px) {
+  .actions { flex-direction: column; gap: 12px; } .btn { height: 56px; width: 100%; }
+  .h1 .film, .h2 .film, .h3 .film { aspect-ratio: 16 / 9; max-height: none; }
+  .h2 .shelf { grid-template-columns: 1fr; margin-top: -24px; padding: 20px; }
+  .h3 .band .row { grid-template-columns: 1fr; }
+  .proofrow { justify-content: flex-start; gap: 12px; } .proofrow .pill { flex: 1; } .proofrow .stat { width: 72px; height: 72px; padding-top: 10px; } .proofrow .stat b { font-size: 24px; }
+  .para { font-size: 19px; line-height: 27px; }
+}
+</style></head><body><div class="page">
+
+<div class="label">H1 · STACK — video, paragraph centred, buttons centred, proof row (recommended for mobile; tallest on desktop)</div>
+<div class="mockhead"><img src="logo.png" alt=""><span class="navline">nav · Book Appointment</span></div>
+<section class="hero h1">
+  <div class="film"><span class="playbtn"></span></div>
+  <div class="wrap">
+    <p class="para">From fertility and pregnancy to paediatric care, diagnostics and specialist services for the whole family, everything you need is available under one trusted roof.</p>
+    <div class="actions"><a class="btn btn--primary">Book Appointment</a><a class="btn btn--secondary">Request a Call Back</a></div>
+    <div class="proofrow"><span class="pill">3 Clinics in Kolkata</span><div class="stat"><b>100+</b><span>Specialist<br>Doctor</span></div><div class="stat"><b>4.8 ★</b><span>Google<br>Rating</span></div></div>
+  </div>
+</section>
+<div class="nextsec">How we care for your family</div>
+
+<div class="label">H2 · SHELF — the paragraph and the proof on a white card overlapping the video's bottom edge, buttons centred beneath (recommended for desktop)</div>
+<div class="mockhead"><img src="logo.png" alt=""><span class="navline">nav · Book Appointment</span></div>
+<section class="hero h2">
+  <div class="film"><span class="playbtn"></span></div>
+  <div class="shelf"><p class="para">From fertility and pregnancy to paediatric care, diagnostics and specialist services for the whole family, everything you need is available under one trusted roof.</p><div class="proofrow"><span class="pill">3 Clinics in Kolkata</span><div class="stat"><b>100+</b><span>Specialist<br>Doctor</span></div><div class="stat"><b>4.8 ★</b><span>Google<br>Rating</span></div></div></div>
+  <div class="wrap"><div class="actions"><a class="btn btn--primary">Book Appointment</a><a class="btn btn--secondary">Request a Call Back</a></div><div class="sep"></div></div>
+</section>
+<div class="nextsec">How we care for your family</div>
+
+<div class="label">H3 · BAND — 21:9 video with a navy band beneath carrying the paragraph and proof, buttons centred on the band (one object; Apollo-like weight)</div>
+<div class="mockhead"><img src="logo.png" alt=""><span class="navline">nav · Book Appointment</span></div>
+<section class="hero h3">
+  <div class="film"><span class="playbtn"></span></div>
+  <div class="band"><div class="wrap">
+    <div class="row"><p class="para">From fertility and pregnancy to paediatric care, diagnostics and specialist services for the whole family, everything you need is available under one trusted roof.</p><div class="proofrow"><span class="pill">3 Clinics in Kolkata</span><div class="stat"><b>100+</b><span>Specialist<br>Doctor</span></div><div class="stat"><b>4.8 ★</b><span>Google<br>Rating</span></div></div></div>
+    <div class="actions"><a class="btn btn--primary" style="background:var(--orange-500);color:var(--blue-900);box-shadow:none">Book Appointment</a><a class="btn btn--secondary on-dark">Request a Call Back</a></div>
+  </div></div>
+</section>
+<div class="nextsec">How we care for your family</div>
+</div></body></html>
