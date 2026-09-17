@@ -2,56 +2,57 @@ import Icon from './Icon.jsx'
 import Watermark from './Watermark.jsx'
 import VideoSlot from './VideoSlot.jsx'
 import { HERO_VIDEO_SRC, HERO_POSTER, HERO_VIDEO_STYLE } from '../config.js'
-import './Hero.css'   /* after VideoSlot.css so .hero__photo's absolute box wins */
+import { HEADER_HEIGHT } from '../layout.js'
+import './Hero.css'   /* after VideoSlot.css so .hero__film's box wins */
 
-// Geometry and provenance: design/hero-values.md ("Hero band").
-// TODO(breakpoints): desktop only — no narrower frames exist in the design.
-// The petal watermark spans this band and the next section; see Watermark.jsx for why it is
-// rendered in two clipped parts. Inside the hero it sits above the gradient, below content.
-// Layout: the band spans the viewport and carries the gradient; .hero__inner is the 1366 content box.
+// Hero concept B (design/round2-report.md §2, approved 2026-09-17): no headline; the paragraph carries the message;
+// a 16:9 film card starts at the text column's right and bleeds to the viewport edge; two equal buttons; the proof
+// strip (location pill + stats) overlaps the card's bottom-left corner. Values: design/hero-values.md ("Hero band")
+// for the atoms that survive (band gradient, button size, pill, stat tiles, watermark).
+// The design's portrait photo and its mask stay in /assets, unused.
 
-// mock-up switch: ?videoStyle=card|flush and ?video=<url> override config (design/video-options.md)
+// mock-up switch: ?videoStyle=film|card|flush and ?video=<url> override config
 const qs = () => new URLSearchParams(window.location.search)
 const videoStyle = () => qs().get('videoStyle') || HERO_VIDEO_STYLE
 const videoSrc = () => qs().get('video') || HERO_VIDEO_SRC
 
 export default function Hero() {
   return (
-    <section className="hero band" aria-labelledby="hero-title">
-      <Watermark part="hero" offsetTop={142} />
-      <div className="inner hero__inner">
-      {/* photo travels with the 1366 content box (the design's clip starts 120.5 px in; there is no bleed) */}
-      <VideoSlot className="hero__photo" poster={HERO_POSTER} posterAlt="A mother holding her smiling baby" src={videoSrc()} label="hero video" variant={videoStyle()} />
+    <section className="hero band" aria-label="Petals Health">
+      <Watermark part="hero" offsetTop={HEADER_HEIGHT} />
 
-      <h1 id="hero-title" className="hero__title">
-        <span className="hero__title-line hero__title-line--primary">Caring for All,</span>
-        <span className="hero__title-line hero__title-line--accent">You Care About</span>
-      </h1>
+      {/* film card: left edge at inner x 646, right edge = viewport edge */}
+      <VideoSlot className="hero__film" poster={HERO_POSTER} posterAlt="A parent holding a baby at a Petals clinic" src={videoSrc()} label="hero video" variant={videoStyle()} />
 
-      <p className="hero__body">
-        From fertility and pregnancy to paediatric care, diagnostics and specialist services for
-        the whole family, everything you need is available under one trusted roof.
-      </p>
-
-      <a className="hero__cta" href="#book">Book your appoinment</a>
-
-      <div className="hero__pill">
-        <Icon name="pin" className="hero__pill-icon" />
-        <span className="hero__pill-text">3 Clinics in Kolkata</span>
-      </div>
-
-      <div className="hero__stats">
-        <div className="stat stat--doctors">
-          <div className="stat__value">100+</div>
-          <div className="stat__label">Specialist<br />Doctor</div>
+      {/* proof strip on the card's bottom-left corner */}
+      <div className="hero__proof">
+        <div className="hero__pill">
+          <Icon name="pin" className="hero__pill-icon" />
+          <span className="hero__pill-text">3 Clinics in Kolkata</span>
         </div>
-        <div className="stat stat--rating">
-          <div className="stat__value">
-            4.8<Icon name="star" className="stat__star" />
+        <div className="hero__stats">
+          <div className="stat stat--doctors">
+            <div className="stat__value">100+</div>
+            <div className="stat__label">Specialist<br />Doctor</div>
           </div>
-          <div className="stat__label">Google<br />Rating</div>
+          <div className="stat stat--rating">
+            <div className="stat__value">4.8<Icon name="star" className="stat__star" /></div>
+            <div className="stat__label">Google<br />Rating</div>
+          </div>
         </div>
       </div>
+
+      <div className="inner hero__inner">
+        <div className="hero__copy">
+          <p className="hero__body">
+            From fertility and pregnancy to paediatric care, diagnostics and specialist services for
+            the whole family, everything you need is available under one trusted roof.
+          </p>
+          <div className="hero__actions">
+            <a className="hero__cta btn-primary" href="#book" data-form="book-appointment">Book Appointment</a>
+            <a className="hero__cta hero__cta--secondary btn-secondary" href="#callback" data-form="request-callback">Request a Call Back</a>
+          </div>
+        </div>
       </div>
     </section>
   )

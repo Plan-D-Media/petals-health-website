@@ -39,3 +39,11 @@
 @media (prefers-reduced-motion: reduce) {
   .video-slot__video { transition: none; }
 }
+
+/* film (hero concept B): a 16:9 card whose right edge is the viewport edge — rounded on the left only, no inset;
+   the poster is a landscape frame the same size as the video, so nothing spills */
+.video-slot--film { --video-inset: 0px; border-radius: var(--radius-card-lg) 0 0 var(--radius-card-lg); box-shadow: var(--shadow-card); }
+.video-slot--film .video-slot__poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.video-slot--film .video-slot__video { border-radius: 0; }
+.video-slot--film .video-slot__control { right: auto; left: 316px; bottom: 24px; }   /* clear of the proof strip, which covers the card's bottom-left 290 px */
+

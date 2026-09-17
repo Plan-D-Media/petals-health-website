@@ -1,4 +1,5 @@
 import './Watermark.css'
+import { HEADER_HEIGHT, HERO_HEIGHT, PAGE_DY } from '../layout.js'
 
 // The petal watermark from design/svg/2.svg (top-level group #3).
 // It is RASTER in the source: 2_a79aaebf.png (colour petals on black) whose alpha is the
@@ -16,13 +17,16 @@ import './Watermark.css'
 // ends there. The window is therefore left-anchored to the centred content box and open on the
 // right, so the petal continues to the viewport edge rather than stopping on a hard line.
 
-const PLACED = { left: 659.5, top: 446.0, width: 1079.4, height: 1619.2 }
-const CLIP = { left: 660, top: 608.4, right: 1365.3, bottom: 1982.7 }
+// The artwork belongs to the family-care section, which sits PAGE_DY higher than in the design (header ×1.2, hero
+// concept B), so the placement and clip move with it; the split between the two parts is the hero's bottom edge.
+const PLACED = { left: 659.5, top: 446.0 + PAGE_DY, width: 1079.4, height: 1619.2 }
+const CLIP = { left: 660, top: 608.4 + PAGE_DY, right: 1365.3, bottom: 1982.7 + PAGE_DY }
+const SPLIT = HEADER_HEIGHT + HERO_HEIGHT
 
 export default function Watermark({ part, offsetTop = 0 }) {
   // clip window in page coordinates for this part
-  const top = part === 'hero' ? CLIP.top : 880
-  const bottom = part === 'hero' ? 880 : CLIP.bottom
+  const top = part === 'hero' ? CLIP.top : SPLIT
+  const bottom = part === 'hero' ? SPLIT : CLIP.bottom
   const win = { left: CLIP.left, top, width: CLIP.right - CLIP.left, height: bottom - top }
   return (
     <div
