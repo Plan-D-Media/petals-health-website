@@ -80,20 +80,20 @@ for (const width of WIDTHS) {
   if (width < 1024) log(width, r.targets.length === 0, 'touch targets ≥ 44', r.targets.slice(0, 5).join(' | '))
   log(width, r.h1 === 1, 'exactly one h1', `found ${r.h1}`)
 
-  // 6 carousels reachable
+  // 6 marquees reachable: under reduced motion the marquee is a scrollable row; the forward button must reach the last item
   const car = await page.evaluate(async () => {
     const res = []
-    for (const c of document.querySelectorAll('.carousel')) {
-      const next = c.querySelector('.carousel__btn--next'); const slides = c.querySelectorAll('.carousel__slide'); const track = c.querySelector('.carousel__track')
-      const vp = c.querySelector('.carousel__viewport').getBoundingClientRect()
-      const lastVisibleNow = () => { const l = slides[slides.length - 1].getBoundingClientRect(); return l.left >= vp.left - 2 && l.right <= Math.min(vp.right, window.innerWidth) + 2 }
-      let clicks = 0; let seen = lastVisibleNow()
-      while (!seen && clicks < slides.length) { next.click(); clicks++; await new Promise((r) => setTimeout(r, 450)); seen = lastVisibleNow() }
-      res.push({ label: c.getAttribute('aria-label'), lastVisible: seen, clicks })
+    for (const m of document.querySelectorAll('.marquee')) {
+      const next = m.querySelector('.marquee__btn--next'); const vp = m.querySelector('.marquee__viewport'); const items = m.querySelectorAll('.marquee__item:not(.marquee__item--dup)')
+      const lastVisible = () => { const l = items[items.length - 1].getBoundingClientRect(); const v = vp.getBoundingClientRect(); return l.left >= v.left - 2 && l.right <= v.right + 2 }
+      let clicks = 0; let seen = lastVisible()
+      while (!seen && clicks < items.length + 2) { next.click(); clicks++; await new Promise((r) => setTimeout(r, 350)); seen = lastVisible() }
+      const dupsHidden = [...m.querySelectorAll('.marquee__item--dup')].every((d) => d.getAttribute('aria-hidden') === 'true')
+      res.push({ label: m.getAttribute('aria-label'), lastVisible: seen, clicks, manual: m.classList.contains('marquee--manual'), dupsHidden })
     }
     return res
   })
-  for (const c of car) log(width, c.lastVisible, `carousel "${c.label}" last slide reachable`, `${c.clicks} next clicks`)
+  for (const c of car) log(width, c.lastVisible && c.manual && c.dupsHidden, `marquee "${c.label}" manual under reduced motion, last item reachable`, `${c.clicks} clicks`)
 
   // 8 form usable: open from the first data-form trigger that is visible
   const form = await page.evaluate(async () => {

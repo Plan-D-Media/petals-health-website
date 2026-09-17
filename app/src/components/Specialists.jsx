@@ -1,9 +1,10 @@
 import DoctorCard from './DoctorCard.jsx'
-import Carousel from './Carousel.jsx'
+import Marquee from './Marquee.jsx'
 import { DOCTORS } from '../data/doctors.js'
 import './Specialists.css'
 
-// Home section 5 — "OUR SPECIALISTS / Meet your care team": the doctor carousel over data/doctors.js.
+// Home section 5 — "OUR SPECIALISTS / Meet your care team": the doctor marquee (left-to-right, opposite the stories)
+// over data/doctors.js.
 
 export function Arrow() {
   return (
@@ -21,7 +22,9 @@ export default function Specialists() {
         <p className="specialists__eyebrow">Our specialists</p>
         <h2 id="specialists-title" className="specialists__title">Meet your care team</h2>
         <p className="specialists__subline">Experienced, empathetic doctors who take time to truly understand your health.</p>
-        <Carousel className="specialists__carousel" label="Our doctors" items={DOCTORS} renderItem={(d) => <DoctorCard doctor={d} />} autoplayMs={5000} />
+      </div>
+      <Marquee className="specialists__marquee" label="Our doctors" items={DOCTORS} renderItem={(d) => <DoctorCard doctor={d} />} direction="right" speed={40} />
+      <div className="inner">
         <div className="specialists__foot">
           <a className="specialists__all btn-soft" href="#doctors">View all 50+ Doctor <Arrow /></a>
         </div>

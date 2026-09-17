@@ -1,0 +1,27 @@
+/* Caring block (replaces the health-card panel): the original hero's photo and headline on the hero's pale ground. */
+.caring { padding: 40px 0 48px; background: radial-gradient(786.5px circle at 50% 50%, var(--hero-bg-inner) 0%, var(--hero-bg-outer) 100%); }
+.caring__inner { display: grid; gap: 24px; align-items: center; }
+/* the design's cut-out: 614.7 × 749.6 image in a 497.7 × 678.7 window (offset −56.2, −36.1) → kept as a ratio */
+.caring__photo { position: relative; width: min(100%, 420px); aspect-ratio: 497.7 / 678.7; margin: 0 auto; overflow: hidden; }
+.caring__photo img {
+  position: absolute; left: -11.3%; top: -5.3%; width: 123.5%; max-width: none; height: 110.4%; display: block;
+  -webkit-mask-image: url('/assets/2_6a954d96.png'); mask-image: url('/assets/2_6a954d96.png');
+  -webkit-mask-mode: luminance; mask-mode: luminance; -webkit-mask-size: 100% 100%; mask-size: 100% 100%;
+}
+.caring__title { margin: 0; font-size: var(--fs-display-md); font-weight: var(--fw-display-md); line-height: 1.05; font-variation-settings: var(--opsz-display); }
+.caring__line { display: block; }
+.caring__line--primary { color: var(--blue-900); }
+.caring__line--accent { color: var(--accent); }
+.caring__body { margin: 20px 0 0; font-size: var(--fs-body); font-weight: var(--fw-body); line-height: 1.45; color: var(--black); }
+.caring__copy .pending { margin: 16px 0 0; }
+@media (min-width: 768px) {
+  .caring { padding: 56px 0 56px; }
+  .caring__inner { grid-template-columns: 5fr 7fr; gap: 40px; }
+  .caring__photo { margin: 0; }
+}
+@media (min-width: 1024px) {
+  .caring { padding: 64px 0 64px; }
+  .caring__inner { grid-template-columns: 497.7px 1fr; gap: 64px; }
+  .caring__photo { width: 497.7px; }
+  .caring__body { line-height: 30px; max-width: 620px; }
+}

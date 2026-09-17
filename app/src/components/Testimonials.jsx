@@ -1,10 +1,11 @@
 import Icon from './Icon.jsx'
-import Carousel from './Carousel.jsx'
+import Marquee from './Marquee.jsx'
 import { TESTIMONIALS } from '../data/testimonials.js'
 import './Testimonials.css'
 
 // Home section 4 — "PATIENT STORIES". Carousel over data/testimonials.js (PLACEHOLDER content, tagged on each card).
-// Flow rewrite 2026-09-17: one card + peek on mobile, two on tablet, three at ≥1024.
+// Round 3: a continuous right-to-left marquee (Marquee.jsx) — pause on hover/focus, manual scroll mode for keyboard and
+// reduced motion; every card reachable.
 
 function Story({ s }) {
   return (
@@ -32,7 +33,9 @@ export default function Testimonials() {
       <div className="inner stories__inner">
         <p className="stories__eyebrow">Patient stories</p>
         <h2 id="stories-title" className="stories__title">Trusted by thousands of Kolkata families</h2>
-        <Carousel className="stories__carousel" label="Patient stories" items={TESTIMONIALS} renderItem={(s) => <Story s={s} />} autoplayMs={6000} />
+      </div>
+      <Marquee className="stories__marquee" label="Patient stories" items={TESTIMONIALS} renderItem={(s) => <Story s={s} />} direction="left" speed={40} />
+      <div className="inner">
       </div>
     </section>
   )

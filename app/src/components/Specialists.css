@@ -15,19 +15,15 @@
 .specialists__eyebrow { margin: 0; text-align: center; font-size: var(--fs-eyebrow); font-weight: var(--fw-eyebrow); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; line-height: 1.2; color: var(--grey-600); }
 .specialists__title { margin: 16px 0 0; text-align: center; font-size: var(--fs-display-xl); font-weight: var(--fw-display-xl); line-height: 1.05; color: var(--blue-900); text-wrap: balance; }
 .specialists__subline { margin: 24px 0 0; text-align: center; font-size: 18px; font-weight: 400; line-height: 1.3; color: var(--black); text-wrap: balance; }
-.specialists__carousel { margin-top: 24px; }
+.specialists__marquee { margin-top: 24px; }
+.specialists .marquee__item { width: min(300px, calc(100vw - 56px)); }
 .specialists__foot { display: flex; justify-content: center; margin-top: 24px; }
 .specialists__all { width: 235.1px; height: 45.8px; }
 
 @media (min-width: 1024px) {
   .specialists { padding: 56px 0 24px; }
-  .specialists__carousel { margin-top: 32px; }
-  .specialists .carousel__slide { width: 300px; }
-  /* the track starts on the content box and runs to the viewport edge; the band is the positioning context */
-  .specialists__carousel .carousel__viewport { margin-right: calc(-1 * var(--gutter)); }
+  .specialists__marquee { margin-top: 32px; }
+  .specialists .marquee__item { width: 300px; }
   .specialists__foot { margin-top: 20px; }
 }
-@media (min-width: 1366px) and (max-width: 1439px) {
-  .specialists__carousel { margin-left: -48px; }   /* four 300 px cards + 24 px gaps = 1272 inside the 1366 box (47 px in) */
-  .specialists__carousel .carousel__viewport { margin-right: calc(-1 * var(--gutter) + 48px); }
-}
+

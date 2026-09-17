@@ -2,7 +2,8 @@
 .stories { padding: 40px 0 8px; }
 .stories__eyebrow { margin: 0; text-align: center; font-size: var(--fs-eyebrow); font-weight: var(--fw-eyebrow); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; line-height: 1.2; color: var(--grey-600); }
 .stories__title { margin: 16px 0 0; text-align: center; font-size: var(--fs-display-lg); font-weight: var(--fw-display-lg); line-height: 1.05; color: var(--blue-900); font-variation-settings: var(--opsz-display-alt); text-wrap: balance; }
-.stories__carousel { margin-top: 24px; }
+.stories__marquee { margin-top: 24px; }
+.stories .marquee__item { width: min(340px, calc(100vw - 56px)); }
 
 .story { position: relative; display: flex; flex-direction: column; min-height: 100%; padding: 20px 20px 18px; background: var(--white); border: 1.5px solid var(--blue-900); border-radius: var(--radius-card-lg); }
 .story__placeholder { align-self: flex-start; height: 20px; padding: 0 8px; border-radius: var(--radius-pill); background: var(--orange-500); color: var(--blue-900); font-size: 13px; font-weight: 700; line-height: 20px; letter-spacing: 0.04em; text-transform: uppercase; }
@@ -19,9 +20,8 @@
 
 @media (min-width: 1024px) {
   .stories { padding: 48px 0 8px; }
-  .stories__carousel { margin-top: 32px; }
-  .stories .carousel__slide { width: 377.4px; }
-  .stories .carousel { --carousel-gap: 18.85px; }
+  .stories__marquee { margin-top: 32px; }
+  .stories .marquee__item { width: 377.4px; }
   .story { height: 208.2px; padding: 46px 22px 18px; }
   .story__placeholder { position: absolute; left: 22px; top: 16px; }
   .story__mark { position: absolute; left: 19.8px; top: 42.1px; margin: 0; }

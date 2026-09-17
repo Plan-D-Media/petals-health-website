@@ -46,6 +46,6 @@
   .care-card { display: grid; grid-template-columns: 300px 1fr auto; gap: 32px; align-items: center; padding: 32px 40px; }
   .care-card__chips { margin: 0; }
   .care-card__cta { align-self: center; margin: 0; }
-  .care__petal { right: 260px; top: -60px; } .care__petal svg { width: 212px; }
+  .care__petal { right: -40px; top: -90px; } .care__petal svg { width: 212px; }
 }
 @media (min-width: 1366px) { .care-card { grid-template-columns: 340px 1fr auto; } }
