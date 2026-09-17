@@ -27,7 +27,11 @@ html[data-polish2] .specialists {
 }
 
 /* ---------- 2. rhythm: process becomes a soft tint band; article cards recomposed ---------- */
-html[data-polish2] .process {
+/* The tint is painted on a z-index −1 layer, i.e. beneath every positioned sibling, so the care section's watermark
+   petal (which spills into this band) runs through the tint instead of being cut off by it. */
+html[data-polish2] body { background: transparent; }   /* body's own white would paint over a z-index −1 layer; the html canvas stays white */
+html[data-polish2] .process::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
   background:
     linear-gradient(to bottom, var(--white) 0, rgba(255, 255, 255, 0) var(--band-soft), rgba(255, 255, 255, 0) calc(100% - var(--band-soft)), var(--white) 100%),
     var(--band-tint);

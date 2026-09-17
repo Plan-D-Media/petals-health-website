@@ -13,8 +13,11 @@ page), `polish2_details_1366.png` (the four changed areas at 1:1, current above 
 
 ## 2 · Rhythm and the article cards
 - Process band becomes a soft tint band (the specialists band's own gradient) so the page alternates white / tint /
-  white / tint / white down to the health card. The care-section petal now fades into the process tint instead of
-  running through it (visible at 1920); acceptable, flagging it.
+  white / tint / white down to the health card. First cut painted the tint on the band itself, which cut the care
+  section's watermark petal with a straight edge at 1920 (`design/render/audit/petal_process_1920.png`) — worse than
+  the seam it replaced. Fixed: the tint is a `::before` layer at z-index −1 (beneath every positioned sibling, so the
+  petal paints over it) with the body background made transparent under the flag (the html canvas stays white; body's
+  own white would otherwise cover a negative layer). Verified at 1:1: `petal_process_1920_fixed.png`.
 - Article card, same box and copy: topic as the existing cream chip (chip token 16/300), title (body-md) in the
   middle, date and read time anchored to the bottom above a 1 px blue-900 10 % hairline; outline softened from
   1.5 px solid navy to 1 px at 30 %, rest shadow added. The headline becomes the dominant line; the topic reads as a
