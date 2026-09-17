@@ -8,7 +8,6 @@
 .proof__pill-text { position: absolute; left: 43.1px; top: 50%; transform: translateY(-50%); white-space: nowrap; font-size: var(--fs-label-lg); font-weight: var(--fw-label-lg); line-height: 18px; }
 
 .proof__stats { position: relative; flex: none; width: 180px; height: 84px; }
-@media (max-width: 767px) { .proof__stats { width: 156px; height: 72px; } .stat { width: 72px; height: 72px; } .stat--rating { left: 84px; } .stat__value { top: 10px; line-height: 24px; } .stat__label { top: 40px; font-size: 12px; } }
 .stat {
   position: absolute; top: 0; width: 84px; height: 84px; border-radius: var(--radius-card-sm);
   background: radial-gradient(circle farthest-corner at 50% 50%, var(--card-bg-inner) 0%, var(--card-bg-outer) 100%);
@@ -19,3 +18,5 @@
 .stat__value { position: absolute; left: 0; right: 0; top: 12px; font-family: var(--font-stat); font-size: var(--fs-stat-value); font-weight: var(--fw-stat-value); line-height: 28px; white-space: nowrap; display: flex; justify-content: center; align-items: flex-start; }
 .stat__star { margin-left: 5px; margin-top: 1.5px; }
 .stat__label { position: absolute; left: 0; right: 0; top: 48px; font-size: var(--fs-caption); font-weight: var(--fw-caption); line-height: var(--lh-caption); }
+/* mobile sizes last, so they override the base offsets above */
+@media (max-width: 767px) { .proof__stats { width: 156px; height: 72px; } .stat { width: 72px; height: 72px; } .stat--rating { left: 84px; } .stat__value { top: 10px; line-height: 24px; } .stat__label { top: 40px; font-size: 13px; } }
