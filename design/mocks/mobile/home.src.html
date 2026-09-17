@@ -1,0 +1,195 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Home — mobile / tablet approach</title>
+<link rel="stylesheet" href="mock.css">
+<style>
+/* STATIC APPROACH MOCK for 390 (mobile) and 768 (tablet). Real copy, real tokens, media as grey/photo blocks.
+   Mobile-first: the 390 layout is the base; @media (min-width: 768px) reflows to two columns. */
+.page { min-width: 0; }
+.wrap { padding: 0 16px; }
+@media (min-width: 768px) { .wrap { padding: 0 32px; } }
+
+/* header: 56 px sticky bar — logo, phone, menu button. Utility links live in the drawer. */
+.mh { position: sticky; top: 0; z-index: 30; height: 56px; background: var(--white); display: flex; align-items: center; justify-content: space-between; padding: 0 16px; box-shadow: 0 1px 0 rgba(0,66,126,.08); }
+.mh img { height: 40px; width: auto; }
+.mh .right { display: flex; gap: 8px; }
+.mh .ib { width: 44px; height: 44px; border-radius: 22px; display: flex; align-items: center; justify-content: center; color: var(--blue-900); background: var(--hero-bg-outer); font-size: 12px; font-weight: 700; }
+.mh .ib.menu { background: var(--blue-900); color: var(--white); }
+@media (min-width: 768px) { .mh { height: 64px; padding: 0 32px; } .mh img { height: 48px; } .mh .util { display: flex; gap: 20px; font-size: 15px; color: var(--blue-900); align-items: center; } }
+.mh .util { display: none; }
+
+/* hero: paragraph, two full-width buttons, film card 16:9, proof row */
+.hero { background: radial-gradient(600px circle at 50% 30%, var(--hero-bg-inner) 0%, var(--hero-bg-outer) 100%); padding: 28px 0 32px; }
+.hero .para { font-size: 21px; line-height: 30px; margin: 0; }
+.hero .actions { display: flex; flex-direction: column; gap: 12px; margin: 20px 0 24px; }
+.hero .btn { height: 56px; font-size: 18px; width: 100%; }
+.film { position: relative; aspect-ratio: 16 / 9; border-radius: 16px; overflow: hidden; background: #cfd8e3 url('frame.jpg') center/cover; box-shadow: var(--shadow-card); }
+.film .playbtn { left: 12px; bottom: 12px; width: 40px; height: 40px; }
+.proofrow { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+.proofrow .pill { height: 32px; font-size: 15px; padding: 0 12px 0 10px; flex: 1; }
+.proofrow .stat { width: 72px; height: 72px; padding-top: 10px; } .proofrow .stat b { font-size: 24px; line-height: 24px; } .proofrow .stat span { font-size: 12px; margin-top: 6px; }
+@media (min-width: 768px) {
+  .hero { padding: 40px 0 44px; }
+  .hero .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
+  .hero .actions { flex-direction: row; } .hero .btn { width: auto; flex: 1; }
+  .proofrow { grid-column: 1 / -1; }
+}
+
+/* section heads */
+.sec { padding: 40px 0 8px; }
+.eyebrow { margin: 0; text-align: center; letter-spacing: .12em; text-transform: uppercase; color: var(--grey-600); font-size: 14px; line-height: 18px; }
+.h2 { margin: 10px 0 0; text-align: center; color: var(--blue-900); font-size: 34px; line-height: 38px; font-weight: 700; }
+.sub { margin: 14px 0 0; text-align: center; font-size: 17px; line-height: 24px; }
+@media (min-width: 768px) { .h2 { font-size: 44px; line-height: 48px; } .sub { font-size: 18px; } }
+
+/* family cards: stacked; tablet 3-up is too tight (426 each) → 1 column with the orange card first, or 2 + 1 */
+.cards { display: grid; gap: 16px; margin-top: 24px; }
+.card { border-radius: 16px; padding: 24px 20px 20px; position: relative; }
+.card.orange { background: linear-gradient(135deg, var(--card-orange-start) 0%, var(--card-orange-end) 50%); color: var(--white); }
+.card.pale { background: linear-gradient(135deg, #d4e3ff 0%, #fff 100%); box-shadow: var(--ring-card); }
+.card h3 { margin: 0; font-size: 26px; line-height: 30px; font-weight: 700; color: inherit; } .card.pale h3 { color: var(--blue-900); }
+.card p { margin: 4px 0 14px; font-size: 16px; line-height: 20px; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { height: 30px; padding: 0 12px; border-radius: 999px; background: #fffbf4; color: var(--black); font-size: 15px; line-height: 30px; font-weight: 300; }
+.card.orange .chip { background: #ff8e7a; color: var(--grey-800); }
+.card .cta { display: flex; margin-top: 18px; height: 44px; border-radius: 999px; background: linear-gradient(180deg, #fff 0%, #fff8eb 70%); box-shadow: var(--shadow-secondary, 0 2px 6px rgba(0,66,126,.16)); color: var(--blue-900); align-items: center; justify-content: center; font-size: 16px; font-weight: 500; }
+@media (min-width: 768px) { .cards { grid-template-columns: 1fr 1fr; } .card.orange { grid-column: 1 / -1; } }
+
+/* process: vertical list, ring left */
+.steps { display: grid; gap: 18px; margin-top: 24px; }
+.step { display: flex; gap: 14px; align-items: flex-start; }
+.step .ring { flex: none; width: 48px; height: 48px; border-radius: 50%; border: 3px solid #6e5fa1; display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--blue-900); }
+.step b { display: block; font-size: 18px; font-weight: 500; line-height: 22px; } .step p { margin: 4px 0 0; font-size: 16px; line-height: 20px; color: var(--grey-800); }
+@media (min-width: 768px) { .steps { grid-template-columns: 1fr 1fr; gap: 24px 32px; } }
+
+/* carousels: 1 slide + peek on mobile, 2 on tablet; arrows below on mobile (thumb zone) */
+.track { display: flex; gap: 12px; margin-top: 24px; overflow: hidden; padding-right: 0; }
+.slide { flex: none; width: calc(100% - 40px); }
+@media (min-width: 768px) { .slide { width: calc(50% - 6px); } }
+.story { border: 1px solid rgba(0,66,126,.3); border-radius: 16px; padding: 20px; background: #fff; }
+.story .q { margin: 8px 0 16px; font-size: 15px; line-height: 22px; }
+.story .who { display: flex; gap: 12px; align-items: center; } .story .av { width: 40px; height: 40px; border-radius: 50%; background: #6e5fa1; color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Lora', serif; }
+.story .who b { display: block; font-size: 15px; } .story .who span { font-size: 13px; }
+.story .tag { display: inline-block; height: 18px; padding: 0 8px; border-radius: 999px; background: var(--orange-500); color: var(--blue-900); font-size: 11px; font-weight: 700; line-height: 18px; text-transform: uppercase; }
+.dots { display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 14px; }
+.dots .arrow { width: 44px; height: 44px; border-radius: 50%; background: #fff; box-shadow: var(--shadow-button); }
+.dots .d { width: 8px; height: 8px; border-radius: 50%; background: rgba(0,66,126,.25); } .dots .d.on { background: var(--blue-900); }
+
+/* doctor card: same card, full slide width (358 at 390) — it fits; 300 is not a hard size */
+.doc { border-radius: 16px; background: #fff; box-shadow: var(--shadow-card), var(--ring-card); overflow: hidden; }
+.doc .top { height: 120px; background: radial-gradient(circle farthest-corner at 50% 50%, #fff 0%, #7aadd9 100%); position: relative; }
+.doc .avatar { position: absolute; left: 20px; bottom: -28px; width: 76px; height: 76px; border-radius: 50%; background: #fff; }
+.doc .avatar span { position: absolute; inset: 5px; border-radius: 50%; background: var(--blue-900); color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'Lora', serif; font-size: 26px; }
+.doc .badge { position: absolute; right: 16px; top: 14px; height: 24px; padding: 0 10px; border-radius: 999px; background: #fff; font-size: 13px; line-height: 24px; }
+.doc .body { padding: 38px 20px 18px; }
+.doc .name { margin: 0; font-size: 22px; line-height: 26px; font-weight: 600; color: var(--blue-900); }
+.doc .spec { margin: 2px 0 10px; font-size: 14px; color: var(--grey-800); }
+.doc .meta { font-size: 14px; line-height: 18px; } .doc .langs { font-size: 13px; color: var(--grey-600); margin-top: 8px; }
+.doc .foot { display: flex; align-items: center; justify-content: space-between; margin-top: 14px; }
+.doc .stars { color: var(--orange-500); letter-spacing: 2px; font-size: 14px; }
+.doc .book { height: 44px; padding: 0 20px; border-radius: 999px; background: var(--blue-900); color: #fff; display: flex; align-items: center; font-size: 15px; font-weight: 700; }
+
+/* health card: photo on top (rectangular crop), copy in the navy panel below */
+.hc { border-radius: 16px; overflow: hidden; background: var(--blue-900); color: #fff; margin-top: 24px; }
+.hc .photo { aspect-ratio: 4 / 3; background: url('hcard.jpg') 70% 30% / cover; }
+.hc .copy { padding: 24px 20px 24px; }
+.hc .ey { letter-spacing: .12em; text-transform: uppercase; font-size: 16px; font-weight: 300; }
+.hc .t { margin: 10px 0 0; font-size: 30px; line-height: 34px; font-weight: 700; }
+.hc .p { margin: 14px 0 0; font-size: 17px; line-height: 24px; font-weight: 300; }
+.hc ul { margin: 12px 0 0; padding-left: 20px; font-size: 17px; line-height: 24px; font-weight: 300; }
+.hc .cta { display: flex; margin-top: 20px; height: 48px; border-radius: 999px; background: #fff; color: var(--blue-900); align-items: center; justify-content: center; font-size: 17px; font-weight: 700; }
+@media (min-width: 768px) { .hc { display: grid; grid-template-columns: 1fr 1fr; } .hc .photo { aspect-ratio: auto; min-height: 100%; } .hc .copy { padding: 36px 32px; } }
+
+/* articles: stacked */
+.posts { display: grid; gap: 14px; margin-top: 24px; }
+.post { border-radius: 16px; background: #fff; box-shadow: var(--shadow-card-rest, 0 1px 0 rgba(0,66,126,.06)), var(--ring-card); padding: 18px 20px 16px; position: relative; }
+.post .chip { margin-bottom: 10px; display: inline-block; }
+.post .t { margin: 0 0 12px; font-size: 18px; line-height: 24px; }
+.post .m { padding-top: 10px; border-top: 1px solid rgba(0,66,126,.1); font-size: 14px; color: #00bf63; }
+@media (min-width: 768px) { .posts { grid-template-columns: 1fr 1fr 1fr; } }
+
+/* closing band + footer */
+.close { background: radial-gradient(600px circle at 50% 50%, #fff 0%, #e3f2ff 100%); padding: 32px 0; margin-top: 40px; }
+.close .para { font-size: 18px; line-height: 26px; margin: 0 0 18px; }
+.close .actions { display: flex; flex-direction: column; gap: 12px; } .close .btn { width: 100%; height: 52px; font-size: 17px; }
+@media (min-width: 768px) { .close .actions { flex-direction: row; } }
+.foot { background: var(--blue-800); color: #fff; padding: 28px 0 24px; }
+.foot .about { font-size: 13px; line-height: 17px; }
+.foot details { border-top: 1px solid rgba(255,255,255,.15); } .foot summary { padding: 14px 0; font-size: 16px; color: var(--orange-500); list-style: none; display: flex; justify-content: space-between; }
+.foot summary::after { content: '+'; } .foot ul { margin: 0 0 12px; padding: 0; list-style: none; font-size: 14px; line-height: 26px; }
+.foot .cols { margin-top: 20px; }
+@media (min-width: 768px) { .foot .cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 24px; } .foot details { border: 0; } .foot summary::after { content: ''; } }
+.copy2 { background: var(--blue-900); color: #fff; padding: 16px 0 88px; font-size: 13px; line-height: 17px; }
+
+/* sticky bottom action bar (mobile only): Call + Book, appears after the hero, hidden when a form is open */
+.bar { position: fixed; left: 0; right: 0; bottom: 0; height: 64px; background: #fff; box-shadow: 0 -4px 16px rgba(0,66,126,.14); display: flex; gap: 10px; padding: 10px 16px; z-index: 40; }
+.bar a { flex: 1; display: flex; align-items: center; justify-content: center; border-radius: 999px; font-size: 16px; font-weight: 700; text-decoration: none; }
+.bar .call { background: #fff; color: var(--blue-900); box-shadow: 0 0 0 1px rgba(0,66,126,.3); } .bar .book { background: var(--orange-500); color: var(--blue-900); }
+@media (min-width: 768px) { .bar { display: none; } .tab-cta { display: inline-flex !important; } }
+.tab-cta { display: none; align-items: center; height: 36px; padding: 0 16px; border-radius: 999px; background: var(--orange-500); color: var(--blue-900); font-size: 15px; font-weight: 700; }
+.note { background: #333; color: #fff; font: 11px/16px system-ui; padding: 2px 8px; }
+</style></head><body><div class="page">
+<div class="note">MOCK — mobile / tablet approach (static). Sticky top bar + bottom action bar are fixed elements; a full page is shown.</div>
+<div class="mh"><img src="logo.png" alt=""><div class="util"><span>9147405955</span><span>Find a Doctor</span><span>Ask a Doctor</span><a class="tab-cta">Book Appointment</a></div><div class="right"><span class="ib">☏</span><span class="ib menu">☰</span></div></div>
+
+<section class="hero"><div class="wrap grid">
+  <div><p class="para">From fertility and pregnancy to paediatric care, diagnostics and specialist services for the whole family, everything you need is available under one trusted roof.</p>
+  <div class="actions"><a class="btn btn--primary">Book Appointment</a><a class="btn btn--secondary">Request a Call Back</a></div></div>
+  <div class="film"><span class="playbtn"></span></div>
+  <div class="proofrow"><span class="pill">3 Clinics in Kolkata</span><div class="stat"><b>100+</b><span>Specialist<br>Doctor</span></div><div class="stat"><b>4.8 ★</b><span>Google<br>Rating</span></div></div>
+</div></section>
+
+<section class="sec"><div class="wrap"><p class="eyebrow">How we care for your family</p><h2 class="h2">For her health, her children, her family</h2><p class="sub">Every stage of life, under one roof</p>
+<div class="cards">
+  <div class="card orange"><h3>For Her Health</h3><p>From adolescence to motherhood and beyond</p><div class="chips"><span class="chip">Gynaecology</span><span class="chip">Pregnancy Care</span><span class="chip">High-Risk Pregnancy</span><span class="chip">Fertility Treatment</span><span class="chip">Cosmetic Gynaecology &amp; Aesthetics</span><span class="chip">Yoga &amp; Wellness</span></div><a class="cta">Explore Treatment</a></div>
+  <div class="card pale"><h3>For Her Children</h3><p>Dedicated support for every growing smile and milestone.</p><div class="chips"><span class="chip">Paediatrics</span><span class="chip">Paediatric Dentistry</span><span class="chip">Vaccinations</span></div><a class="cta">Explore Treatment</a></div>
+  <div class="card pale"><h3>For Whole Family</h3><p>Keeping every generation healthier, together.</p><div class="chips"><span class="chip">Cardiology</span><span class="chip">Dentistry</span><span class="chip">Diagnostics</span><span class="chip">Physiotherapy &amp; Pain Management</span><span class="chip">Audiology</span></div><a class="cta">Explore Treatment</a></div>
+</div></div></section>
+
+<section class="sec"><div class="wrap"><p class="eyebrow">Simple process</p><h2 class="h2">From search to care in minutes</h2>
+<div class="steps">
+  <div class="step"><span class="ring">1</span><div><b>Search &amp; choose</b><p>Find the right doctor or test by specialty, location, or concern.</p></div></div>
+  <div class="step"><span class="ring">2</span><div><b>Book a slot</b><p>Pick a time that works for you — online, by phone, or via our app.</p></div></div>
+  <div class="step"><span class="ring">3</span><div><b>Visit or consult</b><p>In-clinic or video consultation with your chosen specialist.</p></div></div>
+  <div class="step"><span class="ring">4</span><div><b>Get your reports</b><p>Digital prescriptions and lab reports delivered instantly.</p></div></div>
+</div></div></section>
+
+<section class="sec"><div class="wrap"><p class="eyebrow">Patient stories</p><h2 class="h2">Trusted by thousands of Kolkata families</h2>
+<div class="track">
+  <div class="slide"><div class="story"><span class="tag">Placeholder</span><p class="q">My entire pregnancy was a smooth ride with the team here. The doctors made me feel very comfortable every single visit.</p><div class="who"><span class="av">IA</span><div><b>Isha Agarwal</b><span>Pregnancy Care · Kankurgachi</span></div></div></div></div>
+  <div class="slide"><div class="story"><span class="tag">Placeholder</span><p class="q">The clinic has sonography, tests, and everything under one roof. Dr. Smita is very patient and reassuring.</p><div class="who"><span class="av">HA</span><div><b>Harshita Nahata</b><span>Antenatal Care · Kankurgachi</span></div></div></div></div>
+</div>
+<div class="dots"><span class="arrow"></span><span class="d on"></span><span class="d"></span><span class="d"></span><span class="d"></span><span class="arrow"></span></div>
+</div></section>
+
+<section class="sec" style="background:linear-gradient(to bottom,#fff 0,#edf7ff 25%,#edf7ff 75%,#fff 100%)"><div class="wrap"><p class="eyebrow">Our specialists</p><h2 class="h2">Meet your care team</h2><p class="sub">Experienced, empathetic doctors who take time to truly understand your health.</p>
+<div class="track">
+  <div class="slide"><div class="doc"><div class="top"><span class="badge">Gynaecology</span><div class="avatar"><span>SG</span></div></div><div class="body"><h3 class="name">Dr. Smita Gutgutia</h3><p class="spec">Gynaecology &amp; Obstetrics</p><div class="meta">Loudon Street · 10am–4pm<br>Tollygunge · 10am–4pm</div><div class="langs">Bengali · Hindi · English · Video consult</div><div class="foot"><span class="stars">★★★★★ <span style="color:#4d4d4d;letter-spacing:0;font-size:13px">4.8</span></span><a class="book">Book</a></div></div></div></div>
+  <div class="slide"><div class="doc"><div class="top"><span class="badge">Cardiology</span><div class="avatar"><span>KS</span></div></div><div class="body"><h3 class="name">Dr. K N Siddiqui</h3><p class="spec">Cardio-Metabolic disorders</p><div class="meta">Loudon Street · 4pm–8pm</div><div class="langs">Bengali · Hindi · English · Video consult</div><div class="foot"><span class="stars">★★★★★ <span style="color:#4d4d4d;letter-spacing:0;font-size:13px">4.8</span></span><a class="book">Book</a></div></div></div></div>
+</div>
+<div class="dots"><span class="arrow"></span><span class="d on"></span><span class="d"></span><span class="d"></span><span class="d"></span><span class="d"></span><span class="d"></span><span class="d"></span><span class="arrow"></span></div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+<div class="hc"><div class="photo"></div><div class="copy"><div class="ey">Family health card</div><h2 class="t">Your family's health, in your pocket</h2><p class="p">Get Your Card To Avail Discounts &amp; Other Benefits</p><ul><li>20% discount on Diagnostic Tests</li><li>Complimentary ECG (Twice in a year)</li><li>Free OPD registration</li><li>Free Home Blood Collection (single visit, net bill value ₹2000/-)</li></ul><a class="cta">Click here we will call back</a></div></div>
+</div></section>
+
+<section class="sec"><div class="wrap"><p class="eyebrow">Health insights</p><h2 class="h2">Latest from our doctors</h2><p class="sub">Evidence-based health advice written by our specialists — in plain language.</p>
+<div class="posts">
+  <div class="post"><span class="chip">IVF Treatment</span><p class="t">Is IVF Right for You? Signs, Eligibility &amp; Expert Advice</p><div class="m">Jun 4, 2026 · 6 min read</div></div>
+  <div class="post"><span class="chip">Gynaecology</span><p class="t">Your Periods Aren't Supposed to Be Painful — When Cramping Signals Something More</p><div class="m">Feb 13, 2026 · 5 min read</div></div>
+  <div class="post"><span class="chip">Paediatrics</span><p class="t">Child Fever Guide: When Home Care Is Enough and When It's Not</p><div class="m">May 14, 2026 · 4 min read</div></div>
+</div></div></section>
+
+<section class="close"><div class="wrap"><p class="para">From fertility and pregnancy to paediatric care, diagnostics and specialist services for the whole family, everything you need is available under one trusted roof.</p><div class="actions"><a class="btn btn--primary">Book Appointment</a><a class="btn btn--secondary">Request a Call Back</a></div></div></section>
+
+<footer class="foot"><div class="wrap"><p class="about">*Disclaimer: The information provided on this website is for informational purposes only and is not a substitute for professional medical advice, diagnosis, or treatment. Always consult a healthcare provider for medical concerns.</p>
+<div class="cols">
+  <details open><summary>Information</summary><ul><li>About Us</li><li>Our Story</li><li>Petal's App &amp; Community</li><li>Career</li><li>Vlogs</li><li>Contact Us</li></ul></details>
+  <details><summary>At Home Services</summary><ul><li>Upload Prescription</li></ul></details>
+  <details><summary>In Clinic</summary><ul><li>Polyclinic / Multispecialty OPD</li></ul></details>
+  <details><summary>Patient Connect</summary><ul><li>Clinic Guide</li><li>Know your Tests</li><li>Health Packages</li></ul></details>
+  <details><summary>Our Partners</summary><ul><li>Petals Inner Circle</li></ul></details>
+  <details><summary>Policies</summary><ul><li>Terms of Service</li><li>Social Media Policy</li><li>Privacy Policy</li><li>Grievance Redressal</li><li>Code of Ethics</li></ul></details>
+</div></div></footer>
+<div class="copy2"><div class="wrap">Copyright 2026 www.petalshealth.in - All Rights Reserved | 1st Floor, VIP Complex, P 30/1, Kankurgachi Rd, Kadapara, Phool Bagan, Kankurgachi, Kolkata, West Bengal 700054<br><b style="font-size:18px;line-height:32px">☏ 9147405955</b></div></div>
+<div class="bar"><a class="call">Call now</a><a class="book">Book Appointment</a></div>
+</div></body></html>

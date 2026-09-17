@@ -18,5 +18,5 @@ export const HERO_VIDEO_STYLE = 'film'   // hero concept B (design/round2-report
 // (https://script.google.com/macros/s/…/exec). While it says PLACEHOLDER, submissions are simulated (forms/submit.js).
 export const FORM_ENDPOINT = 'https://script.google.com/macros/s/PLACEHOLDER/exec'
 // Privacy notice linked from the consent line on every form. The page does not exist yet — client to supply the text.
-export const PRIVACY_URL = '/privacy-policy'
+export const PRIVACY_URL = '/privacy-policy.html'   // interim standalone page (public/privacy-policy.html) until the client's policy text arrives
 

@@ -78,10 +78,10 @@ SECTIONS = {
         ("card 3 border", (895, 2260, 1280, 2488), lambda a: (np.abs(a - np.array((0, 66, 126))).max(axis=2) <= 90), (-15, 1, 0, 1), "width 361.9 → 377.4, x 905.6 → 890.2; top 2268.7 → 2270"),
         ("stars 1", (350, 2285, 460, 2312), lambda a: (a[:, :, 0] > 220) & (a[:, :, 1] > 130) & (a[:, :, 1] < 200) & (a[:, :, 2] < 120), (0, 0, 0, 0), "vector star in orange-500 vs raster"),
         ("quote 1 text", (110, 2318, 470, 2385), black, (2, 0, -12, 0), "upright Bricolage Regular is 12 px narrower than Canva Sans italic on line 1; ink top aligned"),
-        ("avatar 1", (115, 2405, 175, 2465), purple, (0, -1, 0, -1), "card top regularised"),
+        ("avatar 1", (115, 2405, 175, 2465), near((110, 95, 161), 20), (0, -1, 0, -1), "card top regularised"),
         ("name 1", (172, 2412, 300, 2436), black, (2, 0, 5, 0), "16/700 renders 3 px wider"),
         ("role 1", (172, 2434, 400, 2455), black, (3, 0, -11, 0), "14 px Regular 11 px narrower than the mock line (14.4 px + tracking)"),
-        ("avatar 3", (900, 2402, 985, 2462), purple, (-15, 1, -15, 1), "card 3 regularised (x −15.4, top +1.3)"),   # box widened left so the regularised disc is not clipped
+        ("avatar 3", (905, 2402, 980, 2462), near((110, 95, 161), 20), (-15, 1, -15, 1), "card 3 regularised (x −15.4, top +1.3)"),   # box covers both discs (mock 933–975, build 917–960); tight tolerance so anti-aliased text edges right of the disc do not count
     ],
     "hcard": [
         ("panel left edge/top", (85, 3140, 600, 3400), navy, None, ""),

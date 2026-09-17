@@ -4,7 +4,9 @@
    side of each separator, chevron 6 px after its label; utility 15 px either side of each separator, icon 9 px
    before its label. The mock's hand-placed lefts (gaps 13–18) are logged as regularised. */
 
-.site-header { position: relative; width: 100%; }
+/* display: contents — a sticky child can never leave its parent's box, and the header box is only 166 px tall; with no
+   box of its own the nav sticks against the page. The <header> element stays in the accessibility tree. */
+.site-header { display: contents; }
 
 /* ---------- utility bar: 0–108 ---------- */
 .utility { height: 124px; background: var(--white); }   /* header ×1.2 (2026-09-17): 108 → 124 */
@@ -50,8 +52,8 @@
 
 /* sticky CTA: viewport right edge (the nav row ends at 1190 at 1366, so the container edge would collide) */
 .nav__cta {
-  position: absolute; right: 24px; top: 6px; height: 30px; padding: 0 16px; border-radius: var(--radius-pill);
-  background: var(--orange-500); color: var(--blue-900); font-size: 15px; font-weight: 700; line-height: 30px; white-space: nowrap;
+  position: absolute; right: 16px; top: 6px; height: 30px; padding: 0 12px; border-radius: var(--radius-pill);
+  background: var(--orange-500); color: var(--blue-900); font-size: 14px; font-weight: 700; line-height: 30px; white-space: nowrap;   /* ~130 px: clears the nav row (ends 1193 at 1366) by ~27 px */
   opacity: 0; transform: translateY(-4px); pointer-events: none; transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
 }
 .nav--cta .nav__cta { opacity: 1; transform: none; pointer-events: auto; }
