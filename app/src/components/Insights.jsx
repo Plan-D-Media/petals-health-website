@@ -22,7 +22,7 @@ export default function Insights() {
               <span className="post__top" aria-hidden="true" />
               <h3 className="post__topic">{a.topic}</h3>
               <p className="post__title">{a.title}</p>
-              <p className="post__meta">{a.meta}</p>
+              <p className="post__meta"><span>{a.meta}</span><a className="post__read" href="#articles" aria-label={`Read: ${a.title}`}>Read <Arrow /></a></p>
             </article>
           ))}
         </div>
