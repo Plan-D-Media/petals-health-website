@@ -49,7 +49,7 @@
   .care-card__cta { min-height: 32.6px; height: 32.6px; }
   .care__petal { right: -30px; top: -20px; } .care__petal svg { width: 212px; }
 }
-@media (min-width: 1366px) {
+@media (min-width: 1366px) and (max-width: 1439px) {
   /* the design's card row is 1305 wide (32 px margins), wider than the 1176 content box */
   .care__cards { margin-inline: -64.5px; }
 }

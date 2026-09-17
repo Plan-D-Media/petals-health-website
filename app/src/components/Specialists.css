@@ -27,7 +27,7 @@
   .specialists__carousel .carousel__viewport { margin-right: calc(-1 * var(--gutter)); }
   .specialists__foot { margin-top: 20px; }
 }
-@media (min-width: 1366px) {
+@media (min-width: 1366px) and (max-width: 1439px) {
   .specialists__carousel { margin-left: -48px; }   /* four 300 px cards + 24 px gaps = 1272 inside the 1366 box (47 px in) */
   .specialists__carousel .carousel__viewport { margin-right: calc(-1 * var(--gutter) + 48px); }
 }

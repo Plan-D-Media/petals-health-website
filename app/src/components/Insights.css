@@ -18,4 +18,4 @@
   .post { min-height: 250px; }
   .insights__foot { margin-top: 48px; }
 }
-@media (min-width: 1366px) { .insights__cards { margin-inline: 47px; } }   /* the design's 330 px cards on 42.75 gaps: 1076.7 wide, centred */
+@media (min-width: 1366px) and (max-width: 1439px) { .insights__cards { margin-inline: 47px; } }   /* the design's 330 px cards on 42.75 gaps: 1076.7 wide, centred; from 1440 the cards fill the wider box */

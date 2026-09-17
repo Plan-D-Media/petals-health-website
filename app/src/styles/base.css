@@ -19,6 +19,8 @@ body { background: transparent; }   /* z-index -1 tint layers (Process) paint ab
 @media (min-width: 768px)  { :root { --gutter: 32px; } }
 @media (min-width: 1024px) { :root { --gutter: 40px; } }
 @media (min-width: 1366px) { :root { --gutter: 95px; } }
+/* gutter fix (round 3): from 1440 up the content box grows to 1440 so a 1920 screen uses ~75 % of its width instead of 61 % */
+@media (min-width: 1440px) { :root { --gutter: 64px; --content-width: 1440px; } }
 
 .page { width: 100%; position: relative; overflow-x: clip; }
 .band { position: relative; width: 100%; }
