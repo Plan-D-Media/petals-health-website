@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import { DOCTORS } from '../data/doctors.js'
+const DEPARTMENTS = ["Women's Care", 'Child Care', 'Fertility Care', 'Cosmetic Gynaecology & Aesthetics', 'Dentistry', 'Multispecialty Clinic', 'Yoga & Wellness', 'Pain Management & Rejuvenation', 'Audiology']
 import { PRIVACY_URL } from '../config.js'
 import { submitLead, CONSENT_TEXT } from '../forms/submit.js'
 import './LeadForm.css'
@@ -12,12 +13,13 @@ export const FORM_PRESETS = {
   'request-callback': { title: 'Request a call back', fields: ['name', 'mobile', 'message'], submit: 'Request a Call Back', thanks: 'Thank you. We will call you back on this number, usually within an hour during clinic hours.' },
   'book-consultation': { title: 'Book a consultation', fields: ['name', 'mobile', 'email', 'doctor', 'date'], submit: 'Book Consultation', thanks: 'Thank you. Our team will confirm your consultation by phone or WhatsApp.' },
   'sxo-agent': { title: 'Tell us how we can help', fields: ['name', 'mobile', 'gender', 'age', 'doctor', 'date'], submit: 'Send', thanks: 'Thank you. A member of our team will be in touch shortly.' },
+  'book-consultation-page': { title: 'Book a Consultation', fields: ['name', 'mobile', 'email', 'department', 'message'], submit: 'Submit', thanks: 'Thank you. Our team will confirm your consultation by phone or WhatsApp.' },   // the treatment pages' on-page form (mock: Full Name, Email ID, Phone, Select Department, Message)
 }
 
-export default function LeadForm({ form = 'book-appointment', source = {}, preset, onSuccess, autoFocus = true }) {
+export default function LeadForm({ form = 'book-appointment', source = {}, preset, onSuccess, autoFocus = true, hideTitle = false }) {
   const p = preset || FORM_PRESETS[form]
   const id = useId()
-  const [values, setValues] = useState({ name: '', mobile: '', email: '', gender: '', age: '', doctor: source.doctor || '', date: '', message: '', consent: false, website: '' })
+  const [values, setValues] = useState({ name: '', mobile: '', email: '', gender: '', age: '', doctor: source.doctor || '', department: source.department || '', date: '', message: '', consent: false, website: '' })
   const [errors, setErrors] = useState({})
   const [status, setStatus] = useState('idle')   // idle | submitting | success | error
   const [message, setMessage] = useState('')
@@ -52,7 +54,7 @@ export default function LeadForm({ form = 'book-appointment', source = {}, prese
   const aria = (k) => ({ 'aria-invalid': errors[k] ? true : undefined, 'aria-describedby': errors[k] ? `${id}-${k}-err` : undefined })
   return (
     <form className="lead" onSubmit={onSubmit} noValidate aria-busy={status === 'submitting'}>
-      <h3 className="lead__title">{p.title}</h3>
+      {!hideTitle && <h3 className="lead__title">{p.title}</h3>}
       {has('name') && <label className="lead__field"><span>Full name</span><input ref={firstRef} name="name" autoComplete="name" value={values.name} onChange={set('name')} {...aria('name')} />{err('name')}</label>}
       {has('mobile') && <label className="lead__field"><span>Mobile number</span><input name="mobile" type="tel" inputMode="numeric" autoComplete="tel" placeholder="10-digit mobile" value={values.mobile} onChange={set('mobile')} {...aria('mobile')} />{err('mobile')}</label>}
       {has('email') && <label className="lead__field"><span>Email <em>(optional)</em></span><input name="email" type="email" autoComplete="email" value={values.email} onChange={set('email')} {...aria('email')} />{err('email')}</label>}
@@ -69,6 +71,14 @@ export default function LeadForm({ form = 'book-appointment', source = {}, prese
             <option value="">Any available doctor</option>
             {DOCTORS.map((d) => <option key={d.id} value={d.id}>{d.name} — {d.specialty}</option>)}
           </select>
+        </label>
+      )}
+      {has('department') && (
+        <label className="lead__field"><span>Select Department</span>
+          <select name="department" value={values.department} onChange={set('department')} {...aria('department')}>
+            <option value="">-please choose an option-</option>
+            {DEPARTMENTS.map((d) => <option key={d} value={d}>{d}</option>)}
+          </select>{err('department')}
         </label>
       )}
       {has('date') && <label className="lead__field lead__field--short"><span>Preferred date <em>(optional)</em></span><input name="date" type="date" value={values.date} onChange={set('date')} {...aria('date')} />{err('date')}</label>}

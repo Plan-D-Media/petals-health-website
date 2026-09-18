@@ -66,7 +66,9 @@ for (const width of WIDTHS) {
     if (width < 1024) {
       for (const el of document.querySelectorAll('a, button, input, select, textarea, summary')) {
         if (!vis(el) || getComputedStyle(el).pointerEvents === 'none' || el.closest('[data-inline-link], .drawer:not(.drawer--open), .actionbar:not(.actionbar--on), .nav, .utility, dialog')) continue
-        const b = el.getBoundingClientRect()
+        // a checkbox or radio inside its <label> is activated by the whole label: measure the label
+        const target = (el.tagName === 'INPUT' && (el.type === 'checkbox' || el.type === 'radio') && el.closest('label')) ? el.closest('label') : el
+        const b = target.getBoundingClientRect()
         if (b.width < 44 || b.height < 44) { const cs = getComputedStyle(el); if (el.tagName === 'A' && cs.display === 'inline') continue; out.targets.push(desc(el) + ` ${Math.round(b.width)}×${Math.round(b.height)}`) }
       }
     }

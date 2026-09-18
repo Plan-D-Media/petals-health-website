@@ -27,6 +27,7 @@ export function validate(values, fields) {
   if (need('mobile') && !MOBILE_RE.test(normaliseMobile(values.mobile))) errors.mobile = 'Please enter a 10-digit Indian mobile number.'
   if (need('email') && values.email && !EMAIL_RE.test(String(values.email).trim())) errors.email = 'That email address does not look right.'
   if (need('gender') && !values.gender) errors.gender = 'Please choose one.'
+  if (need('department') && !values.department) errors.department = 'Please choose a department.'
   if (need('age') && (values.age === '' || Number.isNaN(Number(values.age)) || Number(values.age) < 0 || Number(values.age) > 120)) errors.age = 'Please enter an age between 0 and 120.'
   if (need('date') && values.date) {
     const d = new Date(values.date + 'T00:00:00'); const today = new Date(); today.setHours(0, 0, 0, 0)

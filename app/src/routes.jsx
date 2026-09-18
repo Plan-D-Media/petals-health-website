@@ -1,5 +1,8 @@
 import App from './App.jsx'
 import TreatmentA from './templates/TreatmentA.jsx'
+import TreatmentB from './templates/TreatmentB.jsx'
+import womens from './content/treatments/womens-care.js'
+import dentistry from './content/treatments/dentistry.js'
 import childCare from './content/treatments/child-care.js'
 import pain from './content/treatments/pain-management-rejuvenation.js'
 import audiology from './content/treatments/audiology.js'
@@ -14,6 +17,8 @@ export const TREATMENTS = {
   'audiology': { template: TreatmentA, content: audiology },
   'yoga-wellness': { template: TreatmentA, content: yoga },
   'multispecialty-clinic': { template: TreatmentA, content: multi },
+  'womens-care': { template: TreatmentB, content: womens },
+  'dentistry': { template: TreatmentB, content: dentistry },
 }
 
 export function pageFor(pathname) {
