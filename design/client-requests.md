@@ -48,3 +48,7 @@ can rank for family-clinic searches in Kolkata. Please confirm or send the line 
 the Family Health Card panel shows the original "Caring for All, You Care About" heading and paragraph until you send
 the final text; please also tell us what "IWC" stands for in "Complete IWC integrated concept".
 
+**9. One spelling to confirm.** The Child Care page button reads "Book your appoinment" in the design (missing a
+letter). We have kept it exactly as designed; say the word and we will correct it to "Book your appointment" here and
+on every treatment page.
+
