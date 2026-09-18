@@ -123,3 +123,12 @@ line; "Multi Specality Clinic" in the Multispecialty headline; "Yoga & Welness" 
   numbers (Woman & Child 8, Family Medicine 25, six pages…) will be replaced by real ones automatically.
 - "Ask Doctor" (the band under the list, and the header's "Ask a Doctor") opens a short form (name, mobile, message)
   that goes to the same inbox as the other forms. Say if it should go somewhere else.
+
+**15. Site-wide items — three things we need from you.**
+- Page titles and the one-line descriptions search engines show are drawn from each page's own copy (list in
+  app/src/pages.js). Please read them once and send changes if you want different wording.
+- Analytics: send your Google Tag Manager container id (GTM-XXXXXXX) or a GA4 measurement id. The site already
+  records page views, button clicks, form opens/submissions, doctor searches and 404s; nothing is sent anywhere until
+  the id is added. If you plan to run advertising tags, tell us and we will add a cookie-consent banner.
+- The site address: we have assumed https://www.petalshealth.in for the sitemap and link previews. Confirm the
+  final domain (and whether it is www or not) before launch.

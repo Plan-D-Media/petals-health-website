@@ -9,7 +9,8 @@ import { readFileSync, existsSync, statSync } from 'node:fs'
 
 const ROOT = resolve(import.meta.dirname, '..')
 const PORT = 4199
-export const PAGES = ['/', '/treatments/child-care/', '/treatments/pain-management-rejuvenation/', '/treatments/audiology/', '/treatments/yoga-wellness/', '/treatments/multispecialty-clinic/', '/treatments/womens-care/', '/treatments/dentistry/', '/treatments/cosmetic-gynaecology-aesthetics/', '/treatments/petals-ivf/', '/about/', '/clinics/', '/find-a-doctor/', '/doctors/smita-gutgutia/', '/doctors/uttara-bhar/', '/no-such-page/']
+import { SITE_PAGES } from '../src/pages.js'
+export const PAGES = [...SITE_PAGES.map((p) => p.path), '/no-such-page/']   // every listed page plus the 404 route
 
 const build = spawnSync('npm', ['run', 'build'], { cwd: ROOT, shell: true, stdio: 'pipe', encoding: 'utf8' })
 if (build.status !== 0) { console.error(build.stdout, build.stderr); console.error('GATE: build failed'); process.exit(1) }

@@ -3,6 +3,7 @@ import { DOCTORS } from '../data/doctors.js'
 const DEPARTMENTS = ["Women's Care", 'Child Care', 'Fertility Care', 'Cosmetic Gynaecology & Aesthetics', 'Dentistry', 'Multispecialty Clinic', 'Yoga & Wellness', 'Pain Management & Rejuvenation', 'Audiology']
 import { PRIVACY_URL } from '../config.js'
 import { submitLead, CONSENT_TEXT } from '../forms/submit.js'
+import { track } from '../analytics.js'
 import './LeadForm.css'
 
 // The one lead form. `fields` picks which inputs appear; `source` says which form/page/section/doctor it came from.
@@ -35,10 +36,12 @@ export default function LeadForm({ form = 'book-appointment', source = {}, prese
     e.preventDefault()
     if (status === 'submitting') return                     // no double-send
     setStatus('submitting'); setMessage('')
+    const ev = { form, section: source.section || '', doctor: source.doctor || '' }
+    track('form_submit', ev)
     const r = await submitLead(values, p.fields, { form, ...source }, openedAt.current)
     if (r.status === 'invalid') { setErrors(r.errors); setStatus('idle'); return }
-    if (r.status === 'error') { setStatus('error'); setMessage(r.message); return }
-    setStatus('success'); onSuccess?.(r)
+    if (r.status === 'error') { track('form_error', ev); setStatus('error'); setMessage(r.message); return }
+    track('form_success', { ...ev, queued: r.status === 'queued' }); setStatus('success'); onSuccess?.(r)
   }
 
   if (status === 'success') {

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { track } from '../analytics.js'
 import LeadForm from './LeadForm.jsx'
 import { flushQueue } from '../forms/submit.js'
 import './FormDialog.css'
@@ -27,7 +28,7 @@ export default function FormDialog() {
 
   useEffect(() => {
     const d = ref.current; if (!d) return undefined
-    if (req && !d.open) { d.showModal(); document.documentElement.dataset.dialog = 'open'; requestAnimationFrame(() => d.querySelector('input, select, textarea')?.focus()) }   // showModal focuses the close button; move to the first field
+    if (req && !d.open) { track('form_open', { form: req.form, section: req.section, doctor: req.doctor }); d.showModal(); document.documentElement.dataset.dialog = 'open'; requestAnimationFrame(() => d.querySelector('input, select, textarea')?.focus()) }   // showModal focuses the close button; move to the first field
     const onClose = () => { setReq(null); delete document.documentElement.dataset.dialog; returnFocus.current?.focus?.() }
     d.addEventListener('close', onClose)
     return () => d.removeEventListener('close', onClose)

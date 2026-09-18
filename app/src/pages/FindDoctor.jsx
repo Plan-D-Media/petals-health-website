@@ -3,6 +3,7 @@ import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
 import FormDialog from '../components/FormDialog.jsx'
 import Icon from '../components/Icon.jsx'
+import { track } from '../analytics.js'
 import { DOCTORS, CLINICS, SPECIALTY_GROUPS, SPECIALTY_LABELS, specialtyGroupOf, availableToday, sessionsToday, nextSession, timeRange, monogram } from '../data/doctors.js'
 import './FindDoctor.css'
 
@@ -111,6 +112,7 @@ export default function FindDoctor() {
   const pages = Math.max(1, Math.ceil(results.length / PAGE_SIZE))
   const page = Math.min(st.page, pages)
   const slice = results.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
+  useEffect(() => { const t = setTimeout(() => track('doctor_search', { ...st, results: results.length }), 800); return () => clearTimeout(t) }, [st]) // eslint-disable-line react-hooks/exhaustive-deps
   const active = st.specialties.length + st.clinics.length + st.avail.length + st.langs.length + (st.rating ? 1 : 0)
   const clear = () => setSt((s) => ({ ...s, specialties: [], clinics: [], avail: [], langs: [], rating: 0, page: 1 }))
   const goPage = (p) => { setSt((s) => ({ ...s, page: p })); document.getElementById('results')?.scrollIntoView({ block: 'start', behavior: 'auto' }) }

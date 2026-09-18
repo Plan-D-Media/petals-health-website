@@ -20,3 +20,8 @@ export const FORM_ENDPOINT = 'https://script.google.com/macros/s/PLACEHOLDER/exe
 // Privacy notice linked from the consent line on every form. The page does not exist yet — client to supply the text.
 export const PRIVACY_URL = '/privacy-policy.html'   // interim standalone page (public/privacy-policy.html) until the client's policy text arrives
 
+
+// Site-wide (2026-09-18): canonical origin for the sitemap, canonical links and Open Graph; Google Tag Manager
+// container id — empty until the client supplies one (analytics.js keeps events in window.__petalsEvents meanwhile).
+export const SITE_URL = 'https://www.petalshealth.in'
+export const GTM_ID = ''

@@ -1,15 +1,7 @@
 import App from './App.jsx'
 import TreatmentA from './templates/TreatmentA.jsx'
 import TreatmentB from './templates/TreatmentB.jsx'
-import womens from './content/treatments/womens-care.js'
-import dentistry from './content/treatments/dentistry.js'
-import cosmetic from './content/treatments/cosmetic-gynaecology-aesthetics.js'
-import ivf from './content/treatments/petals-ivf.js'
-import childCare from './content/treatments/child-care.js'
-import pain from './content/treatments/pain-management-rejuvenation.js'
-import audiology from './content/treatments/audiology.js'
-import yoga from './content/treatments/yoga-wellness.js'
-import multi from './content/treatments/multispecialty-clinic.js'
+import { TREATMENT_PAGES } from './content/treatments/index.js'
 import About from './pages/About.jsx'
 import Clinics from './pages/Clinics.jsx'
 import FindDoctor from './pages/FindDoctor.jsx'
@@ -19,18 +11,8 @@ import { byId } from './data/doctors.js'
 
 // Path-based routing without a router dependency: one static build, every path served index.html (SPA fallback on
 // the host), the page picked from location.pathname. Treatment pages are template + content file.
-export const TREATMENTS = {
-  'child-care': { template: TreatmentA, content: childCare },
-  'pain-management-rejuvenation': { template: TreatmentA, content: pain },
-  'audiology': { template: TreatmentA, content: audiology },
-  'yoga-wellness': { template: TreatmentA, content: yoga },
-  'multispecialty-clinic': { template: TreatmentA, content: multi },
-  'womens-care': { template: TreatmentB, content: womens },
-  'dentistry': { template: TreatmentB, content: dentistry },
-  'cosmetic-gynaecology-aesthetics': { template: TreatmentB, content: cosmetic },
-  'fertility-care': { template: TreatmentB, content: ivf },   // the nav's Fertility Care item → the Petals IVF page
-  'petals-ivf': { template: TreatmentB, content: ivf },
-}
+const TEMPLATES = { A: TreatmentA, B: TreatmentB }
+export const TREATMENTS = Object.fromEntries(Object.entries(TREATMENT_PAGES).map(([slug, p]) => [slug, { template: TEMPLATES[p.template], content: p.content }]))
 
 export function pageFor(pathname) {
   // static hosts without SPA rewrites serve public/<path>/index.html, which redirects to /?__p=<path>; honour it
