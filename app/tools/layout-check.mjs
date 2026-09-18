@@ -24,7 +24,7 @@ for (const width of WIDTHS) {
   const mobile = width < 1024
   await page.setViewport({ width, height: mobile ? 844 : 900, deviceScaleFactor: 1, isMobile: width < 768, hasTouch: width < 768 })
   await page.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }])   // reveals off, autoplay off: deterministic layout
-  await page.goto('http://127.0.0.1:4173' + path, { waitUntil: 'networkidle0' })
+  await page.goto((process.env.CHECK_BASE || 'http://127.0.0.1:4173') + path, { waitUntil: 'networkidle0' })
   await page.evaluate(() => document.fonts.ready)
   // reveal everything (scroll through) so measurements see the final layout
   await page.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 500) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 30)) } window.scrollTo(0, 0) })
@@ -83,7 +83,7 @@ for (const width of WIDTHS) {
   // 6 marquees reachable: under reduced motion the marquee is a scrollable row; the forward button must reach the last item
   const car = await page.evaluate(async () => {
     const res = []
-    for (const m of document.querySelectorAll('.marquee')) {
+    for (const m of document.querySelectorAll('.marquee:not(.marquee--static)')) {
       const next = m.querySelector('.marquee__btn--next'); const vp = m.querySelector('.marquee__viewport'); const items = m.querySelectorAll('.marquee__item:not(.marquee__item--dup)')
       const lastVisible = () => { const l = items[items.length - 1].getBoundingClientRect(); const v = vp.getBoundingClientRect(); return l.left >= v.left - 2 && l.right <= v.right + 2 }
       let clicks = 0; let seen = lastVisible()

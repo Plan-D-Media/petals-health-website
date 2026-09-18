@@ -11,7 +11,7 @@ import './NavMenu.css'
 //         top-level item (and open its menu if this one was open).
 // Close:  Escape (focus returns to the trigger), pointer leaves the entry (200 ms grace for the diagonal move into
 //         the panel), click / tap outside, Tab out, focus leaving the entry, the trigger being clicked again.
-export default function NavMenu({ id, label, items, open, onOpen, onClose, onArrow, triggerRef }) {
+export default function NavMenu({ id, label, items, open, onOpen, onClose, onArrow, triggerRef, activeHref }) {
   const menuId = useId()
   const root = useRef(null)
   const list = useRef(null)
@@ -72,7 +72,7 @@ export default function NavMenu({ id, label, items, open, onOpen, onClose, onArr
       <button
         type="button"
         ref={(el) => { btn.current = el; triggerRef?.(el) }}
-        className={'nav__item nav__item--trigger' + (open ? ' nav__item--open' : '')}
+        className={'nav__item nav__item--trigger' + (open ? ' nav__item--open' : '') + (items.some((it) => it.href === activeHref) ? ' nav__item--active' : '')}
         aria-haspopup="true"
         aria-expanded={open}
         aria-controls={menuId}
@@ -91,7 +91,7 @@ export default function NavMenu({ id, label, items, open, onOpen, onClose, onArr
       >
         {items.map((it) => (
           <li key={it.label}>
-            <a className="nav__menu-item" href={it.href} tabIndex={open ? 0 : -1}>{it.label}</a>
+            <a className={'nav__menu-item' + (it.href === activeHref ? ' nav__menu-item--current' : '')} href={it.href} tabIndex={open ? 0 : -1} aria-current={it.href === activeHref ? 'page' : undefined}>{it.label}</a>
           </li>
         ))}
       </ul>

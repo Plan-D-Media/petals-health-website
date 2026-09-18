@@ -37,3 +37,4 @@
   .nav__menu { transition: none; transform: none; }
   .nav__chevron { transition: none; }
 }
+.nav__menu-item--current { font-weight: 700; box-shadow: inset 4px 0 0 var(--orange-500); }

@@ -31,7 +31,8 @@ export default function Marquee({ items, renderItem, direction = 'left', speed =
     return () => ro.disconnect()
   }, [speed, items.length])
 
-  const isManual = manual || reduced
+  const isStatic = items.length < 3
+  const isManual = manual || reduced || isStatic
   const step = (dir) => {
     const vp = viewport.current; if (!vp) return
     const slide = vp.querySelector('.marquee__item'); const w = slide ? slide.getBoundingClientRect().width + 24 : 320
@@ -51,7 +52,7 @@ export default function Marquee({ items, renderItem, direction = 'left', speed =
 
   return (
     <section
-      className={`marquee marquee--${direction}${isManual ? ' marquee--manual' : ''} ${className}`.trim()}
+      className={`marquee marquee--${direction}${isManual ? ' marquee--manual' : ''}${isStatic ? ' marquee--static' : ''} ${className}`.trim()}
       aria-roledescription="marquee" aria-label={label}
       style={{ '--marquee-duration': `${duration}s` }}
       onFocus={onFocusIn} onBlur={onFocusOut} onKeyDown={onKey}

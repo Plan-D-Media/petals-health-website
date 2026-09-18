@@ -5,6 +5,9 @@
 .marquee--right .marquee__track { animation-name: marquee-right; }
 .marquee:hover .marquee__track, .marquee:focus-within .marquee__track { animation-play-state: paused; }
 .marquee__item { flex: none; }
+/* fewer than three items: no motion, the row is centred (the caller adds .marquee--static) */
+.marquee--static .marquee__track { animation: none; width: auto; justify-content: center; padding-inline: var(--gutter); }
+.marquee--static .marquee__controls { display: none; }
 @keyframes marquee-left  { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(calc(-50% - var(--marquee-gap) / 2), 0, 0); } }
 @keyframes marquee-right { from { transform: translate3d(calc(-50% - var(--marquee-gap) / 2), 0, 0); } to { transform: translate3d(0, 0, 0); } }
 

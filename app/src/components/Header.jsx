@@ -22,7 +22,7 @@ const TREATMENTS = [   // nine items, in the mock's order (spellings corrected: 
 ]
 
 export const NAV = [
-  { id: 'home', label: 'Home', href: '/', current: true },
+  { id: 'home', label: 'Home', href: '/' },
   { id: 'about', label: 'About us', href: '#' },
   { id: 'clinics', label: 'Clinics', href: '#', chevron: true },
   { id: 'treatments', label: 'Treatments', items: TREATMENTS },
@@ -41,14 +41,14 @@ const UTILITY = [
 function useHeroScrolledOut() {
   const [out, setOut] = useState(false)
   useEffect(() => {
-    const hero = document.querySelector('.hero'); if (!hero || !('IntersectionObserver' in window)) return undefined
+    const hero = document.querySelector('.hero, .t-hero'); if (!hero || !('IntersectionObserver' in window)) return undefined
     const io = new IntersectionObserver(([e]) => setOut(!e.isIntersecting), { threshold: 0 })
     io.observe(hero); return () => io.disconnect()
   }, [])
   return out
 }
 
-function Drawer({ open, onClose }) {
+function Drawer({ open, onClose, current }) {
   const panel = useRef(null)
   const [expanded, setExpanded] = useState(null)
   useEffect(() => {
@@ -79,7 +79,7 @@ function Drawer({ open, onClose }) {
         </ul>
         <ul className="drawer__nav">
           {NAV.map((n) => (
-            <li key={n.id} className={n.current ? 'drawer__item--current' : ''}>
+            <li key={n.id} className={n.id === current ? 'drawer__item--current' : ''}>
               {n.items ? (
                 <>
                   <button type="button" className="drawer__acc" aria-expanded={expanded === n.id} aria-controls={`drawer-${n.id}`} onClick={() => setExpanded(expanded === n.id ? null : n.id)}>
@@ -90,7 +90,7 @@ function Drawer({ open, onClose }) {
                   </ul>
                 </>
               ) : (
-                <a href={n.href} aria-current={n.current ? 'page' : undefined}>{n.label}</a>
+                <a href={n.href} aria-current={n.id === current ? 'page' : undefined}>{n.label}</a>
               )}
             </li>
           ))}
@@ -100,7 +100,7 @@ function Drawer({ open, onClose }) {
   )
 }
 
-export default function Header() {
+export default function Header({ current = 'home' } = {}) {
   const [openId, setOpenId] = useState(null)
   const tops = useRef({})
   const close = useCallback(() => setOpenId(null), [])
@@ -132,7 +132,7 @@ export default function Header() {
           <button type="button" className="mbar__btn mbar__btn--menu" aria-label="Open menu" aria-expanded={drawer} onClick={() => setDrawer(true)}><span /><span /><span /></button>
         </div>
       </div>
-      <Drawer open={drawer} onClose={closeDrawer} />
+      <Drawer open={drawer} onClose={closeDrawer} current={current} />
 
       {/* ---- desktop bars (≥1024) ---- */}
       <div className="utility band"><div className="inner utility__inner">
@@ -156,9 +156,9 @@ export default function Header() {
           {NAV.map((n, i) => [
             i > 1 && <span key={'sep' + i} className="nav__sep" aria-hidden="true" />,
             n.items ? (
-              <NavMenu key={n.id} id={n.id} label={n.label} items={n.items} open={openId === n.id} onOpen={setOpenId} onClose={close} onArrow={onArrow} triggerRef={(el) => { tops.current[n.id] = el }} />
+              <NavMenu key={n.id} id={n.id} label={n.label} items={n.items} open={openId === n.id} activeHref={`/treatments/${current}`} onOpen={setOpenId} onClose={close} onArrow={onArrow} triggerRef={(el) => { tops.current[n.id] = el }} />
             ) : (
-              <a key={n.id} ref={(el) => { tops.current[n.id] = el }} className={'nav__item' + (n.current ? ' nav__item--active' : '')} href={n.href} aria-current={n.current ? 'page' : undefined} onKeyDown={onTopKey(n.id)}>
+              <a key={n.id} ref={(el) => { tops.current[n.id] = el }} className={'nav__item' + (n.id === current ? ' nav__item--active' : '')} href={n.href} aria-current={n.id === current ? 'page' : undefined} onKeyDown={onTopKey(n.id)}>
                 {n.label}
                 {n.chevron && <Icon name="chevron" className="nav__chevron" />}
               </a>
