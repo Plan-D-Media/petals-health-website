@@ -52,3 +52,21 @@ the final text; please also tell us what "IWC" stands for in "Complete IWC integ
 letter). We have kept it exactly as designed; say the word and we will correct it to "Book your appointment" here and
 on every treatment page.
 
+**10. Spellings in the treatment pages (kept exactly as designed until you confirm).** "Book your appoinment" on
+every treatment page; "& Rejuvination" in the Pain Management headline; "hasn't gone away on it's own" in its closing
+line; "Multi Specality Clinic" in the Multispecialty headline; "Yoga & Welness" in the Treatments menu of the design
+(the page itself spells it correctly). Also noted from the wider design for when we reach those pages: "Cantre",
+"Womans Care", "Our Approch".
+
+**11. Content mix-ups in the treatment pages — please confirm the fixes we assumed.**
+- Yoga & Wellness: the design's introduction paragraph is the Multispecialty Clinic's ("Family medicine at Petals
+  Health … our cardiology track …"), pasted by mistake. We have left the paragraph out; please send the intended one.
+- Yoga & Wellness: the fourth service card is titled "Post-Surgical Pain Care" (from the Pain Management page) but its
+  text is about nutrition in pregnancy. We kept the text and marked the title "copy pending"; please send the title.
+- Multispecialty Clinic: the small line above the heading reads "Trusted Care for, Healthier Smiles", which is the
+  Dentistry page's line. We have left it off; say if you want a line here.
+- Child Care: the exported design we were given has six paediatric cards and no PRP Vaginal Rejuvenation or Sexual
+  Wellness cards; if your PDF shows them on Child Care, that PDF is out of step with the export. We built the six.
+- Yoga & Wellness lead: "real bodies and real schedules not a studio ideal" reads as if a dash is missing after
+  "schedules"; kept as designed.
+
