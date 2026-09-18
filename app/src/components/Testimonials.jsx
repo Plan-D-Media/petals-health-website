@@ -7,7 +7,7 @@ import './Testimonials.css'
 // Round 3: a continuous right-to-left marquee (Marquee.jsx) — pause on hover/focus, manual scroll mode for keyboard and
 // reduced motion; every card reachable.
 
-function Story({ s }) {
+export function Story({ s }) {
   return (
     <article className="story" data-reveal>
       {s.placeholder && <span className="story__placeholder" title="Dummy testimonial until real patient stories are supplied">Placeholder</span>}

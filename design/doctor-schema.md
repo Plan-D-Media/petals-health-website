@@ -35,6 +35,14 @@ the second listing — modelled as one doctor with two clinics; and Dr. Sunil Ag
 12 pm. Days are not given in the mock, so every session is Mon–Sat until the sheet arrives.
 
 ## Field map (spreadsheet → data file)
-name, qualifications[], designation, specialty, specialtyId (derived), sessions[{clinicId, days[], from, to}],
-languages[], videoConsult, rating, reviewCount, bio, quote, treatmentTags[], education[{degree, institution, year}],
-photo, experienceYears, registrationNo.
+name, pronoun (she/he — drives "In her words" / "Where she practises" on the profile; unset → they), qualifications[],
+college (the "— BJ Medical College, Pune" part of the qualifications line), designation, specialty, specialtyId
+(derived; SPECIALTY_GROUPS in doctors.js maps ids to the Find a Doctor filter groups), sessions[{clinicId, days[],
+from, to}], languages[], videoConsult, rating, reviewCount, experienceYears, bio, quote, treatmentTags[] (the three
+hero pills and the search index), treats[{heading, tags[]}] (the profile's grouped TREATS lists; optional — the flat
+tags show when absent), education[{period, title, place}] (the profile's BACKGROUND rows: period "", "16+ yrs" or
+"Present"), photo (list/card cut-out), portrait (profile hero, optional), registrationNo.
+
+Added 2026-09-18 from the profile mock: pronoun, college, experienceYears, treats, education row shape, portrait.
+Spreadsheet columns to add: Pronoun (she/he), College, Experience (years), Treats (group heading: tag; tag | next
+group…), Education rows as "period | title | place".

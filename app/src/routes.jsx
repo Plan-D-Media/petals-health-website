@@ -12,6 +12,10 @@ import yoga from './content/treatments/yoga-wellness.js'
 import multi from './content/treatments/multispecialty-clinic.js'
 import About from './pages/About.jsx'
 import Clinics from './pages/Clinics.jsx'
+import FindDoctor from './pages/FindDoctor.jsx'
+import DoctorProfile from './pages/DoctorProfile.jsx'
+import NotFound from './pages/NotFound.jsx'
+import { byId } from './data/doctors.js'
 
 // Path-based routing without a router dependency: one static build, every path served index.html (SPA fallback on
 // the host), the page picked from location.pathname. Treatment pages are template + content file.
@@ -35,7 +39,11 @@ export function pageFor(pathname) {
   const path = pathname.replace(/\/+$/, '') || '/'
   const m = path.match(/^\/treatments\/([a-z0-9-]+)$/)
   if (m && TREATMENTS[m[1]]) { const { template: T, content } = TREATMENTS[m[1]]; return <T content={content} /> }
+  if (path === '/') return <App />
   if (path === '/about') return <About />
   if (path === '/clinics') return <Clinics />
-  return <App />
+  if (path === '/find-a-doctor') return <FindDoctor />
+  const doc = path.match(/^\/doctors\/([a-z0-9-]+)$/)
+  if (doc && byId(doc[1])) return <DoctorProfile doctor={byId(doc[1])} />
+  return <NotFound path={path} />
 }

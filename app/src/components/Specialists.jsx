@@ -26,7 +26,7 @@ export default function Specialists() {
       <Marquee className="specialists__marquee" label="Our doctors" items={DOCTORS} renderItem={(d) => <DoctorCard doctor={d} />} direction="right" speed={40} />
       <div className="inner">
         <div className="specialists__foot">
-          <a className="specialists__all btn-soft" href="#doctors">View all 50+ Doctor <Arrow /></a>
+          <a className="specialists__all btn-soft" href="/find-a-doctor">View all 50+ Doctor <Arrow /></a>
         </div>
       </div>
     </section>

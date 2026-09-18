@@ -104,3 +104,22 @@ line; "Multi Specality Clinic" in the Multispecialty headline; "Yoga & Welness" 
   the clinics' own Google Maps links if you have them and we will use those instead.
 - The map picture in the cards is the same stock crop three times, as in the design; real map thumbnails per clinic
   can replace it if you prefer.
+
+**14. Find a Doctor and the doctor profile (built from the eight placeholder listings — please confirm).**
+- Dr. Smita Gutgutia appears twice in the Find a Doctor design (Loudon Street and Tollygunge, the second with a man's
+  photograph, both "10 am – 4 pm"), while her profile page says Loudon Street Mon–Sat and Kankurgachi Sat,
+  11 am – 5 pm. We built her from the profile page (it is the only place that gives days). Please confirm her
+  clinics, days and hours, and tell us whose photograph the second listing carries.
+- Days are not given for any other doctor; every session is shown Mon–Sat until the doctor sheet arrives, so
+  "Available Today" is true for everyone six days a week. The sheet fixes this.
+- Dr. Sunil Agarwal "12 am – 2 pm" is shown as 12 pm – 2 pm. Dr. Madanki's name is written "Dr. Madanki . S" and her
+  specialty "Consultant Gynaecologist & IVF Specialists"; we show "Dr. Madanki S" and "Gynaecologist & IVF".
+- Profile spellings kept as designed: "Loudon Steet", "Post-Partom Recovery". The stat "IN PRACTICE / FROM 1012" is
+  ambiguous (from 2012? 1,012 reviews?) — we show "16+ years in practice" and "4.9 / 5 Google reviews" and leave the
+  "FROM" line out until you tell us what it means.
+- The profile's three patient reviews are the Home page placeholders; the six doctors without profile copy show
+  "copy pending" for approach, treatments, education and reviews. The doctor sheet (item 3) fills all of this.
+- The filter counts, "Available Today", sorting and pages are computed from the doctor list, so the design's fixed
+  numbers (Woman & Child 8, Family Medicine 25, six pages…) will be replaced by real ones automatically.
+- "Ask Doctor" (the band under the list, and the header's "Ask a Doctor") opens a short form (name, mobile, message)
+  that goes to the same inbox as the other forms. Say if it should go somewhere else.

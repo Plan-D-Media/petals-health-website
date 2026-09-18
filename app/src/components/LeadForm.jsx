@@ -13,6 +13,7 @@ export const FORM_PRESETS = {
   'request-callback': { title: 'Request a call back', fields: ['name', 'mobile', 'message'], submit: 'Request a Call Back', thanks: 'Thank you. We will call you back on this number, usually within an hour during clinic hours.' },
   'book-consultation': { title: 'Book a consultation', fields: ['name', 'mobile', 'email', 'doctor', 'date'], submit: 'Book Consultation', thanks: 'Thank you. Our team will confirm your consultation by phone or WhatsApp.' },
   'sxo-agent': { title: 'Tell us how we can help', fields: ['name', 'mobile', 'gender', 'age', 'doctor', 'date'], submit: 'Send', thanks: 'Thank you. A member of our team will be in touch shortly.' },
+  'ask-doctor': { title: 'Ask a doctor', fields: ['name', 'mobile', 'message'], submit: 'Ask Doctor', thanks: 'Thank you. A doctor from the right department will get back to you, usually within a working day.' },   // header "Ask a Doctor" and the Find a Doctor "Not sure who to pick?" band
   'book-consultation-page': { title: 'Book a Consultation', fields: ['name', 'mobile', 'email', 'department', 'message'], submit: 'Submit', thanks: 'Thank you. Our team will confirm your consultation by phone or WhatsApp.' },   // the treatment pages' on-page form (mock: Full Name, Email ID, Phone, Select Department, Message)
 }
 

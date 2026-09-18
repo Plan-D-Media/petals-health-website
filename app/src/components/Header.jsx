@@ -34,8 +34,8 @@ export const NAV = [
 const UTILITY = [
   { icon: 'phone', label: '9147405955', href: 'tel:9147405955' },
   { icon: 'calendar', label: 'Book an Appt', href: '#book', form: 'book-appointment' },
-  { icon: 'findDoctor', label: 'Find a Doctor', href: '#find' },
-  { icon: 'askDoctor', label: 'Ask a Doctor', href: '#ask' },
+  { icon: 'findDoctor', label: 'Find a Doctor', href: '/find-a-doctor' },
+  { icon: 'askDoctor', label: 'Ask a Doctor', href: '#ask', form: 'ask-doctor' },
 ]
 
 function useHeroScrolledOut() {
@@ -124,7 +124,7 @@ export default function Header({ current = 'home' } = {}) {
       <div className="mbar band">
         <a className="mbar__logo" href="/" aria-label="Petals Health — Your Family Clinic"><img src="/assets/2_09c94b70.png" alt="" width="46" height="59" /></a>
         <div className="mbar__util">
-          <a href="#find">Find a Doctor</a><a href="#ask">Ask a Doctor</a>
+          <a href="/find-a-doctor">Find a Doctor</a><a href="#ask" data-form="ask-doctor">Ask a Doctor</a>
           <a className="mbar__cta" href="#book" data-form="book-appointment">Book Appointment</a>
         </div>
         <div className="mbar__actions">
