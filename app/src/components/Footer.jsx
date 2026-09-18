@@ -6,6 +6,7 @@ import './Footer.css'
 // three columns on tablet, six on desktop; copyright band below with bottom padding that clears the mobile action bar.
 // Content: design/sections5-8-values.md §8.
 
+const FOOTER_HREFS = { 'Privacy Policy': '/privacy-policy.html', 'About Us': '/about', 'Our Story': '/about', 'Clinic Guide': '/clinics' }
 const COLUMNS = [
   { heading: 'Information', links: ['About Us', 'Our Story', 'Petal’s App & Community', 'Career', 'Vlogs', 'Contact Us'] },
   { heading: 'At Home Services', links: ['Upload Prescription'] },
@@ -34,7 +35,7 @@ export default function Footer() {
             <details key={c.heading} className="footer__col" open={wide || i === 0}>
               <summary className="footer__heading">{c.heading}</summary>
               <ul>
-                {c.links.map((l) => <li key={l}><a href={l === 'Privacy Policy' ? '/privacy-policy.html' : '#'}>{l}</a></li>)}
+                {c.links.map((l) => <li key={l}><a href={FOOTER_HREFS[l] || '#'}>{l}</a></li>)}
               </ul>
             </details>
           ))}

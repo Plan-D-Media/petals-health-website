@@ -12,7 +12,7 @@
 export const CLINICS = {
   'loudon-street': { id: 'loudon-street', name: 'Loudon Street (CMC)', short: 'Loudon Street', area: 'Central Kolkata' },
   'tollygunge':    { id: 'tollygunge',    name: 'Tollygunge',          short: 'Tollygunge',    area: 'South Kolkata' },
-  'kankurgachi':   { id: 'kankurgachi',   name: 'Kankurgachi',         short: 'Kankurgachi',   area: 'East Kolkata' },
+  'kankurgachi':   { id: 'kankurgachi',   name: 'Kankurgachi',         short: 'Kankurgachi',   area: 'North Kolkata' }   // the About/Clinics mocks label Kankurgachi North Kolkata,
 }
 
 const ALL_LANGUAGES = ['Bengali', 'Hindi', 'English']

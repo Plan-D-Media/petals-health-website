@@ -87,3 +87,20 @@ line; "Multi Specality Clinic" in the Multispecialty headline; "Yoga & Welness" 
 - Dentistry: "First Dental Visit & Check ups" ("Check-ups" elsewhere).
 - "Book your appoinment" on every treatment page, as already listed.
 
+
+**13. About Us and Clinic Location pages (kept as designed until you confirm).**
+- Spellings: "Our Approch" (Approach) on About Us; "Calcutta Medical Cantre" (Centre) and "Oppsite Pantaloons"
+  (Opposite) in the clinic cards on both pages; "there are infertility specialist you go to" (specialists);
+  "docuflencers" is kept in quotation marks as written.
+- The clinic FAQ answers only the first question ("Where is the clinic ?"), and that answer describes Tollygunge alone
+  although the page covers three clinics. Questions 2–5 (metro distance, visiting hours, booking, insurance) are
+  marked "copy pending"; please send the answers, ideally per clinic.
+- The "team at a glance" cards on About Us are unnamed placeholders with a stock illustration in the design. Please
+  send the three names, titles and photographs (portrait, at least 600 px wide).
+- "View job openings" and "Submit your resume" have no destination in the design. Tell us where they should go: a
+  careers page (we would need the openings list), an email address, or the call-back form.
+- The third clinic card on About Us has a blank first button in the design; the Clinic Location page shows
+  "Get Direction" there, so all three cards get it. The links open Google Maps searches for the three addresses; send
+  the clinics' own Google Maps links if you have them and we will use those instead.
+- The map picture in the cards is the same stock crop three times, as in the design; real map thumbnails per clinic
+  can replace it if you prefer.

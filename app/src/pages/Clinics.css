@@ -1,0 +1,23 @@
+/* Clinic Location page: the three photo tiles, edge to edge, each with a navy name pill anchored bottom-left/right. */
+.sites__grid { display: grid; gap: 4px; margin: 0; padding: 0; list-style: none; }
+.site { position: relative; }
+.site__link { position: relative; display: block; aspect-ratio: 16 / 10; overflow: hidden; }
+.site__link img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.site__pill {
+  position: absolute; left: 0; bottom: 24px; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; max-width: calc(100% - 24px);
+  padding: 14px 36px 14px 24px; border-radius: 0 var(--radius-pill) var(--radius-pill) 0; background: var(--blue-900); color: var(--white);
+}
+.site__pill-line { display: block; font-size: 18px; font-weight: 600; line-height: 1.15; white-space: nowrap; }
+.site__pill-line--small { font-size: 14px; font-weight: 400; }
+.site__link:hover img { transform: scale(1.02); }
+.site__link img { transition: transform var(--dur) var(--ease); }
+@media (min-width: 768px) {
+  .sites__grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+  .site__link { aspect-ratio: 455 / 395; }
+  .site:nth-child(2) .site__pill { left: 50%; transform: translateX(-50%); align-items: center; border-radius: var(--radius-pill); padding-inline: 32px; }
+  .site:nth-child(3) .site__pill { left: auto; right: 0; align-items: flex-end; border-radius: var(--radius-pill) 0 0 var(--radius-pill); padding: 14px 24px 14px 36px; }
+  .site__pill-line { font-size: 16px; }
+}
+@media (min-width: 1024px) { .site__pill-line { font-size: 20px; } .site__pill-line--small { font-size: 15px; } .site__pill { bottom: 28px; } }
+@media (min-width: 1366px) { .site__pill-line { font-size: 22px; } .site__pill-line--small { font-size: 16px; } }
+.sites + .clinics { padding-top: 40px; }

@@ -60,8 +60,9 @@
 .t-faq__item { border-radius: 14px 14px 0 0; overflow: hidden; }
 .t-faq__q { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 56px; padding: 12px 64px 12px 24px; list-style: none; cursor: pointer; background: var(--blue-900); color: var(--white); font-size: 18px; font-weight: 500; line-height: 1.2; border-radius: 14px 14px 0 0; }
 .t-faq__q::-webkit-details-marker { display: none; }
-.t-faq__q::after { content: ''; position: absolute; right: 24px; top: 50%; width: 26px; height: 5px; margin-top: -2.5px; background: var(--white); border-radius: 2px; }
-.t-faq__item[open] .t-faq__q::after { background: linear-gradient(var(--white), var(--white)) center/100% 5px no-repeat, linear-gradient(var(--white), var(--white)) center/5px 100% no-repeat; height: 26px; margin-top: -13px; }
+/* closed: plus; open: minus (the mock's convention) */
+.t-faq__q::after { content: ''; position: absolute; right: 24px; top: 50%; width: 26px; height: 26px; margin-top: -13px; background: linear-gradient(var(--white), var(--white)) center/100% 5px no-repeat, linear-gradient(var(--white), var(--white)) center/5px 100% no-repeat; border-radius: 2px; }
+.t-faq__item[open] .t-faq__q::after { background: var(--white); height: 5px; margin-top: -2.5px; }
 .t-faq__item:not([open]) .t-faq__q { border-radius: 14px 14px 0 0; }
 .t-faq__a { padding: 20px 24px 22px; background: linear-gradient(135deg, var(--card-blue-start) 0%, var(--card-blue-end) 100%); font-size: 18px; line-height: 1.3; color: var(--black); }
 .t-faq__a p { margin: 0; }

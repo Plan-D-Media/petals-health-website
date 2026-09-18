@@ -1,0 +1,61 @@
+/* About Us page. Text columns on white; the shared clinic cards; the team block on white with the mock's placeholder
+   role cards; the join line with two cream buttons. */
+.about-hero { height: clamp(200px, 40vw, 460px); overflow: hidden; }
+.about-hero img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; }
+
+.about { padding: 32px 0 8px; }
+.about__cols { display: grid; gap: 28px; }
+.about__h { margin: 0 0 12px; font-size: var(--fs-heading-sm); font-weight: 700; line-height: 1.1; color: var(--blue-900); }
+h1.about__h { font-size: var(--fs-heading-sm); }
+.about__p { margin: 0 0 14px; font-size: 16px; font-weight: 400; line-height: 1.4; color: var(--black); }
+.about__p:last-child { margin-bottom: 0; }
+.about__p--strong { font-weight: 700; }
+.about__pairs { margin: 0; padding: 0; list-style: none; }
+.about__pairs li { display: flex; flex-direction: column; gap: 2px; font-size: 16px; line-height: 1.35; color: var(--black); }
+.about__pairs li + li { margin-top: 16px; }
+.about__pairs strong { font-weight: 400; }
+@media (min-width: 768px) {
+  .about { padding: 40px 0 8px; }
+  .about__cols { grid-template-columns: 1fr 1fr; gap: 32px 48px; }
+  .about__cols--three { grid-template-columns: 1fr 1fr 1fr; gap: 32px; }
+}
+@media (min-width: 1024px) {
+  .about { padding: 48px 0 8px; }
+  .about__cols { gap: 40px 64px; }
+  .about__cols--three { grid-template-columns: 0.9fr 1.2fr 1fr; gap: 48px; }
+  .about__h { margin-bottom: 16px; }
+  .about__p { line-height: 20px; }
+}
+
+/* team */
+.team { padding: 40px 0 48px; }
+.team__intro { max-width: 760px; margin-inline: auto; }
+.team__sub { margin: 24px 0 0; font-size: var(--fs-display-md); font-weight: var(--fw-display-md); line-height: 1.05; color: var(--blue-900); }
+.team__carousel-wrap { margin-top: 24px; }
+.team__carousel .carousel__slide { width: min(254px, calc(100% - 40px)); }
+.team-card { display: flex; flex-direction: column; overflow: hidden; border-radius: var(--radius-card); box-shadow: var(--shadow-card-rest), var(--ring-card); }
+.team-card__photo { position: relative; aspect-ratio: 254 / 335; overflow: hidden; background: var(--card-blue-start); }
+.team-card__photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 100%; }
+.team-card__placeholder { position: absolute; left: 12px; top: 12px; height: 24px; padding: 0 10px; border-radius: var(--radius-pill); background: rgba(255, 255, 255, 0.92); color: var(--grey-600); font-size: var(--fs-caption); line-height: 24px; }
+.team-card__role { margin: 0; min-height: 92px; display: flex; align-items: center; justify-content: center; padding: 16px; background: var(--blue-900); color: var(--white); text-align: center; font-size: 20px; font-weight: 600; line-height: 1.15; }
+.team__join { margin-top: 32px; text-align: center; }
+.team__join-title { margin: 0; font-size: var(--fs-display-md); font-weight: var(--fw-display-md); line-height: 1.05; color: var(--blue-900); }
+.team__join-accent { color: var(--accent); }
+.team__actions { display: flex; flex-direction: column; align-items: center; gap: 12px; margin-top: 24px; }
+.team__btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 50px; width: min(100%, 252px); padding: 0 24px; border-radius: 10px;
+  background: linear-gradient(180deg, var(--button-cream-top) 0%, var(--card-blue-start) 100%); color: var(--black); font-size: 18px; font-weight: 400; line-height: 1; white-space: nowrap; box-shadow: var(--shadow-secondary);
+}
+.team__btn:hover { color: var(--blue-900); transform: translateY(-1px); box-shadow: var(--shadow-button); }
+@media (min-width: 768px) {
+  .team__carousel .carousel__slide { width: 254px; }
+  .team__carousel .carousel__track { justify-content: center; }
+  .team__actions { flex-direction: row; justify-content: center; gap: 20px; }
+}
+@media (min-width: 1024px) {
+  .team { padding: 56px 0 64px; }
+  .team__sub { margin-top: 32px; }
+  .team__carousel-wrap { margin-top: 32px; }
+  .team__join { margin-top: 40px; }
+  .team__actions { margin-top: 32px; }
+}

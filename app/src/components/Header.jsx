@@ -23,8 +23,8 @@ const TREATMENTS = [   // nine items, in the mock's order (spellings corrected: 
 
 export const NAV = [
   { id: 'home', label: 'Home', href: '/' },
-  { id: 'about', label: 'About us', href: '#' },
-  { id: 'clinics', label: 'Clinics', href: '#', chevron: true },
+  { id: 'about', label: 'About us', href: '/about' },
+  { id: 'clinics', label: 'Clinics', href: '/clinics', chevron: true },
   { id: 'treatments', label: 'Treatments', items: TREATMENTS },
   { id: 'diagnostics', label: 'Diagnostic Services', href: '#' },
   { id: 'patients', label: 'For Patients', href: '#', chevron: true },
@@ -41,7 +41,7 @@ const UTILITY = [
 function useHeroScrolledOut() {
   const [out, setOut] = useState(false)
   useEffect(() => {
-    const hero = document.querySelector('.hero, .t-hero'); if (!hero || !('IntersectionObserver' in window)) return undefined
+    const hero = document.querySelector('.hero, .t-hero, [data-hero]'); if (!hero || !('IntersectionObserver' in window)) return undefined
     const io = new IntersectionObserver(([e]) => setOut(!e.isIntersecting), { threshold: 0 })
     io.observe(hero); return () => io.disconnect()
   }, [])
