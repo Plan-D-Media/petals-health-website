@@ -3,6 +3,8 @@ import TreatmentA from './templates/TreatmentA.jsx'
 import TreatmentB from './templates/TreatmentB.jsx'
 import womens from './content/treatments/womens-care.js'
 import dentistry from './content/treatments/dentistry.js'
+import cosmetic from './content/treatments/cosmetic-gynaecology-aesthetics.js'
+import ivf from './content/treatments/petals-ivf.js'
 import childCare from './content/treatments/child-care.js'
 import pain from './content/treatments/pain-management-rejuvenation.js'
 import audiology from './content/treatments/audiology.js'
@@ -19,6 +21,9 @@ export const TREATMENTS = {
   'multispecialty-clinic': { template: TreatmentA, content: multi },
   'womens-care': { template: TreatmentB, content: womens },
   'dentistry': { template: TreatmentB, content: dentistry },
+  'cosmetic-gynaecology-aesthetics': { template: TreatmentB, content: cosmetic },
+  'fertility-care': { template: TreatmentB, content: ivf },   // the nav's Fertility Care item → the Petals IVF page
+  'petals-ivf': { template: TreatmentB, content: ivf },
 }
 
 export function pageFor(pathname) {

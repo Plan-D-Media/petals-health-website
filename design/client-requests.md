@@ -70,3 +70,20 @@ line; "Multi Specality Clinic" in the Multispecialty headline; "Yoga & Welness" 
 - Yoga & Wellness lead: "real bodies and real schedules not a studio ideal" reads as if a dash is missing after
   "schedules"; kept as designed.
 
+**12. Women's Care, Dentistry, Cosmetic Gynaecology and Petals IVF (spellings and gaps, kept as designed).**
+- The FAQ sections show only the first answer in the design; the remaining questions (four on Women's Care, four on
+  Dentistry, five on Petals IVF) have no answers anywhere in the file. They are on the pages marked "copy pending";
+  please send the answers.
+- Cosmetic Gynaecology: the first group under "Skin, hair & contouring care" is headed "When non-surgical isn't the
+  right fit", which is the divider line from earlier on the page pasted again; the group holds PRP, GFC, Botox and
+  thread-lift treatments and needs its own heading (its neighbours are "Resurfacing & Texture", "Tone & Pigmentation",
+  "Corrective & Removal"). Marked pending on the page.
+- Cosmetic Gynaecology: the four-card row PRP Vaginal Rejuvenation / Sexual Wellness / HIFEM / Microneedling exists
+  twice in the design file at the same position (one copy hidden under the other). We show it once, as the design
+  displays it. "EMS FR Core Tightening)" has a stray bracket; "center" is the US spelling.
+- Petals IVF: "Intraurine Insemination" should read "Intrauterine"; "Why Choose Petals Ivf ?" should read "IVF";
+  the page mixes "fertilization / specialized / personalized" with "personalised / fertilisation". The journey steps
+  are shown as four outlined rings (the design fills step 2), per the decision already recorded for the Home page.
+- Dentistry: "First Dental Visit & Check ups" ("Check-ups" elsewhere).
+- "Book your appoinment" on every treatment page, as already listed.
+
