@@ -146,6 +146,8 @@ export const sessionLabel = (s) => `${CLINICS[s.clinicId].short} · ${timeRange(
 export const clinicsOf = (d) => [...new Set(d.sessions.map((s) => s.clinicId))].map((id) => CLINICS[id])
 export const specialtyGroupOf = (d) => SPECIALTY_GROUPS.find((g) => g.members.includes(d.specialtyId))?.id || d.specialtyId
 export const byId = (id) => DOCTORS.find((d) => d.id === id)
+/** the 340 px-tall variant tools/images.py writes next to every doctor photo (cards, list rows) */
+export const photoSmall = (d) => (d.photo ? d.photo.replace(/\.(png|jpe?g)$/i, '-sm.$1') : null)
 
 const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 export const todayName = (date = new Date()) => DAYS[date.getDay()]

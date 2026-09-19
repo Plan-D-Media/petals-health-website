@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import { track } from '../analytics.js'
-import LeadForm from './LeadForm.jsx'
-import { flushQueue } from '../forms/submit.js'
+const LeadForm = lazy(() => import('./LeadForm.jsx'))   // the form code (validation, submit, doctor list) loads on first open, not with every page
 import './FormDialog.css'
 
 // One modal for every lead form on the page. Any element with data-form="<preset>" (and optional data-doctor,
@@ -13,7 +12,7 @@ export default function FormDialog() {
   const [req, setReq] = useState(null)   // { form, doctor, section, key }
   const returnFocus = useRef(null)
 
-  useEffect(() => { flushQueue().then((n) => { if (n) console.info(`[petals forms] re-sent ${n} queued submission(s)`) }) }, [])
+  useEffect(() => { const t = setTimeout(() => import('../forms/submit.js').then((m) => m.flushQueue()).then((n) => { if (n) console.info(`[petals forms] re-sent ${n} queued submission(s)`) }), 3000); return () => clearTimeout(t) }, [])   // retry queued submissions after the page has settled; loads the submit module only then
 
   useEffect(() => {
     const onClick = (e) => {
@@ -40,7 +39,7 @@ export default function FormDialog() {
       {req && (
         <div className="fdialog__panel">
           <button type="button" className="fdialog__close" onClick={close} aria-label="Close">×</button>
-          <LeadForm key={req.key} form={req.form} source={{ doctor: req.doctor, section: req.section }} />
+          <Suspense fallback={<p className="fdialog__loading">Loading…</p>}><LeadForm key={req.key} form={req.form} source={{ doctor: req.doctor, section: req.section }} /></Suspense>
         </div>
       )}
     </dialog>

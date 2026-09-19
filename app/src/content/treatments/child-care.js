@@ -7,7 +7,7 @@ export default {
     headline: ['Care that grows', 'with your child'],    // line 1 navy, line 2 accent (as the Home hero was)
     lead: 'From newborn checks to school-age concerns, our pediatric team gives you a steady point of contact through every stage.',
     cta: { label: 'Book your appoinment', form: 'book-appointment' },   // sic: the mock's spelling; flagged in the client note
-    photo: { src: '/assets/treatments/child-care-hero.png', mask: '/assets/treatments/child-care-hero-mask.png', alt: 'A mother holding her sleeping newborn' },
+    photo: { src: '/assets/treatments/child-care-hero.png', alt: 'A mother holding her sleeping newborn' },
   },
   intro: "Children's health moves fast,  a growth spurt, a new vaccine due, a fever that won't settle. Our pediatricians work alongside your family medicine and gynaecology team so your child's records, history, and care plan stay in one place.",
   services: [

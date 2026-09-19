@@ -7,6 +7,8 @@ import LeadForm from '../components/LeadForm.jsx'
 import { DOCTORS } from '../data/doctors.js'
 import './TreatmentA.css'   /* the shared treatment stylesheet: hero, intro, service cards, team */
 import './TreatmentB.css'
+import Img from '../components/Img.jsx'
+import { linkOr } from '../components/pending.js'
 
 // Template B — "grouped grids + FAQ + on-page form" (Women's Care, Dentistry, Cosmetic Gynaecology) and its IVF variant.
 // Every block is optional and comes from the content file, rendered in this fixed order:
@@ -30,7 +32,7 @@ function Cards({ cards, g, offset = 0 }) {
           {g.labelled && s.label && <span className="t-service__num">{s.label}</span>}
           <h3 className="t-service__title">{s.title}{s.titlePending && <Pending />}</h3>
           <p className="t-service__text">{s.text}</p>
-          {g.link && <a className={'t-service__link' + (g.link.accent ? ' t-service__link--accent' : '')} href="#" data-inline-link>{g.link.label} <span aria-hidden="true">→</span></a>}
+          {g.link && <a {...linkOr(g.link.href, { className: 't-service__link' + (g.link.accent ? ' t-service__link--accent' : '') })}>{g.link.label} <span aria-hidden="true">→</span></a>}
         </li>
       ))}
     </ol>
@@ -48,7 +50,7 @@ export default function TreatmentB({ content: c }) {
         <section className="t-hero band" aria-labelledby="t-hero-title">
           <div className="inner t-hero__inner">
             <div className="t-hero__photo" data-overlap-ok>
-              <img src={h.photo.src} alt={h.photo.alt} decoding="async" fetchPriority="high" style={{ '--mask': h.photo.mask ? `url(${h.photo.mask})` : 'none', '--pos': h.photo.position || '50% 30%' }} />
+              <Img src={h.photo.src} alt={h.photo.alt} priority style={{ '--pos': h.photo.position || '50% 30%' }} />
             </div>
             <div className="t-hero__copy">
               <p className="t-hero__crumb"><a href="/">Home</a> <span aria-hidden="true">›</span> Treatments <span aria-hidden="true">›</span> {c.title}</p>
@@ -76,7 +78,7 @@ export default function TreatmentB({ content: c }) {
                 <h2 id="t-explained-title" className="t-explained__title">{c.explained.heading[0]}<br />{c.explained.heading[1]}</h2>
                 {c.explained.paragraphs.map((p) => <p key={p} className="t-explained__p">{p}</p>)}
               </div>
-              <div className="t-explained__art"><img src={c.explained.illustration.src} alt={c.explained.illustration.alt} loading="lazy" decoding="async" style={{ '--mask': c.explained.illustration.mask ? `url(${c.explained.illustration.mask})` : 'none' }} /></div>
+              <div className="t-explained__art"><Img src={c.explained.illustration.src} alt={c.explained.illustration.alt} /></div>
             </div>
           </section>
         )}
@@ -111,7 +113,7 @@ export default function TreatmentB({ content: c }) {
               <ol className="t-icons__grid">
                 {c.iconGrid.tiles.map((t, i) => (
                   <li key={t.title[0]} className={'t-tile' + (t.highlight ? ' t-tile--highlight' : '')} data-reveal data-reveal-order={i % 3}>
-                    <img className="t-tile__icon" src={t.icon} alt="" loading="lazy" decoding="async" />
+                    <Img className="t-tile__icon" src={t.icon} alt="" />
                     <h3 className="t-tile__title">{t.title.map((l, k) => <span key={k}>{l}{k < t.title.length - 1 && <br />}</span>)}</h3>
                     <p className="t-tile__text">{t.text}</p>
                   </li>
@@ -130,9 +132,9 @@ export default function TreatmentB({ content: c }) {
                 <div>
                   <h3 id="t-featured-title" className="t-featured__title">{c.featured.heading}</h3>
                   {c.featured.paragraphs.map((p, i) => typeof p === 'string' ? <p key={i} className="t-featured__p">{p}</p> : <p key={i} className="t-featured__p">{p.text}<strong>{p.strong}</strong>{p.after}</p>)}
-                  <a className="t-featured__cta" href={c.featured.cta.href} data-inline-link>{c.featured.cta.label}</a>
+                  <a {...linkOr(c.featured.cta.href, { className: 't-featured__cta' })}>{c.featured.cta.label}</a>
                 </div>
-                <img className="t-featured__art" src={c.featured.illustration.src} alt={c.featured.illustration.alt} loading="lazy" decoding="async" />
+                <Img className="t-featured__art" src={c.featured.illustration.src} alt={c.featured.illustration.alt} />
               </div>
             </div>
           </section>
@@ -171,10 +173,10 @@ export default function TreatmentB({ content: c }) {
             <div className="inner"><h2 id="t-risks-title" className="t-risks__title">{c.risks.title}</h2></div>
             <div className="t-risks__band t-risks__band--navy band"><div className="inner t-risks__inner">
               <div className="t-risks__copy"><h3 className="t-risks__heading">{c.risks.risks.heading}</h3><ul className="t-risks__list">{c.risks.risks.bullets.map((b) => <li key={b}>{b}</li>)}</ul></div>
-              <img className="t-risks__photo" src={c.risks.risks.photo.src} alt={c.risks.risks.photo.alt} loading="lazy" decoding="async" />
+              <Img className="t-risks__photo" src={c.risks.risks.photo.src} alt={c.risks.risks.photo.alt} />
             </div></div>
             <div className="t-risks__band t-risks__band--light band"><div className="inner t-risks__inner t-risks__inner--photo-first">
-              <img className="t-risks__photo" src={c.risks.safety.photo.src} alt={c.risks.safety.photo.alt} loading="lazy" decoding="async" />
+              <Img className="t-risks__photo" src={c.risks.safety.photo.src} alt={c.risks.safety.photo.alt} />
               <div className="t-risks__copy"><h3 className="t-risks__heading">{c.risks.safety.heading}</h3><ul className="t-risks__list">{c.risks.safety.bullets.map((b) => <li key={b}>{b}</li>)}</ul></div>
             </div></div>
           </section>

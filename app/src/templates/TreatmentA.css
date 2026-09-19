@@ -6,8 +6,7 @@
 .t-hero { padding: 24px 0 0; background: radial-gradient(581px circle at 37.5% 37.5%, var(--hero-bg-inner) 0%, var(--hero-bg-outer) 100%); }
 .t-hero__inner { display: grid; gap: 20px; }
 .t-hero__photo { position: relative; aspect-ratio: 1024.5 / 719.7; overflow: hidden; }
-.t-hero__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, 35% 20%); display: block;
-  -webkit-mask-image: var(--mask); mask-image: var(--mask); -webkit-mask-mode: luminance; mask-mode: luminance; -webkit-mask-size: cover; mask-size: cover; -webkit-mask-position: var(--pos, 35% 20%); mask-position: var(--pos, 35% 20%); }
+.t-hero__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: var(--pos, 35% 20%); display: block; }
 .t-hero__tagline { margin: 0 0 8px; font-size: var(--fs-heading-sm); font-weight: 400; line-height: 1.15; color: var(--blue-900); }
 .t-hero__subline { margin: 10px 0 0; font-size: var(--fs-body); font-weight: 400; line-height: 1.3; color: var(--black); }
 .t-hero__crumb { margin: 0 0 12px; font-size: var(--fs-caption); color: var(--grey-600); }

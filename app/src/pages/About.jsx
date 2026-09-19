@@ -4,6 +4,8 @@ import FormDialog from '../components/FormDialog.jsx'
 import ClinicCards from '../components/ClinicCards.jsx'
 import Carousel from '../components/Carousel.jsx'
 import './About.css'
+import Img from '../components/Img.jsx'
+import { linkOr } from '../components/pending.js'
 
 // About Us (design/svg/4.svg). Sections in the mock's order: reception photo band · About Petals | Our Story ·
 // The problem | The idea · Our Approch | What we offer | The journey so far · Find us (shared clinic cards) ·
@@ -68,7 +70,7 @@ const Para = ({ p }) => typeof p === 'string' ? <p className="about__p">{p}</p> 
 function TeamCard({ m }) {
   return (
     <article className="team-card" aria-label={m.role}>
-      <div className="team-card__photo"><img src="/assets/about/team-card.jpg" alt="" loading="lazy" decoding="async" /><span className="team-card__placeholder" title="Name and photograph are with the client">Placeholder</span></div>
+      <div className="team-card__photo"><Img src="/assets/about/team-card.jpg" alt="" /><span className="team-card__placeholder" title="Name and photograph are with the client">Placeholder</span></div>
       <h4 className="team-card__role">{m.role}</h4>
     </article>
   )
@@ -80,7 +82,7 @@ export default function About() {
       <Header current="about" />
       <main>
         <div className="about-hero band" data-hero>
-          <img src="/assets/about/reception.jpg" alt="The reception desk at a Petals Health clinic" decoding="async" fetchPriority="high" />
+          <Img src="/assets/about/reception.jpg" alt="The reception desk at a Petals Health clinic" priority />
         </div>
 
         <section className="about band" aria-labelledby="about-title">
@@ -138,8 +140,8 @@ export default function About() {
           <div className="inner team__join">
             <h3 className="team__join-title">Want to join <span className="team__join-accent">our Team?</span></h3>
             <div className="team__actions">
-              <a className="team__btn" href="#" data-inline-link>View job openings <span aria-hidden="true">→</span></a>
-              <a className="team__btn" href="#" data-inline-link>Submit your resume <span aria-hidden="true">→</span></a>
+              <a {...linkOr(null, { className: 'team__btn' })}>View job openings <span aria-hidden="true">→</span></a>
+              <a {...linkOr(null, { className: 'team__btn' })}>Submit your resume <span aria-hidden="true">→</span></a>
             </div>
           </div>
         </section>

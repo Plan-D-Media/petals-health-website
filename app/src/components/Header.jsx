@@ -2,6 +2,8 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import Icon from './Icon.jsx'
 import NavMenu from './NavMenu.jsx'
 import './Header.css'
+import Img from './Img.jsx'
+import { PENDING_TITLE } from './pending.js'
 
 // Header, flow rewrite 2026-09-17.
 //   ≥1024: the desktop bars (utility row + sticky nav row, flex on the content container; design/hero-values.md sizes ×1.2).
@@ -26,9 +28,9 @@ export const NAV = [
   { id: 'about', label: 'About us', href: '/about' },
   { id: 'clinics', label: 'Clinics', href: '/clinics', chevron: true },
   { id: 'treatments', label: 'Treatments', items: TREATMENTS },
-  { id: 'diagnostics', label: 'Diagnostic Services', href: '#' },
-  { id: 'patients', label: 'For Patients', href: '#', chevron: true },
-  { id: 'bangladesh', label: 'Petals Clinic in Bangladesh', href: '#' },
+  { id: 'diagnostics', label: 'Diagnostic Services', href: null },   // no page yet (design/no-mock-pages.md)
+  { id: 'patients', label: 'For Patients', href: null, chevron: true },
+  { id: 'bangladesh', label: 'Petals Clinic in Bangladesh', href: null },
 ]
 
 const UTILITY = [
@@ -90,7 +92,7 @@ function Drawer({ open, onClose, current }) {
                   </ul>
                 </>
               ) : (
-                <a href={n.href} aria-current={n.id === current ? 'page' : undefined}>{n.label}</a>
+                <a href={n.href || undefined} className={n.href ? undefined : 'is-pending'} aria-disabled={n.href ? undefined : 'true'} title={n.href ? undefined : PENDING_TITLE} aria-current={n.id === current ? 'page' : undefined}>{n.label}</a>
               )}
             </li>
           ))}
@@ -122,7 +124,7 @@ export default function Header({ current = 'home' } = {}) {
     <header className="site-header">
       {/* ---- compact bar (<1024) ---- */}
       <div className="mbar band">
-        <a className="mbar__logo" href="/" aria-label="Petals Health — Your Family Clinic"><img src="/assets/2_09c94b70.png" alt="" width="46" height="59" /></a>
+        <a className="mbar__logo" href="/" aria-label="Petals Health — Your Family Clinic"><Img src="/assets/2_09c94b70.png" alt="" width="46" height="59" priority /></a>
         <div className="mbar__util">
           <a href="/find-a-doctor">Find a Doctor</a><a href="#ask" data-form="ask-doctor">Ask a Doctor</a>
           <a className="mbar__cta" href="#book" data-form="book-appointment">Book Appointment</a>
@@ -137,7 +139,7 @@ export default function Header({ current = 'home' } = {}) {
       {/* ---- desktop bars (≥1024) ---- */}
       <div className="utility band"><div className="inner utility__inner">
         <a className="utility__logo" href="/" aria-label="Petals Health — Your Family Clinic">
-          <img src="/assets/2_09c94b70.png" alt="" width="65" height="83" />
+          <Img src="/assets/2_09c94b70.png" alt="" width="65" height="83" priority />
         </a>
         <div className="utility__links">
           {UTILITY.map((u, i) => [
@@ -158,7 +160,7 @@ export default function Header({ current = 'home' } = {}) {
             n.items ? (
               <NavMenu key={n.id} id={n.id} label={n.label} items={n.items} open={openId === n.id} activeHref={`/treatments/${current}`} onOpen={setOpenId} onClose={close} onArrow={onArrow} triggerRef={(el) => { tops.current[n.id] = el }} />
             ) : (
-              <a key={n.id} ref={(el) => { tops.current[n.id] = el }} className={'nav__item' + (n.id === current ? ' nav__item--active' : '')} href={n.href} aria-current={n.id === current ? 'page' : undefined} onKeyDown={onTopKey(n.id)}>
+              <a key={n.id} ref={(el) => { tops.current[n.id] = el }} className={'nav__item' + (n.id === current ? ' nav__item--active' : '') + (n.href ? '' : ' is-pending')} href={n.href || undefined} aria-disabled={n.href ? undefined : 'true'} title={n.href ? undefined : PENDING_TITLE} tabIndex={n.href ? undefined : -1} aria-current={n.id === current ? 'page' : undefined} onKeyDown={onTopKey(n.id)}>
                 {n.label}
                 {n.chevron && <Icon name="chevron" className="nav__chevron" />}
               </a>

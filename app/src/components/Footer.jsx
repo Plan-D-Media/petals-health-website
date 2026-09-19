@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import Icon from './Icon.jsx'
 import './Footer.css'
+import { linkOr } from './pending.js'
 
 // Shared site footer. Flow rewrite 2026-09-17: about text + six link groups — accordions on mobile (Information open),
 // three columns on tablet, six on desktop; copyright band below with bottom padding that clears the mobile action bar.
@@ -35,7 +36,7 @@ export default function Footer() {
             <details key={c.heading} className="footer__col" open={wide || i === 0}>
               <summary className="footer__heading">{c.heading}</summary>
               <ul>
-                {c.links.map((l) => <li key={l}><a href={FOOTER_HREFS[l] || '#'}>{l}</a></li>)}
+                {c.links.map((l) => <li key={l}><a {...linkOr(FOOTER_HREFS[l])}>{l}</a></li>)}
               </ul>
             </details>
           ))}

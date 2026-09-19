@@ -5,6 +5,7 @@ import DoctorCard from '../components/DoctorCard.jsx'
 import Marquee from '../components/Marquee.jsx'
 import { DOCTORS } from '../data/doctors.js'
 import './TreatmentA.css'
+import Img from '../components/Img.jsx'
 
 // Template A — "grid + CTA" treatment page (Child Care, Pain Management, Audiology, Yoga & Wellness, Multispecialty).
 // Blocks, top to bottom: hero (masked photo | tagline?, headline, lead, CTA) · intro paragraph (optional) · feature
@@ -39,7 +40,7 @@ export default function TreatmentA({ content: c }) {
         <section className={'t-hero band' + (h.photoSide === 'right' ? ' t-hero--photo-right' : '')} aria-labelledby="t-hero-title">
           <div className="inner t-hero__inner">
             <div className="t-hero__photo" data-overlap-ok>
-              <img src={h.photo.src} alt={h.photo.alt} decoding="async" fetchPriority="high" style={{ '--mask': h.photo.mask ? `url(${h.photo.mask})` : 'none', '--pos': h.photo.position || '50% 30%' }} />
+              <Img src={h.photo.src} alt={h.photo.alt} priority style={{ '--pos': h.photo.position || '50% 30%' }} />
             </div>
             <div className="t-hero__copy">
               <p className="t-hero__crumb"><a href="/">Home</a> <span aria-hidden="true">›</span> Treatments <span aria-hidden="true">›</span> {c.title}</p>
@@ -60,7 +61,7 @@ export default function TreatmentA({ content: c }) {
           <section className="t-feature band" aria-labelledby="t-feature-title">
             <div className="inner t-feature__inner">
               <div className="t-feature__photos">
-                {c.feature.photos.map((p) => <img key={p.src} src={p.src} alt={p.alt} loading="lazy" decoding="async" />)}
+                {c.feature.photos.map((p) => <Img key={p.src} src={p.src} alt={p.alt} />)}
               </div>
               <div className="t-feature__copy">
                 <h2 id="t-feature-title" className="t-feature__title">{c.feature.heading}</h2>

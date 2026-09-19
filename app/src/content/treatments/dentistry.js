@@ -12,7 +12,7 @@ export default {
     subline: 'for the whole family, in one visit.',
     lead: 'From routine check-ups to smile makeovers, our dental team keeps things straightforward — clear treatment plans, no surprises.',
     cta: { label: 'Book your appoinment', form: 'book-appointment' },
-    photo: { src: '/assets/treatments/dentistry-hero.png', mask: '/assets/treatments/dentistry-hero-mask.png', alt: 'A young man laughing', position: '45% 25%' },
+    photo: { src: '/assets/treatments/dentistry-hero.png', alt: 'A young man laughing', position: '45% 25%' },
   },
   intro: "Dentistry at Petals Health is organised into three tracks. General dentistry covers the routine and the restorative. Cosmetic dentistry is for when you're ready to fix something you've been putting off. And pediatric dentistry is built specifically for children, from their first visit through their teenage years.",
   groups: [

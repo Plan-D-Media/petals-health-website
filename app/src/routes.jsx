@@ -1,26 +1,25 @@
-import App from './App.jsx'
-import TreatmentA from './templates/TreatmentA.jsx'
-import TreatmentB from './templates/TreatmentB.jsx'
-import { TREATMENT_PAGES } from './content/treatments/index.js'
-import About from './pages/About.jsx'
-import Clinics from './pages/Clinics.jsx'
-import FindDoctor from './pages/FindDoctor.jsx'
-import DoctorProfile from './pages/DoctorProfile.jsx'
-import NotFound from './pages/NotFound.jsx'
+import { lazy } from 'react'
+import { TREATMENT_LIST } from './content/treatments/list.js'
 import { byId } from './data/doctors.js'
 
-// Path-based routing without a router dependency: one static build, every path served index.html (SPA fallback on
-// the host), the page picked from location.pathname. Treatment pages are template + content file.
-const TEMPLATES = { A: TreatmentA, B: TreatmentB }
-export const TREATMENTS = Object.fromEntries(Object.entries(TREATMENT_PAGES).map(([slug, p]) => [slug, { template: TEMPLATES[p.template], content: p.content }]))
+// Path-based routing without a router dependency: one static build; the per-route HTML files (tools/postbuild.mjs)
+// carry each page's title, meta and preloads, and a host with SPA rewrites serves index.html for anything else.
+// Every page is a lazy chunk so a visitor downloads only the route they landed on (2026-09-19 page-weight pass).
+const App = lazy(() => import('./App.jsx'))
+const About = lazy(() => import('./pages/About.jsx'))
+const Clinics = lazy(() => import('./pages/Clinics.jsx'))
+const FindDoctor = lazy(() => import('./pages/FindDoctor.jsx'))
+const DoctorProfile = lazy(() => import('./pages/DoctorProfile.jsx'))
+const Treatment = lazy(() => import('./pages/Treatment.jsx'))
+const NotFound = lazy(() => import('./pages/NotFound.jsx'))
 
 export function pageFor(pathname) {
-  // static hosts without SPA rewrites serve public/<path>/index.html, which redirects to /?__p=<path>; honour it
+  // older links of the form /?__p=<path> (the pre-2026-09-19 static stubs): honour them once
   const forced = new URLSearchParams(window.location.search).get('__p')
-  if (forced && forced !== pathname) { window.history.replaceState(null, '', forced); pathname = forced }
+  if (forced && forced !== pathname) { window.history.replaceState(null, '', forced + window.location.hash); pathname = forced }
   const path = pathname.replace(/\/+$/, '') || '/'
   const m = path.match(/^\/treatments\/([a-z0-9-]+)$/)
-  if (m && TREATMENTS[m[1]]) { const { template: T, content } = TREATMENTS[m[1]]; return <T content={content} /> }
+  if (m && TREATMENT_LIST[m[1]]) return <Treatment slug={m[1]} />
   if (path === '/') return <App />
   if (path === '/about') return <About />
   if (path === '/clinics') return <Clinics />

@@ -15,7 +15,7 @@ export default {
     lead: 'Every fertility journey is personal, and so is the support it deserves.',
     leadLarge: true,
     cta: { label: 'Book your appoinment', form: 'book-appointment' },
-    photo: { src: '/assets/treatments/ivf-hero.png', mask: '/assets/treatments/ivf-hero-mask.png', alt: 'A couple lifting their baby', position: '45% 30%' },
+    photo: { src: '/assets/treatments/ivf-hero.png', alt: 'A couple lifting their baby', position: '45% 30%' },
   },
   explained: {
     heading: ['Fertility, Explained', 'with Honesty'],
@@ -24,7 +24,7 @@ export default {
       'We take the time to understand your concerns, explain your options in simple language, and recommend a treatment plan based on your individual needs—not assumptions.',
       'Our goal is to help you feel informed, respected, and confident about every decision you make.',
     ],
-    illustration: { src: '/assets/treatments/ivf-egg.png', mask: '/assets/treatments/ivf-egg-mask.png', alt: 'Illustration of an egg surrounded by sperm cells' },
+    illustration: { src: '/assets/treatments/ivf-egg.png', alt: 'Illustration of an egg surrounded by sperm cells' },
   },
   iconGrid: {
     ruleHeading: 'Our Fertility Services',

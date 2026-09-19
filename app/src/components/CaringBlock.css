@@ -5,8 +5,6 @@
 .caring__photo { position: relative; width: min(100%, 420px); aspect-ratio: 497.7 / 678.7; margin: 0 auto; overflow: hidden; }
 .caring__photo img {
   position: absolute; left: -11.3%; top: -5.3%; width: 123.5%; max-width: none; height: 110.4%; display: block;
-  -webkit-mask-image: url('/assets/2_6a954d96.png'); mask-image: url('/assets/2_6a954d96.png');
-  -webkit-mask-mode: luminance; mask-mode: luminance; -webkit-mask-size: 100% 100%; mask-size: 100% 100%;
 }
 .caring__title { margin: 0; font-size: var(--fs-display-md); font-weight: var(--fw-display-md); line-height: 1.05; font-variation-settings: var(--opsz-display); }
 .caring__line { display: block; }

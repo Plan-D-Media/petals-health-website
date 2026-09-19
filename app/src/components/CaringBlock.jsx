@@ -1,4 +1,5 @@
 import './CaringBlock.css'
+import Img from './Img.jsx'
 
 // Round 3, item 6 — replaces the Family Health Card panel: the original hero photo (the mother-and-baby cut-out with its
 // luminance mask, design/hero-values.md) beside the original hero headline and paragraph.
@@ -9,7 +10,7 @@ export default function CaringBlock() {
     <section className="caring band" aria-labelledby="caring-title">
       <div className="inner caring__inner">
         <div className="caring__photo" data-overlap-ok>
-          <img src="/assets/2_04c0f486.png" alt="A mother holding her smiling baby" decoding="async" />
+          <Img src="/assets/2_04c0f486.png" alt="A mother holding her smiling baby" />
         </div>
         <div className="caring__copy">
           <h2 id="caring-title" className="caring__title">

@@ -11,7 +11,7 @@ export default {
     headline: ['Care that grows with her', 'from first visit to first steps'],
     lead: 'From adolescence to motherhood and beyond, we provide seamless care in gynaecology, pregnancy, high-risk pregnancy, fertility, cosmetic gynaecology, aesthetics, and wellness—so your doctor, your records, and your care journey stay connected every step of the way.',
     cta: { label: 'Book your appoinment', form: 'book-appointment' },
-    photo: { src: '/assets/treatments/womens-care-hero.png', mask: '/assets/treatments/womens-care-hero-mask.png', alt: 'Four women of different ages standing together', position: '40% 30%' },
+    photo: { src: '/assets/treatments/womens-care-hero.png', alt: 'Four women of different ages standing together', position: '40% 30%' },
   },
   groups: [
     {

@@ -1,6 +1,7 @@
 import Icon from './Icon.jsx'
-import { monogram, sessionLabel } from '../data/doctors.js'
+import { monogram, sessionLabel, photoSmall } from '../data/doctors.js'
 import './DoctorCard.css'
+import Img from './Img.jsx'
 
 // The doctor card (design/round2-report.md §4): 300 × 410, built from the data file's schema. A flex column with the
 // rating row and the button anchored at the bottom, so uneven specialty or clinic lines never push them out of line.
@@ -14,7 +15,7 @@ export default function DoctorCard({ doctor }) {
         <span className="doctor__badge">{doctor.specialty.split(' & ')[0].split(',')[0]}</span>
         {doctor.videoConsult && <span className="doctor__video"><Icon name="askDoctor" className="doctor__video-icon" />Video consult</span>}
         <div className="doctor__avatar">
-          {doctor.photo ? <img src={doctor.photo} alt="" /> : <span>{monogram(doctor.name)}</span>}
+          {doctor.photo ? <Img src={photoSmall(doctor)} alt="" /> : <span>{monogram(doctor.name)}</span>}
         </div>
       </div>
       <div className="doctor__body">

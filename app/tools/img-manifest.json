@@ -1,0 +1,726 @@
+{
+ "/assets/2_09c94b70.png": {
+  "natW": 1285,
+  "natH": 1627,
+  "needW": 131,
+  "needH": 166,
+  "fit": "fill",
+  "kind": "img",
+  "pages": [
+   "/",
+   "/about/",
+   "/clinics/",
+   "/find-a-doctor/",
+   "/treatments/child-care/",
+   "/treatments/pain-management-rejuvenation/",
+   "/treatments/audiology/",
+   "/treatments/yoga-wellness/",
+   "/treatments/multispecialty-clinic/",
+   "/treatments/womens-care/",
+   "/treatments/dentistry/",
+   "/treatments/cosmetic-gynaecology-aesthetics/",
+   "/treatments/petals-ivf/",
+   "/doctors/smita-gutgutia/",
+   "/doctors/k-n-siddiqui/",
+   "/doctors/sunil-agarwal/",
+   "/doctors/subhra-ghosh-paul/",
+   "/doctors/bhaskar-mukherjee/",
+   "/doctors/uttara-bhar/",
+   "/doctors/madanki-s/",
+   "/no-such-page/"
+  ],
+  "maxBox": "65\u00c3\u201483@1366 /"
+ },
+ "/assets/2_bfab15d2.png": {
+  "natW": 0,
+  "natH": 0,
+  "needW": 130,
+  "needH": 166,
+  "fit": "mask",
+  "kind": "mask",
+  "pages": [
+   "/",
+   "/about/",
+   "/clinics/",
+   "/find-a-doctor/",
+   "/treatments/child-care/",
+   "/treatments/pain-management-rejuvenation/",
+   "/treatments/audiology/",
+   "/treatments/yoga-wellness/",
+   "/treatments/multispecialty-clinic/",
+   "/treatments/womens-care/",
+   "/treatments/dentistry/",
+   "/treatments/cosmetic-gynaecology-aesthetics/",
+   "/treatments/petals-ivf/",
+   "/doctors/smita-gutgutia/",
+   "/doctors/k-n-siddiqui/",
+   "/doctors/sunil-agarwal/",
+   "/doctors/subhra-ghosh-paul/",
+   "/doctors/bhaskar-mukherjee/",
+   "/doctors/uttara-bhar/",
+   "/doctors/madanki-s/",
+   "/no-such-page/"
+  ],
+  "maxBox": "65\u00c3\u201483@1366 /"
+ },
+ "/media/hero-poster-landscape.jpg": {
+  "natW": 1280,
+  "natH": 720,
+  "needW": 3840,
+  "needH": 2160,
+  "fit": "cover",
+  "kind": "img",
+  "pages": [
+   "/"
+  ],
+  "maxBox": "1920\u00c3\u2014560@1920 /"
+ },
+ "/assets/2_a79aaebf.png": {
+  "natW": 1800,
+  "natH": 1200,
+  "needW": 3238,
+  "needH": 2159,
+  "fit": "fill",
+  "kind": "img",
+  "pages": [
+   "/"
+  ],
+  "maxBox": "1079\u00c3\u20141079@1366 /"
+ },
+ "/assets/2_3bcc21fb.png": {
+  "natW": 0,
+  "natH": 0,
+  "needW": 2159,
+  "needH": 2159,
+  "fit": "mask",
+  "kind": "mask",
+  "pages": [
+   "/"
+  ],
+  "maxBox": "1079\u00c3\u20141079@1366 /"
+ },
+ "/assets/doctors/smita-gutgutia.png": {
+  "natW": 803,
+  "natH": 1240,
+  "needW": 220,
+  "needH": 339,
+  "fit": "cover",
+  "kind": "img",
+  "pages": [
+   "/",
+   "/find-a-doctor/",
+   "/treatments/womens-care/"
+  ],
+  "maxBox": "110\u00c3\u2014140@768 /find-a-doctor/"
+ },
+ "/assets/doctors/k-n-siddiqui.png": {
+  "natW": 770,
+  "natH": 1061,
+  "needW": 899,
+  "needH": 1240,
+  "fit": "cover",
+  "kind": "img",
+  "pages": [
+   "/",
+   "/find-a-doctor/",
+   "/treatments/multispecialty-clinic/",
+   "/doctors/k-n-siddiqui/"
+  ],
+  "maxBox": "450\u00c3\u2014620@1366 /doctors/k-n-siddiqui/"
+ },
+ "/assets/doctors/sunil-agarwal.png": {
+  "natW": 593,
+  "natH": 1013,
+  "needW": 725,
+  "needH": 1240,
+  "fit": "cover",
+  "kind": "img",
+  "pages": [
+   "/",
+   "/find-a-doctor/",
+   "/doctors/sunil-agarwal/"
+  ],
+  "maxBox": "363\u00c3\u2014620@1366 /doctors/sunil-agarwal/"
+ },
+ "/assets/doctors/subhra-ghosh-paul.png": {
+  "natW": 463,
+  "natH": 995,
+  "needW": 577,
+  "needH": 1240,
+  "fit": "cover",
+  "kind": "img",
+  "pages": [
+   "/",
+   "/find-a-doctor/",
+   "/treatments/womens-care/",
+   "/doctors/subhra-ghosh-paul/"
+  ],
+  "maxBox": "288\u00c3\u2014620@1366 /doctors/subhra-ghosh-paul/"
+ },
+ "/assets/doctors/bhaskar-mukherjee.png": {
+  "natW": 659,
+  "natH": 1240,
+  "needW": 659,
+  "needH": 1240,
+  "fit": "cover",
+  "kind": "img",
+  "pages": [
+   "/",
+   "/find-a-doctor/",
+   "/doctors/bhaskar-mukherjee/"
+  ],
+  "maxBox": "330\u00c3\u2014620@1366 /doctors/bhaskar-mukherjee/"
+ },
+ "/assets/doctors/uttara-bhar.png": {
+  "natW": 517,
+  "natH": 942,
+  "needW": 680,
+  "needH": 1240,
+  "fit": "cover",
+  "kind": "img",
+  "pages": [
+   "/",
+   "/treatments/child-care/",
+   "/doctors/uttara-bhar/"
+  ],
+  "maxBox": "340\u00c3\u2014620@1366 /doctors/uttara-bhar/"
+ },
+ "/assets/doctors/madanki-s.png": {
+  "natW": 668,
+  "natH": 634,
+  "needW": 1306,
+  "needH": 1240,
+  "fit": "cover",
+  "kind": "img",
+  "pages": [
+   "/",
+   "/find-a-doctor/",
+   "/treatments/petals-ivf/",
+   "/doctors/madanki-s/"
+  ],
+  "maxBox": "653\u00c3\u2014620@1366 /doctors/madanki-s/"
+ },
+ "/assets/2_04c0f486.png": {
+  "natW": 1136,
+  "natH": 1385,
+  "needW": 1229,
+  "needH": 1499,
+  "fit": "fill",
+  "kind": "img",
+  "pages": [
+   "/"
+  ],
+  "maxBox": "615\u00c3\u2014749@1366 /"
+ },
+ "/assets/2_6a954d96.png": {
+  "natW": 0,
+  "natH": 0,
+  "needW": 1229,
+  "needH": 1499,
+  "fit": "mask",
+  "kind": "mask",
+  "pages": [
+   "/"
+  ],
+  "maxBox": "615\u00c3\u2014749@1366 /"
+ },
+ "video": {
+  "natW": 1280,
+  "natH": 720,
+  "needW": 3840,
+  "needH": 1120,
+  "fit": "video",
+  "kind": "video",
+  "pages": [
+   "/"
+  ],
+  "maxBox": "1920\u00c3\u2014560@1920 /"
+ },
+ "/assets/about/reception.jpg": {
+  "natW": 1600,
+  "natH": 1200,
+  "needW": 3840,
+  "needH": 2880,
+  "fit": "cover",
+  "kind": "img",
+  "pages": [
+   "/about/"
+  ],
+  "maxBox": "1920\u00c3\u2014460@1920 /about/"
+ },
+ "/assets/clinics/map.jpg": {
+  "natW": 2400,
+  "natH": 1600,
+  "needW": 917,
+  "needH": 612,
+  "fit": "cover",
+  "kind": "img",
+  "pages": [
+   "/about/",
+   "/clinics/"
+  ],
+  "maxBox": "459\u00c3\u201478@1920 /about/"
+ },
+ "/assets/about/team-card.jpg": {
+  "natW": 1438,
+  "natH": 560,
+  "needW": 1720,
+  "needH": 670,
+  "fit": "cover",
+  "kind": "img",
+  "pages": [
+   "/about/"
+  ],
+  "maxBox": "254\u00c3\u2014335@390 /about/"
+ },
+ "/assets/clinics/kankurgachi.jpg": {
+  "natW": 3600,
+  "natH": 2700,
+  "needW": 1472,
+  "needH": 1104,
+  "fit": "cover",
+  "kind": "img",
+  "pages": [
+   "/clinics/"
+  ],
+  "maxBox": "636\u00c3\u2014552@1920 /clinics/"
+ },
+ "/assets/clinics/loudon-street.png": {
+  "natW": 953,
+  "natH": 656,
+  "needW": 1604,
+  "needH": 1104,
+  "fit": "cover",
+  "kind": "img",
+  "pages": [
+   "/clinics/"
+  ],
+  "maxBox": "636\u00c3\u2014552@1920 /clinics/"
+ },
+ "/assets/clinics/tollygunge.jpg": {
+  "natW": 1600,
+  "natH": 1200,
+  "needW": 1472,
+  "needH": 1104,
+  "fit": "cover",
+  "kind": "img",
+  "pages": [
+   "/clinics/"
+  ],
+  "maxBox": "636\u00c3\u2014552@1920 /clinics/"
+ },
+ "/assets/doctors/find-hero.png": {
+  "natW": 1872,
+  "natH": 1444,
+  "needW": 2120,
+  "needH": 1635,
+  "fit": "contain",
+  "kind": "img",
+  "pages": [
+   "/find-a-doctor/"
+  ],
+  "maxBox": "1060\u00c3\u2014818@1920 /find-a-doctor/"
+ },
+ "/assets/treatments/child-care-hero.png": {
+  "natW": 1496,
+  "natH": 1051,
+  "needW": 2092,
+  "needH": 1470,
+  "fit": "cover",
+  "kind": "img",
+  "pages": [
+   "/treatments/child-care/"
+  ],
+  "maxBox": "718\u00c3\u2014735@1366 /treatments/child-care/"
+ },
+ "/assets/treatments/child-care-hero-mask.png": {
+  "natW": 0,
+  "natH": 0,
+  "needW": 1681,
+  "needH": 1470,
+  "fit": "mask",
+  "kind": "mask",
+  "pages": [
+   "/treatments/child-care/"
+  ],
+  "maxBox": "841\u00c3\u2014735@1920 /treatments/child-care/"
+ },
+ "/assets/treatments/pain-hero.png": {
+  "natW": 1536,
+  "natH": 1024,
+  "needW": 2205,
+  "needH": 1470,
+  "fit": "cover",
+  "kind": "img",
+  "pages": [
+   "/treatments/pain-management-rejuvenation/"
+  ],
+  "maxBox": "718\u00c3\u2014735@1366 /treatments/pain-management-rejuvenation/"
+ },
+ "/assets/treatments/pain-hero-mask.png": {
+  "natW": 0,
+  "natH": 0,
+  "needW": 1681,
+  "needH": 1470,
+  "fit": "mask",
+  "kind": "mask",
+  "pages": [
+   "/treatments/pain-management-rejuvenation/"
+  ],
+  "maxBox": "841\u00c3\u2014735@1920 /treatments/pain-management-rejuvenation/"
+ },
+ "/assets/treatments/audiology-hero.png": {
+  "natW": 1774,
+  "natH": 887,
+  "needW": 2940,
+  "needH": 1470,
+  "fit": "cover",
+  "kind": "img",
+  "pages": [
+   "/treatments/audiology/"
+  ],
+  "maxBox": "718\u00c3\u2014735@1366 /treatments/audiology/"
+ },
+ "/assets/treatments/audiology-hero-mask.png": {
+  "natW": 0,
+  "natH": 0,
+  "needW": 1681,
+  "needH": 1470,
+  "fit": "mask",
+  "kind": "mask",
+  "pages": [
+   "/treatments/audiology/"
+  ],
+  "maxBox": "841\u00c3\u2014735@1920 /treatments/audiology/"
+ },
+ "/assets/treatments/yoga-hero.png": {
+  "natW": 1919,
+  "natH": 820,
+  "needW": 3440,
+  "needH": 1470,
+  "fit": "cover",
+  "kind": "img",
+  "pages": [
+   "/treatments/yoga-wellness/"
+  ],
+  "maxBox": "718\u00c3\u2014735@1366 /treatments/yoga-wellness/"
+ },
+ "/assets/treatments/yoga-feature-1.jpg": {
+  "natW": 2640,
+  "natH": 1760,
+  "needW": 1244,
+  "needH": 829,
+  "fit": "cover",
+  "kind": "img",
+  "pages": [
+   "/treatments/yoga-wellness/"
+  ],
+  "maxBox": "622\u00c3\u2014316@1366 /treatments/yoga-wellness/"
+ },
+ "/assets/treatments/yoga-feature-2.jpg": {
+  "natW": 2240,
+  "natH": 1494,
+  "needW": 1244,
+  "needH": 830,
+  "fit": "cover",
+  "kind": "img",
+  "pages": [
+   "/treatments/yoga-wellness/"
+  ],
+  "maxBox": "622\u00c3\u2014316@1366 /treatments/yoga-wellness/"
+ },
+ "/assets/treatments/multi-hero.png": {
+  "natW": 1708,
+  "natH": 921,
+  "needW": 2726,
+  "needH": 1470,
+  "fit": "cover",
+  "kind": "img",
+  "pages": [
+   "/treatments/multispecialty-clinic/"
+  ],
+  "maxBox": "758\u00c3\u2014735@1366 /treatments/multispecialty-clinic/"
+ },
+ "/assets/treatments/multi-hero-mask.png": {
+  "natW": 0,
+  "natH": 0,
+  "needW": 1761,
+  "needH": 1470,
+  "fit": "mask",
+  "kind": "mask",
+  "pages": [
+   "/treatments/multispecialty-clinic/"
+  ],
+  "maxBox": "881\u00c3\u2014735@1920 /treatments/multispecialty-clinic/"
+ },
+ "/assets/treatments/womens-care-hero.png": {
+  "natW": 1475,
+  "natH": 1066,
+  "needW": 2034,
+  "needH": 1470,
+  "fit": "cover",
+  "kind": "img",
+  "pages": [
+   "/treatments/womens-care/"
+  ],
+  "maxBox": "718\u00c3\u2014735@1366 /treatments/womens-care/"
+ },
+ "/assets/treatments/womens-care-hero-mask.png": {
+  "natW": 0,
+  "natH": 0,
+  "needW": 1681,
+  "needH": 1470,
+  "fit": "mask",
+  "kind": "mask",
+  "pages": [
+   "/treatments/womens-care/"
+  ],
+  "maxBox": "841\u00c3\u2014735@1920 /treatments/womens-care/"
+ },
+ "/assets/treatments/dentistry-hero.png": {
+  "natW": 1600,
+  "natH": 1066,
+  "needW": 2206,
+  "needH": 1470,
+  "fit": "cover",
+  "kind": "img",
+  "pages": [
+   "/treatments/dentistry/"
+  ],
+  "maxBox": "718\u00c3\u2014735@1366 /treatments/dentistry/"
+ },
+ "/assets/treatments/dentistry-hero-mask.png": {
+  "natW": 0,
+  "natH": 0,
+  "needW": 1681,
+  "needH": 1470,
+  "fit": "mask",
+  "kind": "mask",
+  "pages": [
+   "/treatments/dentistry/"
+  ],
+  "maxBox": "841\u00c3\u2014735@1920 /treatments/dentistry/"
+ },
+ "/assets/treatments/dentistry-risks.jpg": {
+  "natW": 1145,
+  "natH": 1374,
+  "needW": 1152,
+  "needH": 1383,
+  "fit": "cover",
+  "kind": "img",
+  "pages": [
+   "/treatments/dentistry/"
+  ],
+  "maxBox": "550\u00c3\u2014691@1366 /treatments/dentistry/"
+ },
+ "/assets/treatments/dentistry-safety.jpg": {
+  "natW": 1145,
+  "natH": 1374,
+  "needW": 1525,
+  "needH": 1830,
+  "fit": "cover",
+  "kind": "img",
+  "pages": [
+   "/treatments/dentistry/"
+  ],
+  "maxBox": "705\u00c3\u2014915@1366 /treatments/dentistry/"
+ },
+ "/assets/treatments/cosmetic-hero.png": {
+  "natW": 1600,
+  "natH": 893,
+  "needW": 2634,
+  "needH": 1470,
+  "fit": "cover",
+  "kind": "img",
+  "pages": [
+   "/treatments/cosmetic-gynaecology-aesthetics/"
+  ],
+  "maxBox": "718\u00c3\u2014735@1366 /treatments/cosmetic-gynaecology-aesthetics/"
+ },
+ "/assets/treatments/cosmetic-hero-mask.png": {
+  "natW": 0,
+  "natH": 0,
+  "needW": 1681,
+  "needH": 1470,
+  "fit": "mask",
+  "kind": "mask",
+  "pages": [
+   "/treatments/cosmetic-gynaecology-aesthetics/"
+  ],
+  "maxBox": "841\u00c3\u2014735@1920 /treatments/cosmetic-gynaecology-aesthetics/"
+ },
+ "/assets/treatments/ivf-hero.png": {
+  "natW": 1448,
+  "natH": 1086,
+  "needW": 1960,
+  "needH": 1470,
+  "fit": "cover",
+  "kind": "img",
+  "pages": [
+   "/treatments/petals-ivf/"
+  ],
+  "maxBox": "718\u00c3\u2014735@1366 /treatments/petals-ivf/"
+ },
+ "/assets/treatments/ivf-hero-mask.png": {
+  "natW": 0,
+  "natH": 0,
+  "needW": 1681,
+  "needH": 1470,
+  "fit": "mask",
+  "kind": "mask",
+  "pages": [
+   "/treatments/petals-ivf/"
+  ],
+  "maxBox": "841\u00c3\u2014735@1920 /treatments/petals-ivf/"
+ },
+ "/assets/treatments/ivf-egg.png": {
+  "natW": 1280,
+  "natH": 1142,
+  "needW": 1280,
+  "needH": 1142,
+  "fit": "fill",
+  "kind": "img",
+  "pages": [
+   "/treatments/petals-ivf/"
+  ],
+  "maxBox": "640\u00c3\u2014571@1366 /treatments/petals-ivf/"
+ },
+ "/assets/treatments/ivf-egg-mask.png": {
+  "natW": 0,
+  "natH": 0,
+  "needW": 1280,
+  "needH": 1142,
+  "fit": "mask",
+  "kind": "mask",
+  "pages": [
+   "/treatments/petals-ivf/"
+  ],
+  "maxBox": "640\u00c3\u2014571@1366 /treatments/petals-ivf/"
+ },
+ "/assets/treatments/ivf-icon-iui.png": {
+  "natW": 194,
+  "natH": 195,
+  "needW": 219,
+  "needH": 220,
+  "fit": "contain",
+  "kind": "img",
+  "pages": [
+   "/treatments/petals-ivf/"
+  ],
+  "maxBox": "110\u00c3\u2014110@390 /treatments/petals-ivf/"
+ },
+ "/assets/treatments/ivf-icon-ivf.png": {
+  "natW": 258,
+  "natH": 269,
+  "needW": 211,
+  "needH": 220,
+  "fit": "contain",
+  "kind": "img",
+  "pages": [
+   "/treatments/petals-ivf/"
+  ],
+  "maxBox": "110\u00c3\u2014110@390 /treatments/petals-ivf/"
+ },
+ "/assets/treatments/ivf-icon-icsi.png": {
+  "natW": 204,
+  "natH": 208,
+  "needW": 216,
+  "needH": 220,
+  "fit": "contain",
+  "kind": "img",
+  "pages": [
+   "/treatments/petals-ivf/"
+  ],
+  "maxBox": "110\u00c3\u2014110@390 /treatments/petals-ivf/"
+ },
+ "/assets/treatments/ivf-icon-egg-freezing.png": {
+  "natW": 204,
+  "natH": 210,
+  "needW": 214,
+  "needH": 220,
+  "fit": "contain",
+  "kind": "img",
+  "pages": [
+   "/treatments/petals-ivf/"
+  ],
+  "maxBox": "110\u00c3\u2014110@390 /treatments/petals-ivf/"
+ },
+ "/assets/treatments/ivf-icon-fertility-assessment.png": {
+  "natW": 182,
+  "natH": 232,
+  "needW": 173,
+  "needH": 220,
+  "fit": "contain",
+  "kind": "img",
+  "pages": [
+   "/treatments/petals-ivf/"
+  ],
+  "maxBox": "110\u00c3\u2014110@390 /treatments/petals-ivf/"
+ },
+ "/assets/treatments/ivf-icon-male-fertility.png": {
+  "natW": 182,
+  "natH": 212,
+  "needW": 189,
+  "needH": 220,
+  "fit": "contain",
+  "kind": "img",
+  "pages": [
+   "/treatments/petals-ivf/"
+  ],
+  "maxBox": "110\u00c3\u2014110@390 /treatments/petals-ivf/"
+ },
+ "/assets/treatments/ivf-icon-female-fertility.png": {
+  "natW": 182,
+  "natH": 227,
+  "needW": 176,
+  "needH": 220,
+  "fit": "contain",
+  "kind": "img",
+  "pages": [
+   "/treatments/petals-ivf/"
+  ],
+  "maxBox": "110\u00c3\u2014110@390 /treatments/petals-ivf/"
+ },
+ "/assets/treatments/ivf-dish.png": {
+  "natW": 711,
+  "natH": 720,
+  "needW": 720,
+  "needH": 729,
+  "fit": "fill",
+  "kind": "img",
+  "pages": [
+   "/treatments/petals-ivf/"
+  ],
+  "maxBox": "360\u00c3\u2014365@1366 /treatments/petals-ivf/"
+ },
+ "/assets/doctors/profile-hero-bg.jpg": {
+  "natW": 1600,
+  "natH": 1067,
+  "needW": 3840,
+  "needH": 2561,
+  "fit": "cover",
+  "kind": "img",
+  "pages": [
+   "/doctors/smita-gutgutia/",
+   "/doctors/k-n-siddiqui/",
+   "/doctors/sunil-agarwal/",
+   "/doctors/subhra-ghosh-paul/",
+   "/doctors/bhaskar-mukherjee/",
+   "/doctors/uttara-bhar/",
+   "/doctors/madanki-s/"
+  ],
+  "maxBox": "1920\u00c3\u2014620@1920 /doctors/smita-gutgutia/"
+ },
+ "/assets/doctors/smita-gutgutia-portrait.png": {
+  "natW": 713,
+  "natH": 1100,
+  "needW": 804,
+  "needH": 1240,
+  "fit": "contain",
+  "kind": "img",
+  "pages": [
+   "/doctors/smita-gutgutia/"
+  ],
+  "maxBox": "402\u00c3\u2014620@1366 /doctors/smita-gutgutia/"
+ }
+}

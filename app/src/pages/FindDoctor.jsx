@@ -4,8 +4,9 @@ import Footer from '../components/Footer.jsx'
 import FormDialog from '../components/FormDialog.jsx'
 import Icon from '../components/Icon.jsx'
 import { track } from '../analytics.js'
-import { DOCTORS, CLINICS, SPECIALTY_GROUPS, SPECIALTY_LABELS, specialtyGroupOf, availableToday, sessionsToday, nextSession, timeRange, monogram } from '../data/doctors.js'
+import { DOCTORS, CLINICS, SPECIALTY_GROUPS, SPECIALTY_LABELS, specialtyGroupOf, availableToday, sessionsToday, nextSession, timeRange, monogram, photoSmall } from '../data/doctors.js'
 import './FindDoctor.css'
+import Img from '../components/Img.jsx'
 
 // Find a Doctor (design/svg/Find a Doctor.svg). Everything below the hero is computed from data/doctors.js:
 //   filters  — specialty groups (SPECIALTY_GROUPS + any ungrouped specialtyId), clinics, availability (today's weekday
@@ -70,7 +71,7 @@ function Row({ d }) {
   return (
     <li className="drow" data-reveal>
       <a className="drow__photo" href={`/doctors/${d.id}`} tabIndex={-1} aria-hidden="true">
-        {d.photo ? <img src={d.photo} alt="" loading="lazy" decoding="async" /> : <span className="drow__monogram">{monogram(d.name)}</span>}
+        {d.photo ? <Img src={photoSmall(d)} alt="" /> : <span className="drow__monogram">{monogram(d.name)}</span>}
       </a>
       <div className="drow__body">
         <h3 className="drow__name"><a href={`/doctors/${d.id}`}>{d.name}</a></h3>
@@ -140,7 +141,7 @@ export default function FindDoctor() {
               <h1 id="fd-title" className="fd-hero__title">Search our specialists by name, specialty, or clinic</h1>
               <p className="fd-hero__lead">100+ doctors across three clinics in Kolkata. Filter by what you need, or search for a name if someone's already been recommended to you.</p>
             </div>
-            <div className="fd-hero__photo" data-overlap-ok><img src="/assets/doctors/find-hero.png" alt="Four Petals Health doctors" decoding="async" fetchPriority="high" /></div>
+            <div className="fd-hero__photo" data-overlap-ok><Img src="/assets/doctors/find-hero.png" alt="Four Petals Health doctors" priority /></div>
           </div>
         </section>
 

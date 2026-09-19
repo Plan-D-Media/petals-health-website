@@ -1,5 +1,6 @@
 import { Arrow } from './Specialists.jsx'
 import './Insights.css'
+import { linkOr } from './pending.js'
 
 // Home section 7 — "HEALTH INSIGHTS / Latest from our doctors". Content: design/sections5-8-values.md §7.
 
@@ -22,12 +23,12 @@ export default function Insights() {
               <span className="post__top" aria-hidden="true" />
               <h3 className="post__topic">{a.topic}</h3>
               <p className="post__title">{a.title}</p>
-              <p className="post__meta"><span>{a.meta}</span><a className="post__read" href="#articles" aria-label={`Read: ${a.title}`}>Read <Arrow /></a></p>
+              <p className="post__meta"><span>{a.meta}</span><a {...linkOr(null, { className: 'post__read', 'aria-label': `Read: ${a.title}` })}>Read <Arrow /></a></p>
             </article>
           ))}
         </div>
         <div className="insights__foot">
-          <a className="insights__more btn-soft" href="#articles">Read More Articles <Arrow /></a>
+          <a {...linkOr(null, { className: 'insights__more btn-soft' })}>Read More Articles <Arrow /></a>
         </div>
       </div>
     </section>

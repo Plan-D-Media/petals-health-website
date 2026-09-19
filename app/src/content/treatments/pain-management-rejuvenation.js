@@ -10,7 +10,7 @@ export default {
     tagline: 'Pain relief with a plan, not just a prescription.',
     lead: "For pain that's stuck around too long — back, joints, pregnancy, or recovery after surgery — we look for the cause, not just the symptom.",
     cta: { label: 'Book your appoinment', form: 'book-appointment' },
-    photo: { src: '/assets/treatments/pain-hero.png', mask: '/assets/treatments/pain-hero-mask.png', alt: 'A woman holding her lower back and neck', position: '50% 20%' },
+    photo: { src: '/assets/treatments/pain-hero.png', alt: 'A woman holding her lower back and neck', position: '50% 20%' },
   },
   intro: 'Chronic and persistent pain deserves more than a repeat prescription. Our pain management consultations start with understanding what\'s driving the pain, then build a plan that may combine medication, physiotherapy referral, and targeted intervention — including care built specifically around pregnancy.',
   gridStyle: 'tiles',   // the mock's flush 3-column tiles (no card outline), vs Child Care's outlined cards

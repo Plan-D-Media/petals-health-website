@@ -15,9 +15,6 @@
   width: 1619.2px; height: 1079.4px;
   left: 50%; top: 50%;
   transform: translate(-50%, -50%) rotate(-90deg);
-  -webkit-mask-image: url('/assets/2_3bcc21fb.png'); mask-image: url('/assets/2_3bcc21fb.png');
-  -webkit-mask-mode: luminance; mask-mode: luminance;
-  -webkit-mask-size: 100% 100%; mask-size: 100% 100%;
   display: block;
 }
 @media (min-width: 1024px) { .watermark { display: block; } }

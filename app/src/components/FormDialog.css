@@ -9,3 +9,5 @@
   .fdialog__panel { width: 100%; max-width: 100%; max-height: calc(100vh - 24px); border-radius: var(--radius-card-lg) var(--radius-card-lg) 0 0; padding: 28px 20px 32px; }
 }
 
+
+.fdialog__loading { margin: 0; min-height: 120px; font-size: var(--fs-meta); color: var(--grey-600); }

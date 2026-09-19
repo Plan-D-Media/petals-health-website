@@ -6,6 +6,7 @@ import { Story } from '../components/Testimonials.jsx'
 import { CLINICS, clinicsOf, daysLabel, timeRange, monogram } from '../data/doctors.js'
 import { TESTIMONIALS } from '../data/testimonials.js'
 import './DoctorProfile.css'
+import Img from '../components/Img.jsx'
 
 // Doctor profile (design/svg/under Find a Doctor.svg — Dr. Smita Gutgutia). Every block reads the doctor's record:
 //   hero (breadcrumb, name, specialty, qualifications + college, clinics, languages, top treatment tags, video pill,
@@ -28,7 +29,7 @@ export default function DoctorProfile({ doctor: d }) {
       <Header current="find" />
       <main>
         <section className="dp-hero band" aria-labelledby="dp-title" data-hero>
-          <div className="dp-hero__bg" aria-hidden="true"><img src="/assets/doctors/profile-hero-bg.jpg" alt="" decoding="async" /></div>
+          <div className="dp-hero__bg" aria-hidden="true"><Img src="/assets/doctors/profile-hero-bg.jpg" alt="" priority /></div>
           <div className="inner dp-hero__inner">
             <div className="dp-hero__copy">
               <p className="dp-hero__crumb"><a href="/">Home</a> <span aria-hidden="true">/</span> <a href="/find-a-doctor">Find a Doctor</a> <span aria-hidden="true">/</span> {d.name}</p>
@@ -46,7 +47,7 @@ export default function DoctorProfile({ doctor: d }) {
               <a className="dp-hero__cta" href="#book" data-form="book-appointment" data-doctor={d.id} data-section="doctor-profile">Book a visit</a>
             </div>
             <div className="dp-hero__photo" data-overlap-ok>
-              {d.portrait || d.photo ? <img src={d.portrait || d.photo} alt={`${d.name}, portrait`} decoding="async" fetchPriority="high" /> : <span className="dp-hero__monogram" aria-hidden="true">{monogram(d.name)}</span>}
+              {d.portrait || d.photo ? <Img src={d.portrait || d.photo} alt={`${d.name}, portrait`} priority /> : <span className="dp-hero__monogram" aria-hidden="true">{monogram(d.name)}</span>}
             </div>
           </div>
         </section>

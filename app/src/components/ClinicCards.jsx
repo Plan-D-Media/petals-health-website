@@ -1,5 +1,6 @@
 import { SITES, MAP_THUMB, directionsUrl } from '../data/clinics.js'
 import './ClinicCards.css'
+import Img from './Img.jsx'
 
 // "FIND US / 3 clinics across Kolkata": the three clinic cards shared by About Us and Clinic Location (the same block
 // in both mocks). `as` picks the heading level — h1 on the Clinics page, where it is the page's title.
@@ -18,7 +19,7 @@ export default function ClinicCards({ as: H = 'h2', id = 'find-us' }) {
           {SITES.map((s, i) => (
             <li key={s.id} className="clinic" id={`clinic-${s.id}`} data-reveal data-reveal-order={i}>
               <div className="clinic__map">
-                <img src={MAP_THUMB} alt="" loading="lazy" decoding="async" />
+                <Img src={MAP_THUMB} alt="" />
                 <span className="clinic__region">{s.region}</span>
               </div>
               <div className="clinic__body">

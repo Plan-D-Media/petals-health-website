@@ -6,6 +6,7 @@ import LeadForm from '../components/LeadForm.jsx'
 import { SITES } from '../data/clinics.js'
 import '../templates/TreatmentB.css'   /* the FAQ accordion and the on-page form frame */
 import './Clinics.css'
+import Img from '../components/Img.jsx'
 
 // Clinic Location (design/svg/6.svg): three clinic photo tiles with name pills · Find us (shared clinic cards, the
 // page's h1) · FAQs (five questions; the design answers only the first) | Book a Consultation form.
@@ -27,10 +28,10 @@ export default function Clinics() {
       <main>
         <section className="sites band" aria-label="Our three clinics" data-hero>
           <ul className="sites__grid">
-            {SITES.map((s) => (
+            {SITES.map((s, i) => (
               <li key={s.id} className="site">
                 <a className="site__link" href={`#clinic-${s.id}`} aria-label={s.name}>
-                  <img src={s.photo.src} alt={s.photo.alt} decoding="async" style={{ objectPosition: s.photo.position }} />
+                  <Img src={s.photo.src} alt={s.photo.alt} style={{ objectPosition: s.photo.position }} priority={i === 0} />
                   <span className="site__pill" aria-hidden="true">
                     {s.tile.map((l, i) => <span key={i} className={'site__pill-line' + (s.tile.length === 3 && i === 1 ? ' site__pill-line--small' : '')}>{l}</span>)}
                   </span>

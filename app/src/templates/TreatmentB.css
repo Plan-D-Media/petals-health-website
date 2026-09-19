@@ -130,7 +130,7 @@
 .t-explained__inner { display: grid; gap: 24px; align-items: center; }
 .t-explained__title { margin: 0 0 16px; font-size: var(--fs-display-md); font-weight: var(--fw-display-md); line-height: 1.05; color: var(--blue-900); }
 .t-explained__p { margin: 0 0 16px; font-size: var(--fs-body); line-height: 1.5; color: var(--black); }
-.t-explained__art img { display: block; width: 100%; max-width: 640px; height: auto; margin: 0 auto; -webkit-mask-image: var(--mask); mask-image: var(--mask); -webkit-mask-mode: luminance; mask-mode: luminance; -webkit-mask-size: 100% 100%; mask-size: 100% 100%; }
+.t-explained__art img { display: block; width: 100%; max-width: 640px; height: auto; margin: 0 auto; }
 @media (min-width: 768px) { .t-explained__inner { grid-template-columns: 1fr 1fr; gap: 32px; } }
 @media (min-width: 1024px) { .t-explained { padding: 56px 0 8px; } .t-explained__inner { grid-template-columns: 1fr 640px; gap: 40px; } .t-explained__title { font-size: 53px; } .t-explained__p { font-size: 21px; line-height: 33px; margin-bottom: 33px; } }
 

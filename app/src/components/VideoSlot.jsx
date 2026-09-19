@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import './VideoSlot.css'
+import Img from './Img.jsx'
 
 // A media slot that renders a poster image first and, when a source exists, a muted looping video on top of it.
 //   poster / posterAlt  the still (always rendered: it is the first paint, the reduced-motion state and the fallback)
@@ -25,15 +26,22 @@ export default function VideoSlot({ poster, posterAlt = '', src, label = 'video'
     return () => mq.removeEventListener('change', onChange)
   }, [])
 
+  // 2026-09-19 (page-weight pass): the video is desktop-only (>=1024) and never under Save-Data; on phones and tablets
+  // the slot is the poster alone. On desktop the source is attached only after the window load event, so the
+  // 1.3 MB clip never competes with the LCP image, CSS and script.
+  const [allow] = useState(() => typeof window !== 'undefined' && window.matchMedia('(min-width: 1024px)').matches && !(navigator.connection && navigator.connection.saveData))
   useEffect(() => {
-    if (!src || armed || !root.current) return undefined
-    if (!('IntersectionObserver' in window)) { setArmed(true); return undefined }
-    const io = new IntersectionObserver((entries) => {
-      if (entries.some((e) => e.isIntersecting)) { setArmed(true); io.disconnect() }
-    }, { rootMargin: '200px' })
-    io.observe(root.current)
-    return () => io.disconnect()
-  }, [src, armed])
+    if (!src || armed || !allow || !root.current) return undefined
+    let io; let timer
+    const arm = () => { timer = setTimeout(() => setArmed(true), 800) }
+    const whenVisible = () => {
+      if (!('IntersectionObserver' in window)) { arm(); return }
+      io = new IntersectionObserver((entries) => { if (entries.some((e) => e.isIntersecting)) { arm(); io.disconnect() } }, { rootMargin: '200px' })
+      io.observe(root.current)
+    }
+    if (document.readyState === 'complete') whenVisible(); else window.addEventListener('load', whenVisible, { once: true })
+    return () => { io?.disconnect(); clearTimeout(timer); window.removeEventListener('load', whenVisible) }
+  }, [src, armed, allow])
 
   // autoplay once the browser can play, unless the user prefers reduced motion
   const onCanPlay = () => {
@@ -53,7 +61,7 @@ export default function VideoSlot({ poster, posterAlt = '', src, label = 'video'
 
   return (
     <div ref={root} className={`video-slot video-slot--${variant} video-slot--${status} ${className}`.trim()}>
-      <img className="video-slot__poster" src={poster} alt={posterAlt} fetchPriority="high" decoding="async" />
+      <Img className="video-slot__poster" src={poster} alt={posterAlt} priority />
       {hasVideo && (
         <video
           ref={video}

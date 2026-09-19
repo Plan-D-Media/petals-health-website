@@ -11,7 +11,7 @@ export default {
     headline: ['Multi Specality Clinic'],
     lead: "From a child's fever to a parent's heart health, our family medicine team gives you a consistent point of contact — with cardiology at the centre of what we do.",
     cta: { label: 'Book your appoinment', form: 'book-appointment' },
-    photo: { src: '/assets/treatments/multi-hero.png', mask: '/assets/treatments/multi-hero-mask.png', alt: 'A doctor talking with a three-generation family on a sofa', position: '60% 40%' },
+    photo: { src: '/assets/treatments/multi-hero.png', alt: 'A doctor talking with a three-generation family on a sofa', position: '60% 40%' },
     photoSide: 'right',   // the mock puts the copy left and the photo right on this page
   },
   taglineFromMock: 'Trusted Care for, Healthier Smiles',

@@ -20,7 +20,7 @@ export const SITES = [
     tile: ['Calcutta Medical Cantre', 'a unit of Petals health', 'Loudon Street'],
     address: ['Maruti Building, 1st Floor, 12 Loudon St,', 'Opp. Bellevue Hospital, Kolkata 700017'],
     mapsQuery: 'Calcutta Medical Centre, Maruti Building, 12 Loudon Street, Kolkata 700017',
-    photo: { src: '/assets/clinics/loudon-street.png', alt: 'Reception at Calcutta Medical Centre, Loudon Street', position: '50% 50%' },
+    photo: { src: '/assets/clinics/loudon-street.jpg', alt: 'Reception at Calcutta Medical Centre, Loudon Street', position: '50% 50%' },
   },
   {
     id: 'tollygunge',

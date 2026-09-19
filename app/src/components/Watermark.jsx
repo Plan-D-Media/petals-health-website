@@ -1,5 +1,6 @@
 import './Watermark.css'
 import { HEADER_HEIGHT, HERO_HEIGHT, PAGE_DY } from '../layout.js'
+import Img from './Img.jsx'
 
 // The petal watermark from design/svg/2.svg (top-level group #3).
 // It is RASTER in the source: 2_a79aaebf.png (colour petals on black) whose alpha is the
@@ -49,7 +50,7 @@ export default function Watermark({ part, offsetTop = 0 }) {
           height: PLACED.height,
         }}
       >
-        <img src="/assets/2_a79aaebf.png" alt="" />
+        <Img src="/assets/2_a79aaebf.png" alt="" />
       </div>
     </div>
   )

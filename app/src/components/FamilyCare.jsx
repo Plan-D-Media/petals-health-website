@@ -1,6 +1,7 @@
 import Icon from './Icon.jsx'
 import { Arrow } from './Specialists.jsx'
 import './FamilyCare.css'
+import { linkOr } from './pending.js'
 
 // Home section 2 — "How we care for your family". Round 3 (approved): Ribbons — three full-width rows (title block ·
 // chips · CTA) from 1024 up; stacked cards below. Chips are one wrapping list; copy unchanged.
@@ -35,7 +36,7 @@ export default function FamilyCare() {
               <ul className="care-card__chips">
                 {c.chips.map((label) => <li key={label} className="chip">{label}</li>)}
               </ul>
-              <a className="care-card__cta" href="#treatments">Explore Treatment <Arrow /></a>
+              <a {...linkOr(null, { className: 'care-card__cta' })}>Explore Treatment <Arrow /></a>
             </article>
           ))}
         </div>

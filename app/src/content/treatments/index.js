@@ -1,5 +1,6 @@
-// The treatment pages: slug → template letter + content file. routes.jsx turns the letter into a component; pages.js
-// (sitemap, meta, gate) reads the same list, so a new treatment page is one line here plus its content file.
+// Build-time registry: every treatment page with its content (pages.js -> titles, descriptions, sitemap, gate).
+// The runtime router uses list.js and loads content on demand.
+import { TREATMENT_LIST } from './list.js'
 import childCare from './child-care.js'
 import pain from './pain-management-rejuvenation.js'
 import audiology from './audiology.js'
@@ -9,16 +10,5 @@ import womens from './womens-care.js'
 import dentistry from './dentistry.js'
 import cosmetic from './cosmetic-gynaecology-aesthetics.js'
 import ivf from './petals-ivf.js'
-
-export const TREATMENT_PAGES = {
-  'child-care': { template: 'A', content: childCare },
-  'pain-management-rejuvenation': { template: 'A', content: pain },
-  'audiology': { template: 'A', content: audiology },
-  'yoga-wellness': { template: 'A', content: yoga },
-  'multispecialty-clinic': { template: 'A', content: multi },
-  'womens-care': { template: 'B', content: womens },
-  'dentistry': { template: 'B', content: dentistry },
-  'cosmetic-gynaecology-aesthetics': { template: 'B', content: cosmetic },
-  'fertility-care': { template: 'B', content: ivf, alias: 'petals-ivf' },   // the nav's Fertility Care item → the Petals IVF page (canonical: /treatments/petals-ivf)
-  'petals-ivf': { template: 'B', content: ivf },
-}
+const CONTENT = { 'child-care': childCare, 'pain-management-rejuvenation': pain, 'audiology': audiology, 'yoga-wellness': yoga, 'multispecialty-clinic': multi, 'womens-care': womens, 'dentistry': dentistry, 'cosmetic-gynaecology-aesthetics': cosmetic, 'petals-ivf': ivf }
+export const TREATMENT_PAGES = Object.fromEntries(Object.entries(TREATMENT_LIST).map(([slug, p]) => [slug, { ...p, content: CONTENT[p.alias || slug] }]))

@@ -44,3 +44,7 @@ a, button, .chip, .care-card, .story, .doc, .post, .btn-soft, .hero__cta, .care-
 @media (prefers-reduced-motion: reduce) {
   * { transition-duration: 0.01ms !important; }
 }
+
+/* placeholder links (components/pending.js): an <a> with no href — same look at rest, no hover/active response, arrow cursor */
+a.is-pending, a.is-pending:hover, a.is-pending:active { cursor: default; text-decoration: none; transform: none; box-shadow: inherit; }
+a.is-pending:hover::after { transform: none; }

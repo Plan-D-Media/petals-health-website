@@ -18,7 +18,7 @@ export default {
     subline: 'Care for the parts of you that deserve equal attention',
     lead: "From non-surgical intimate wellness to surgical procedures and skin & hair aesthetics — three tracks of care, one confidential team, across Petals Health's Kolkata clinics.",
     cta: { label: 'Book your appoinment', form: 'book-appointment' },
-    photo: { src: '/assets/treatments/cosmetic-hero.png', mask: '/assets/treatments/cosmetic-hero-mask.png', alt: 'A woman holding a lotus flower', position: '40% 25%' },
+    photo: { src: '/assets/treatments/cosmetic-hero.png', alt: 'A woman holding a lotus flower', position: '40% 25%' },
   },
   stats: ['35 procedures across 3 tracks of care', { big: '3 clinics', small: 'Kankurgachi, Loudon Street, Tollygunge' }, '1st consultation is complimentary'],
   groups: [

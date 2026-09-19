@@ -1,0 +1,302 @@
+{
+"/assets/2_04c0f486.png": {
+"h": 1385,
+"m": true,
+"w": 1136,
+"webp": true
+},
+"/assets/2_09c94b70.png": {
+"h": 166,
+"m": false,
+"w": 131,
+"webp": true
+},
+"/assets/2_a79aaebf.png": {
+"h": 1067,
+"m": true,
+"w": 1600,
+"webp": true
+},
+"/assets/about/reception.jpg": {
+"h": 1200,
+"m": true,
+"w": 1600,
+"webp": true
+},
+"/assets/about/team-card.jpg": {
+"h": 560,
+"m": true,
+"w": 1438,
+"webp": true
+},
+"/assets/clinics/kankurgachi.jpg": {
+"h": 1104,
+"m": true,
+"w": 1472,
+"webp": true
+},
+"/assets/clinics/loudon-street.jpg": {
+"h": 656,
+"m": true,
+"w": 953,
+"webp": true
+},
+"/assets/clinics/map.jpg": {
+"h": 613,
+"m": true,
+"w": 920,
+"webp": true
+},
+"/assets/clinics/tollygunge.jpg": {
+"h": 1104,
+"m": true,
+"w": 1472,
+"webp": true
+},
+"/assets/doctors/bhaskar-mukherjee-sm.png": {
+"h": 340,
+"m": false,
+"w": 181,
+"webp": true
+},
+"/assets/doctors/bhaskar-mukherjee.png": {
+"h": 1240,
+"m": false,
+"w": 659,
+"webp": true
+},
+"/assets/doctors/find-hero.png": {
+"h": 1444,
+"m": true,
+"w": 1872,
+"webp": true
+},
+"/assets/doctors/k-n-siddiqui-sm.png": {
+"h": 340,
+"m": false,
+"w": 247,
+"webp": true
+},
+"/assets/doctors/k-n-siddiqui.png": {
+"h": 1061,
+"m": false,
+"w": 770,
+"webp": true
+},
+"/assets/doctors/madanki-s-sm.png": {
+"h": 340,
+"m": false,
+"w": 358,
+"webp": true
+},
+"/assets/doctors/madanki-s.png": {
+"h": 634,
+"m": false,
+"w": 668,
+"webp": true
+},
+"/assets/doctors/profile-hero-bg.jpg": {
+"h": 1067,
+"m": true,
+"w": 1600,
+"webp": true
+},
+"/assets/doctors/smita-gutgutia-portrait-sm.png": {
+"h": 340,
+"m": false,
+"w": 220,
+"webp": true
+},
+"/assets/doctors/smita-gutgutia-portrait.png": {
+"h": 1100,
+"m": false,
+"w": 713,
+"webp": true
+},
+"/assets/doctors/smita-gutgutia-sm.png": {
+"h": 340,
+"m": false,
+"w": 220,
+"webp": true
+},
+"/assets/doctors/smita-gutgutia.png": {
+"h": 340,
+"m": false,
+"w": 220,
+"webp": true
+},
+"/assets/doctors/subhra-ghosh-paul-sm.png": {
+"h": 340,
+"m": false,
+"w": 158,
+"webp": true
+},
+"/assets/doctors/subhra-ghosh-paul.png": {
+"h": 995,
+"m": false,
+"w": 463,
+"webp": true
+},
+"/assets/doctors/sunil-agarwal-sm.png": {
+"h": 340,
+"m": false,
+"w": 199,
+"webp": true
+},
+"/assets/doctors/sunil-agarwal.png": {
+"h": 1013,
+"m": false,
+"w": 593,
+"webp": true
+},
+"/assets/doctors/uttara-bhar-sm.png": {
+"h": 340,
+"m": false,
+"w": 187,
+"webp": true
+},
+"/assets/doctors/uttara-bhar.png": {
+"h": 942,
+"m": false,
+"w": 517,
+"webp": true
+},
+"/assets/treatments/audiology-hero.png": {
+"h": 887,
+"m": true,
+"w": 1774,
+"webp": true
+},
+"/assets/treatments/child-care-hero.png": {
+"h": 1051,
+"m": true,
+"w": 1496,
+"webp": true
+},
+"/assets/treatments/cosmetic-hero.png": {
+"h": 893,
+"m": true,
+"w": 1600,
+"webp": true
+},
+"/assets/treatments/dentistry-hero.png": {
+"h": 1066,
+"m": true,
+"w": 1600,
+"webp": true
+},
+"/assets/treatments/dentistry-risks.jpg": {
+"h": 1374,
+"m": true,
+"w": 1145,
+"webp": true
+},
+"/assets/treatments/dentistry-safety.jpg": {
+"h": 1374,
+"m": true,
+"w": 1145,
+"webp": true
+},
+"/assets/treatments/ivf-dish.png": {
+"h": 720,
+"m": false,
+"w": 711,
+"webp": true
+},
+"/assets/treatments/ivf-egg.png": {
+"h": 1142,
+"m": true,
+"w": 1280,
+"webp": true
+},
+"/assets/treatments/ivf-hero.png": {
+"h": 1086,
+"m": true,
+"w": 1448,
+"webp": true
+},
+"/assets/treatments/ivf-icon-egg-freezing.png": {
+"h": 210,
+"m": false,
+"w": 204,
+"webp": true
+},
+"/assets/treatments/ivf-icon-female-fertility.png": {
+"h": 220,
+"m": false,
+"w": 176,
+"webp": true
+},
+"/assets/treatments/ivf-icon-fertility-assessment.png": {
+"h": 221,
+"m": false,
+"w": 173,
+"webp": true
+},
+"/assets/treatments/ivf-icon-icsi.png": {
+"h": 208,
+"m": false,
+"w": 204,
+"webp": true
+},
+"/assets/treatments/ivf-icon-iui.png": {
+"h": 195,
+"m": false,
+"w": 194,
+"webp": true
+},
+"/assets/treatments/ivf-icon-ivf.png": {
+"h": 220,
+"m": false,
+"w": 211,
+"webp": true
+},
+"/assets/treatments/ivf-icon-male-fertility.png": {
+"h": 212,
+"m": false,
+"w": 182,
+"webp": true
+},
+"/assets/treatments/multi-hero.png": {
+"h": 921,
+"m": true,
+"w": 1708,
+"webp": true
+},
+"/assets/treatments/pain-hero.png": {
+"h": 1024,
+"m": true,
+"w": 1536,
+"webp": true
+},
+"/assets/treatments/womens-care-hero.png": {
+"h": 1066,
+"m": true,
+"w": 1475,
+"webp": true
+},
+"/assets/treatments/yoga-feature-1.jpg": {
+"h": 829,
+"m": true,
+"w": 1244,
+"webp": true
+},
+"/assets/treatments/yoga-feature-2.jpg": {
+"h": 830,
+"m": true,
+"w": 1244,
+"webp": true
+},
+"/assets/treatments/yoga-hero.jpg": {
+"h": 820,
+"m": true,
+"w": 1919,
+"webp": true
+},
+"/media/hero-poster-landscape.jpg": {
+"h": 720,
+"m": true,
+"w": 1280,
+"webp": true
+}
+}
