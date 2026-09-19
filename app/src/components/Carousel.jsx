@@ -104,8 +104,8 @@ export default function Carousel({ items, renderItem, autoplayMs = 5000, autopla
       <div ref={viewport} className="carousel__viewport" onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={endDrag} onPointerCancel={endDrag}>
         <ul className={`carousel__track${drag.current ? ' carousel__track--dragging' : ''}`} style={{ transform: `translate3d(${offset}px, 0, 0)` }} id={`${id}-track`}>
           {items.map((it, i) => (
-            <li key={it.id ?? i} className="carousel__slide" data-slide={i} role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${n}`}>
-              {renderItem(it, i)}
+            <li key={it.id ?? i} className="carousel__slide" data-slide={i}>
+              <div className="carousel__slide-inner" role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${n}`}>{renderItem(it, i)}</div>
             </li>
           ))}
         </ul>

@@ -15,6 +15,7 @@ export default function App() {
   return (
     <div className="page">
       <Header />
+      <main id="main" tabIndex={-1}>
       <Hero />
       <Watermark part="page" />
       <FamilyCare />
@@ -24,6 +25,7 @@ export default function App() {
       <CaringBlock />
       <Insights />
       <ClosingBand />
+      </main>
       <Footer />
       <FormDialog />
     </div>

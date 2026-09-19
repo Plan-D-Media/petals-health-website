@@ -27,7 +27,7 @@ export default function DoctorProfile({ doctor: d }) {
   return (
     <div className="page">
       <Header current="find" />
-      <main>
+      <main id="main" tabIndex={-1}>
         <section className="dp-hero band" aria-labelledby="dp-title" data-hero>
           <div className="dp-hero__bg" aria-hidden="true"><Img src="/assets/doctors/profile-hero-bg.jpg" alt="" priority /></div>
           <div className="inner dp-hero__inner">
@@ -36,9 +36,9 @@ export default function DoctorProfile({ doctor: d }) {
               <h1 id="dp-title" className="dp-hero__name">{d.name}</h1>
               <p className="dp-hero__spec">{d.specialty}</p>
               <ul className="dp-hero__facts">
-                {quals ? <li><span className="dp-hero__glyph" aria-hidden="true">🎓</span>{quals}</li> : <li className="dp-hero__fact--pending"><span className="dp-hero__glyph" aria-hidden="true">🎓</span>Qualifications <span className="pending" title="With the client">pending</span></li>}
+                {quals ? <li><svg className="dp-hero__glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4 2 9l10 5 10-5-10-5Zm-6 8.2V16c0 1.7 2.7 3 6 3s6-1.3 6-3v-3.8l-6 3-6-3Z" fill="currentColor"/><path d="M21 9.5v5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/></svg>{quals}</li> : <li className="dp-hero__fact--pending"><svg className="dp-hero__glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12 4 2 9l10 5 10-5-10-5Zm-6 8.2V16c0 1.7 2.7 3 6 3s6-1.3 6-3v-3.8l-6 3-6-3Z" fill="currentColor"/><path d="M21 9.5v5" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/></svg>Qualifications <span className="pending" title="With the client">pending</span></li>}
                 <li><Icon name="pin" className="dp-hero__pin" />{clinics.map((c) => c.name).join(' | ')}</li>
-                <li><span className="dp-hero__glyph" aria-hidden="true">🗣</span>{d.languages.join(', ')}</li>
+                <li><svg className="dp-hero__glyph" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3h11A2.5 2.5 0 0 1 20 5.5v8a2.5 2.5 0 0 1-2.5 2.5H10l-4.4 3.3A.8.8 0 0 1 4.3 18.7V16A2.5 2.5 0 0 1 4 13.5v-8Z" fill="currentColor"/></svg>{d.languages.join(', ')}</li>
               </ul>
               <ul className="dp-hero__tags" aria-label="Areas of focus">
                 {d.treatmentTags.slice(0, 3).map((t) => <li key={t}>{t}</li>)}

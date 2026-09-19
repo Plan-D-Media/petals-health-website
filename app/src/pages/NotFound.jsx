@@ -15,7 +15,7 @@ export default function NotFound({ path }) {
   return (
     <div className="page">
       <Header current="none" />
-      <main>
+      <main id="main" tabIndex={-1}>
         <section className="nf band" aria-labelledby="nf-title" data-hero>
           <div className="inner nf__inner">
             <p className="nf__eyebrow">Page not found</p>

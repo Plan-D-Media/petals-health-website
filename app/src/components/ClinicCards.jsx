@@ -7,6 +7,7 @@ import Img from './Img.jsx'
 // The About mock leaves the third card's first button blank; the Clinics mock shows "Get Direction" on all three, so
 // all three get it (logged, design/client-requests.md item 13).
 export default function ClinicCards({ as: H = 'h2', id = 'find-us' }) {
+  const Sub = H === 'h1' ? 'h2' : 'h3'   // card names sit one level under the block title
   return (
     <section className="clinics band" aria-labelledby={id}>
       <div className="inner">
@@ -23,7 +24,7 @@ export default function ClinicCards({ as: H = 'h2', id = 'find-us' }) {
                 <span className="clinic__region">{s.region}</span>
               </div>
               <div className="clinic__body">
-                <h3 className="clinic__name">{s.name}</h3>
+                <Sub className="clinic__name">{s.name}</Sub>
                 <p className="clinic__address">{s.address.map((l, k) => <span key={k}>{l}{k < s.address.length - 1 && <br />}</span>)}</p>
               </div>
               <div className="clinic__actions">

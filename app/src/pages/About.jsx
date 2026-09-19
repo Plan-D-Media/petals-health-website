@@ -80,7 +80,7 @@ export default function About() {
   return (
     <div className="page">
       <Header current="about" />
-      <main>
+      <main id="main" tabIndex={-1}>
         <div className="about-hero band" data-hero>
           <Img src="/assets/about/reception.jpg" alt="The reception desk at a Petals Health clinic" priority />
         </div>

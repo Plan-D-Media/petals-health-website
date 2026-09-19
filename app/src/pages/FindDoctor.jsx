@@ -74,7 +74,7 @@ function Row({ d }) {
         {d.photo ? <Img src={photoSmall(d)} alt="" /> : <span className="drow__monogram">{monogram(d.name)}</span>}
       </a>
       <div className="drow__body">
-        <h3 className="drow__name"><a href={`/doctors/${d.id}`}>{d.name}</a></h3>
+        <h2 className="drow__name"><a href={`/doctors/${d.id}`}>{d.name}</a></h2>
         <p className="drow__spec">{d.specialty}</p>
         <p className="drow__clinic"><Icon name="pin" className="drow__pin" />{clinics.map((c) => CLINICS[c].name).join(' · ')}</p>
         <Availability d={d} />
@@ -133,7 +133,7 @@ export default function FindDoctor() {
   return (
     <div className="page">
       <Header current="find" />
-      <main>
+      <main id="main" tabIndex={-1}>
         <section className="fd-hero band" aria-labelledby="fd-title" data-hero>
           <div className="inner fd-hero__inner">
             <div className="fd-hero__copy">
@@ -162,6 +162,10 @@ export default function FindDoctor() {
                 <fieldset className="facet">
                   <legend className="facet__title">Patient's Rating</legend>
                   <div className="facet__stars" role="radiogroup" aria-label="Minimum rating">
+                    <label className={'facet__star-opt facet__star-opt--any' + (st.rating === 0 ? ' facet__star-opt--on' : '')}>
+                      <input type="radio" name="rating" checked={st.rating === 0} onChange={() => update({ rating: 0 })} />
+                      <span className="facet__star-text">Any rating</span>
+                    </label>
                     {RATINGS.map((r) => (
                       <label key={r} className={'facet__star-opt' + (st.rating === r ? ' facet__star-opt--on' : '')}>
                         <input type="radio" name="rating" checked={st.rating === r} onChange={() => update({ rating: st.rating === r ? 0 : r })} onClick={() => { if (st.rating === r) update({ rating: 0 }) }} />

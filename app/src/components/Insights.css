@@ -9,7 +9,7 @@
 .post__top { display: block; height: 96px; margin: 0 -20px; background: radial-gradient(circle farthest-corner at 30% 40%, var(--card-bg-inner) 0%, var(--card-bg-outer) 100%); }
 .post__topic { align-self: flex-start; margin: -16px 0 0; display: inline-flex; align-items: center; height: 28px; padding: 0 12px; border-radius: var(--radius-pill); background: var(--chip-cream); box-shadow: var(--ring-card); font-size: var(--fs-chip); font-weight: var(--fw-chip); line-height: 28px; color: var(--black); white-space: nowrap; }
 .post__title { margin: 14px 0 20px; font-size: var(--fs-title); font-weight: var(--fw-title); line-height: 1.2; color: var(--blue-900); }
-.post__meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: auto 0 0; padding-top: 12px; border-top: 1px solid var(--rule-card); font-size: var(--fs-meta); font-weight: var(--fw-meta); line-height: 1; color: var(--green-500); white-space: nowrap; }
+.post__meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: auto 0 0; padding-top: 12px; border-top: 1px solid var(--rule-card); font-size: var(--fs-meta); font-weight: var(--fw-meta); line-height: 1; color: var(--grey-600); white-space: nowrap; }   /* was green-500: 2.43:1 on white; grey-600 keeps the meta tone at 8.45:1 (2026-09-19) */
 .post__read { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 10px; margin: -15px -10px; color: var(--blue-900); font-weight: 500; }   /* 44 px hit area, small footprint */
 .post:hover .post__read, .post:focus-within .post__read { text-decoration: underline; text-underline-offset: 3px; }
 .insights__foot { display: flex; justify-content: center; margin-top: 24px; }

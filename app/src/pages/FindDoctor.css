@@ -28,7 +28,7 @@
 .fd__search { position: relative; display: block; margin-bottom: 16px; }
 .fd__search-icon { position: absolute; left: 16px; top: 50%; width: 20px; height: 20px; margin-top: -10px; color: var(--purple-500); pointer-events: none; }
 .fd__search input { width: 100%; height: 52px; padding: 0 16px 0 48px; border: 2px solid var(--purple-500); border-radius: 12px; background: var(--white); font: inherit; font-size: 17px; color: var(--black); }
-.fd__search input::placeholder { color: var(--grey-500); }
+.fd__search input::placeholder { color: var(--grey-600); }
 .fd__search input:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
 .facet { margin: 0 0 8px; padding: 0; border: 0; min-width: 0; }
 .facet__title { padding: 0; margin: 0 0 6px; font-size: 22px; font-weight: 500; line-height: 1.2; color: var(--blue-900); }
@@ -36,7 +36,7 @@
 .facet__opt input { width: 20px; height: 20px; margin: 0; flex: none; accent-color: var(--blue-900); }
 .facet__label { flex: 1; }
 .facet__count { min-width: 28px; text-align: right; font-variant-numeric: tabular-nums; color: var(--blue-900); }
-.facet__opt--empty { color: var(--grey-500); } .facet__opt--empty .facet__count { color: var(--grey-500); }
+.facet__opt--empty { color: var(--grey-600); } .facet__opt--empty .facet__count { color: var(--grey-600); }   /* grey-500 was 3.95:1 */
 .facet__stars { display: flex; flex-direction: column; }
 .facet__star-opt { display: flex; align-items: center; gap: 12px; min-height: 44px; cursor: pointer; color: var(--blue-900); font-size: 17px; }
 .facet__star-opt input { position: absolute; opacity: 0; width: 1px; height: 1px; }

@@ -29,7 +29,7 @@ export default function DoctorCard({ doctor }) {
       </div>
       <div className="doctor__foot">
         <div className="doctor__rating">
-          <span className="doctor__stars" aria-label={`${doctor.rating ?? 5} out of 5 stars`}>{[0, 1, 2, 3, 4].map((k) => <Icon key={k} name="star" className="doctor__star" />)}</span>
+          <span className="doctor__stars" role="img" aria-label={`${doctor.rating ?? 5} out of 5 stars`}>{[0, 1, 2, 3, 4].map((k) => <Icon key={k} name="star" className="doctor__star" />)}</span>
           {doctor.rating != null && <span className="doctor__score">{doctor.rating.toFixed(1)}{doctor.reviewCount ? ` · ${doctor.reviewCount} reviews` : ''}</span>}
         </div>
         <a className="doctor__book" href="#book" data-form="book-appointment" data-doctor={doctor.id}>Book Consultation</a>

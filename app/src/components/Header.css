@@ -1,3 +1,7 @@
+/* skip link: first tab stop on every page; visible only while focused */
+.skip-link { position: absolute; left: 16px; top: -100px; z-index: 100; min-height: 44px; display: inline-flex; align-items: center; padding: 0 16px; border-radius: 8px; background: var(--blue-900); color: var(--white); font-size: 16px; font-weight: 600; }
+.skip-link:focus { top: 8px; outline: 2px solid var(--orange-500); outline-offset: 2px; }
+main:focus { outline: none; }
 /* Header — flow rewrite 2026-09-17. Sizes from design/hero-values.md ("Bars") ×1.2 at ≥1366.
    display: contents on the header element so the sticky bars stick against the page, not a 166 px box. */
 .site-header { display: contents; }

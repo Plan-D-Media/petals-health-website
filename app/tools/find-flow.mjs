@@ -46,10 +46,10 @@ for (const width of [1366, 390]) {
   if (s6.names.join() !== s5.names.join() || s6.checked !== 2 || s6.sort !== 'name-desc') issues.push(`${width}: shared URL did not restore the state (${JSON.stringify(s6)})`)
   await p2.close()
   // rating filter and clear
-  await page.evaluate(() => document.querySelectorAll('.facet__star-opt input')[1].click()); await wait(200)   // 4.5 & up
+  await page.evaluate(() => document.querySelectorAll('.facet__star-opt input')[2].click()); await wait(200)   // 4.5 & up (index 0 is Any rating)
   const s7 = await state(); console.log(width, 'rating 4.5+', s7.url, s7.names.join(' | '))
   if (s7.names.length !== 3 || !s7.url.includes('r=4.5')) issues.push(`${width}: rating filter 4.5+ gave ${s7.names.length} rows (${s7.url})`)
-  await page.evaluate(() => document.querySelectorAll('.facet__star-opt input')[1].click()); await wait(200)   // click again → off
+  await page.evaluate(() => document.querySelectorAll('.facet__star-opt input')[2].click()); await wait(200)   // click again → off
   const s7b = await state(); if (s7b.url.includes('r=')) issues.push(`${width}: clicking the selected rating again did not clear it`)
   await page.click('.fd__clear'); await wait(200)
   const s8 = await state(); console.log(width, 'cleared', s8.url, s8.count, 'active', s8.active)
@@ -72,7 +72,7 @@ for (const width of [1366, 390]) {
   const back = await page.evaluate(() => ({ href: location.href, rows: document.querySelectorAll('.drow').length, checked: document.querySelectorAll('.facet__opt input:checked').length, scrollY }))
   console.log(width, 'back', JSON.stringify(back))
   if (back.href !== beforeUrl) issues.push(`${width}: back from the profile lost the URL state (${back.href} vs ${beforeUrl})`)
-  if (back.checked !== 2) issues.push(`${width}: back from the profile lost the filters (${back.checked} checked)`)
+  if (back.checked !== 1) issues.push(`${width}: back from the profile lost the filters (${back.checked} checked, expected 1: Available Today)`)
   // breadcrumb link from the profile → list keeps nothing (expected) but works
   await page.goto(BASE + '/doctors/smita-gutgutia/', { waitUntil: 'networkidle0' })
   const crumbOk = await page.evaluate(() => document.querySelector('.dp-hero__crumb a[href="/find-a-doctor"]') !== null)

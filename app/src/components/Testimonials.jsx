@@ -11,7 +11,7 @@ export function Story({ s }) {
   return (
     <article className="story" data-reveal>
       {s.placeholder && <span className="story__placeholder" title="Dummy testimonial until real patient stories are supplied">Placeholder</span>}
-      <div className="story__stars" aria-label={`${s.rating} out of 5 stars`}>
+      <div className="story__stars" role="img" aria-label={`${s.rating} out of 5 stars`}>
         {[0, 1, 2, 3, 4].map((k) => <Icon key={k} name="star" className={`story__star${k < s.rating ? '' : ' story__star--off'}`} />)}
       </div>
       <Icon name="quoteMark" className="story__mark" />

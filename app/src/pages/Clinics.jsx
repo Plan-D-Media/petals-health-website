@@ -25,7 +25,7 @@ export default function Clinics() {
   return (
     <div className="page">
       <Header current="clinics" />
-      <main>
+      <main id="main" tabIndex={-1}>
         <section className="sites band" aria-label="Our three clinics" data-hero>
           <ul className="sites__grid">
             {SITES.map((s, i) => (

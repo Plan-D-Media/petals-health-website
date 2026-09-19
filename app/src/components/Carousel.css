@@ -6,7 +6,8 @@
 .carousel__viewport:active { cursor: grabbing; }
 .carousel__track { display: flex; gap: var(--carousel-gap); margin: 0; padding: 10px 0 14px; list-style: none; transition: transform 400ms var(--ease); will-change: transform; }
 .carousel__track--dragging { transition: none; }
-.carousel__slide { flex: none; width: calc(100% - 40px); }   /* one card + a 40 px peek */
+.carousel__slide { flex: none; width: calc(100% - 40px); }
+.carousel__slide-inner { height: 100%; }   /* one card + a 40 px peek */
 
 .carousel__controls { display: flex; align-items: center; justify-content: center; gap: 12px; margin-top: 6px; }
 .carousel__btn {

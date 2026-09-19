@@ -11,15 +11,16 @@
   font-display: swap;
 }
 /* opsz-12 static cuts, fallback only (see type-scale.md §2 "Optical size") */
-@font-face {
-  font-family: 'Bricolage Fallback';   /* metric-matched Arial: text renders in this until Bricolage arrives, and the swap moves nothing
-                                          (size-adjust measured 100.7–103.6 % across 14–21 px; vertical metrics from the font) */
-  src: local('Arial');
-  size-adjust: 101.5%;
-  ascent-override: 93%;
-  descent-override: 27%;
-  line-gap-override: 0%;
-}
+/* Metric-matched Arial: text renders in this until Bricolage arrives, and the swap moves nothing. size-adjust per
+   weight from tools/font-ratio.mjs (DOM measurement with font-optical-sizing: auto, 2026-09-19): Bricolage is 2–5 %
+   wider than Arial at text weights and 1.5 % narrower than Arial Bold at 600–700; the opsz axis narrows it further
+   at display sizes, so bold is tuned to the 30–36 px mobile headlines (44–64 px desktop lines are long enough not
+   to flip). Vertical metrics from the font. */
+@font-face { font-family: 'Bricolage Fallback'; src: local('Arial'); font-weight: 300; size-adjust: 102%; ascent-override: 93%; descent-override: 27%; line-gap-override: 0%; }
+@font-face { font-family: 'Bricolage Fallback'; src: local('Arial'); font-weight: 400; size-adjust: 103.3%; ascent-override: 93%; descent-override: 27%; line-gap-override: 0%; }
+@font-face { font-family: 'Bricolage Fallback'; src: local('Arial'); font-weight: 500; size-adjust: 104.7%; ascent-override: 93%; descent-override: 27%; line-gap-override: 0%; }
+@font-face { font-family: 'Bricolage Fallback'; src: local('Arial Bold'), local('Arial'); font-weight: 600; size-adjust: 98.5%; ascent-override: 93%; descent-override: 27%; line-gap-override: 0%; }
+@font-face { font-family: 'Bricolage Fallback'; src: local('Arial Bold'), local('Arial'); font-weight: 700; size-adjust: 98.3%; ascent-override: 93%; descent-override: 27%; line-gap-override: 0%; }
 @font-face {
   font-family: 'Bricolage Grotesque Static';
   src: url('/fonts/BricolageGrotesque-Regular.woff2') format('woff2');

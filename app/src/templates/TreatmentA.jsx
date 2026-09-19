@@ -36,7 +36,7 @@ export default function TreatmentA({ content: c }) {
   return (
     <div className="page">
       <Header current={c.slug} />
-      <main>
+      <main id="main" tabIndex={-1}>
         <section className={'t-hero band' + (h.photoSide === 'right' ? ' t-hero--photo-right' : '')} aria-labelledby="t-hero-title">
           <div className="inner t-hero__inner">
             <div className="t-hero__photo" data-overlap-ok>
@@ -71,7 +71,8 @@ export default function TreatmentA({ content: c }) {
           </section>
         )}
 
-        <section className="t-services band" aria-label={`${c.title} services`}>
+        <section className="t-services band" aria-labelledby="t-services-title">
+          <h2 id="t-services-title" className="sr-only">{c.title} services</h2>
           <div className="inner"><ServiceGrid services={c.services} style={c.gridStyle || 'cards'} label={c.serviceLabel} /></div>
         </section>
 

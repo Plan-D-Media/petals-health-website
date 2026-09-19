@@ -56,11 +56,11 @@ function Drawer({ open, onClose, current }) {
   useEffect(() => {
     if (!open) return undefined
     document.documentElement.dataset.drawer = 'open'
-    const first = panel.current?.querySelector('a, button'); first?.focus()
+    const first = panel.current?.querySelector('a[href], button'); first?.focus()
     const onKey = (e) => {
       if (e.key === 'Escape') { e.preventDefault(); onClose(); return }
       if (e.key !== 'Tab') return
-      const f = [...panel.current.querySelectorAll('a, button')].filter((el) => el.offsetParent !== null)
+      const f = [...panel.current.querySelectorAll('a[href], button')].filter((el) => el.offsetParent !== null)   // a[href]: placeholder links (no href) are not focusable
       if (!f.length) return
       const i = f.indexOf(document.activeElement)
       if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus() }
@@ -108,7 +108,8 @@ export default function Header({ current = 'home' } = {}) {
   const close = useCallback(() => setOpenId(null), [])
   const showCta = useHeroScrolledOut()
   const [drawer, setDrawer] = useState(false)
-  const closeDrawer = useCallback(() => setDrawer(false), [])
+  const menuBtn = useRef(null)
+  const closeDrawer = useCallback(() => { setDrawer(false); requestAnimationFrame(() => menuBtn.current?.focus()) }, [])   // focus returns to the button that opened it
 
   const onArrow = (fromId, dir, wasOpen) => {
     const i = NAV.findIndex((n) => n.id === fromId)
@@ -122,6 +123,7 @@ export default function Header({ current = 'home' } = {}) {
 
   return (
     <header className="site-header">
+      <a className="skip-link" href="#main">Skip to content</a>
       {/* ---- compact bar (<1024) ---- */}
       <div className="mbar band">
         <a className="mbar__logo" href="/" aria-label="Petals Health — Your Family Clinic"><Img src="/assets/2_09c94b70.png" alt="" width="46" height="59" priority /></a>
@@ -131,7 +133,7 @@ export default function Header({ current = 'home' } = {}) {
         </div>
         <div className="mbar__actions">
           <a className="mbar__btn" href="tel:9147405955" aria-label="Call 9147405955"><Icon name="phone" /></a>
-          <button type="button" className="mbar__btn mbar__btn--menu" aria-label="Open menu" aria-expanded={drawer} onClick={() => setDrawer(true)}><span /><span /><span /></button>
+          <button ref={menuBtn} type="button" className="mbar__btn mbar__btn--menu" aria-label="Open menu" aria-expanded={drawer} onClick={() => setDrawer(true)}><span /><span /><span /></button>
         </div>
       </div>
       <Drawer open={drawer} onClose={closeDrawer} current={current} />

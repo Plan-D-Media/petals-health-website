@@ -46,7 +46,7 @@ export default function TreatmentB({ content: c }) {
   return (
     <div className="page">
       <Header current={c.slug} />
-      <main>
+      <main id="main" tabIndex={-1}>
         <section className="t-hero band" aria-labelledby="t-hero-title">
           <div className="inner t-hero__inner">
             <div className="t-hero__photo" data-overlap-ok>
