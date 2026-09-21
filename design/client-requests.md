@@ -132,3 +132,19 @@ line; "Multi Specality Clinic" in the Multispecialty headline; "Yoga & Welness" 
   the id is added. If you plan to run advertising tags, tell us and we will add a cookie-consent banner.
 - The site address: we have assumed https://www.petalshealth.in for the sitemap and link previews. Confirm the
   final domain (and whether it is www or not) before launch.
+
+**16. Treatment pages — doctors shown where no specialist is on the list yet (please approve before we show any).**
+Some treatment pages have no doctor of that specialty in the current list (Pain Management, Audiology, Yoga &
+Wellness, Dentistry, Cosmetic Gynaecology). Until the doctor sheet arrives, those pages show a "Find a doctor" link
+only — no substitute doctor. If you would like a related doctor shown meanwhile, this is what we propose and why;
+anything not in this table stays as the link:
+- Pain Management & Rejuvenation → the Family Physician (the page says pain consultations start with an assessment
+  and referral, which is family medicine).
+- Yoga & Wellness → a Gynaecologist, shown ONLY beside the "Prenatal & Postnatal Yoga" block, not as the page's team
+  (the rest of the page — back pain, stress and sleep, wellness coaching — is not her field).
+- Cosmetic Gynaecology → a Gynaecologist for the two intimate-wellness tracks only, not the skin and hair track.
+- Audiology and Dentistry → nobody until an audiologist / the dental team are on the sheet.
+Also for approval, the "start here" card on each page (the one drawn larger, first in the grid): Child Care →
+Well-Baby Checks (or Vaccination?), Pain Management → Back & Neck Pain (or Pregnancy-Related Pain?), Audiology →
+Hearing Tests, Yoga → Therapeutic Yoga, Multispecialty → Cardiology (your "Flagship"). Tell us if a different service
+should lead on any page.

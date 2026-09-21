@@ -139,7 +139,7 @@ link only. Proposed map for the client to approve before any substitute doctor a
 | Treatment page | Proposed substitute specialties | Basis |
 |---|---|---|
 | Pain Management & Rejuvenation | Family Medicine | the page's own copy: pain consultations start with a family physician's assessment and referral |
-| Yoga & Wellness | Gynaecology & Obstetrics | the page's feature block is prenatal/postnatal yoga; sessions are "built into your care" |
+| Yoga & Wellness | Gynaecology & Obstetrics — **for the Prenatal & Postnatal Yoga feature block only**, shown beside that block, not in the page's team band | the rest of the page (therapeutic yoga, stress and sleep coaching, wellness coaching) is not gynaecological; a gynaecologist in the team band would imply she oversees all of it |
 | Audiology | none proposed | no specialty in the data is defensible; wait for an audiologist in the sheet |
 | Dentistry | none proposed | wait for the dental team in the sheet |
 | Cosmetic Gynaecology & Aesthetics | Gynaecology & Obstetrics (cosmetic gynaecology track only) | the intimate-wellness tracks are gynaecological; the skin/hair track is not |
@@ -172,3 +172,14 @@ Other content keys added (all optional): `related` (slugs for the "More at Petal
 neighbours in the Treatments menu), `compactFrom` (services beyond it render as compact rows; default 6 when a page
 has more than eight), `href` on a service (turns the whole card into a link once a sub-page exists),
 `servicesEyebrow` / `servicesTitle` (the grid heading; default "What we treat" / "<Title> services").
+
+### Navy rule (review of Template A, 2026-09-21)
+Multispecialty had two navy objects: the lead card and the mock's "Cardiology, in depth" flagship band. Both options
+were built live (design/render/live/navy_compare.png: A left, B right). **A — light lead card (white, navy rule along
+the top, accent label), navy flagship band** is the recommendation and the template's rule: a page with a flagship
+band gets the light lead automatically (`leadTone` overrides). B — navy lead, flagship on the tint — turned the page's
+biggest section into a second services grid with nothing to mark it as the mock's featured track.
+The other four pages have no navy band: the lead card is their one navy object in the body. One thing to decide: the
+"More at Petals Health" row at the foot of every page is Home's navy closing panel, so strictly every page carries a
+second navy object at the very end. It is small, last and the site's closing device; kept, flagged here in case the
+rule should be stricter (it becomes a tint panel with one CSS change).

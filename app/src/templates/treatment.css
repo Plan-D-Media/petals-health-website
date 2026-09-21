@@ -75,6 +75,12 @@
 .tc--lead .tc__title { font-size: 26px; color: var(--white); }
 .tc--lead .tc__text { font-size: 16px; color: var(--white); }
 .tc--lead .tc__start { margin-top: auto; padding-top: 16px; font-size: 14px; font-weight: 500; color: var(--orange-500); }
+/* light lead (leadTone: 'light' — used where the page already has a navy band, so navy stays one object per page):
+   white card, orange label, navy title, a navy rule along the top */
+.tc--lead.tc--light { background: var(--white); color: var(--blue-900); border-top: 6px solid var(--blue-900); }
+.tc--lead.tc--light .tc__num { color: var(--accent-dark); }
+.tc--lead.tc--light .tc__title, .tc--lead.tc--light .tc__text { color: var(--blue-900); }
+.tc--lead.tc--light .tc__start { color: var(--accent-dark); }
 .tc__link { position: absolute; inset: 0; border-radius: inherit; }   /* whole card is the link once `href` exists */
 .tc__link:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
 .tc--linked .tc__title { text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 4px; transition: text-decoration-color var(--dur) var(--ease); }
@@ -108,6 +114,8 @@
 .tc__ask:hover { transform: translateY(-1px); box-shadow: var(--shadow-button); }
 @media (min-width: 768px) { .tc--ask { grid-column: span var(--span2, 1); } }
 @media (min-width: 1024px) { .tc--ask { grid-column: span var(--span4, 1); } }
+/* flagship band on the tint instead of navy (flagshipTone: 'tint'): same grid, white cards */
+.ts.tb--tint.ts--flagship .tc { background: var(--white); }
 /* on navy bands (flagship) the cards go translucent white */
 .tb--navy .tc { background: rgba(255, 255, 255, 0.08); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28); }
 .tb--navy .tc__num { color: var(--orange-500); }

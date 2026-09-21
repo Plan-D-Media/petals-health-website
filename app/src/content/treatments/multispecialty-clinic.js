@@ -50,5 +50,7 @@ export default {
     book: { label: 'Book Online', form: 'book-appointment' },
     style: 'light',   // the mock's closing band on this page is white with navy text and an outlined navy button
   },
+  // navy rule (2026-09-21, design/treatment-redesign.md): one navy object per page. The template gives the lead card
+  // the light treatment automatically when a page has a flagship band; `leadTone: 'navy'` would override.
   specialtyId: 'cardiology',
 }

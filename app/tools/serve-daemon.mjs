@@ -18,7 +18,7 @@ if (cmd === 'loop') {                       // the detached supervisor
   writeFileSync(PID, String(process.pid))
   const run = () => {
     const out = openSync(LOG, 'a')
-    const child = spawn(process.execPath, [resolve(ROOT, 'tools', 'serve.mjs'), '4173'], { cwd: ROOT, stdio: ['ignore', out, out] })
+    const child = spawn(process.execPath, [resolve(ROOT, 'tools', 'serve.mjs'), '4173'], { cwd: ROOT, stdio: ['ignore', out, out], windowsHide: true })   // no console window for the server either
     child.on('exit', (code) => { writeFileSync(LOG, `[supervisor] server exited ${code} at ${new Date().toISOString()}, restarting\n`, { flag: 'a' }); setTimeout(run, 2000) })
   }
   run()
@@ -27,7 +27,7 @@ if (cmd === 'loop') {                       // the detached supervisor
   if (pid && alive(pid)) { console.log(`already running (supervisor pid ${pid})`); process.exit(0) }
   const child = spawn(process.execPath, [import.meta.filename, 'loop'], { cwd: ROOT, detached: true, stdio: 'ignore', windowsHide: true })
   child.unref()
-  console.log(`started supervisor pid ${child.pid}; server on http://127.0.0.1:4173 (log: .serve/log)`)
+  console.log(`started supervisor pid ${child.pid}; server on http://127.0.0.1:4173 (log: .serve/log); no console window. Stop: node tools/serve-daemon.mjs stop`)
 } else if (cmd === 'stop') {
   const pid = readPid()
   if (pid && alive(pid)) { spawn('taskkill', ['/PID', String(pid), '/T', '/F'], { stdio: 'ignore' }); console.log(`stopped supervisor ${pid} and its server`) } else console.log('not running')

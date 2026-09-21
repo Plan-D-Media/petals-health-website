@@ -29,7 +29,7 @@ export function ServiceGrid({ services, c, noLead = false, ask = true }) {
     <>
       <ol className="ts__grid">
         {cards.map((s, i) => (
-          <li key={s.title} className={'tc' + (s.rank === 'lead' ? ' tc--lead' : '') + (s.href ? ' tc--linked' : '')} data-reveal data-reveal-order={i % 4}>
+          <li key={s.title} className={'tc' + (s.rank === 'lead' ? ' tc--lead' + ((c.leadTone || (c.flagship ? 'light' : 'navy')) === 'light' ? ' tc--light' : '') : '') + (s.href ? ' tc--linked' : '')} data-reveal data-reveal-order={i % 4}>
             <span className="tc__num" aria-hidden="true">{s.rank === 'lead' ? (s.label || 'Start here') : (s.label || c.serviceLabel || String(s.index + 1).padStart(2, '0'))}</span>
             <h3 className="tc__title">{s.title}{s.titlePending && <Pending title="This title is copied from the Pain Management page in the design; the intended title is with the client" />}</h3>
             <p className="tc__text">{s.text}</p>
@@ -173,7 +173,7 @@ export default function TreatmentA({ content: c }) {
         </section>
 
         {c.flagship && (
-          <section className="ts tb tb--navy" aria-labelledby="t-flagship-title">
+          <section className={'ts ts--flagship tb ' + (c.flagshipTone === 'tint' ? 'tb--tint' : 'tb--navy')} aria-labelledby="t-flagship-title">   {/* the page's one navy band; the lead card above goes light */}
             <div className="inner">
               <div className="tb__head">
                 <p className="tb__eyebrow">{c.flagship.eyebrow}</p>

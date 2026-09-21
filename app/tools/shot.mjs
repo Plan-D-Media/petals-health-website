@@ -14,7 +14,7 @@ for (const w of widths) {
   await p.goto(BASE + path, { waitUntil: 'networkidle0' }); await p.evaluate(() => document.fonts.ready)
   await p.evaluate(async () => { for (let y = 0; y < document.body.scrollHeight; y += 600) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 30)) } window.scrollTo(0, 0) })
   await new Promise((r) => setTimeout(r, 400))
-  const f = resolve(OUT, `${path.replace(/\//g, '_') || '_'}${w}.png`)
+  const f = resolve(OUT, `${path.replace(/[?=&]/g, '-').replace(/\//g, '_') || '_'}${w}.png`)
   await p.screenshot({ path: f, fullPage: true }); console.log(f, await p.evaluate(() => document.body.scrollHeight))
   await p.close()
 }
