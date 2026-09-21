@@ -5,7 +5,7 @@ import DoctorCard from '../components/DoctorCard.jsx'
 import Marquee from '../components/Marquee.jsx'
 import LeadForm from '../components/LeadForm.jsx'
 import { DOCTORS } from '../data/doctors.js'
-import './TreatmentA.css'   /* the shared treatment stylesheet: hero, intro, service cards, team */
+import './TreatmentLegacy.css'   /* the pre-redesign shared stylesheet; replaced when Template B moves to treatment.css */
 import './TreatmentB.css'
 import Img from '../components/Img.jsx'
 import { linkOr } from '../components/pending.js'
