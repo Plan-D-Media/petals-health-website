@@ -25,6 +25,7 @@ export default function SxoAgent() {
   const [phase, setPhase] = useState('hidden')        // hidden | prompt | who | need | form
   const [trigger, setTrigger] = useState('')
   const [answers, setAnswers] = useState({ who: '', need: '' })
+  const [done, setDone] = useState(false)
   const card = useRef(null)
   const returnTo = useRef(null)
 
@@ -63,7 +64,7 @@ export default function SxoAgent() {
     return () => document.removeEventListener('keydown', onKey)
   }, [open, dismiss])
 
-  const complete = () => { writeState({ completed: true }); track('sxo_completed', answers) }
+  const complete = () => { setDone(true); writeState({ completed: true }); track('sxo_completed', answers) }
   const pick = (k, v, next) => { setAnswers((a) => ({ ...a, [k]: v })); track('sxo_step', { step: k, value: v }); setPhase(next) }
 
   if (phase === 'hidden') return null
@@ -104,11 +105,11 @@ export default function SxoAgent() {
 
         {phase === 'form' && (
           <div className="sxo__body sxo__body--form">
-            <p className="sxo__sub">{COPY.formIntro}</p>
+            {!done && <p className="sxo__sub">{COPY.formIntro}</p>}
             <Suspense fallback={<p className="sxo__sub">Loading…</p>}>
               <LeadForm form="sxo-agent" source={{ section }} autoFocus={false} hideTitle onSuccess={complete} />
             </Suspense>
-            <p className="sxo__call"><a href="tel:9147405955">{COPY.callInstead}</a></p>
+            {!done && <p className="sxo__call"><a href="tel:9147405955">{COPY.callInstead}</a></p>}
           </div>
         )}
       </section>
