@@ -2,18 +2,25 @@ import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
 import FormDialog from '../components/FormDialog.jsx'
 import ClinicCards from '../components/ClinicCards.jsx'
-import Carousel from '../components/Carousel.jsx'
-import './About.css'
 import Img from '../components/Img.jsx'
-import { linkOr } from '../components/pending.js'
+import { Arrow } from '../components/Specialists.jsx'
+import { Related } from '../templates/TreatmentA.jsx'
+import { TEAM, hasRealPeople, careersEmail } from '../content/team.js'
+import { SITES } from '../data/clinics.js'
+import { STAGING } from '../config.js'
+import '../templates/treatment.css'
+import './About.css'
 
-// About Us (design/svg/4.svg). Sections in the mock's order: reception photo band · About Petals | Our Story ·
-// The problem | The idea · Our Approch | What we offer | The journey so far · Find us (shared clinic cards) ·
-// We are Building The Perfect Team + The team at a glance (three placeholder cards) · Want to join our Team?
-// Copy verbatim. Logged for the client (design/client-requests.md item 13): "Our Approch"; "infertility specialist
-// you go to" (specialists); "docuflencers" as written; the team cards are unnamed placeholders in the design; the
-// job-openings and resume links have no destination in the design.
-// The mock has no page title; "About Petals" — the first heading — is the page's h1.
+// About Us (design/svg/4.svg) — redesign 2026-09-21 (design/treatment-redesign.md, "About Us"). The mock's sections in
+// the mock's order, on the site's shared language:
+//   shelf hero (reception photo | h1 About Petals + its paragraph + the three clinics as facts) · Our Story as a
+//   centred pull · The problem → The idea as one tint band with a turn and the payoff set apart · Our Approch as
+//   numbered cards, What we offer as a checklist, The journey so far as a timeline · Find us (shared clinic cards) ·
+//   the team (monogram role tiles until real people; hidden in production while none exist) · Want to join our Team?
+//   as a light block · the "More at Petals Health" navy closing panel · footer.
+// Copy verbatim. Logged (client-requests.md items 13 and 17): "Our Approch"; "infertility specialist you go to";
+// "docuflencers" as written; the unsourced "80%…" and "Recognized among Kolkata's leading providers…" lines, kept as
+// plain body text; the careers address. Careers enquiries use the lead form tagged form: 'careers'.
 
 const ABOUT = 'Envisaged as a chain of family clinics, Petals is your community all-in-one family healthcare destination. We not only treat our patients, but we also continually engage with them to promote good practices to build healthy communities.'
 const STORY = [
@@ -58,93 +65,113 @@ const JOURNEY = [
   'Continuously expanding our medical knowledge resources to support women at every stage of life.',
 ]
 const TEAM_INTRO = 'Our passionate and committed team is dedicated to uplift our brand values and create a Modern Primary Care Digital Health Platform for families. With a shared vision, we bring together purpose-driven seasoned professionals and diverse expertise from various healthcare niches. We believe a dynamic team builds a stronger brand.'
-// PLACEHOLDER team: the design shows three unnamed role cards with a stock illustration. Names and photos are with the client.
-const TEAM = [
-  { id: 'ceo', role: 'Chief Executive Officer' },
-  { id: 'med-admin', role: 'Medical Administrator' },
-  { id: 'hr', role: 'Human Resources' },
-]
 
-const Para = ({ p }) => typeof p === 'string' ? <p className="about__p">{p}</p> : <p className="about__p">{p.before}<strong>{p.strong}</strong>{p.after}</p>
+const Para = ({ p, className = 'about__p' }) => typeof p === 'string' ? <p className={className}>{p}</p> : <p className={className}>{p.before}<strong>{p.strong}</strong>{p.after}</p>
 
-function TeamCard({ m }) {
+function TeamTile({ m }) {
   return (
-    <article className="team-card" aria-label={m.role}>
-      <div className="team-card__photo"><Img src="/assets/about/team-card.jpg" alt="" /><span className="team-card__placeholder" title="Name and photograph are with the client">Placeholder</span></div>
-      <h4 className="team-card__role">{m.role}</h4>
-    </article>
+    <li className="tm" data-reveal>
+      {m.photo ? <Img className="tm__photo" src={m.photo} alt="" /> : <span className="tm__mono" aria-hidden="true">{m.initials}</span>}
+      {m.name && <h3 className="tm__name">{m.name}</h3>}
+      <p className="tm__role">{m.role}</p>
+      {m.line && <p className="tm__line">{m.line}</p>}
+      {!m.name && <p className="tm__pending"><span className="pending" title="With the client">Placeholder</span> Name and photograph to follow</p>}
+    </li>
   )
 }
 
 export default function About() {
+  const showTeam = hasRealPeople || STAGING || import.meta.env.DEV   // production hides the section until a real person exists
   return (
     <div className="page">
       <Header current="about" />
       <main id="main" tabIndex={-1}>
-        <div className="about-hero band" data-hero>
-          <Img src="/assets/about/reception.jpg" alt="The reception desk at a Petals Health clinic" priority />
-        </div>
-
-        <section className="about band" aria-labelledby="about-title">
-          <div className="inner about__cols">
-            <div className="about__col">
-              <h1 id="about-title" className="about__h">About Petals</h1>
-              <p className="about__p">{ABOUT}</p>
+        <section className="th tb" aria-labelledby="about-title" data-hero>
+          <div className="inner th__inner">
+            <div className="th__stage ah__stage" data-overlap-ok>
+              <Img src="/assets/about/reception.jpg" alt="The reception desk at a Petals Health clinic" priority style={{ '--pos': '45% 60%' }} />
             </div>
-            <div className="about__col">
-              <h2 className="about__h">Our Story</h2>
-              {STORY.map((p) => <Para key={p} p={p} />)}
-            </div>
-            <div className="about__col">
-              <h2 className="about__h">The problem</h2>
-              <p className="about__p about__p--strong">80% of a Gynaecologist’s consultations are Pregnancy and Infertility related.</p>
-              {PROBLEM.map((p, i) => <Para key={i} p={p} />)}
-            </div>
-            <div className="about__col">
-              <h2 className="about__h">The idea</h2>
-              {IDEA.map((p) => <Para key={p} p={p} />)}
+            <div className="th__copy">
+              <p className="th__crumb"><a href="/">Home</a> <span aria-hidden="true">›</span> About us</p>
+              <h1 id="about-title" className="th__title"><span className="th__line th__line--primary">About Petals</span></h1>
+              <p className="th__lead ah__lead">{ABOUT}</p>
+              <a className="th__cta" href="#book" data-form="book-appointment" data-section="about-hero">Book an appointment</a>
+              <ul className="th__facts" aria-label="Our clinics">{SITES.map((s) => <li key={s.id} title="Source: clinics.js">{s.region}</li>)}</ul>
             </div>
           </div>
         </section>
 
-        <section className="about about--three band" aria-label="Our approach, what we offer and the journey so far">
-          <div className="inner about__cols about__cols--three">
-            <div className="about__col">
-              <h2 className="about__h">Our Approch</h2>
-              <ul className="about__pairs">{APPROACH.map(([t, d]) => <li key={t}><strong>{t}</strong><span>{d}</span></li>)}</ul>
+        <section className="as tb" aria-labelledby="story-title">
+          <div className="inner as__inner">
+            <h2 id="story-title" className="tb__eyebrow">Our Story</h2>
+            <p className="as__p">{STORY[0]}</p>
+            <p className="as__p as__p--pull">{STORY[1]}</p>
+          </div>
+        </section>
+
+        <section className="an tb tb--tint" aria-label="The problem and the idea">
+          <div className="inner an__inner">
+            <div className="an__col an__col--problem">
+              <h2 className="tb__eyebrow an__eyebrow">The problem</h2>
+              <p className="about__p about__p--strong">80% of a Gynaecologist’s consultations are Pregnancy and Infertility related.</p>
+              {PROBLEM.map((p, i) => <Para key={i} p={p} />)}
             </div>
-            <div className="about__col">
-              <h2 className="about__h">What we offer</h2>
-              {OFFER.map((p) => <Para key={p} p={p} />)}
+            <div className="an__turn" aria-hidden="true"><span /></div>
+            <div className="an__col an__col--idea">
+              <h2 className="tb__eyebrow an__eyebrow">The idea</h2>
+              {IDEA.slice(0, -1).map((p) => <Para key={p} p={p} />)}
             </div>
-            <div className="about__col">
-              <h2 className="about__h">The journey so far</h2>
-              {JOURNEY.map((p) => <Para key={p} p={p} />)}
+            <p className="an__payoff" data-reveal>{IDEA[IDEA.length - 1]}</p>
+          </div>
+        </section>
+
+        <section className="a3 tb" aria-label="Our approach, what we offer and the journey so far">
+          <div className="inner">
+            <h2 className="tb__eyebrow a3__eyebrow">Our Approch</h2>
+            <ol className="a3__approach">
+              {APPROACH.map(([t, d], i) => <li key={t} className="a3__card" data-reveal data-reveal-order={i}><span className="a3__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span><strong>{t}</strong><span>{d}</span></li>)}
+            </ol>
+            <div className="a3__pair">
+              <div className="a3__offer">
+                <h2 className="tb__eyebrow a3__eyebrow">What we offer</h2>
+                <ul className="a3__check">{OFFER.map((p) => <li key={p} data-reveal><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg><span>{p}</span></li>)}</ul>
+              </div>
+              <div className="a3__journey">
+                <h2 className="tb__eyebrow a3__eyebrow">The journey so far</h2>
+                <ol className="a3__timeline">{JOURNEY.map((p) => <li key={p} data-reveal><span>{p}</span></li>)}</ol>
+              </div>
             </div>
           </div>
         </section>
 
         <ClinicCards />
 
-        <section className="team band" aria-labelledby="team-title">
-          <div className="inner">
-            <div className="sec-head">
-              <h2 id="team-title" className="sec-head__title">We are Building The Perfect Team</h2>
-              <p className="sec-head__sub team__intro">{TEAM_INTRO}</p>
-              <h3 className="team__sub">The team at a glance</h3>
+        {showTeam && (
+          <section className="at tb" aria-labelledby="team-title">
+            <div className="inner">
+              <div className="tb__head">
+                <h2 id="team-title" className="tb__title">We are Building The Perfect Team</h2>
+                <p className="tb__sub">{TEAM_INTRO}</p>
+              </div>
+              <h3 className="at__sub">The team at a glance</h3>
+              <ul className="at__grid">{TEAM.map((m) => <TeamTile key={m.id} m={m} />)}</ul>
             </div>
-          </div>
-          <div className="inner team__carousel-wrap">
-            <Carousel items={TEAM} renderItem={(m) => <TeamCard m={m} />} label="The team at a glance" autoplayMs={0} dots={false} className="team__carousel" />
-          </div>
-          <div className="inner team__join">
-            <h3 className="team__join-title">Want to join <span className="team__join-accent">our Team?</span></h3>
-            <div className="team__actions">
-              <a {...linkOr(null, { className: 'team__btn' })}>View job openings <span aria-hidden="true">→</span></a>
-              <a {...linkOr(null, { className: 'team__btn' })}>Submit your resume <span aria-hidden="true">→</span></a>
+          </section>
+        )}
+
+        <section className="aj tb" aria-labelledby="join-title">
+          <div className="inner aj__inner">
+            <h2 id="join-title" className="aj__title">Want to join <span className="aj__accent">our Team?</span></h2>
+            <div className="aj__actions">
+              {careersEmail
+                ? <a className="aj__btn" href={`mailto:${careersEmail}?subject=Application%20via%20petalshealth.in`}>Submit your resume <Arrow /></a>
+                : <a className="aj__btn is-pending" aria-disabled="true" title="This page is not available yet">Submit your resume <Arrow /></a>}
+              <a className="aj__btn" href="#careers" data-form="careers" data-section="about-careers">View job openings <Arrow /></a>
             </div>
           </div>
         </section>
+
+        <Related c={{ slug: 'about', related: ['womens-care', 'child-care', 'multispecialty-clinic'] }} />
       </main>
       <Footer />
       <FormDialog />

@@ -15,6 +15,7 @@ export const FORM_PRESETS = {
   'book-consultation': { title: 'Book a consultation', fields: ['name', 'mobile', 'email', 'doctor', 'date'], submit: 'Book Consultation', thanks: 'Thank you. Our team will confirm your consultation by phone or WhatsApp.' },
   'sxo-agent': { title: 'Tell us how we can help', fields: ['name', 'mobile', 'gender', 'age', 'doctor', 'date'], submit: 'Send', thanks: 'Thank you. A member of our team will be in touch shortly.' },
   'ask-doctor': { title: 'Ask a doctor', fields: ['name', 'mobile', 'message'], submit: 'Ask Doctor', thanks: 'Thank you. A doctor from the right department will get back to you, usually within a working day.' },   // header "Ask a Doctor" and the Find a Doctor "Not sure who to pick?" band
+  'careers': { title: 'Ask about job openings', fields: ['name', 'mobile', 'email', 'message'], submit: 'Send enquiry', thanks: 'Thank you. Our team will reply about current openings.' },   // About Us careers block; form: 'careers' in the payload so lead reporting can exclude it
   'book-consultation-page': { title: 'Book a Consultation', fields: ['name', 'mobile', 'email', 'department', 'message'], submit: 'Submit', thanks: 'Thank you. Our team will confirm your consultation by phone or WhatsApp.' },   // the treatment pages' on-page form (mock: Full Name, Email ID, Phone, Select Department, Message)
 }
 

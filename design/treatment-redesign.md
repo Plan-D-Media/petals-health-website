@@ -251,3 +251,116 @@ Test hooks: ?sxo=now, ?sxo=reset, ?sxoDelay=<ms>. Analytics: sxo_shown {trigger}
 sxo_completed, plus the form's own events. Demo frames: design/render/live/sxo/ (sheet_1366.png, sheet_390.png,
 sxo_1366.gif, sxo_390.gif). Verified: all three triggers fire; dismissal and completion persist across navigation.
 Not built (waits on approval): mounting on every page (one line in main.jsx), `repeatMs`.
+
+# About Us — audit and direction (2026-09-21)
+
+Walked live at 390, 1366 and 1920 (design/render/live/_about_*.png). Fixed: palette, fonts, type scale, copy, section
+order. Open: layout, proportion, hierarchy, imagery, rhythm.
+
+## Where the page loses a reader — top five by improvement against cost
+
+1. **Four prose columns, no way in.** "About Petals / Our Story / The problem / The idea" are four identical
+   headings over four identical blocks of 16 px body. At 1366 the eye reads the first heading, drops to "About
+   Petals" (two sentences), then faces 1,400 px of two-column prose with nothing to hold it. At 1920 the columns
+   stretch to 500 px measures (80–90 characters a line, too long) and the block is 55 % of the page. At 390 it is
+   1.6 screens of uninterrupted text before the first thing that isn't a paragraph. There is no scan layer at all:
+   a visitor cannot tell in five seconds what Petals is. Cost: low; this is layout and typography on copy that
+   already exists.
+
+2. **The problem → The idea is a story told as two unrelated columns.** The mock's most persuasive content is a
+   narrative arc: women's health has been reduced to pregnancy and infertility; women suffer in silence; awareness
+   is rising but there is nowhere reliable to go; *so we built one place*. On the page "The problem" and "The idea"
+   sit side by side as peers, the same size, the same tone, so the payoff line ("This is what gave rise to the Idea
+   of Petals Health…") is buried at the bottom of the right-hand column with the same weight as a bullet about
+   online resources. Nothing on the page says "and then". Cost: low-medium.
+
+3. **Approach / Offer / Journey: three lists side by side.** Three headings, three columns, 5 + 7 + 7 items, every
+   item the same weight, no icons, no numbers, no rhythm. At 1366 the middle column is one long paragraph-list; at
+   768 it was already flagged as cramped (now stacked, which is better but still 900 px of list). "Our Approch" is
+   the one list that is scannable by nature (five short pairs) and it is styled exactly like the two paragraph
+   lists beside it. Cost: low.
+
+4. **The reception photo is a banner, not an argument.** It runs edge to edge at a fixed 460 px height with no
+   caption, no copy over it, no connection to the heading beneath. It is the best asset on the page (a real clinic,
+   the real logo wall, real staff at the desk) and it is doing nothing but occupying the first screen; at 1920 it is
+   letterboxed and the desk is cropped. It should carry the page's opening claim. Cost: low.
+
+5. **The team section promises people and shows three empty cards; the careers line has two dead buttons.** "The
+   team at a glance" introduces a carousel of three identical stock illustrations with role titles, then arrows to
+   scroll three cards that fit on one row anyway. Then "Want to join our Team?" with two buttons that are placeholder
+   links. The section is 900 px tall and contains no information a visitor can use. Cost: low, but it needs a
+   content decision (below).
+
+Also: the page has no navy object and no closing action; it ends on the two inert careers buttons and the footer.
+The clinic cards are the only object with hierarchy on the page, and they are the shared component, already right.
+
+## Direction
+
+**Hero: the photo carries the opening.** The reception photograph becomes a shelf hero like the treatment pages:
+the photo on the left running off the edge (desk and logo wall in frame at every width via object-position), and on
+the right the page's h1 "About Petals" with its single paragraph as the lead ("Envisaged as a chain of family
+clinics, Petals is your community all-in-one family healthcare destination…") and the three clinic names from the
+data file as the facts row (verified: they exist). The visitor gets the answer to "what is this?" in the first
+screen, with the real clinic behind it.
+
+**Our Story: a short pull, not a column.** Two sentences, set large on the white band under the hero, centred, the
+way Home's intro paragraph reads. "We don't just treat conditions. We help you manage your health better, every
+day." is the line the mock wants remembered; it gets the last position and the weight.
+
+**The problem → The idea: one narrative band with a turn.** A tint band. Left column, eyebrow "The problem", the
+four paragraphs as they are (the 80 % line stays plain body text, bold as in the mock, not a stat). A visible turn
+between the two, a vertical rule on desktop and a marker on mobile, then the eyebrow "The idea" and the three
+"but…" paragraphs, and the payoff paragraph ("This is what gave rise to the Idea of Petals Health…") set apart as
+the band's conclusion: larger, navy, full width under both columns, so the arc lands. No copy changes; the order is
+the mock's.
+
+**Approach / Offer / Journey: three different shapes.** "Our Approch" becomes five numbered pairs in a row of
+small white cards (the ranked-grid card, compact); it is a list of principles and reads as one. "What we offer"
+becomes a two-column checklist with a check mark per item (seven services; a checklist is what the copy is). "The
+journey so far" becomes a vertical timeline down the right: seven milestones with a dot and a rule (the copy is
+achievements; a timeline says "so far"). The "Recognized among Kolkata's leading providers" line stays a timeline
+entry in body size, not a callout. White band, seam above and below.
+
+**Find us: unchanged.** The shared clinic cards, tint band, as on the Clinics page.
+
+**The team: honest until people arrive.** The three placeholder cards go. Until the client sends names and
+photographs, the section is the heading and the paragraph the mock gives it ("We are Building The Perfect Team…"),
+and under it one row of three *role tiles*: a small monogram disc with the role's initials (CEO, MA, HR; the same
+monogram device the doctor card uses when a photo is missing), the role title, and the single line "Name and
+photograph to follow". No carousel, no arrows, no stock illustration pretending to be a person. When the sheet
+arrives, each tile becomes a person card (photo, name, role, one line) through the same content array; the
+component handles both shapes. The `Placeholder` tag stays so the client sees the state.
+
+**Careers: a real destination or nothing clickable.** "Want to join our Team?" stays as the section's closing
+line inside one navy closing panel (the page's one navy object, matching every other page's close): the line, then
+two actions that work today. "Email your CV" is a mailto once the client gives the address (until then an inert
+placeholder link, tagged), and "Contact us" opens the call-back form, which exists. One content key switches the
+mailto on.
+
+**Bands and seams.** white hero → white story → tint narrative → white three-shapes → tint clinics → white team →
+navy careers panel → footer. Seams on every tint band.
+
+**Weight.** The reception photo is already the pipeline's output (1600 × 1200 WebP, 165 kB, an 800 px phone
+variant); the shelf hero shows it larger than today's banner but inside that box. The team-card stock illustration
+(7 kB) is dropped; the map thumbs stay. Nothing added.
+
+**Motion.** The existing reveals on the cards and timeline rows; nothing else.
+
+**Logged for the client (item 17):** the two unsourced claims, "80% of a Gynaecologist's consultations are
+Pregnancy and Infertility related" and "Recognized among Kolkata's leading providers of women's health and
+gynecological care", kept as body text, source or removal requested; "Our Approch", "Cantre", "Oppsite",
+"infertility specialist you go to", "docuflencers" as already listed under item 13; the careers address.
+
+### About Us — built 2026-09-21 (with the three changes from the approval)
+1. **Careers routing.** Chose tagging: "View job openings" opens the shared lead form with the `careers` preset
+   (name, mobile, email, message; own thank-you), so the payload carries `source.form: 'careers'` and lead reporting
+   filters it on one field. "Submit your resume" is an inert, tagged placeholder until `careersEmail` in
+   src/content/team.js is set, when it becomes a mailto. No careers enquiry can land untagged in the patient sheet.
+2. **Team tiles in production.** src/content/team.js holds the array; `hasRealPeople` is true once any entry has a
+   name. The section renders when a real person exists, or on staging/dev builds; a production build with no real
+   people omits it entirely (build-time: VITE_STAGING / import.meta.env.DEV). Verified: the production capture has
+   no team section; the staging capture shows the three monogram tiles with the Placeholder tag.
+3. **Closing action.** Careers is a white block in the mock's position; the navy "More at Petals Health" panel
+   (Women's Care · Child Care · Multispecialty · Find a Doctor) closes the page. The hero CTA is Book an appointment.
+Bands: white hero · white story · tint narrative · white three-shapes · tint clinics · [white team] · white careers ·
+navy close. Weight: the stock team illustration is gone; nothing added.

@@ -15,7 +15,7 @@ const WIDTHS = [390, 768, 1366, 1920]
 const filter = process.argv[2]
 const PAGES = [...SITE_PAGES.map((p) => p.path), '/no-such-page/'].filter((p) => !filter || p.includes(filter))
 const KNOWN = new Set([...SITE_PAGES.map((p) => p.path.replace(/\/$/, '') || '/'), '/privacy-policy.html', '/treatments/fertility-care'])
-const FORM_TITLES = { 'book-appointment': 'Book an appointment', 'request-callback': 'Request a call back', 'book-consultation': 'Book a consultation', 'sxo-agent': 'Tell us how we can help', 'ask-doctor': 'Ask a doctor', 'book-consultation-page': 'Book a Consultation' }
+const FORM_TITLES = { 'book-appointment': 'Book an appointment', 'request-callback': 'Request a call back', 'book-consultation': 'Book a consultation', 'sxo-agent': 'Tell us how we can help', 'ask-doctor': 'Ask a doctor', 'careers': 'Ask about job openings', 'book-consultation-page': 'Book a Consultation' }
 
 const browser = await puppeteer.launch({ executablePath: CHROME, headless: 'new', args: ['--no-sandbox'] })
 const wait = (ms) => new Promise((r) => setTimeout(r, ms))

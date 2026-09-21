@@ -148,3 +148,10 @@ Also for approval, the "start here" card on each page (the one drawn larger, fir
 Well-Baby Checks (or Vaccination?), Pain Management → Back & Neck Pain (or Pregnancy-Related Pain?), Audiology →
 Hearing Tests, Yoga → Therapeutic Yoga, Multispecialty → Cardiology (your "Flagship"). Tell us if a different service
 should lead on any page.
+
+**17. About Us: two claims need a source, or removal.** "80% of a Gynaecologist's consultations are Pregnancy and
+Infertility related" and "Recognized among Kolkata's leading providers of women's health and gynecological care" are
+stated on the page without a source. We have kept both as ordinary body text (not highlighted) until you tell us
+where each comes from (a survey, an award, a publication) or ask us to remove them. Also from this page: which
+email address should receive CVs from "Submit your resume", or is there a careers page we should link to? Until
+then that button is shown but not clickable.
