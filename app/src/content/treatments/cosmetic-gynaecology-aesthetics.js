@@ -20,7 +20,12 @@ export default {
     cta: { label: 'Book your appoinment', form: 'book-appointment' },
     photo: { src: '/assets/treatments/cosmetic-hero.png', alt: 'A woman holding a lotus flower', position: '40% 25%' },
   },
-  stats: ['35 procedures across 3 tracks of care', { big: '3 clinics', small: 'Kankurgachi, Loudon Street, Tollygunge' }, '1st consultation is complimentary'],
+  // the mock's navy stats strip, as the hero's verified-facts row (each fact carries its source; design/treatment-redesign.md)
+  facts: [
+    { label: '35 procedures across 3 tracks of care', source: 'mock stats strip (design/svg/Cosmetic Gynaecology & Aesthetics.svg)' },
+    { label: '3 clinics — Kankurgachi, Loudon Street, Tollygunge', source: 'mock stats strip' },
+    { label: '1st consultation is complimentary', source: 'mock stats strip — this page only' },
+  ],
   groups: [
     { head: { eyebrow: '01 · Non-Surgical', title: 'Intimate wellness, ', titleAccent: 'without surgery', sub: 'Laser and device based treatments for tightening, rejuvenation, infection control and pelvic floor strength most take under an hour, with no downtime.' },
       cols: 4, tone: 'cream', labelled: true, link: { label: 'Learn more' },

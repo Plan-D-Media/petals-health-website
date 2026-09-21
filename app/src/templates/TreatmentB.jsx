@@ -1,166 +1,178 @@
+import { useEffect, useState } from 'react'
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
 import FormDialog from '../components/FormDialog.jsx'
-import DoctorCard from '../components/DoctorCard.jsx'
-import Marquee from '../components/Marquee.jsx'
 import LeadForm from '../components/LeadForm.jsx'
-import { DOCTORS } from '../data/doctors.js'
-import './TreatmentLegacy.css'   /* the pre-redesign shared stylesheet; replaced when Template B moves to treatment.css */
-import './TreatmentB.css'
 import Img from '../components/Img.jsx'
-import { linkOr } from '../components/pending.js'
+import { Arrow } from '../components/Specialists.jsx'
+import { Hero, ServiceGrid, Team, Related } from './TreatmentA.jsx'
+import { departmentFor } from './treatmentData.js'
+import './treatment.css'
+import './TreatmentB.css'
 
-// Template B — "grouped grids + FAQ + on-page form" (Women's Care, Dentistry, Cosmetic Gynaecology) and its IVF variant.
-// Every block is optional and comes from the content file, rendered in this fixed order:
-//   hero · stats strip · intro · explained · groups[] (each: head, cards or subgroups, tone, divider) · icon grid ·
-//   featured band · why-choose · journey stepper · risks & safety · conversation band · [faq | package] + form · team
-// The page adds no copy of its own.
+// Template B (Women's Care, Dentistry, Cosmetic Gynaecology) and the Petals IVF variant — redesign 2026-09-21
+// (design/treatment-redesign.md). Same shared layer as Template A; the mock's section order:
+//   hero on a shelf (+ facts, + track pills on multi-track pages) · intro · [IVF: explained · icon grid · featured ·
+//   why-choose · journey · conversation] · groups (tracks: each a band with the ranked grid; a sticky track index on
+//   desktop) · risks & safety · before your visit (answered FAQs or the package | the form) · team · related · footer.
+// Navy: one band per page — Cosmetic's surgical track, Dentistry's Risks band, IVF's featured band. Cards carry no link
+// until a service has `href` (the mock's "Learn more" goes nowhere; design/review-2026-09-19.md item 5).
+// FAQ: only answered questions render — an open list up to two, an accordion from three; unanswered items stay in the
+// content file with no `a` and appear when the client supplies them.
 
 const Pending = ({ title = 'With the client' }) => <span className="pending" title={title}>Copy pending</span>
+const trackLabel = (g, i) => g.trackLabel || (g.head?.eyebrow || `Track ${i + 1}`).replace(/^\d+\s*·?\s*/, '').replace(/\s+/g, ' ').trim()
+const realHref = (href) => (href && href !== '#' ? href : null)
 
-function Headline({ lines }) {
-  if (typeof lines[0] === 'string') return lines.map((l, i) => <span key={i} className={'t-hero__line ' + (i === 1 ? 't-hero__line--accent' : 't-hero__line--primary')}>{l}</span>)
-  return <span className="t-hero__line">{lines.map((p, i) => <span key={i} className={p.accent ? 't-hero__accent' : 't-hero__primary'}>{p.text}</span>)}</span>
+function TrackIndex({ tracks }) {
+  const [active, setActive] = useState(tracks[0]?.id)
+  useEffect(() => {
+    const els = tracks.map((t) => document.getElementById(t.id)).filter(Boolean)
+    let raf = 0
+    const onScroll = () => { if (raf) return; raf = requestAnimationFrame(() => { raf = 0; const line = 140; let cur = els[0]; for (const el of els) if (el.getBoundingClientRect().top <= line) cur = el; setActive(cur?.id) }) }
+    window.addEventListener('scroll', onScroll, { passive: true }); onScroll()
+    return () => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(raf) }
+  }, [tracks])
+  return (
+    <nav className="tx" aria-label="Sections on this page">
+      <div className="inner tx__inner">
+        <ol className="tx__list">{tracks.map((t) => <li key={t.id}><a href={`#${t.id}`} className={t.id === active ? 'is-active' : ''} aria-current={t.id === active ? 'location' : undefined}>{t.label}</a></li>)}</ol>
+      </div>
+    </nav>
+  )
 }
 
-function Cards({ cards, g, offset = 0 }) {
+function Group({ g, i, c, id }) {
+  const tone = g.tone === 'navy' ? 'tb--navy' : g.tone === 'cream' ? 'tb--cream' : i % 2 === 0 ? 'tb--tint' : ''
+  const gc = { ...c, compactFrom: Infinity, serviceLabel: null, leadNote: '' }
   return (
-    <ol className={`t-services__grid t-services__grid--cards t-services__grid--cols${g.cols || 4}${g.tone ? ' t-services__grid--' + g.tone : ''}`}>
-      {cards.map((s, i) => (
-        <li key={s.title} className="t-service" data-reveal data-reveal-order={i % (g.cols || 4)}>
-          {g.numbered && <span className="t-service__num" aria-hidden="true">{offset + i + 1}</span>}
-          {g.labelled && s.label && <span className="t-service__num">{s.label}</span>}
-          <h3 className="t-service__title">{s.title}{s.titlePending && <Pending />}</h3>
-          <p className="t-service__text">{s.text}</p>
-          {g.link && <a {...linkOr(g.link.href, { className: 't-service__link' + (g.link.accent ? ' t-service__link--accent' : '') })}>{g.link.label} <span aria-hidden="true">→</span></a>}
-        </li>
-      ))}
-    </ol>
+    <section id={id} className={`ts tg tb ${tone}`.trim()} aria-labelledby={`${id}-title`}>
+      <div className="inner">
+        {g.head && (
+          <div className="tb__head">
+            {g.head.eyebrow && <p className="tb__eyebrow">{g.head.eyebrow}</p>}
+            <h2 id={`${id}-title`} className="tb__title">{g.head.title}{g.head.titleAccent && <span className="tb__accent">{g.head.titleAccent}</span>}</h2>
+            {g.head.sub && <p className="tb__sub">{g.head.sub}</p>}
+          </div>
+        )}
+        {g.cards && <ServiceGrid services={g.cards} c={gc} noLead={i > 0} ask={i === 0} />}
+        {g.subgroups && g.subgroups.map((sg, k) => (
+          <div key={sg.heading + k} className="tg__sub">
+            <h3 className="tg__sub-heading"><span>{sg.heading}{sg.headingPending && <Pending title="This heading is the divider line from between tracks 01 and 02, repeated here in the design; the intended heading is with the client" />}</span></h3>
+            <ServiceGrid services={sg.cards} c={gc} noLead ask={false} />
+          </div>
+        ))}
+      </div>
+      {g.divider && <div className="tg__divider"><span>{g.divider}</span></div>}
+    </section>
+  )
+}
+
+function Faq({ faq }) {
+  const answered = faq.items.filter((it) => it.a)
+  const pending = faq.items.length - answered.length
+  if (!answered.length) return null
+  return (
+    <div className="tq">
+      {faq.eyebrow && <p className="tb__eyebrow tq__eyebrow">{faq.eyebrow}</p>}
+      <h2 id="t-visit-title" className="tv__title">{faq.title}</h2>
+      {answered.length < 3 ? (
+        <dl className="tq__list">{answered.map((it) => <div key={it.q} className="tq__item"><dt>{it.q}</dt><dd>{it.a}</dd></div>)}</dl>
+      ) : (
+        <div className="tq__acc">{answered.map((it, i) => <details key={it.q} className="tq__acc-item" open={i === 0}><summary>{it.q}</summary><p>{it.a}</p></details>)}</div>
+      )}
+      {pending > 0 && <p className="tq__note">{pending} more {pending === 1 ? 'question is' : 'questions are'} being answered by the clinic and will appear here.</p>}
+    </div>
   )
 }
 
 export default function TreatmentB({ content: c }) {
-  const team = DOCTORS.filter((d) => d.specialtyId === c.specialtyId)
-  const h = c.hero
-  const leftColumn = c.faq || c.package
+  const groups = c.groups || []
+  const tracks = groups.length > 1 ? groups.map((g, i) => ({ id: `track-${i + 1}`, label: trackLabel(g, i) })) : null
+  const featHref = c.featured && realHref(c.featured.cta.href)
   return (
     <div className="page">
       <Header current={c.slug} />
       <main id="main" tabIndex={-1}>
-        <section className="t-hero band" aria-labelledby="t-hero-title">
-          <div className="inner t-hero__inner">
-            <div className="t-hero__photo" data-overlap-ok>
-              <Img src={h.photo.src} alt={h.photo.alt} priority style={{ '--pos': h.photo.position || '50% 30%' }} />
-            </div>
-            <div className="t-hero__copy">
-              <p className="t-hero__crumb"><a href="/">Home</a> <span aria-hidden="true">›</span> Treatments <span aria-hidden="true">›</span> {c.title}</p>
-              {h.tagline && <p className="t-hero__tagline">{h.tagline}</p>}
-              <h1 id="t-hero-title" className="t-hero__title"><Headline lines={h.headline} /></h1>
-              {h.subline && <p className="t-hero__subline t-hero__subline--strong">{h.subline}</p>}
-              <p className={'t-hero__lead' + (h.leadLarge ? ' t-hero__lead--large' : '')}>{h.lead}</p>
-              <a className="t-hero__cta" href="#book" data-form={h.cta.form} data-section="treatment-hero">{h.cta.label}</a>
-            </div>
-          </div>
-        </section>
+        <Hero c={{ ...c, tracks }} />
 
-        {c.stats && (
-          <div className="t-stats band"><div className="inner t-stats__inner">
-            {c.stats.map((s, i) => typeof s === 'string' ? <p key={i} className="t-stats__item">{s}</p> : <p key={i} className="t-stats__item"><span className="t-stats__big">{s.big}</span><span className="t-stats__small">{s.small}</span></p>)}
-          </div></div>
-        )}
-
-        {c.intro && <section className="t-intro band"><div className="inner"><p className="t-intro__text">{c.intro}</p></div></section>}
+        {c.intro && <section className="ti tb"><div className="inner"><p className="ti__text">{c.intro}</p></div></section>}
 
         {c.explained && (
-          <section className="t-explained band" aria-labelledby="t-explained-title">
-            <div className="inner t-explained__inner">
+          <section className="tx-explained tb" aria-labelledby="t-explained-title">
+            <div className="inner tx-explained__inner">
               <div>
-                <h2 id="t-explained-title" className="t-explained__title">{c.explained.heading[0]}<br />{c.explained.heading[1]}</h2>
-                {c.explained.paragraphs.map((p) => <p key={p} className="t-explained__p">{p}</p>)}
+                <h2 id="t-explained-title" className="tx-explained__title">{c.explained.heading[0]}<br />{c.explained.heading[1]}</h2>
+                {c.explained.paragraphs.map((p) => <p key={p} className="tx-explained__p">{p}</p>)}
               </div>
-              <div className="t-explained__art"><Img src={c.explained.illustration.src} alt={c.explained.illustration.alt} /></div>
+              <div className="tx-explained__art"><Img src={c.explained.illustration.src} alt={c.explained.illustration.alt} /></div>
             </div>
           </section>
         )}
 
-        {c.groups.map((g, gi) => (
-          <section key={gi} className={'t-group band' + (g.tone === 'navy' ? ' t-group--navy' : '')} aria-labelledby={`t-group-${gi}`}>
-            <div className="inner">
-              {g.head && (
-                <div className="t-group__head">
-                  {g.head.eyebrow && <p className="t-group__eyebrow">{g.head.eyebrow}</p>}
-                  <h2 id={`t-group-${gi}`} className="t-group__title">{g.head.title}{g.head.titleAccent && <span className="t-group__accent">{g.head.titleAccent}</span>}</h2>
-                  {g.head.sub && <p className="t-group__sub">{g.head.sub}</p>}
-                </div>
-              )}
-              {g.cards && <Cards cards={g.cards} g={g} />}
-              {g.subgroups && g.subgroups.map((sg) => (
-                <div key={sg.heading} className="t-subgroup">
-                  <h3 className="t-subgroup__heading"><span>{sg.heading}{sg.headingPending && <Pending title="This heading is the divider line from between tracks 01 and 02, repeated here in the design; the intended heading is with the client" />}</span></h3>
-                  <Cards cards={sg.cards} g={g} />
-                </div>
-              ))}
-            </div>
-            {g.divider && <div className="t-divider"><span>{g.divider}</span></div>}
-          </section>
-        ))}
-
         {c.iconGrid && (
-          <section className="t-icons band" aria-labelledby="t-icons-title">
+          <section className="ts tb tb--tint" aria-labelledby="t-icons-title">
             <div className="inner">
-              <h2 id="t-icons-title" className="t-rule-heading"><span>{c.iconGrid.ruleHeading}</span></h2>
-              <p className="t-icons__intro">{c.iconGrid.intro}</p>
-              <ol className="t-icons__grid">
+              <div className="tb__head">
+                <p className="tb__eyebrow">What we offer</p>
+                <h2 id="t-icons-title" className="tb__title">{c.iconGrid.ruleHeading}</h2>
+                <p className="tb__sub">{c.iconGrid.intro}</p>
+              </div>
+              <ol className="ts__grid tk__grid">
                 {c.iconGrid.tiles.map((t, i) => (
-                  <li key={t.title[0]} className={'t-tile' + (t.highlight ? ' t-tile--highlight' : '')} data-reveal data-reveal-order={i % 3}>
-                    <Img className="t-tile__icon" src={t.icon} alt="" />
-                    <h3 className="t-tile__title">{t.title.map((l, k) => <span key={k}>{l}{k < t.title.length - 1 && <br />}</span>)}</h3>
-                    <p className="t-tile__text">{t.text}</p>
+                  <li key={t.title[0]} className={'tc tk' + (t.highlight ? ' tc--lead tk--lead' : '')} data-reveal data-reveal-order={i % 4}>
+                    <Img className="tk__icon" src={t.icon} alt="" />
+                    {t.highlight && <span className="tc__num" aria-hidden="true">Start here</span>}
+                    <h3 className="tc__title">{t.title.map((l, k) => <span key={k}>{l}{k < t.title.length - 1 && <br />}</span>)}</h3>
+                    <p className="tc__text">{t.text}</p>
                   </li>
                 ))}
-                <li className="t-tile t-tile--cta" aria-label="Book your appointment"><a className="t-tile__cta" href="#book" data-form={c.iconGrid.cta.form} data-section="treatment-services">{c.iconGrid.cta.label}</a></li>
+                <li className="tc tc--ask tk__cta" aria-label={c.iconGrid.cta.label}>
+                  <span className="tc__num" aria-hidden="true">Ready when you are</span>
+                  <a className="tc__ask" href="#book" data-form={c.iconGrid.cta.form} data-section="treatment-services">{c.iconGrid.cta.label} <Arrow /></a>
+                </li>
               </ol>
             </div>
           </section>
         )}
 
         {c.featured && (
-          <section className="t-featured band" aria-labelledby="t-featured-title">
+          <section className="tf-band tb tb--navy" aria-labelledby="t-featured-title">
             <div className="inner">
-              <h2 className="t-rule-heading t-rule-heading--left t-rule-heading--onnavy"><span>{c.featured.eyebrow}</span></h2>
-              <div className="t-featured__inner">
+              <p className="tb__eyebrow tf-band__eyebrow">{c.featured.eyebrow}</p>
+              <div className="tf-band__inner">
                 <div>
-                  <h3 id="t-featured-title" className="t-featured__title">{c.featured.heading}</h3>
-                  {c.featured.paragraphs.map((p, i) => typeof p === 'string' ? <p key={i} className="t-featured__p">{p}</p> : <p key={i} className="t-featured__p">{p.text}<strong>{p.strong}</strong>{p.after}</p>)}
-                  <a {...linkOr(c.featured.cta.href, { className: 't-featured__cta' })}>{c.featured.cta.label}</a>
+                  <h2 id="t-featured-title" className="tf-band__title">{c.featured.heading}</h2>
+                  {c.featured.paragraphs.map((p, i) => typeof p === 'string' ? <p key={i} className="tf-band__p">{p}</p> : <p key={i} className="tf-band__p">{p.text}<strong>{p.strong}</strong>{p.after}</p>)}
+                  {featHref
+                    ? <a className="tf-band__cta" href={featHref}>{c.featured.cta.label}</a>
+                    : <a className="tf-band__cta is-pending" aria-disabled="true" title="This page is not available yet">{c.featured.cta.label}</a>}
                 </div>
-                <Img className="t-featured__art" src={c.featured.illustration.src} alt={c.featured.illustration.alt} />
+                <Img className="tf-band__art" src={c.featured.illustration.src} alt={c.featured.illustration.alt} />
               </div>
             </div>
           </section>
         )}
 
         {c.whyChoose && (
-          <section className="t-why band" aria-labelledby="t-why-title">
+          <section className="tw tb" aria-labelledby="t-why-title">
             <div className="inner">
-              <h2 id="t-why-title" className="t-rule-heading t-rule-heading--left"><span>{c.whyChoose.heading}</span></h2>
-              <p className="t-why__sub">{c.whyChoose.sub}</p>
-              <ul className="t-why__list">{c.whyChoose.items.map((it) => <li key={it.title}><strong>{it.title}</strong><span>{it.text}</span></li>)}</ul>
+              <div className="tb__head"><h2 id="t-why-title" className="tb__title">{c.whyChoose.heading}</h2><p className="tb__sub">{c.whyChoose.sub}</p></div>
+              <ul className="tw__list">{c.whyChoose.items.map((it, i) => <li key={it.title} data-reveal data-reveal-order={i % 3}><strong>{it.title}</strong><span>{it.text}</span></li>)}</ul>
             </div>
           </section>
         )}
 
         {c.journey && (
-          <section className="t-journey band" aria-labelledby="t-journey-title">
+          <section className="tj tb tb--tint" aria-labelledby="t-journey-title">
             <div className="inner">
-              <h2 id="t-journey-title" className="t-journey__title">{c.journey.heading}</h2>
-              <p className="t-journey__sub">{c.journey.sub}</p>
-              <ol className="t-journey__steps">
+              <div className="tb__head"><h2 id="t-journey-title" className="tb__title">{c.journey.heading}</h2><p className="tb__sub">{c.journey.sub}</p></div>
+              <ol className="tj__steps">
                 {c.journey.steps.map((s, i) => (
-                  <li key={s.title} className="t-step" data-reveal data-reveal-order={i}>
-                    <span className="t-step__ring" aria-hidden="true">{i + 1}</span>
-                    <strong className="t-step__title">{s.title}</strong>
-                    <p className="t-step__text">{s.text}</p>
+                  <li key={s.title} className="tj__step" data-reveal data-reveal-order={i}>
+                    <span className="tj__ring" aria-hidden="true">{i + 1}</span>
+                    <strong className="tj__title">{s.title}</strong>
+                    <p className="tj__text">{s.text}</p>
                   </li>
                 ))}
               </ol>
@@ -168,75 +180,66 @@ export default function TreatmentB({ content: c }) {
           </section>
         )}
 
-        {c.risks && (
-          <section className="t-risks" aria-labelledby="t-risks-title">
-            <div className="inner"><h2 id="t-risks-title" className="t-risks__title">{c.risks.title}</h2></div>
-            <div className="t-risks__band t-risks__band--navy band"><div className="inner t-risks__inner">
-              <div className="t-risks__copy"><h3 className="t-risks__heading">{c.risks.risks.heading}</h3><ul className="t-risks__list">{c.risks.risks.bullets.map((b) => <li key={b}>{b}</li>)}</ul></div>
-              <Img className="t-risks__photo" src={c.risks.risks.photo.src} alt={c.risks.risks.photo.alt} />
-            </div></div>
-            <div className="t-risks__band t-risks__band--light band"><div className="inner t-risks__inner t-risks__inner--photo-first">
-              <Img className="t-risks__photo" src={c.risks.safety.photo.src} alt={c.risks.safety.photo.alt} />
-              <div className="t-risks__copy"><h3 className="t-risks__heading">{c.risks.safety.heading}</h3><ul className="t-risks__list">{c.risks.safety.bullets.map((b) => <li key={b}>{b}</li>)}</ul></div>
-            </div></div>
-          </section>
-        )}
-
         {c.conversation && (
-          <section className="t-convo band" aria-labelledby="t-convo-title">
-            <div className="inner t-convo__inner">
+          <section className="tn tb" aria-labelledby="t-convo-title">
+            <div className="inner tn__inner">
               <div>
-                <h2 id="t-convo-title" className="t-convo__title">{c.conversation.heading[0]}<br />{c.conversation.heading[1]}</h2>
-                {c.conversation.paragraphs.map((p) => <p key={p} className="t-convo__p">{p}</p>)}
+                <h2 id="t-convo-title" className="tn__title">{c.conversation.heading[0]}<br />{c.conversation.heading[1]}</h2>
+                {c.conversation.paragraphs.map((p) => <p key={p} className="tn__p">{p}</p>)}
               </div>
-              <div className="t-convo__actions">
-                <a className="t-convo__primary" href="#book" data-form={c.conversation.primary.form} data-section="treatment-conversation">{c.conversation.primary.label}</a>
-                <a className="t-convo__secondary" href="#callback" data-form={c.conversation.secondary.form} data-section="treatment-conversation">{c.conversation.secondary.label}</a>
+              <div className="tn__actions">
+                <a className="tn__primary" href="#book" data-form={c.conversation.primary.form} data-section="treatment-conversation">{c.conversation.primary.label}</a>
+                <a className="tn__secondary" href="#callback" data-form={c.conversation.secondary.form} data-section="treatment-conversation">{c.conversation.secondary.label}</a>
               </div>
             </div>
           </section>
         )}
 
-        {(leftColumn || c.form) && (
-          <section className="t-faq band" aria-labelledby={c.faq ? 't-faq-title' : 't-package-title'}>
-            <div className="inner t-faq__inner">
-              {c.faq && (
-                <div className="t-faq__col">
-                  {c.faq.eyebrow && <p className="t-faq__eyebrow">{c.faq.eyebrow}</p>}
-                  <h2 id="t-faq-title" className="t-faq__title">{c.faq.title}</h2>
-                  <div className="t-faq__list">
-                    {c.faq.items.map((it, i) => (
-                      <details key={it.q} className="t-faq__item" open={i === 0}>
-                        <summary className="t-faq__q">{it.q}</summary>
-                        <div className="t-faq__a">{it.a ? <p>{it.a}</p> : <p className="t-faq__pending"><Pending title="The design shows this question closed and carries no answer for it" /> The answer to this question is with the client.</p>}</div>
-                      </details>
-                    ))}
-                  </div>
-                </div>
-              )}
+        {groups.length > 0 && (
+          <div className="tracks">
+            {tracks && <TrackIndex tracks={tracks} />}
+            {groups.map((g, i) => <Group key={i} g={g} i={i} c={c} id={`track-${i + 1}`} />)}
+          </div>
+        )}
+
+        {c.risks && (
+          <section className="tr2" aria-labelledby="t-risks-title">
+            <div className="inner tb__head"><h2 id="t-risks-title" className="tb__title">{c.risks.title}</h2></div>
+            <div className="tr2__band tb tb--navy"><div className="inner tr2__inner">
+              <div className="tr2__copy"><h3 className="tr2__heading">{c.risks.risks.heading}</h3><ul className="tr2__list">{c.risks.risks.bullets.map((b) => <li key={b}>{b}</li>)}</ul></div>
+              <div className="tr2__photo"><Img src={c.risks.risks.photo.src} alt={c.risks.risks.photo.alt} /></div>
+            </div></div>
+            <div className="tr2__band tb tb--tint"><div className="inner tr2__inner tr2__inner--photo-first">
+              <div className="tr2__photo"><Img src={c.risks.safety.photo.src} alt={c.risks.safety.photo.alt} /></div>
+              <div className="tr2__copy"><h3 className="tr2__heading">{c.risks.safety.heading}</h3><ul className="tr2__list">{c.risks.safety.bullets.map((b) => <li key={b}>{b}</li>)}</ul></div>
+            </div></div>
+          </section>
+        )}
+
+        <section className="tv tb" aria-labelledby="t-visit-title">
+          <div className="inner tv__inner">
+            <div className="tv__copy">
+              {c.faq && <Faq faq={c.faq} />}
               {!c.faq && c.package && (
-                <div className="t-package" data-reveal>
-                  <h2 id="t-package-title" className="t-package__title">{c.package.title}</h2>
-                  <ul className="t-package__chips">{c.package.chips.map((ch) => <li key={ch}>{ch}</li>)}</ul>
-                  <a className="t-package__phone" href={c.package.phone.href}>{c.package.phone.label}</a>
+                <div className="tp" data-reveal>
+                  <p className="tb__eyebrow tq__eyebrow">Package</p>
+                  <h2 id="t-visit-title" className="tv__title">{c.package.title}</h2>
+                  <ul className="tp__chips">{c.package.chips.map((ch) => <li key={ch}>{ch}</li>)}</ul>
+                  <a className="tp__phone" href={c.package.phone.href}>Call {c.package.phone.label}</a>
                 </div>
               )}
-              {c.form && (
-                <aside className="t-form" aria-label={c.form.title}>
-                  <div className="t-form__head">{c.form.title}</div>
-                  <div className="t-form__body"><LeadForm form={c.form.preset} source={{ section: 'treatment-form', page: c.slug }} autoFocus={false} hideTitle /></div>
-                </aside>
-              )}
+              {(!c.faq || !c.faq.items.some((it) => it.a)) && !c.package && <h2 id="t-visit-title" className="tv__title">Book a consultation</h2>}
             </div>
-          </section>
-        )}
+            <div className="tv__form" data-reveal>
+              <h3 className="tv__form-title">{c.form?.title || 'Book a consultation'}</h3>
+              <p className="tv__form-sub">Tell us what you need and we will call you back.</p>
+              <LeadForm form={c.form?.preset || 'book-consultation-page'} source={{ section: 'treatment-form', page: c.slug, department: departmentFor(c) }} autoFocus={false} hideTitle />
+            </div>
+          </div>
+        </section>
 
-        {team.length > 0 && (
-          <section className="t-team band" aria-labelledby="t-team-title">
-            <div className="inner"><h2 id="t-team-title" className="t-team__title">Meet the {c.title.toLowerCase()} team</h2></div>
-            <Marquee className="t-team__marquee" label={`${c.title} doctors`} items={team} renderItem={(d) => <DoctorCard doctor={d} />} direction="right" speed={30} />
-          </section>
-        )}
+        <Team c={c} />
+        <Related c={c} />
       </main>
       <Footer />
       <FormDialog />

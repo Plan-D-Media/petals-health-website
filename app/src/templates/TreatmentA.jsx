@@ -33,7 +33,7 @@ export function ServiceGrid({ services, c, noLead = false, ask = true }) {
             <span className="tc__num" aria-hidden="true">{s.rank === 'lead' ? (s.label || 'Start here') : (s.label || c.serviceLabel || String(s.index + 1).padStart(2, '0'))}</span>
             <h3 className="tc__title">{s.title}{s.titlePending && <Pending title="This title is copied from the Pain Management page in the design; the intended title is with the client" />}</h3>
             <p className="tc__text">{s.text}</p>
-            {s.rank === 'lead' && !s.href && <span className="tc__start" aria-hidden="true">{c.leadNote || 'Where most families begin'}</span>}
+            {s.rank === 'lead' && !s.href && c.leadNote !== '' && <span className="tc__start" aria-hidden="true">{c.leadNote || 'Where most families begin'}</span>}
             {s.href && <a className="tc__link" href={s.href} aria-label={s.title}></a>}
           </li>
         ))}
@@ -128,10 +128,12 @@ export function Hero({ c, children }) {
           <p className="th__crumb"><a href="/">Home</a> <span aria-hidden="true">›</span> Treatments <span aria-hidden="true">›</span> {c.title}</p>
           {tagline.length > 0 && <p className="th__tagline">{tagline.map((l, i) => <span key={i}>{l}{i < tagline.length - 1 && <br />}</span>)}</p>}
           <h1 id="t-hero-title" className="th__title">
-            {children || h.headline.map((line, i) => <span key={i} className={'th__line ' + ((i === 1 || h.headlineAccent) ? 'th__line--accent' : 'th__line--primary')}>{line}</span>)}
+            {children || (typeof h.headline[0] === 'string'
+              ? h.headline.map((line, i) => <span key={i} className={'th__line ' + ((i === 1 || h.headlineAccent) ? 'th__line--accent' : 'th__line--primary')}>{line}</span>)
+              : <span className="th__line">{h.headline.map((part, i) => <span key={i} className={part.accent ? 'th__line--accent' : 'th__line--primary'}>{part.text}</span>)}</span>)}
           </h1>
-          {h.subline && <p className="th__subline">{h.subline}</p>}
-          <p className="th__lead">{h.lead}</p>
+          {h.subline && <p className={'th__subline' + (h.sublineStrong || c.template === 'B' ? ' th__subline--strong' : '')}>{h.subline}</p>}
+          <p className={'th__lead' + (h.leadLarge ? ' th__lead--large' : '')}>{h.lead}</p>
           <a className="th__cta" href="#book" data-form={h.cta.form} data-section="treatment-hero">{h.cta.label}</a>
           {facts.length > 0 && <ul className="th__facts" aria-label="Quick facts">{facts.map((f) => <li key={f.label} title={`Source: ${f.source}`}>{f.label}</li>)}</ul>}
           {c.tracks && <ul className="th__tracks" aria-label="Jump to">{c.tracks.map((t) => <li key={t.id}><a href={`#${t.id}`}>{t.label}</a></li>)}</ul>}

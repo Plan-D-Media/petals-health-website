@@ -4,7 +4,7 @@ import FormDialog from '../components/FormDialog.jsx'
 import ClinicCards from '../components/ClinicCards.jsx'
 import LeadForm from '../components/LeadForm.jsx'
 import { SITES } from '../data/clinics.js'
-import '../templates/TreatmentB.css'   /* the FAQ accordion and the on-page form frame */
+import './Clinics-faq.css'   /* the FAQ accordion and form frame on this page */
 import './Clinics.css'
 import Img from '../components/Img.jsx'
 

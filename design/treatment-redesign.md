@@ -183,3 +183,42 @@ The other four pages have no navy band: the lead card is their one navy object i
 "More at Petals Health" row at the foot of every page is Home's navy closing panel, so strictly every page carries a
 second navy object at the very end. It is small, last and the site's closing device; kept, flagged here in case the
 rule should be stricter (it becomes a tint panel with one CSS change).
+
+## Template B — built 2026-09-21 (same shared layer; the four conditions)
+
+**Cosmetic Gynaecology (the hard page).** Three track pills under the hero CTA (Non-Surgical · Surgical ·
+Dermatology & Aesthetic) jump to the tracks; from 1024 a slim sticky index under the nav highlights the current track
+as you scroll (verified: active item follows track-1 → 2 → 3 at scrollY 1264 / 2378 / 3164; bar at top 42 px). Track
+01 (cream band): lead card Laser Vaginal Rejuvenation + 10 cards. Track 02 (the page's one navy band): five cards.
+Track 03 (cream): four labelled sub-group rows with rule headings. The 35 cards carry no "Learn more" box; the
+`href` key makes a card the link when a sub-page exists. The mock's navy stats strip is now the facts row.
+
+**Facts row (condition 1).** Only source-tracked facts render:
+
+| Page | Facts shown | Source |
+|---|---|---|
+| Women's Care | At Loudon Street (CMC) and Kankurgachi · Video consult available | Dr Smita Gutgutia's and Dr Subhra Ghosh Paul's records |
+| Petals IVF | At Tollygunge · Video consult available | Dr Madanki S's record |
+| Cosmetic Gynaecology | 35 procedures across 3 tracks of care · 3 clinics — Kankurgachi, Loudon Street, Tollygunge · 1st consultation is complimentary | the mock's stats strip, this page only (`facts` in the content file, each with `source`) |
+| Dentistry | none — row hidden | no matching doctor, no stated fact |
+
+**Related doctors (condition 2).** Not built. Dentistry and Cosmetic show the "Find a doctor" band with the search link
+only. The proposal table (above) covers them; nothing renders until approved.
+
+**Lead card (condition 3).** One lead per page, the first card of the first group in mock order (`lead: true`
+overrides): Women's Care → Gynaecology; Dentistry → Check-ups & Cleaning; Cosmetic → Laser Vaginal Rejuvenation;
+Petals IVF → Egg Freezing (the mock's own highlighted tile). Later groups and sub-groups have no lead.
+
+**FAQ (content problem 2).** Only answered questions render: Women's Care 1 of 5, Dentistry 1 of 5, IVF 1 of 6, as
+an open question/answer list under "Before your first visit", with a one-line note that the rest are being answered.
+At three or more answered the same component switches to an accordion. Unanswered items stay in the content files
+with no `a`. Cosmetic has no FAQ: the package (LuxMOM Re-sculpt) sits there as outlined chips with a call button.
+
+**Navy rule.** One navy band per page: Cosmetic — the surgical track; Dentistry — the Risks band; IVF — the featured
+"Planning Ahead" band (its conversation band became a tint panel with navy title, since orange-on-tint fails contrast
+and two navy bands broke the rule); Women's Care — none in the body (the lead card). Plus the closing "More at Petals
+Health" panel on every page, as noted for Template A.
+
+**Live (condition 4).** All four pages verified on the detached server at 390 / 1366 / 1920
+(design/render/live/sheet_<slug>.png). The Clinics page kept its old FAQ accordion styles in its own file
+(Clinics-faq.css); the pre-redesign template stylesheet is deleted.
