@@ -7,3 +7,5 @@ design/render/**
 !design/render/2.png
 design/assets/
 app/.serve/
+app/.staging.json
+app/.vercel/

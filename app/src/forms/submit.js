@@ -8,12 +8,12 @@
 //
 // Never lose a submission silently: a failed POST keeps the data in the form, shows an error with retry, and queues
 // the payload in localStorage; queued payloads are retried on the next page load (flushQueue).
-import { FORM_ENDPOINT } from '../config.js'
+import { FORM_ENDPOINT, STAGING } from '../config.js'
 
 const QUEUE_KEY = 'petals.leads.pending'
 // test hook: ?leadEndpoint=<url> overrides the endpoint for the session (used by tools/form-demo.mjs to exercise the error path)
 const endpointOverride = () => (typeof location !== 'undefined' ? new URLSearchParams(location.search).get('leadEndpoint') : null)
-const endpoint = () => endpointOverride() || FORM_ENDPOINT
+const endpoint = () => (STAGING ? 'https://script.google.com/macros/s/PLACEHOLDER/exec' : (endpointOverride() || FORM_ENDPOINT))   // staging can never post to a real inbox or sheet
 export const isPlaceholderEndpoint = () => !endpoint() || /PLACEHOLDER/.test(endpoint())
 
 // ---- validation ----

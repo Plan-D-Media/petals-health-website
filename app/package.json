@@ -3,9 +3,12 @@
   "private": true,
   "version": "0.0.1",
   "type": "module",
+  "engines": { "node": "22.x" },
   "scripts": {
     "dev": "vite",
     "build": "node tools/gen-meta.mjs && vite build && node tools/postbuild.mjs",
+    "build:staging": "node tools/staging-build.mjs",
+    "deploy:staging": "node tools/deploy-staging.mjs",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -16,6 +19,7 @@
     "@vitejs/plugin-react": "^4.3.4",
     "axe-core": "^4.13.0",
     "puppeteer-core": "^25.11.0",
+    "vercel": "^59.23.2",
     "vite": "^5.4.11"
   }
 }

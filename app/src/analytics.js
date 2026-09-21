@@ -1,4 +1,4 @@
-import { GTM_ID } from './config.js'
+import { GTM_ID, STAGING } from './config.js'
 
 // Analytics hooks. One `track(event, props)` call site for the whole app; events go to window.dataLayer (Google Tag
 // Manager's queue) so GA4 / Meta / any tag can be configured in GTM without a code change. With GTM_ID empty
@@ -24,7 +24,7 @@ let inited = false
 export function initAnalytics() {
   if (inited) return; inited = true
   window.dataLayer = window.dataLayer || []
-  if (GTM_ID) {
+  if (GTM_ID && !STAGING) {
     window.dataLayer.push({ 'gtm.start': Date.now(), event: 'gtm.js' })
     const s = document.createElement('script'); s.async = true; s.src = `https://www.googletagmanager.com/gtm.js?id=${encodeURIComponent(GTM_ID)}`
     document.head.appendChild(s)

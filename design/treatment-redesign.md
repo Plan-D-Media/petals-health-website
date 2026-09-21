@@ -222,3 +222,32 @@ Health" panel on every page, as noted for Template A.
 **Live (condition 4).** All four pages verified on the detached server at 390 / 1366 / 1920
 (design/render/live/sheet_<slug>.png). The Clinics page kept its old FAQ accordion styles in its own file
 (Clinics-faq.css); the pre-redesign template stylesheet is deleted.
+
+## Staging and the SXO agent — 2026-09-21
+
+**Staging.** https://petals-health-staging.vercel.app — a separate Vercel project (`petals-health-staging`, Hobby
+plan, the account the CLI on this machine is logged into) built from `vercel.staging.json` with `npm run
+build:staging`. What makes it staging: HTTP Basic auth on every request from `middleware.js` (credentials live only
+in the project's environment as STAGING_USER / STAGING_PASS; generated into app/.staging.json, gitignored);
+`X-Robots-Tag: noindex, nofollow` on every response; `<meta name="robots" content="noindex, nofollow">` in every
+page's HTML; robots.txt `Disallow: /`; no sitemap; forms hard-wired to the simulated placeholder endpoint (the
+?leadEndpoint= test hook is ignored on staging, verified: zero POST requests on a submission); analytics never loads;
+an orange preview ribbon at the top of every page. Production builds (`npm run build`) contain none of this.
+Redeploy: `cd app && npm run deploy:staging` (Vercel builds in the cloud; ~2 min; the URL stays the same).
+One-time on a new machine: `npx vercel login`, then `node tools/deploy-staging.mjs --setup`.
+Verified from outside after deploy: 401 without the sign-in; with it, direct links to /, treatment pages, doctor
+profiles, Find a Doctor, Clinics all 200; a non-slash URL 308s to its slash form; unknown paths 404; sitemap 404.
+
+**SXO agent** (src/components/SxoAgent.jsx, copy in src/content/sxo.js, timing in config.js `SXO`). Built against
+the placeholder endpoint and mounted on Home only until the interaction is approved. First appearance: 30 s, or 50 %
+scroll, or exit intent (pointer leaves through the top edge; desktop only), whichever first; each is one number in
+`SXO.firstAppearance`. Card bottom-right on desktop, bottom sheet above the action bar on phones. Steps: prompt
+(Start / Not now) → "Who is this for?" (Me / My child / A family member) → "What do you need?" (An appointment / A
+call back / A test or check-up) → the sxo-agent lead form (name, mobile, gender, age, preferred doctor, date, with the
+consent checkbox and privacy link) → the form's thank-you. The two answers travel in the payload's source.section
+as `sxo:<who>:<need>`. Session: "Not now", × or Escape → dismissed for the tab session; a completed form → the same.
+Non-modal; focus moves into the card at each step and back on close; Escape closes; no slide under reduced motion.
+Test hooks: ?sxo=now, ?sxo=reset, ?sxoDelay=<ms>. Analytics: sxo_shown {trigger}, sxo_step, sxo_dismissed,
+sxo_completed, plus the form's own events. Demo frames: design/render/live/sxo/ (sheet_1366.png, sheet_390.png,
+sxo_1366.gif, sxo_390.gif). Verified: all three triggers fire; dismissal and completion persist across navigation.
+Not built (waits on approval): mounting on every page (one line in main.jsx), `repeatMs`.

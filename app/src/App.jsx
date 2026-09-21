@@ -10,6 +10,7 @@ import Insights from './components/Insights.jsx'
 import ClosingBand from './components/ClosingBand.jsx'
 import Footer from './components/Footer.jsx'
 import FormDialog from './components/FormDialog.jsx'
+import SxoAgent from './components/SxoAgent.jsx'
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
       </main>
       <Footer />
       <FormDialog />
+      <SxoAgent />   {/* mounted on Home only until the interaction is approved; then main.jsx for every page */}
     </div>
   )
 }

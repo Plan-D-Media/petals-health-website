@@ -1,0 +1,5 @@
+dist
+.serve
+.staging.json
+.vite
+node_modules

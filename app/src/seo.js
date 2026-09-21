@@ -1,4 +1,4 @@
-import { SITE_URL } from './config.js'
+import { SITE_URL, STAGING } from './config.js'
 import { SITE_META, SITE_NAME, ALIASES, NOT_FOUND } from './generated/site-meta.js'
 
 // Per-route <title>, description, canonical and Open Graph tags. The per-route HTML (tools/postbuild.mjs) already
@@ -25,6 +25,6 @@ export function applyMeta(pathname) {
   setMeta('meta[property="og:url"]', { property: 'og:url', content: url })
   setMeta('meta[property="og:site_name"]', { property: 'og:site_name', content: SITE_NAME })
   setMeta('meta[property="og:type"]', { property: 'og:type', content: 'website' })
-  if (m.notFound) setMeta('meta[name="robots"]', { name: 'robots', content: 'noindex' })
+  if (m.notFound || STAGING) setMeta('meta[name="robots"]', { name: 'robots', content: STAGING ? 'noindex, nofollow' : 'noindex' })
   return m
 }

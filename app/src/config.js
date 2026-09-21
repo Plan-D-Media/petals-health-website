@@ -25,3 +25,13 @@ export const PRIVACY_URL = '/privacy-policy.html'   // interim standalone page (
 // container id — empty until the client supplies one (analytics.js keeps events in window.__petalsEvents meanwhile).
 export const SITE_URL = 'https://www.petalshealth.in'
 export const GTM_ID = ''
+
+// Staging (2026-09-21): `npm run build:staging` sets VITE_STAGING=1. On staging every page is noindex, robots.txt
+// disallows all, there is no sitemap, forms can only reach the simulated placeholder endpoint (the ?leadEndpoint=
+// test hook is ignored), analytics never loads, and a preview ribbon shows. Production builds ignore all of this.
+// SXO lead-capture agent (design/round2-report.md §6). Timing is configuration: first appearance after delayMs, OR
+// at scrollPct of the page, OR on exit intent — whichever first. repeatMs: null = never re-show in a session once
+// dismissed or completed (the client's "every 20 seconds" would be repeatMs: 20000 — not built until asked).
+export const SXO = { enabled: true, firstAppearance: { delayMs: 30000, scrollPct: 50, exitIntent: true }, repeatMs: null, dismissal: 'session' }
+
+export const STAGING = typeof import.meta !== 'undefined' && import.meta.env ? import.meta.env.VITE_STAGING === '1' : false

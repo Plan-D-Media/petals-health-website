@@ -39,13 +39,13 @@ for (const width of WIDTHS) {
     const all = [...document.querySelectorAll('body *')].filter(vis)
     const clipRight = (el) => { let p = el.parentElement, r = Infinity; while (p && p !== document.body) { const o = getComputedStyle(p).overflowX; if (o === 'hidden' || o === 'clip') r = Math.min(r, p.getBoundingClientRect().right); p = p.parentElement } return r }
     for (const el of all) {
-      if (el.closest('[data-bleed], .watermark, .carousel__track, .carousel__viewport, .hero__film, .drawer, dialog')) continue
+      if (el.closest('[data-bleed], .watermark, .carousel__track, .carousel__viewport, .hero__film, .drawer, dialog, .sxo')) continue
       const b = el.getBoundingClientRect()
       const right = Math.min(b.right, clipRight(el))   // a clipped descendant cannot overflow past its clipping ancestor
       if (right > width + 1 && b.left < width) out.overflow.push(desc(el) + ` right ${Math.round(right)}`)
     }
     // 2 overlaps between leaf-ish elements
-    const leaves = all.filter((el) => (/^(P|H1|H2|H3|A|BUTTON|LI|IMG|INPUT|SELECT|TEXTAREA|SPAN)$/.test(el.tagName)) && !el.closest('[data-overlap-ok], .proof, .carousel__controls, .drawer, dialog, .nav__menu, .actionbar, .video-slot, .care__petal') && el.textContent.trim().length > 0 && !el.querySelector('p, h2, h3, ul'))
+    const leaves = all.filter((el) => (/^(P|H1|H2|H3|A|BUTTON|LI|IMG|INPUT|SELECT|TEXTAREA|SPAN)$/.test(el.tagName)) && !el.closest('[data-overlap-ok], .proof, .carousel__controls, .drawer, dialog, .nav__menu, .actionbar, .video-slot, .care__petal, .sxo') && el.textContent.trim().length > 0 && !el.querySelector('p, h2, h3, ul'))
     const rects = leaves.map((el) => ({ el, b: el.getBoundingClientRect() }))
     for (let i = 0; i < rects.length; i++) for (let j = i + 1; j < rects.length; j++) {
       const a = rects[i], c = rects[j]

@@ -1,0 +1,38 @@
+/* SXO agent: a card anchored bottom-right on desktop, a bottom sheet on phones (above the action bar). Tokens only.
+   z-index 45: above the sticky nav (30) and the action bar (40), below the drawer (50) and the modal dialog. */
+.sxo { position: fixed; right: 16px; bottom: 16px; z-index: 45; width: min(380px, calc(100vw - 32px)); }
+.sxo__card { display: flex; flex-direction: column; max-height: min(640px, calc(100vh - 32px)); overflow: auto; border-radius: var(--radius-card-lg); background: var(--white); box-shadow: var(--shadow-card), var(--ring-card); outline: none; }
+.sxo__card:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+.sxo__head { display: flex; align-items: center; gap: 12px; padding: 12px 12px 12px 16px; background: var(--blue-900); color: var(--white); }
+.sxo__avatar { display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: var(--white); flex: none; }
+.sxo__avatar img { width: 26px; height: auto; }
+.sxo__name { flex: 1; font-size: 15px; font-weight: 600; }
+.sxo__x { width: 44px; height: 44px; border: 0; border-radius: 50%; background: transparent; color: var(--white); font-size: 26px; line-height: 1; cursor: pointer; }
+.sxo__x:hover { background: rgba(255, 255, 255, 0.14); }
+.sxo__body { padding: 18px 20px 20px; }
+.sxo__body--form { padding-top: 14px; }
+.sxo__step { margin: 0 0 6px; font-size: var(--fs-caption); font-weight: 500; letter-spacing: 0.04em; text-transform: uppercase; color: var(--grey-600); }
+.sxo__title { margin: 0; font-size: 20px; font-weight: 700; line-height: 1.2; color: var(--blue-900); }
+.sxo__sub { margin: 8px 0 0; font-size: 15px; line-height: 1.4; color: var(--black); }
+.sxo__actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.sxo__actions--minor { margin-top: 12px; }
+.sxo__primary, .sxo__secondary, .sxo__chip { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 18px; border-radius: var(--radius-pill); font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; }
+.sxo__primary { border: 0; background: var(--blue-900); color: var(--white); box-shadow: var(--shadow-button); }
+.sxo__secondary { border: 0; background: transparent; color: var(--blue-900); text-decoration: underline; text-underline-offset: 3px; font-weight: 500; }
+.sxo__chips { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+.sxo__chip { border: 1.5px solid var(--blue-900); background: var(--white); color: var(--blue-900); }
+.sxo__chip:hover { background: var(--blue-900); color: var(--white); }
+.sxo__primary:hover { transform: translateY(-1px); }
+.sxo__call { margin: 14px 0 0; font-size: var(--fs-meta); text-align: center; }
+.sxo__call a { color: var(--blue-900); text-decoration: underline; text-underline-offset: 3px; }
+.sxo .lead { gap: 10px; }
+.sxo .lead__submit { height: 48px; }
+/* entrance: slide up 12 px + fade, the motion layer's own timing; none under reduced motion */
+@keyframes sxo-in { from { opacity: 0; translate: 0 12px; } to { opacity: 1; translate: 0 0; } }
+.sxo__card { animation: sxo-in 240ms var(--ease) both; }
+@media (prefers-reduced-motion: reduce) { .sxo__card { animation: none; } }
+/* phones: a bottom sheet above the action bar (64 px) */
+@media (max-width: 767px) {
+  .sxo { right: 0; left: 0; bottom: 0; width: 100%; padding: 0 8px 76px; }
+  .sxo__card { border-radius: var(--radius-card-lg); max-height: calc(100vh - 100px); }
+}
