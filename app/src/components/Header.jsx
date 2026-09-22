@@ -11,10 +11,10 @@ import { PENDING_TITLE } from './pending.js'
 //          are accordions. <768 adds a fixed bottom action bar (Call now / Book Appointment) once the hero has scrolled out.
 // Dropdown data: Treatments only (design/svg/8.svg); other menus await the client's answer.
 
-const TREATMENTS = [   // nine items, in the mock's order (spellings corrected: Womans, Cosmetice, Welness, Rejuvination)
+const TREATMENTS = [   // the mock's order (spellings corrected: Womans, Cosmetice, Welness, Rejuvination). Fertility Care removed
+                       // 2026-09-22 (client): the route /treatments/fertility-care stays (an alias of Petals IVF), only the item goes.
   { label: "Women's Care", href: '/treatments/womens-care' },
   { label: 'Child Care', href: '/treatments/child-care' },
-  { label: 'Fertility Care', href: '/treatments/fertility-care' },
   { label: 'Cosmetic Gynaecology & Aesthetics', href: '/treatments/cosmetic-gynaecology-aesthetics' },
   { label: 'Dentistry', href: '/treatments/dentistry' },
   { label: 'Multispecialty Clinic', href: '/treatments/multispecialty-clinic' },

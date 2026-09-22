@@ -10,7 +10,7 @@ export const TREATMENT_LIST = {
   'womens-care': { template: 'B' },
   'dentistry': { template: 'B' },
   'cosmetic-gynaecology-aesthetics': { template: 'B' },
-  'fertility-care': { template: 'B', alias: 'petals-ivf' },   // the nav's Fertility Care item -> the Petals IVF page (canonical: /treatments/petals-ivf)
+  'fertility-care': { template: 'B', alias: 'petals-ivf' },   // alias of the Petals IVF page (canonical: /treatments/petals-ivf); out of the nav since 2026-09-22, the URL keeps working
   'petals-ivf': { template: 'B' },
 }
 export const contentSlug = (slug) => TREATMENT_LIST[slug]?.alias || slug
