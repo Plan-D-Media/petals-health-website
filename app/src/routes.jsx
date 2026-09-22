@@ -1,5 +1,5 @@
 import { lazy } from 'react'
-import { TREATMENT_LIST } from './content/treatments/list.js'
+import { TREATMENT_LIST, REDIRECTS } from './content/treatments/list.js'
 import { byId } from './data/doctors.js'
 
 // Path-based routing without a router dependency: one static build; the per-route HTML files (tools/postbuild.mjs)
@@ -19,6 +19,7 @@ export function pageFor(pathname) {
   if (forced && forced !== pathname) { window.history.replaceState(null, '', forced + window.location.hash); pathname = forced }
   const path = pathname.replace(/\/+$/, '') || '/'
   const m = path.match(/^\/treatments\/([a-z0-9-]+)$/)
+  if (m && REDIRECTS[m[1]]) { window.location.replace(`/treatments/${REDIRECTS[m[1]]}/` + window.location.search + window.location.hash); return null }   // a moved route (the host 301s first; this covers a host without the rule)
   if (m && TREATMENT_LIST[m[1]]) return <Treatment slug={m[1]} />
   if (path === '/') return <App />
   if (path === '/about') return <About />

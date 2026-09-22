@@ -8,7 +8,7 @@ import yoga from './yoga-wellness.js'
 import multi from './multispecialty-clinic.js'
 import womens from './womens-care.js'
 import dentistry from './dentistry.js'
-import cosmetic from './cosmetic-gynaecology-aesthetics.js'
+import aesthetics from './aesthetics.js'
 import ivf from './petals-ivf.js'
-const CONTENT = { 'child-care': childCare, 'pain-management-rejuvenation': pain, 'audiology': audiology, 'yoga-wellness': yoga, 'multispecialty-clinic': multi, 'womens-care': womens, 'dentistry': dentistry, 'cosmetic-gynaecology-aesthetics': cosmetic, 'petals-ivf': ivf }
-export const TREATMENT_PAGES = Object.fromEntries(Object.entries(TREATMENT_LIST).map(([slug, p]) => [slug, { ...p, content: CONTENT[p.alias || slug] }]))
+const CONTENT = { 'child-care': childCare, 'pain-management-rejuvenation': pain, 'audiology': audiology, 'yoga-wellness': yoga, 'multispecialty-clinic': multi, 'womens-care': womens, 'dentistry': dentistry, 'aesthetics': aesthetics, 'petals-ivf': ivf }
+export const TREATMENT_PAGES = Object.fromEntries(Object.entries(TREATMENT_LIST).filter(([, p]) => !p.redirect).map(([slug, p]) => [slug, { ...p, content: CONTENT[p.alias || slug] }]))

@@ -150,7 +150,9 @@ anything not in this table stays as the link:
   and referral, which is family medicine).
 - Yoga & Wellness → a Gynaecologist, shown ONLY beside the "Prenatal & Postnatal Yoga" block, not as the page's team
   (the rest of the page — back pain, stress and sleep, wellness coaching — is not her field).
-- Cosmetic Gynaecology → a Gynaecologist for the two intimate-wellness tracks only, not the skin and hair track.
+- ~~Cosmetic Gynaecology → a Gynaecologist for the two intimate-wellness tracks only, not the skin and hair track.~~
+  Withdrawn 2026-09-22: the page is now Aesthetics (item 18) and the intimate-wellness tracks are gone; the page
+  shows the Find a doctor link until a dermatologist / aesthetic doctor is on the sheet.
 - Audiology and Dentistry → nobody until an audiologist / the dental team are on the sheet.
 Also for approval, the "start here" card on each page (the one drawn larger, first in the grid): Child Care →
 Well-Baby Checks (or Vaccination?), Pain Management → Back & Neck Pain (or Pregnancy-Related Pain?), Audiology →
@@ -163,3 +165,23 @@ stated on the page without a source. We have kept both as ordinary body text (no
 where each comes from (a survey, an award, a publication) or ask us to remove them. Also from this page: which
 email address should receive CVs from "Submit your resume", or is there a careers page we should link to? Until
 then that button is shown but not clickable.
+
+**18. Aesthetics (was Cosmetic Gynaecology & Aesthetics) — what left the page and what needs your words.**
+On your instruction the page now covers dermatology and aesthetics only (skin, hair and contouring, with its four
+sub-groups: "When non-surgical isn't the right fit" [heading still pending, item 12], Resurfacing & Texture, Tone &
+Pigmentation, Corrective & Removal). Removed: the non-surgical intimate-wellness track (11 cards), the surgical track
+(5 cards), and the **LuxMOM Re-sculpt Package** — its chips were "Laser Vaginal Rejuvenation, PRP Lysate, HIFEM Chair,
+Cryolipolysis, EMS FR Core Tightening)" — because it mixes intimate-wellness and body-contouring items; we have not
+rewritten it. Tell us if an aesthetics-only package should replace it and what it contains.
+- The address changed from /treatments/cosmetic-gynaecology-aesthetics to /treatments/aesthetics; the old address
+  redirects permanently, so bookmarks and search results still land.
+- The hero headline "Kolkata's first dedicated center for Cosmetic Gynaecology & Aesthetics" no longer applies. The
+  page shows "Aesthetics" as a placeholder headline, and the track's own sentence ("Our dermatology and aesthetic
+  team treats…") as the lead, both tagged copy pending. Please send the headline and opening paragraph you want.
+- Two facts from the design's stats strip are hidden until you confirm them for aesthetics: "1st consultation is
+  complimentary" (it was stated for the cosmetic gynaecology centre) and "35 procedures across 3 tracks of care"
+  (now false — one track, 19 procedures).
+- Cosmetic gynaecology is still named in two places we have left as they are: the "For Her Health" card on Home
+  (the chip "Cosmetic Gynaecology & Aesthetics") and the Women's Care page's pillar of the same name ("Enhancing
+  intimate wellness…"). Neither is a link, so nothing sends a visitor to a page that no longer covers it — but both
+  now describe a service the site has no page for. Say whether they should stay, be renamed, or go.

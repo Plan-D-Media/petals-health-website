@@ -10,7 +10,7 @@ import { departmentFor } from './treatmentData.js'
 import './treatment.css'
 import './TreatmentB.css'
 
-// Template B (Women's Care, Dentistry, Cosmetic Gynaecology) and the Petals IVF variant — redesign 2026-09-21
+// Template B (Women's Care, Dentistry, Aesthetics) and the Petals IVF variant — redesign 2026-09-21
 // (design/treatment-redesign.md). Same shared layer as Template A; the mock's section order:
 //   hero on a shelf (+ facts, + track pills on multi-track pages) · intro · [IVF: explained · icon grid · featured ·
 //   why-choose · journey · conversation] · groups (tracks: each a band with the ranked grid; a sticky track index on

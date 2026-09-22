@@ -34,9 +34,9 @@ export function rankServices(services, c, { noLead = false } = {}) {
 export const askSpan = (cards) => { const cells = cards.reduce((a, s) => a + (s.rank === 'lead' ? 2 : 1), 0); return { four: (4 - (cells % 4)) % 4 || 4, two: (2 - (cells % 2)) % 2 || 2 } }
 
 // the Treatments menu order (Header.jsx), by canonical slug
-const MENU = ['womens-care', 'child-care', 'petals-ivf', 'cosmetic-gynaecology-aesthetics', 'dentistry', 'multispecialty-clinic', 'yoga-wellness', 'pain-management-rejuvenation', 'audiology']
+const MENU = ['womens-care', 'child-care', 'petals-ivf', 'aesthetics', 'dentistry', 'multispecialty-clinic', 'yoga-wellness', 'pain-management-rejuvenation', 'audiology']
 void TREATMENT_LIST
-const TITLES = { 'child-care': 'Child Care', 'pain-management-rejuvenation': 'Pain Management & Rejuvenation', 'audiology': 'Audiology', 'yoga-wellness': 'Yoga & Wellness', 'multispecialty-clinic': 'Multispecialty Clinic', 'womens-care': "Women's Care", 'dentistry': 'Dentistry', 'cosmetic-gynaecology-aesthetics': 'Cosmetic Gynaecology & Aesthetics', 'petals-ivf': 'Petals IVF' }
+const TITLES = { 'child-care': 'Child Care', 'pain-management-rejuvenation': 'Pain Management & Rejuvenation', 'audiology': 'Audiology', 'yoga-wellness': 'Yoga & Wellness', 'multispecialty-clinic': 'Multispecialty Clinic', 'womens-care': "Women's Care", 'dentistry': 'Dentistry', 'aesthetics': 'Aesthetics', 'petals-ivf': 'Petals IVF' }
 export function relatedFor(c) {
   const slugs = c.related || (() => { const i = MENU.indexOf(c.slug); return [MENU[(i + MENU.length - 1) % MENU.length], MENU[(i + 1) % MENU.length], MENU[(i + 2) % MENU.length]] })()
   return slugs.filter((s) => s !== c.slug && TITLES[s]).map((s) => ({ slug: s, title: TITLES[s], href: `/treatments/${s}` }))

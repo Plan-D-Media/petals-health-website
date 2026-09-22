@@ -15,7 +15,7 @@ const TREATMENTS = [   // the mock's order (spellings corrected: Womans, Cosmeti
                        // 2026-09-22 (client): the route /treatments/fertility-care stays (an alias of Petals IVF), only the item goes.
   { label: "Women's Care", href: '/treatments/womens-care' },
   { label: 'Child Care', href: '/treatments/child-care' },
-  { label: 'Cosmetic Gynaecology & Aesthetics', href: '/treatments/cosmetic-gynaecology-aesthetics' },
+  { label: 'Aesthetics', href: '/treatments/aesthetics' },   // was Cosmetic Gynaecology & Aesthetics (renamed 2026-09-22, client)
   { label: 'Dentistry', href: '/treatments/dentistry' },
   { label: 'Multispecialty Clinic', href: '/treatments/multispecialty-clinic' },
   { label: 'Yoga & Wellness', href: '/treatments/yoga-wellness' },

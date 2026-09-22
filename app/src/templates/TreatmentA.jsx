@@ -131,9 +131,10 @@ export function Hero({ c, children }) {
             {children || (typeof h.headline[0] === 'string'
               ? h.headline.map((line, i) => <span key={i} className={'th__line ' + ((i === 1 || h.headlineAccent) ? 'th__line--accent' : 'th__line--primary')}>{line}</span>)
               : <span className="th__line">{h.headline.map((part, i) => <span key={i} className={part.accent ? 'th__line--accent' : 'th__line--primary'}>{part.text}</span>)}</span>)}
+            {h.headlinePending && <Pending title={h.headlinePending} />}
           </h1>
           {h.subline && <p className={'th__subline' + (h.sublineStrong || c.template === 'B' ? ' th__subline--strong' : '')}>{h.subline}</p>}
-          <p className={'th__lead' + (h.leadLarge ? ' th__lead--large' : '')}>{h.lead}</p>
+          <p className={'th__lead' + (h.leadLarge ? ' th__lead--large' : '')}>{h.lead}{h.leadPending && <Pending title={h.leadPending} />}</p>
           <a className="th__cta" href="#book" data-form={h.cta.form} data-section="treatment-hero">{h.cta.label}</a>
           {facts.length > 0 && <ul className="th__facts" aria-label="Quick facts">{facts.map((f) => <li key={f.label} title={`Source: ${f.source}`}>{f.label}</li>)}</ul>}
           {c.tracks && <ul className="th__tracks" aria-label="Jump to">{c.tracks.map((t) => <li key={t.id}><a href={`#${t.id}`}>{t.label}</a></li>)}</ul>}

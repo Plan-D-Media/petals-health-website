@@ -4,7 +4,7 @@ const CHROME = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
 const BASE = process.env.CHECK_BASE || 'http://127.0.0.1:4173'
 const b = await puppeteer.launch({ executablePath: CHROME, headless: 'new', args: ['--no-sandbox'] })
 const p = await b.newPage(); await p.setViewport({ width: 1366, height: 900 })
-await p.goto(BASE + '/treatments/cosmetic-gynaecology-aesthetics/', { waitUntil: 'networkidle0' })
+await p.goto(BASE + '/treatments/aesthetics/', { waitUntil: 'networkidle0' })
 for (const id of ['track-1', 'track-2', 'track-3']) {
   await p.evaluate((id) => { document.getElementById(id).scrollIntoView(); window.scrollBy(0, 300) }, id)
   await new Promise((r) => setTimeout(r, 400))

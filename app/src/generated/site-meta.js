@@ -59,9 +59,9 @@ export const SITE_META = [
   "description": "Dentistry at Petals Health is organised into three tracks. General dentistry covers the routine and the restorative. Cosmetic dentistry is for when you're ready"
  },
  {
-  "path": "/treatments/cosmetic-gynaecology-aesthetics/",
-  "title": "Cosmetic Gynaecology & Aesthetics — Petals Health",
-  "description": "From non-surgical intimate wellness to surgical procedures and skin & hair aesthetics — three tracks of care, one confidential team, across Petals Health's Kolk"
+  "path": "/treatments/aesthetics/",
+  "title": "Aesthetics — Petals Health",
+  "description": "Our dermatology and aesthetic team treats the everyday concerns pigmentation, scarring, hair thinning, ageing grouped here by what they actually do."
  },
  {
   "path": "/treatments/petals-ivf/",

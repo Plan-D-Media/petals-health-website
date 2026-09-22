@@ -3,6 +3,7 @@
 // import it at build time. Descriptions are drawn from each page's own copy (no new claims); the client can revise
 // them — see design/client-requests.md item 15.
 import { TREATMENT_PAGES } from './content/treatments/index.js'
+import { REDIRECTS as TREATMENT_REDIRECTS } from './content/treatments/list.js'
 import { DOCTORS, clinicsOf } from './data/doctors.js'
 
 export const SITE_NAME = 'Petals Health'
@@ -33,4 +34,7 @@ const doctorPages = DOCTORS.map((d) => ({
 export const SITE_PAGES = [...STATIC, ...treatmentPages, ...doctorPages]
 
 export const ALIASES = Object.fromEntries(Object.entries(TREATMENT_PAGES).filter(([, p]) => p.alias).map(([slug, p]) => [`/treatments/${slug}/`, `/treatments/${p.alias}/`]))
+// moved routes: the old URL 301s at the host (vercel.json redirects) and, for any host without that rule, the build's
+// meta-refresh page and the router's replace() both land the visitor on the new URL
+export const REDIRECTS = Object.fromEntries(Object.entries(TREATMENT_REDIRECTS).map(([from, to]) => [`/treatments/${from}/`, `/treatments/${to}/`]))
 export const NOT_FOUND = { path: '/404.html', title: t('Page not found'), description: 'The page you were looking for is not here. Find a doctor, our clinics or our treatments from the links on this page.', notFound: true, chunks: ['src/pages/NotFound.jsx'] }

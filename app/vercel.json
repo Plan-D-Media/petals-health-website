@@ -1,24 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "npm run build:staging",
+  "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "framework": null,
   "trailingSlash": true,
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Robots-Tag",
-          "value": "noindex, nofollow"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "no-store"
-        }
-      ]
-    }
-  ],
   "redirects": [
     {
       "source": "/treatments/cosmetic-gynaecology-aesthetics",

@@ -5,7 +5,7 @@
 // Also: dist/404.html (the not-found page, noindex), dist/sitemap.xml, dist/robots.txt.
 import { readFileSync, writeFileSync, mkdirSync, existsSync, unlinkSync } from 'node:fs'
 import { resolve } from 'node:path'
-import { SITE_PAGES, SITE_NAME, NOT_FOUND, ALIASES } from '../src/pages.js'
+import { SITE_PAGES, SITE_NAME, NOT_FOUND, ALIASES, REDIRECTS } from '../src/pages.js'
 import { SITE_URL } from '../src/config.js'
 import IMAGES from '../src/generated/images.json' with { type: 'json' }
 
@@ -65,8 +65,9 @@ for (const p of SITE_PAGES) {
   writeFileSync(resolve(dir, 'index.html'), pageHtml(p)); n++
 }
 writeFileSync(resolve(DIST, '404.html'), pageHtml(NOT_FOUND, { notFound: true }))
-// alias routes (e.g. /treatments/fertility-care/ → /treatments/petals-ivf/): an instant redirect page with a canonical link
-for (const [from, to] of Object.entries(ALIASES)) {
+// alias routes (e.g. /treatments/fertility-care/ → /treatments/petals-ivf/) and moved routes (REDIRECTS; the host 301s
+// these first, vercel.json): an instant redirect page with a canonical link
+for (const [from, to] of Object.entries({ ...ALIASES, ...REDIRECTS })) {
   const dir = resolve(DIST, '.' + from); mkdirSync(dir, { recursive: true })
   writeFileSync(resolve(dir, 'index.html'), `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=${to}"><link rel="canonical" href="${base}${to}"><title>Redirecting…</title></head><body><a href="${to}">Continue</a></body></html>`)
 }

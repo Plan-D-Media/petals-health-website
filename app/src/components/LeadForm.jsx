@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import { DOCTORS } from '../data/doctors.js'
-const DEPARTMENTS = ["Women's Care", 'Child Care', 'Fertility Care', 'Cosmetic Gynaecology & Aesthetics', 'Dentistry', 'Multispecialty Clinic', 'Yoga & Wellness', 'Pain Management & Rejuvenation', 'Audiology']
+const DEPARTMENTS = ["Women's Care", 'Child Care', 'Fertility Care', 'Aesthetics', 'Dentistry', 'Multispecialty Clinic', 'Yoga & Wellness', 'Pain Management & Rejuvenation', 'Audiology']
 import { PRIVACY_URL } from '../config.js'
 import { submitLead, CONSENT_TEXT } from '../forms/submit.js'
 import { track } from '../analytics.js'
