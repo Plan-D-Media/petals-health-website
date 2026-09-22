@@ -59,6 +59,40 @@
 @media (min-width: 1366px) { .th__inner { grid-template-columns: 7fr 5fr; min-height: 700px; } .th__stage { min-height: 700px; } .th__title { font-size: var(--fs-display-md); } }
 @media (min-width: 1920px) { .th__inner { grid-template-columns: 1fr 640px; } }
 
+/* ---- open hero (treatment pages, 2026-09-22, client item 1): the soft blue gradient is the whole hero, edge to edge, and
+   the cut-out figures stand on it — no panel, no radius. The stage holds the cut-out with `contain`, feet on the
+   section's bottom edge (object-position y = 100 %); `--x` from the content file's photo.position anchors it
+   sideways (Audiology's figures are cut at the file's left edge, so they sit flush left). The band takes the
+   cut-out's own height, not the photo shelf's. `th__stage--blend`: a rectangular photograph (Yoga) covers the stage
+   and dissolves into the gradient through a wide feathered mask — no hard edge; a true cut-out replaces it when the
+   client sends one. Below 768 the image stacks above the copy on the same gradient. */
+.th--open {
+  padding: 0; overflow-x: clip;   /* the stage reaches the viewport edge with 100vw, which counts the scrollbar */
+  background:
+    linear-gradient(to bottom, rgba(255, 255, 255, 0) calc(100% - 90px), var(--white) 100%),
+    radial-gradient(1100px circle at 62% 72%, var(--hero-bg-inner) 0%, var(--hero-bg-outer) 100%);
+}
+.th--open .th__stage { margin: 0 calc(-1 * var(--gutter)); aspect-ratio: 4 / 3; border-radius: 0; background: none; overflow: visible; }
+.th--open .th__stage img { object-fit: contain; object-position: var(--x, 50%) 100%; }
+.th--open .th__stage--blend img { object-fit: cover; object-position: var(--pos, 50% 50%); -webkit-mask-image: radial-gradient(ellipse 58% 62% at 50% 56%, #000 48%, rgba(0, 0, 0, 0) 100%); mask-image: radial-gradient(ellipse 58% 62% at 50% 56%, #000 48%, rgba(0, 0, 0, 0) 100%); }
+.th--open .th__copy { padding-top: 8px; }
+@media (min-width: 768px) {
+  .th--open .th__inner { align-items: end; }
+  /* the stage runs to the viewport's edge on its side: the cut-out gets the room it had on the shelf and more, and a file
+     cut at its own edge (Audiology, left) sits flush with the screen instead of showing the cut at the gutter */
+  .th--open .th__stage { margin: 0 0 0 min(calc(-1 * var(--gutter)), calc((var(--content-width) - 100vw) / 2)); aspect-ratio: auto; height: 100%; min-height: 0; border-radius: 0; }
+  .th--open.th--right .th__stage { margin: 0 min(calc(-1 * var(--gutter)), calc((var(--content-width) - 100vw) / 2)) 0 0; }
+  .th--open .th__copy { align-self: center; padding: 40px 0 44px; }
+}
+@media (min-width: 1024px) {
+  .th--open .th__inner { min-height: 0; grid-template-columns: 6fr 5fr; }
+  .th--open.th--right .th__inner { grid-template-columns: 5fr 6fr; }
+  .th--open .th__stage { min-height: 520px; }
+  .th--open .th__copy { padding: 48px 0 56px; }
+}
+@media (min-width: 1366px) { .th--open .th__inner { grid-template-columns: 7fr 5fr; min-height: 0; } .th--open.th--right .th__inner { grid-template-columns: 5fr 7fr; } .th--open .th__stage { min-height: 560px; } }
+@media (min-width: 1920px) { .th--open .th__inner { grid-template-columns: 1fr 640px; } .th--open.th--right .th__inner { grid-template-columns: 640px 1fr; } .th--open .th__stage { min-height: 620px; } }
+
 /* ---- intro ---- */
 .ti { padding: 36px 0 8px; }
 .ti__text { margin: 0 auto; max-width: 900px; text-align: center; font-size: var(--fs-body); font-weight: var(--fw-body); line-height: 1.45; color: var(--black); text-wrap: balance; }

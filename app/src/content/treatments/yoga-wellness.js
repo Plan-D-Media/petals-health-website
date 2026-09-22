@@ -18,7 +18,7 @@ export default {
     headlineAccent: true,
     lead: 'Guided yoga and wellness sessions designed around real bodies and real schedules not a studio ideal.',
     cta: { label: 'Book your appoinment', form: 'book-appointment' },
-    photo: { src: '/assets/treatments/yoga-hero.jpg', alt: 'A woman seated in a meditation pose', position: '78% 60%' }   /* the source is a wide 1919 × 820 frame with the subject right of centre */,
+    photo: { src: '/assets/treatments/yoga-hero.jpg', alt: 'A woman seated in a meditation pose', position: '78% 100%', blend: true }   /* the source is a wide 1919 × 820 rectangular frame (not a cut-out) with its own pale-blue backdrop, subject right of centre: `blend` dissolves it into the hero gradient (design/treatment-redesign.md, item 1); a true cut-out from the client replaces it */,
   },
   intro: null,
   introFromMock: 'Family medicine at Petals Health covers the everyday and the ongoing: general consultations, chronic condition management, and preventive screening, all coordinated by doctors who know your history. Heart health is where we go deepest — our cardiology track is built for early detection and long-term management, not just one-off checks.',

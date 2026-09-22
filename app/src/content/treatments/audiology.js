@@ -7,7 +7,7 @@ export default {
     headline: ['Audiology'],                              // one line, navy (the mock has no accent line)
     lead: 'From a routine hearing test to fitting a hearing aid, our audiology team makes sure nothing gets missed.',
     cta: { label: 'Book your appoinment', form: 'book-appointment' },
-    photo: { src: '/assets/treatments/audiology-hero.png', alt: 'An audiologist examining a patient’s ear with an otoscope', position: '20% 30%' },
+    photo: { src: '/assets/treatments/audiology-hero.png', alt: 'An audiologist examining a patient’s ear with an otoscope', position: '0% 100%' }   /* the figures are cut at the file's left edge: flush left on the open hero */,
   },
   intro: "Hearing changes are easy to dismiss until they affect daily life. Whether it's a child's school screening, ringing in the ears, or a parent who's been asking you to repeat yourself, our audiology services start with a proper test, not a guess.",
   gridStyle: 'tiles',

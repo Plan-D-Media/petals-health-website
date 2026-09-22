@@ -119,10 +119,10 @@ export function Hero({ c, children }) {
   const tagline = Array.isArray(h.tagline) ? h.tagline : h.tagline ? [h.tagline] : []
   const facts = factsFor(c)
   return (
-    <section className={'th tb' + (h.photoSide === 'right' ? ' th--right' : '')} aria-labelledby="t-hero-title">
+    <section className={'th th--open tb' + (h.photoSide === 'right' ? ' th--right' : '')} aria-labelledby="t-hero-title">
       <div className="inner th__inner">
-        <div className="th__stage" data-overlap-ok>
-          <Img src={h.photo.src} alt={h.photo.alt} priority style={{ '--pos': h.photo.position || '50% 30%' }} />
+        <div className={'th__stage' + (h.photo.blend ? ' th__stage--blend' : '')} data-overlap-ok>
+          <Img src={h.photo.src} alt={h.photo.alt} priority style={{ '--pos': h.photo.position || '50% 30%', '--x': (h.photo.position || '50%').split(' ')[0] }} />
         </div>
         <div className="th__copy">
           <p className="th__crumb"><a href="/">Home</a> <span aria-hidden="true">›</span> Treatments <span aria-hidden="true">›</span> {c.title}</p>
