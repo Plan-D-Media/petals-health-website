@@ -44,7 +44,7 @@
 .dp-quote::before { left: -6%; transform: skewX(-8deg); } .dp-quote::after { right: -8%; transform: skewX(-8deg); }
 .dp-quote__title { position: relative; margin: 0 0 18px; font-size: var(--fs-title); font-weight: 500; color: var(--white); }
 .dp-quote__text { position: relative; margin: 0; }
-.dp-quote__text p { margin: 0; font-size: 20px; font-weight: 400; line-height: 1.45; color: var(--white); max-width: 980px; }
+.dp-quote__text p { margin: 0; font-size: 20px; font-weight: 400; line-height: 1.45; color: var(--white); max-width: min(980px, var(--measure)); }
 @media (min-width: 1024px) { .dp-quote { padding: 48px 0 56px; } .dp-quote__text p { font-size: 24px; line-height: 1.4; } .dp-quote__title, .dp-quote__text { margin-left: 100px; } }
 
 /* detail blocks: one band each, white / tint alternating, the copy column aligned with the hero copy */
@@ -53,8 +53,8 @@
 .dp__eyebrow { margin: 0 0 6px; font-size: var(--fs-eyebrow); font-weight: var(--fw-eyebrow); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; line-height: 1.2; color: var(--grey-600); }
 .dp__title { margin: 0 0 16px; font-size: var(--fs-heading-sm); font-weight: 700; line-height: 1.1; color: var(--blue-900); }
 .dp__about { display: grid; gap: 24px; }
-.dp__bio { margin: 0; font-size: 18px; font-weight: 400; line-height: 1.45; color: var(--blue-900); }
-.dp__note { margin: 0; font-size: 18px; line-height: 1.45; color: var(--black); }
+.dp__bio { margin: 0; max-width: var(--measure); font-size: 18px; font-weight: 400; line-height: 1.45; color: var(--blue-900); }
+.dp__note { margin: 0; max-width: var(--measure); font-size: 18px; line-height: 1.45; color: var(--black); }
 .dp__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
 .dp__book { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 24px; border-radius: var(--radius-pill); background: var(--blue-900); color: var(--white); font-size: 16px; font-weight: 700; white-space: nowrap; box-shadow: var(--shadow-button); }
 .dp__book:hover { transform: translateY(-1px); }

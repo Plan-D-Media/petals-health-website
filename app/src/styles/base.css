@@ -13,14 +13,23 @@ html, body {
 body { background: transparent; }   /* z-index -1 tint layers (Process) paint above the canvas but below body's own background */
 
 /* ---------- responsive foundation (flow rewrite 2026-09-17) ----------
-   Breakpoints: <768 mobile (designed at 390) · 768–1023 tablet · 1024–1365 laptop · ≥1366 desktop (the mock's canvas).
-   The content box is 1176 wide at ≥1366 (1366 − 2 × 95, the mock's own margins) and fluid below it. */
-:root { --gutter: 16px; --content-width: 1176px; }
+   Breakpoints: <768 mobile (designed at 390) · 768–1023 tablet · 1024–1365 laptop · 1366+ desktop (the mock's canvas)
+   · 1440+ and 1680+ wide. The content box is 1176 wide at 1366 (1366 − 2 × 95, the mock's own margins), fluid below.
+   --bleed is the distance from the content box to the viewport edge: what a band must pull back by to run full width.
+   --measure caps running text at ~70 characters a line however wide the container gets (item 1, 2026-09-22): the
+   extra width goes to card grids and the consultation form, never to a paragraph. 52ch, not 70ch: `ch` is the width
+   of "0", and Bricolage's digits are wider than its average lowercase, so 52ch measures ~70 real characters —
+   verified per page by tools/measure-check.mjs, which counts characters per rendered line box. */
+:root { --gutter: 16px; --content-width: 1176px; --measure: 52ch; }
 @media (min-width: 768px)  { :root { --gutter: 32px; } }
 @media (min-width: 1024px) { :root { --gutter: 40px; } }
 @media (min-width: 1366px) { :root { --gutter: 95px; } }
 /* gutter fix (round 3): from 1440 up the content box grows to 1440 so a 1920 screen uses ~75 % of its width instead of 61 % */
 @media (min-width: 1440px) { :root { --gutter: 64px; --content-width: 1440px; } }
+/* wide screens (2026-09-22, client item 1): 1600 at 1680+ — a 1920 screen uses 83 % of its width, and header, hero,
+   every band and the footer move together because they all read --content-width through .inner */
+@media (min-width: 1680px) { :root { --content-width: 1600px; } }
+:root { --bleed: max(var(--gutter), calc((100vw - var(--content-width)) / 2)); }
 
 .page { width: 100%; position: relative; overflow-x: clip; }
 .band { position: relative; width: 100%; }

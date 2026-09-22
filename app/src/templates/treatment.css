@@ -13,7 +13,7 @@
 .tb__head { text-align: center; }
 .tb__eyebrow { margin: 0; font-size: var(--fs-eyebrow); font-weight: var(--fw-eyebrow); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; line-height: 1.2; color: var(--grey-600); }
 .tb__title { margin: 12px 0 0; font-size: var(--fs-display-lg); font-weight: var(--fw-display-lg); line-height: 1.05; color: var(--blue-900); text-wrap: balance; }
-.tb__sub { margin: 16px auto 0; max-width: 760px; font-size: var(--fs-body); font-weight: 400; line-height: 1.3; color: var(--black); text-wrap: balance; }
+.tb__sub { margin: 16px auto 0; max-width: min(760px, var(--measure)); font-size: var(--fs-body); font-weight: 400; line-height: 1.3; color: var(--black); text-wrap: balance; }
 .tb--navy .tb__eyebrow, .tb--navy .tb__title, .tb--navy .tb__sub { color: var(--white); }
 
 /* ---- hero: the photo on a shelf ---- */
@@ -95,7 +95,7 @@
 
 /* ---- intro ---- */
 .ti { padding: 36px 0 8px; }
-.ti__text { margin: 0 auto; max-width: 900px; text-align: center; font-size: var(--fs-body); font-weight: var(--fw-body); line-height: 1.45; color: var(--black); text-wrap: balance; }
+.ti__text { margin: 0 auto; max-width: min(900px, var(--measure)); text-align: center; font-size: var(--fs-body); font-weight: var(--fw-body); line-height: 1.45; color: var(--black); text-wrap: balance; }
 @media (min-width: 1024px) { .ti { padding: 48px 0 8px; } .ti__text { line-height: 31px; } }
 
 /* ---- ranked service grid ---- */
@@ -161,28 +161,39 @@
 .tb--navy .tc--lead .tc__num, .tb--navy .tc--lead .tc__start { color: var(--accent-dark); }
 .tb--navy .tc:hover { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6); }
 
-/* ---- the split: content column | sticky consultation form (2026-09-22, client item 2) ----
-   .tsplit is a grid inside the page container holding only the content column and the form, so the form (CSS sticky,
-   no scroll JavaScript) stops where the content ends; the team band and the closing panel follow full width. Below
-   1024 there is no side column: the form sits inline after the content. Inside the column every band keeps its
-   background but at the column's width, as a soft panel (rounded, inset), and its grids reflow to fewer columns. */
-.tsplit { display: grid; gap: 32px; margin-top: 24px; }
+/* ---- the split: content column | sticky consultation form (2026-09-22, client items 2 and 1) ----
+   .tsplit is a grid holding only the content column and the form, so the form (CSS sticky, no scroll JavaScript)
+   stops where the content ends; the team band and the closing panel follow full width.
+   Item 1 (2026-09-22): the block bleeds to both viewport edges (--bleed, base.css) and the two columns meet with no
+   gap — the content bands run edge to edge as bands do everywhere else, and the form sits in a tinted rail that
+   carries to the right edge. The copy inside each column is padded back onto the container's grid, so it still lines
+   up with the logo and the hero above. No rounded panel inside a panel: a band in the column is a band, not a card.
+   Below 1024 there is no rail: the form sits inline after the content. */
+.tsplit { display: grid; gap: 24px; margin-top: 24px; }
 .tsplit__main { min-width: 0; }
 .tsplit .inner { width: 100%; }
-.tsplit__main > .tb--tint, .tsplit__main > .tb--cream, .tsplit__main > .tb--navy, .tsplit__main .tracks > .tb, .tsplit__main .tr2__band { border-radius: var(--radius-card-lg); padding-left: 20px; padding-right: 20px; }
-.tsplit__main .tg__divider { padding: 0 20px; }
-.tsplit__main > .tb + .tb, .tsplit__main .tracks > .tb + .tb { margin-top: 8px; }
 .tsplit__form { padding: 20px 20px 22px; border-radius: var(--radius-card-lg); background: var(--white); box-shadow: var(--shadow-card), var(--ring-card); }
-.tsplit__form .tv__form-title { font-size: 22px; }
-.tsplit__form .tv__form-sub { margin-bottom: 12px; }
+.tsplit__form .tv__form-title { margin: 0 0 6px; font-size: 26px; font-weight: 700; line-height: 1.15; color: var(--blue-900); }
+.tsplit__form .tv__form-sub { margin: 0 0 clamp(12px, 1.8vh, 20px); font-size: 15px; line-height: 1.4; color: var(--grey-600); }
 .tv--close { padding: 32px 0 8px; }
 .tv--column { padding: 32px 0 8px; }
 @media (min-width: 1024px) {
-  .tsplit { grid-template-columns: minmax(0, 1fr) 380px; gap: 40px; align-items: start; }
-  .tsplit__side { align-self: stretch; }
-  .tsplit__form { position: sticky; top: 58px; }   /* 42 px sticky nav + 16 */
-  .tsplit__main > .tb--tint, .tsplit__main > .tb--cream, .tsplit__main > .tb--navy, .tsplit__main .tracks > .tb, .tsplit__main .tr2__band { padding-left: 28px; padding-right: 28px; }
-  .tsplit__main .tg__divider { padding: 0 28px; }
+  .tsplit {
+    /* the rail is the form card plus its inner padding plus the bleed, so the card's right edge lands exactly on the
+       container's right grid line — level with "Ask a Doctor" in the utility bar and the hero copy above */
+    --form-w: 420px; --rail-pad: 36px;
+    grid-template-columns: minmax(0, 1fr) calc(var(--form-w) + var(--rail-pad) + var(--bleed));
+    gap: 0; align-items: start; margin-inline: calc(-1 * var(--bleed)); margin-top: 0;
+  }
+  /* the content column: its bands bleed left to the viewport edge; the copy sits back on the container grid */
+  .tsplit__main { padding-left: var(--bleed); }
+  .tsplit__main > .tb, .tsplit__main .tracks > .tb, .tsplit__main .tr2__band { width: calc(100% + var(--bleed)); margin-left: calc(-1 * var(--bleed)); padding-left: var(--bleed); padding-right: var(--rail-pad); border-radius: 0; }
+  .tsplit__main .tg__divider { padding-right: var(--rail-pad); }
+  /* the form rail: a tinted column the height of the split, carrying to the right edge, with a hairline seam */
+  .tsplit__side { align-self: stretch; padding: 0 var(--bleed) 0 var(--rail-pad); background: var(--hero-bg-outer); box-shadow: inset 1px 0 0 var(--rule-card); }
+  .tsplit__form { position: sticky; top: 58px; margin: 28px 0 32px; padding: 26px 26px 28px; }
+  .tsplit__form .tv__form-title { font-size: 30px; }
+  .tsplit__form .tv__form-sub { font-size: 16px; }
   /* grids in the column: two across (three from 1440) */
   .tsplit__main .ts__grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
   .tsplit__main .tc { min-height: 0; }
@@ -208,8 +219,11 @@
   .tsplit__main .ts { padding: 36px 0 44px; }
   .tsplit__main .tx { top: 42px; }
 }
-@media (min-width: 1366px) { .tsplit { grid-template-columns: minmax(0, 1fr) 400px; gap: 48px; } }
+@media (min-width: 1366px) { .tsplit { --form-w: 440px; --rail-pad: 44px; } }
 @media (min-width: 1440px) {
+  .tsplit { --form-w: 460px; --rail-pad: 48px; }
+  .tsplit__form { padding: 32px 32px 34px; }
+  .tsplit__form .tv__form-title { font-size: 34px; }
   .tsplit__main .ts__grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
   .tsplit__main .tc--ask { grid-column: span var(--span3, 1); }
   .tsplit__main .ts__compact { grid-template-columns: repeat(3, 1fr); }
@@ -217,6 +231,7 @@
   .tsplit__main .tj__step + .tj__step::before { display: block; }
   .tsplit__main .tw__list { grid-template-columns: repeat(3, 1fr); }
 }
+@media (min-width: 1680px) { .tsplit { --form-w: 480px; --rail-pad: 56px; } }
 
 /* ---- team ---- */
 .tt { padding: 40px 0 44px; }
@@ -239,7 +254,7 @@
 .tv__call { background: linear-gradient(90deg, var(--cta-start) 0%, var(--cta-end) 100%); color: var(--white); box-shadow: var(--shadow-button); }
 .tv__book { border: 2px solid var(--blue-900); color: var(--blue-900); }
 .tv__call:hover, .tv__book:hover { transform: translateY(-1px); box-shadow: var(--shadow-button); }
-.tv__note { margin: 20px 0 0; font-size: var(--fs-meta); line-height: 1.4; color: var(--grey-600); }
+.tv__note { margin: 20px 0 0; max-width: var(--measure); font-size: var(--fs-meta); line-height: 1.4; color: var(--grey-600); }
 .tv__form { padding: 24px 20px 24px; border-radius: var(--radius-card-lg); background: var(--white); box-shadow: var(--shadow-card), var(--ring-card); }
 .tv__form-title { margin: 0 0 4px; font-size: var(--fs-title); font-weight: var(--fw-title); color: var(--blue-900); }
 .tv__form-sub { margin: 0 0 16px; font-size: var(--fs-meta); line-height: 1.4; color: var(--grey-600); }
@@ -260,15 +275,15 @@
 .tq__item { padding: 20px 0; border-top: 1.5px solid var(--rule-card); }
 .tq__item:last-child { border-bottom: 1.5px solid var(--rule-card); }
 .tq__item dt { margin: 0; font-size: 20px; font-weight: 600; line-height: 1.25; color: var(--blue-900); }
-.tq__item dd { margin: 10px 0 0; font-size: 17px; line-height: 1.45; color: var(--black); }
+.tq__item dd { margin: 10px 0 0; max-width: var(--measure); font-size: 17px; line-height: 1.45; color: var(--black); }
 .tq__acc { display: grid; gap: 10px; margin: 24px 0 0; }
 .tq__acc-item { border-radius: var(--radius-card); background: var(--white); box-shadow: var(--ring-card); }
 .tq__acc-item summary { position: relative; display: flex; align-items: center; min-height: 56px; padding: 12px 56px 12px 20px; list-style: none; cursor: pointer; font-size: 18px; font-weight: 600; line-height: 1.25; color: var(--blue-900); }
 .tq__acc-item summary::-webkit-details-marker { display: none; }
 .tq__acc-item summary::after { content: ''; position: absolute; right: 20px; top: 50%; width: 18px; height: 18px; margin-top: -9px; background: linear-gradient(var(--blue-900), var(--blue-900)) center/100% 2px no-repeat, linear-gradient(var(--blue-900), var(--blue-900)) center/2px 100% no-repeat; }
 .tq__acc-item[open] summary::after { background: linear-gradient(var(--blue-900), var(--blue-900)) center/100% 2px no-repeat; }
-.tq__acc-item p { margin: 0; padding: 0 20px 18px; font-size: 17px; line-height: 1.45; color: var(--black); }
-.tq__note { margin: 20px 0 0; font-size: var(--fs-meta); line-height: 1.4; color: var(--grey-600); }
+.tq__acc-item p { margin: 0; max-width: var(--measure); padding: 0 20px 18px; font-size: 17px; line-height: 1.45; color: var(--black); }
+.tq__note { margin: 20px 0 0; max-width: var(--measure); font-size: var(--fs-meta); line-height: 1.4; color: var(--grey-600); }
 
 /* ---- related pages ---- */
 .tr { padding: 8px 0 48px; }

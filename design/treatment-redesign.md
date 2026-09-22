@@ -641,3 +641,35 @@ Women's Care, Petals IVF, Aesthetics, Audiology.
 **6. Clinics** — three directions in the report (one band per clinic, recommended; place cards; map first). Sticky
 form: not recommended for this page. **7. About hero** — A / B / C built behind `?hero=a|b|c` (About.jsx, About.css,
 default unchanged), captured with the 768 fold marked: design/render/live/about_hero_options.png. Recommended C.
+
+# Round 4 — item 1: the treatment split uses the full width (2026-09-22)
+
+**The gaps were the site's own container.** At 1920 `.inner` was 1440 wide (75 %), so 240 px sat dead either side; the
+split then lost another 56 px to the grid gap and the content band's own rounded inset. Fixed at the site level, not
+on this band: `--content-width` gains a step — 1176 at 1366, 1440 at 1440, **1600 at 1680+** — and every page reads it
+through `.inner`, so the header, hero, body bands and footer moved together. Measured at 1920: header, main and footer
+all span x160–1760 on all 20 pages, 0 with overflow or a mismatch.
+
+**Running text does not follow the container.** `--measure: 52ch` (≈ 70 real characters — `ch` is the width of "0",
+and Bricolage's digits run ~1.35× its average lowercase). Applied in the stylesheet that owns each rule, because the
+component sheets load after base.css and were winning. tools/measure-check.mjs counts characters per *rendered line
+box* on every page at 1366 / 1440 / 1680 / 1920: widest running-text block **70**, 0 over the 75 limit. One exemption,
+reported rather than hidden: `.footer__copy`, the footer's one-line legal and address strip (13 px, the mock's own
+single line) — capping it would wrap the footer bar to three lines.
+
+**The split is now one composed block.** `.tsplit` bleeds to both viewport edges with `--bleed`
+(`max(gutter, (100vw − content-width) / 2)`); the content column pads back onto the container grid, its bands keep
+their tint but run edge to edge with no radius and no inset (no box inside a box); the form sits in a tinted rail that
+carries to the right edge, separated by a hairline, **gap 0**. The rail is sized as
+`form-w + rail-pad + bleed`, so the form card's right edge lands exactly on the container's right grid line — level
+with "Ask a Doctor" above it. Measured: 1366 gap 0, band x0–787, rail x787–1366, card 440 px ending at 1271 =
+container line 1271; 1440 card 460 ending at 1376 = 1376; 1920 card 480 ending at 1760 = 1760.
+
+**The form carries weight.** Wider (440 / 460 / 480 px), heading 30–34 px, 16 px fields. Heights scale with viewport
+height and keep a 44 px floor: `clamp(44px, 5.6vh, 58px)` inputs, `clamp(48px, 6.2vh, 62px)` Submit,
+`clamp(62px, 9vh, 104px)` textarea, `clamp(10px, 1.45vh, 18px)` gaps. Pinned, measured on Women's Care and Petals IVF:
+1366×768 form 656 px, Submit y638–686, 82 px clear; 1366×900 form 700 px, Submit y674–730, 170 px clear;
+1920×1080 form 773 px, Submit y735–797, 283 px clear. Sticky release unchanged at 1366 / 1440 / 1920 on the shortest
+(Audiology) and longest (Petals IVF) page: form bottom = wrapper bottom = team top.
+
+Evidence: design/render/live/verify-item1.txt · womens-care_1920_before_after.png · wide-1920-sweep.png.

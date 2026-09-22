@@ -36,10 +36,12 @@
 @media (prefers-reduced-motion: reduce) { .lead__spinner { animation: none; border-top-color: transparent; } }
 
 /* compact (the sticky treatment-page form, 2026-09-22): the whole form — every field, the consent line and Submit —
-   fits a 1366 × 768 viewport under the sticky nav. Inputs keep 44+; the gaps, the textarea and the button tighten. */
-.lead--compact { gap: 10px; }
-.lead--compact .lead__field { gap: 4px; }
-.lead--compact input, .lead--compact select { height: 44px; }
-.lead--compact textarea { min-height: 64px; padding: 10px 14px; }
-.lead--compact .lead__consent { min-height: 40px; padding: 0; }
-.lead--compact .lead__submit, .lead--compact button[type="submit"] { height: 48px; margin-top: 0; }
+   fits a 1366 × 768 viewport under the sticky nav, and grows on a taller screen. Item 1: the form carries weight
+   beside the content, so width, type and the heading grew; the heights scale with the viewport (vh) between a
+   768-high laptop and a 1080-high desktop, and every control keeps its 44 px floor. */
+.lead--compact { gap: clamp(10px, 1.45vh, 18px); font-size: 16px; }
+.lead--compact .lead__field { gap: 5px; font-size: 15px; }
+.lead--compact input, .lead--compact select { height: clamp(44px, 5.6vh, 58px); font-size: 16px; }
+.lead--compact textarea { min-height: clamp(62px, 9vh, 104px); padding: 11px 14px; font-size: 16px; }
+.lead--compact .lead__consent { min-height: 40px; padding: 0; font-size: 14px; line-height: 1.35; }
+.lead--compact .lead__submit { height: clamp(48px, 6.2vh, 62px); margin-top: 0; font-size: 18px; }
