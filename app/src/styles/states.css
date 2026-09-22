@@ -48,3 +48,7 @@ a, button, .chip, .care-card, .story, .doc, .post, .btn-soft, .hero__cta, .care-
 /* placeholder links (components/pending.js): an <a> with no href — same look at rest, no hover/active response, arrow cursor */
 a.is-pending, a.is-pending:hover, a.is-pending:active { cursor: default; text-decoration: none; transform: none; box-shadow: inherit; }
 a.is-pending:hover::after { transform: none; }
+
+/* pending-copy tag (same device as the placeholder testimonials). Global (2026-09-22): it was in Hero.css, so on a
+   direct load of any page but Home the tag rendered as unstyled text. */
+.pending { display: inline-block; vertical-align: middle; margin-left: 10px; height: 20px; padding: 0 8px; border-radius: var(--radius-pill); background: var(--orange-500); color: var(--blue-900); font-size: 13px; font-weight: 700; line-height: 20px; letter-spacing: 0.04em; text-transform: uppercase; }

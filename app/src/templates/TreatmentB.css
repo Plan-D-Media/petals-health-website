@@ -53,21 +53,7 @@
   .tr2__photo { aspect-ratio: 4 / 4.2; }
 }
 
-/* ---- before your visit: FAQ (answered only) or package ---- */
-.tq__eyebrow { text-align: left; margin-bottom: 8px; }
-.tq__list { margin: 24px 0 0; }
-.tq__item { padding: 20px 0; border-top: 1.5px solid var(--rule-card); }
-.tq__item:last-child { border-bottom: 1.5px solid var(--rule-card); }
-.tq__item dt { margin: 0; font-size: 20px; font-weight: 600; line-height: 1.25; color: var(--blue-900); }
-.tq__item dd { margin: 10px 0 0; font-size: 17px; line-height: 1.45; color: var(--black); }
-.tq__acc { display: grid; gap: 10px; margin: 24px 0 0; }
-.tq__acc-item { border-radius: var(--radius-card); background: var(--white); box-shadow: var(--ring-card); }
-.tq__acc-item summary { position: relative; display: flex; align-items: center; min-height: 56px; padding: 12px 56px 12px 20px; list-style: none; cursor: pointer; font-size: 18px; font-weight: 600; line-height: 1.25; color: var(--blue-900); }
-.tq__acc-item summary::-webkit-details-marker { display: none; }
-.tq__acc-item summary::after { content: ''; position: absolute; right: 20px; top: 50%; width: 18px; height: 18px; margin-top: -9px; background: linear-gradient(var(--blue-900), var(--blue-900)) center/100% 2px no-repeat, linear-gradient(var(--blue-900), var(--blue-900)) center/2px 100% no-repeat; }
-.tq__acc-item[open] summary::after { background: linear-gradient(var(--blue-900), var(--blue-900)) center/100% 2px no-repeat; }
-.tq__acc-item p { margin: 0; padding: 0 20px 18px; font-size: 17px; line-height: 1.45; color: var(--black); }
-.tq__note { margin: 20px 0 0; font-size: var(--fs-meta); line-height: 1.4; color: var(--grey-600); }
+/* ---- before your visit: the package (the answered-only FAQ is .tq in treatment.css) ---- */
 .tp__chips { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 0; padding: 0; list-style: none; }
 .tp__chips li { display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: var(--radius-pill); border: 1.5px solid var(--blue-900); color: var(--blue-900); font-size: 16px; font-weight: 500; }
 .tp__phone { display: inline-flex; align-items: center; justify-content: center; margin-top: 24px; min-height: 52px; padding: 0 28px; border-radius: var(--radius-pill); background: linear-gradient(90deg, var(--cta-start) 0%, var(--cta-end) 100%); color: var(--white); font-size: 18px; font-weight: 700; box-shadow: var(--shadow-button); }

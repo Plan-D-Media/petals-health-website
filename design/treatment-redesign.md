@@ -364,3 +364,201 @@ gynecological care", kept as body text, source or removal requested; "Our Approc
    (Women's Care · Child Care · Multispecialty · Find a Doctor) closes the page. The hero CTA is Book an appointment.
 Bands: white hero · white story · tint narrative · white three-shapes · tint clinics · [white team] · white careers ·
 navy close. Weight: the stock team illustration is gone; nothing added.
+
+# Find a Doctor, the doctor profile and Clinic Location — audit and direction (2026-09-22)
+
+The last three pages that have not had the redesign pass. Walked live at 390, 1366 and 1920
+(design/render/live/_find-a-doctor_*, _doctors_smita-gutgutia_*, _doctors_uttara-bhar_1366, _clinics_*); geometry
+measured in the page, not read off the captures. Find a Doctor → profile is the site's core journey and the one the
+header points at from every page, so it gets the most attention here.
+
+## Find a Doctor — where it loses a reader
+
+1. **The filter column is taller than the thing it filters.** Filters 400 × 1414; results 736 × 1088 at 1366, and
+   1000 × 992 at 1920 — the sidebar runs 326 px past the results at 1366 and 422 px at 1920, so the page ends on a
+   column of unused checkboxes beside white space. Eight of the eleven specialty rows show a count of 0 (Dentistry,
+   Cosmetic Gynaecology, Dermatology & Aesthetics, Audiology, Wellness, Pain Management and two more): two thirds of
+   the tallest facet can never change the result. The rating facet is five star rows with no counts at all, the
+   tallest block after Specialty, filtering seven doctors who are all rated 4.8–4.9. Cost: low — this is which
+   options render.
+
+2. **At 390 the first doctor is 2,136 px down.** The filter panel opens expanded (358 × 1450) and the results start
+   at y2136 — two and a half screens of checkboxes before a single doctor, on the page a phone visitor arrives at
+   from "Find a Doctor" in the header. The sticky action bar sits over the panel while they scroll it. Cost: low.
+
+3. **The doctor here is not the doctor everywhere else.** Home and Template A use the shared 300 × 410 DoctorCard —
+   the object the round-2 brief made the best thing on the page. This page has its own `.drow`: 356 × 296 at 1366,
+   488 × 264 at 1920, a small square photo beside four stacked lines, then a chip row, then two buttons — nine
+   elements in a squat box, and at 1920 the name has 300 px of empty card to its right. The same seven people are
+   presented two different ways on two pages that link to each other. Cost: medium.
+
+4. **Seven doctors, paginated into two pages.** PAGE_SIZE is 6, so page 2 holds one doctor and the pager is drawn
+   under a six-card grid for a list that would fit on one screen. Cost: none — one number.
+
+5. **The hero is a 733 px band with a 420 px copy column.** The copy is pinned at 420 px at every width, so at 1920
+   (819 px tall) it is 22 % of the band and the rest is pale gradient above four floating cut-out doctors whose feet
+   are cropped mid-thigh. No facts row, no shelf under the photo — the two things the treatment heroes got. Cost: low.
+
+6. **No band rhythm and no seams**: pale hero → white results → navy strap → footer, all hard cuts.
+
+## The doctor profile — where it loses a reader
+
+1. **Six of the seven profiles are five headings over five apologies.** On Dr. Uttara Bhar the whole page below the
+   hero is 975 px containing four "Copy pending …" lines of 22 px each; the quote band does not render without a
+   bio, so there is no navy object; the page ends on "Copy pending Patient reviews for Dr. Uttara Bhar will appear
+   here" and then the footer. The hero's facts row reads "Qualifications pending". A visitor who followed the site's
+   main journey — header → Find a Doctor → View Profile — lands on an empty page six times out of seven. The page
+   is honest, which is right, but honest and empty is still empty: there is nothing here they can act on, and no
+   action offered. Cost: low-medium, and it is the highest-value fix on the three pages.
+
+2. **No closing action on any profile.** The only "Book a visit" is in the hero. Dr. Smita's page is 3,446 px; a
+   visitor who reads the quote, the approach, 19 treatment pills, the education list, the clinics and the reviews
+   arrives at the footer with nothing to do and must scroll back to the top. Every other page on the site closes on
+   a panel. Cost: low.
+
+3. **19 navy pills that look like buttons and are not.** The treats list renders 16 solid navy 163 × 32 pills on Dr.
+   Smita's page in two groups, plus three in the hero. They are the loudest thing on the page — louder than her
+   name — and nothing happens when you click one. This is the same defect as Template B's 47 "Learn more" links,
+   fixed there and still here. Cost: low.
+
+4. **One tint band 1,784 px tall.** Approach, Treats, Background, Clinics and Reviews are five blocks inside a
+   single pale band with no seam, no alternation and no change of shape between them. Cost: low.
+
+5. **A literal double dash where a date should be.** Two of Dr. Smita's four education rows print `--` in the period
+   column because the record has no year. The stat pair (16+ years / 4.9 / 5) floats mid-paragraph with no container.
+   Cost: none.
+
+## Clinic Location — where it loses a reader
+
+1. **The page has no opening.** It starts on a three-photo strip (1366 × 392, 1920 × 552) with navy name pills
+   placed left / centre / right, and the h1 — "3 clinics across Kolkata" — does not appear until y558. There is no
+   lead, no facts, nothing that says what the page is before the photos. At 390 the h1 is below the fold. Cost: low.
+
+2. **The clinic card answers the wrong question.** It gives a region pill, a name, an address and two buttons. A
+   visitor on a clinic page wants to know whether they can be seen there, for what, and when: the card carries no
+   phone, no hours, no specialties, no doctor count — and no link to the doctors at that clinic, although Find a
+   Doctor has a clinic filter and the profile's "View clinic →" already points the other way. The map picture is the
+   same stock crop three times (logged with the client, item 13). At 1920 the card is 553 px wide with the address
+   using a third of it. Cost: low-medium; everything needed is in the data files.
+
+3. **Five navy bars are the loudest object on the page.** The FAQ accordion is full-width solid navy rows 145 px
+   tall — Template B's FAQ was rebuilt in the last pass and Clinics deliberately kept the old styles in its own
+   file. Four of the five questions have no answer, so four of the five bars open onto "Copy pending". The one
+   answer that exists names Tollygunge only, on a page about three clinics. Cost: low.
+
+4. **The form is still the mock's screenshot of a form.** A bordered box with a navy title bar bolted on top,
+   416 × 670 beside a 704 × 516 FAQ column at 1366 and a 968 × 516 one at 1920 — the two columns are 154 px out of
+   register and the left column ends in white space. Same criticism as Template B, fixed there, not here. Cost: low.
+
+5. **Two bands, no seams, no close.** Photo strip → tint → white → footer, hard cuts, and the page ends on the form.
+
+## Direction
+
+**One shared doctor card.** Find a Doctor drops `.drow` and renders the shared DoctorCard in a responsive grid
+(three up at 1920, two at 1366, one at 390), with the two things the list needs and the card lacks added to the
+card itself behind a prop: today's availability line and a "View profile" link beside Book. The same object then
+appears on Home, the treatment pages and the search — one doctor, one card, everywhere.
+
+**Filters that only offer what can be chosen.** Zero-count options are not rendered (an option the visitor has
+selected always is, so a filter can be undone); a facet with nothing left to offer does not render at all. The
+rating facet goes: it cannot separate seven doctors rated 4.8–4.9, and it returns when the doctor sheet brings a
+spread worth filtering — one flag in the file. Applied filters appear as removable chips above the results, so the
+state is visible next to what it changed rather than only as ticks in a column. On desktop the panel becomes sticky
+so it stays with the results instead of running past them; at 390 it is closed by default with the count on the
+toggle — the visitor lands on doctors, and opens filters if they want them.
+
+**Page size 12.** Seven doctors on one page, and the pager appears when the sheet takes the list past twelve.
+
+**Shelf hero, as everywhere else.** The four-doctor cut-out sits on a shelf like the treatment heroes; the copy
+column takes the width it needs; the facts row carries what the data can prove — the live doctor count, the three
+clinics, how many offer a video consult. The "100+ doctors" line in the lead is the mock's and is not true of the
+seven on the sheet: it stays in the lead as written but the facts row states the real number beside it, the same
+rule used for the Cosmetic stats strip.
+
+**The profile earns its scroll, or says plainly what is missing.** The five blocks stop being five equal headings:
+- A profile with no copy renders only what it has — the hero, the clinics and days, and the closing action —
+  followed by one honest line, once, in place of four: the full profile is being prepared, and here are two things
+  you can do now. Four "Copy pending" notes become one note and two working actions. The `Pending` tag stays so the
+  client sees the state on staging.
+- Treats becomes plain text chips at rest (no navy fill, no button shape) — a list reading as a list.
+- The blocks alternate white / tint with seams instead of one 1,784 px tint, and the stat pair becomes a small
+  card beside the approach paragraph.
+- Every profile closes on a panel: Book a visit, Ask a doctor, and a link to the other doctors at that clinic.
+- The education period falls back to nothing, not `--`.
+
+**Clinic Location gets an opening, a card that answers, and a close.** A shelf hero using the Kankurgachi reception
+photo, the h1 the page already has, its one-line lead and a facts row (three clinics, the areas, the doctor count).
+The three-photo strip stays — it is the mock's and it is real photography — but under the hero as a band, with the
+pills regularised to one position. The clinic card gains, from data already in the repo, the doctors who practise
+there (count and a link into Find a Doctor filtered to that clinic) and the phone number; hours stay out until the
+client sends per-clinic hours. The FAQ becomes the answered-only list Template B now uses — one question, answered,
+and the four unanswered ones stay with the client rather than being drawn as doors that open onto nothing. The form
+loses its title bar and sits as the shared lead form in a light panel. The page closes on the navy "More at Petals
+Health" panel.
+
+**Bands.** Find a Doctor: white shelf hero · white results · navy strap · footer, with seams.
+Profile: hero · navy quote (when there is one) · white approach · tint treats · white background · tint clinics ·
+white reviews · navy close. Clinics: white shelf hero · white photo strip · tint clinic cards · white FAQ + form ·
+navy close.
+
+**Weight.** Nothing added: the four-doctor hero cut-out, the reception photo and the three clinic photos are already
+in the pipeline. Dropping `.drow` and the Clinics FAQ stylesheet removes CSS. The rating facet's star icons go.
+
+**Motion.** The existing reveals on card rows only; nothing new.
+
+## Open — needs a decision before building
+
+1. **The rating filter.** Recommended: remove it while every doctor is rated 4.8–4.9 (it cannot separate them), and
+   bring it back with the doctor sheet. Alternative: keep it as designed because it is in the mock.
+2. **The "100+ doctors" line.** Recommended: keep the mock's sentence in the lead and state the true count in the
+   facts row beside it. Alternative: drop the claim until the sheet arrives, or ask the client first — it is not
+   currently in client-requests.md.
+3. **Empty profiles.** Recommended: render only the blocks that have content, with one honest line and two working
+   actions. Alternative: keep all five headings so the client can see every slot the sheet will fill — which is
+   what staging is for, so this can be made staging-only if preferred.
+4. **Clinic card — doctors per clinic.** Adding "4 doctors here →" links into Find a Doctor filtered to that clinic.
+   Counts are live from the data file, so they will read 2, 2 and 4 until the sheet arrives. Worth showing, or hold?
+
+### Find a Doctor, the profile and Clinic Location — built 2026-09-22 (all four open items on the recommended option)
+Verified live at 390, 1366 and 1920 (design/render/live/_find-a-doctor_*, _doctors_*, _clinics_*); gate green on every
+page; site-walk clean on the four changed routes (axe, links, forms, keyboard, console).
+
+**Find a Doctor.** Shelf hero (`.th th--right`) with the cut-out standing on the shelf's floor; the shelf takes the
+cut-out's own height (540 px at 1366) instead of the 700 px photo shelf, so the results start inside the first
+viewport. Facts row from the data: 7 doctors listed · 3 clinics · 7 offer video consults. The list is the shared
+DoctorCard with `list` (availability line, Book | View profile, the name as the link, both buttons named for screen
+readers); `.drow` is gone. Filters: options with a zero count are not offered unless selected (13 rows now, 22
+before; the eight empty specialties are gone until a doctor arrives), a facet with nothing to offer is not drawn,
+applied filters repeat as removable chips with Clear all, the panel is sticky beside the results from 1024
+(top 58 = the sticky nav + 16) and closed by default below it with the active count on the toggle. Rating facet off
+behind `RATING_FACET`; a `?r=` in the URL still applies and draws it. PAGE_SIZE 12. The search band is a tint band;
+the match panel is the page's one navy object. Measured: at 390 the first doctor is at y991 (was 2136); at 1366 the
+panel is 460 px beside a 1,050 px grid (was 1414 beside 1088).
+
+**Profile.** Blocks render only with content, alternating white / tint (`band()` in the page), each with the 100 px
+hero indent from 1024. Stats as a card beside the approach paragraph. Treats as a text list with an orange marker
+(no fill). Education periods fall back to nothing. Every profile closes on the `.tr` panel: Book a visit (orange),
+Ask a doctor, "Doctors at <clinic>" → Find a Doctor filtered to that clinic. A record without a bio gets one "About"
+block: the pending tag, one sentence listing exactly what the sheet still owes it (`missing`), the two actions and
+the rating card — Dr. Uttara Bhar's page is hero · about note · clinics · close (2,012 px; was 2,252 with four
+empty headings). Hero focus tags are white ring pills with the orange dot (the video pill stays filled) — labels, not
+buttons. Ask-a-doctor links carry the doctor in `data-section` (`doctor-profile:<id>`), not `data-doctor`, because
+that form has no doctor field.
+
+**Clinic Location.** Shelf hero with the Kankurgachi reception photo (`--pos` 50% 60% keeps the desk and logo wall),
+the h1, the lead, Book a consultation (to the page's own form) and facts: 3 clinics · North · Central · South
+Kolkata · 7 doctors across the clinics. The three tiles are cards in the container with one pill position
+(bottom-left), each linking to its clinic card; the cards band follows as a tint band with a seam and no repeated
+head (`ClinicCards head={false}`, names as h2). FAQ on the shared `.tq` (moved from TreatmentB.css to
+treatment.css): the one answered question as a list, "4 more questions are being answered by the clinic"; the form
+in the shared `.tv__form` light panel; Clinics-faq.css deleted. Closes on the "More at Petals Health" panel.
+
+**Clinic card (shared with About).** A meta row under the address: the phone (tel:) and "N doctors here →" into
+`/find-a-doctor?c=<clinic>` — live counts (4 · 2 · 2), 44 px targets.
+
+**Also fixed on the way.** `.pending` (the orange COPY PENDING tag) lived in Hero.css, which loads with Home's chunk
+only, so on a direct load of any other page it rendered as plain text glued to the sentence. Moved to
+styles/states.css (global). tools/slice.mjs added: viewport-height slices of a live page, what the visitor actually
+sees screen by screen, where shot.mjs gives the whole scroll.
+
+**Weight.** Nothing added; FindDoctor.css and DoctorProfile.css are shorter, Clinics-faq.css is gone.

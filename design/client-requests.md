@@ -123,6 +123,14 @@ line; "Multi Specality Clinic" in the Multispecialty headline; "Yoga & Welness" 
   numbers (Woman & Child 8, Family Medicine 25, six pages…) will be replaced by real ones automatically.
 - "Ask Doctor" (the band under the list, and the header's "Ask a Doctor") opens a short form (name, mobile, message)
   that goes to the same inbox as the other forms. Say if it should go somewhere else.
+- The hero line "100+ doctors across three clinics in Kolkata" is the design's; seven doctors are on the list today, so
+  the facts row beside it states the live count (7 doctors listed). Confirm the 100+ figure or send the wording you
+  want until the full list is in.
+- The design's "Patient's Rating" filter is not shown for now: every listed doctor is rated 4.8–4.9, so it cannot
+  narrow anything. It returns automatically when the doctor sheet brings a spread of ratings.
+- Doctors without profile copy (six of seven) show a short profile: name, specialty, clinics and days, one line saying
+  the full profile is being prepared, and the booking actions — rather than five empty headings. The sheet (item 3)
+  fills them in.
 
 **15. Site-wide items — three things we need from you.**
 - Page titles and the one-line descriptions search engines show are drawn from each page's own copy (list in
