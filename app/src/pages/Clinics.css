@@ -1,33 +1,99 @@
-/* Clinic Location — redesign 2026-09-22 on the shared treatment layer (treatment.css: .th hero, .tb bands, .tq FAQ,
-   .tv form, .tr close). This file adds: the hero crop, the three photo tiles with one pill position, and the seam
-   between the tiles and the clinic cards. Tokens only. */
-.cl-hero__eyebrow { margin-bottom: 12px; text-align: left; color: var(--blue-900); }
-.cl-hero .cl-hero__stage img { object-position: var(--pos, 50% 60%); }
+/* Clinic Location — one band per clinic (round 4 item 3, 2026-09-22) on the shared treatment layer (treatment.css:
+   .tb bands and seams, .tv form band, .tr close). This file adds: the compact hero with its jump pills, the clinic
+   band (photo | name, address, phone, hours slot, offer chips, actions, the doctors who practise there), the FAQ
+   band and the form row. Tokens only. */
 
-/* the three tiles: real photography, each a link to its card; one pill position for all three */
-.sites { padding: 24px 0 0; }
-.sites__grid { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
-.site { position: relative; }
-.site__link { position: relative; display: block; aspect-ratio: 16 / 10; overflow: hidden; border-radius: var(--radius-card); box-shadow: var(--shadow-card-rest), var(--ring-card); }
-.site__link img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform var(--dur) var(--ease); }
-.site__link:hover img { transform: scale(1.02); }
-.site__pill {
-  position: absolute; left: 16px; bottom: 16px; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; max-width: calc(100% - 32px);
-  padding: 12px 20px; border-radius: var(--radius-card-sm); background: var(--blue-900); color: var(--white);
+/* ---- hero: no photo of its own — the three clinic photographs below are the page's imagery ---- */
+.cl-hero { padding: 28px 0 24px; background: linear-gradient(to bottom, rgba(255, 255, 255, 0) calc(100% - 80px), var(--white) 100%), radial-gradient(900px circle at 50% 40%, var(--hero-bg-inner) 0%, var(--hero-bg-outer) 100%); }
+.cl-hero__eyebrow { text-align: left; color: var(--blue-900); }
+.cl-hero__title { margin: 10px 0 0; font-size: var(--fs-display-md); font-weight: var(--fw-display-md); line-height: 1.05; color: var(--blue-900); font-variation-settings: var(--opsz-display); text-wrap: balance; }
+.cl-hero__lead { margin: 14px 0 0; max-width: var(--measure); font-size: var(--fs-body); font-weight: 400; line-height: 1.4; color: var(--black); }
+.cl-hero__facts { margin-top: 20px; }
+.cl-hero__jump { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; padding: 0; list-style: none; }
+.cl-hero__jump a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 18px; border-radius: var(--radius-pill); background: var(--white); color: var(--blue-900); font-size: 15px; font-weight: 500; box-shadow: var(--ring-card); }
+.cl-hero__jump a:hover { background: var(--blue-900); color: var(--white); box-shadow: none; }
+@media (min-width: 1024px) {
+  /* two columns so the hero uses the width the container now gives it: the title and lead left, the facts and the
+     jump pills aligned to the baseline of the lead on the right */
+  .cl-hero { padding: 44px 0 36px; }
+  .cl-hero__inner { display: grid; grid-template-columns: 1fr auto; grid-template-areas: 'eyebrow eyebrow' 'title facts' 'lead jump'; column-gap: 56px; align-items: end; }
+  .cl-hero__eyebrow { grid-area: eyebrow; }
+  .cl-hero__title { grid-area: title; }
+  .cl-hero__lead { grid-area: lead; font-size: var(--fs-body-md); }
+  .cl-hero__facts { grid-area: facts; justify-content: flex-end; margin: 0 0 6px; }
+  .cl-hero__jump { grid-area: jump; justify-content: flex-end; margin: 14px 0 0; }
 }
-.site__pill-line { display: block; font-size: 17px; font-weight: 600; line-height: 1.15; white-space: nowrap; }
-.site__pill-line--small { font-size: 13px; font-weight: 400; }
+
+/* ---- one band per clinic ---- */
+.cb { padding: 36px 0 40px; scroll-margin-top: 64px; }
+.cb__inner { display: grid; gap: 24px; align-items: start; }
+.cb__photo { position: relative; border-radius: var(--radius-card-lg); overflow: hidden; box-shadow: var(--shadow-card); aspect-ratio: 4 / 3; }
+.cb__photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.cb__region { position: absolute; left: 16px; top: 16px; display: inline-flex; align-items: center; height: 34px; padding: 0 18px; border-radius: var(--radius-pill); background: var(--blue-900); color: var(--white); font-size: 15px; font-weight: 500; line-height: 1; }
+.cb__name { margin: 0; font-size: var(--fs-heading-sm); font-weight: 700; line-height: 1.15; color: var(--blue-900); text-wrap: balance; }
+.cb__address { margin: 10px 0 0; max-width: var(--measure); font-size: 16px; line-height: 1.4; color: var(--black); }
+.cb__meta { display: grid; gap: 2px; margin: 14px 0 0; padding: 0; list-style: none; }
+.cb__meta li { display: flex; align-items: center; gap: 10px; min-height: 40px; font-size: 16px; line-height: 1.3; color: var(--blue-900); }
+.cb__meta a { display: inline-flex; align-items: center; min-height: 44px; color: var(--blue-900); font-weight: 600; }
+.cb__meta a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.cb__meta--pending { color: var(--grey-600); }
+.cb__icon { flex: none; width: 20px; display: flex; justify-content: center; color: var(--blue-900); } .cb__icon svg { width: 17px; height: 17px; display: block; }
+/* what the clinic offers: one chip per specialty of the doctors who practise there (data-derived, no new claims) */
+.cb__offers { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 0; padding: 0; list-style: none; }
+.cb__offers li { display: inline-flex; align-items: center; min-height: 32px; padding: 0 14px; border-radius: var(--radius-pill); background: var(--white); color: var(--blue-900); font-size: 14px; font-weight: 500; box-shadow: var(--ring-card); }
+.tb--tint .cb__offers li { background: var(--white); }
+.cb__actions { display: flex; flex-wrap: wrap; gap: 12px; margin: 22px 0 0; }
+.cb__book { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 28px; border-radius: var(--radius-pill); background: var(--blue-900); color: var(--white); font-size: 17px; font-weight: 700; box-shadow: var(--shadow-button); }
+.cb__book:hover { transform: translateY(-1px); }
+.cb__dir { display: inline-flex; align-items: center; gap: 8px; min-height: 52px; padding: 0 22px; border-radius: var(--radius-pill); box-shadow: inset 0 0 0 1.5px var(--blue-900); color: var(--blue-900); font-size: 17px; font-weight: 500; }
+.cb__dir:hover { background: var(--blue-900); color: var(--white); box-shadow: none; }
+/* the doctors who practise here: the site's avatar disc, the name and specialty, linking to the profile */
+.cb__docs { margin: 24px 0 0; padding: 20px 0 0; border-top: 1.5px solid var(--rule-card); }
+.cb__docs-head { margin: 0 0 12px; font-size: var(--fs-caption); font-weight: var(--fw-eyebrow); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; color: var(--grey-600); }
+.cb__docs-list { display: grid; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.cb__docs-list a { display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 6px 12px 6px 6px; border-radius: var(--radius-pill); }
+.cb__docs-list a:hover { background: var(--white); box-shadow: var(--ring-card); }
+.tb--tint .cb__docs-list a:hover { background: var(--white); }
+.cb__avatar { position: relative; flex: none; width: 44px; height: 44px; border-radius: 50%; background: var(--white); box-shadow: var(--ring-card); overflow: hidden; }
+.cb__avatar img { position: absolute; inset: 3px; width: calc(100% - 6px); height: calc(100% - 6px); border-radius: 50%; object-fit: cover; object-position: 50% 12%; }
+.cb__avatar > span { position: absolute; inset: 3px; border-radius: 50%; background: var(--blue-900); color: var(--white); display: flex; align-items: center; justify-content: center; font-family: var(--font-serif); font-size: 16px; line-height: 1; }
+.cb__doc-name { display: flex; flex-direction: column; gap: 1px; font-size: 16px; font-weight: 600; line-height: 1.2; color: var(--blue-900); }
+.cb__doc-spec { font-size: 13px; font-weight: 400; color: var(--grey-600); }
+.cb__all { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin-top: 10px; font-size: 15px; font-weight: 500; color: var(--blue-900); }
+.cb__all:hover { text-decoration: underline; text-underline-offset: 3px; }
 @media (min-width: 768px) {
-  .sites { padding-top: 32px; }
-  .sites__grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .site__link { aspect-ratio: 455 / 360; }
-  .site__pill-line { font-size: 16px; }
+  .cb { padding: 44px 0 48px; }
+  /* the photograph keeps its own 4:3 and sits at the top of the band beside the heading: stretching it to the
+     detail column's height cropped the reception desk and the Petals wall — the two things that prove the place */
+  .cb__inner { grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+  .cb__inner--flip .cb__photo { order: 2; }
+  .cb__docs-list { grid-template-columns: 1fr 1fr; }
 }
-@media (min-width: 1024px) { .sites { padding-top: 40px; } .sites__grid { gap: 24px; } .site__pill { left: 20px; bottom: 20px; } .site__pill-line { font-size: 18px; } .site__pill-line--small { font-size: 14px; } }
-@media (min-width: 1366px) { .sites__grid { gap: 32px; } .site__pill-line { font-size: 20px; } }
+@media (min-width: 1024px) {
+  .cb { padding: 56px 0 60px; }
+  .cb__inner { grid-template-columns: 1fr 1fr; gap: 56px; }
+  .cb__name { font-size: var(--fs-display-md); }
+  .cb__address { font-size: 17px; }
+}
+@media (min-width: 1440px) { .cb__inner { grid-template-columns: 7fr 6fr; gap: 72px; } }
 
-/* the clinic cards follow as a tint band with a seam, not a hard cut */
-.sites + .clinics { margin-top: 32px; padding-top: 48px; background:
-  linear-gradient(to bottom, var(--white) 0, rgba(255, 255, 255, 0) 80px, rgba(255, 255, 255, 0) calc(100% - 80px), var(--white) 100%),
-  radial-gradient(750px circle at 50% 50%, #ffffff 0%, #edf7ff 100%); }
-@media (min-width: 1024px) { .sites + .clinics { margin-top: 40px; padding-top: 64px; } }
+/* ---- FAQ: a deliberate two-column band with one answer, growing to a list as answers arrive ---- */
+.cq { padding: 40px 0 48px; }
+.cq__inner { display: grid; gap: 24px; }
+.cq__title { margin: 10px 0 0; font-size: var(--fs-display-md); font-weight: var(--fw-display-md); line-height: 1.05; color: var(--blue-900); }
+.cq__note { margin: 16px 0 0; max-width: var(--measure); font-size: var(--fs-meta); line-height: 1.4; color: var(--grey-600); }
+.cq__list { display: grid; gap: 0; margin: 0; }
+.cq__item { padding: 22px 0; border-top: 1.5px solid var(--rule-card); }
+.cq__item:last-child { border-bottom: 1.5px solid var(--rule-card); }
+.cq__item dt { margin: 0; font-size: 20px; font-weight: 600; line-height: 1.25; color: var(--blue-900); }
+.cq__item dd { margin: 10px 0 0; max-width: var(--measure); font-size: 17px; line-height: 1.45; color: var(--black); }
+@media (min-width: 1024px) {
+  .cq { padding: 56px 0 64px; }
+  .cq__inner { grid-template-columns: 5fr 7fr; gap: 64px; align-items: start; }
+  .cq__item:first-child { padding-top: 0; border-top: 0; }
+}
+
+/* ---- form row ---- */
+.cf__inner { display: grid; gap: 28px; }
+.cf__copy .tv__call { display: inline-flex; margin-top: 20px; }
+@media (min-width: 1024px) { .cf__inner { grid-template-columns: 1fr 480px; gap: 64px; align-items: start; } .cf__copy { padding-top: 12px; } }

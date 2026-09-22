@@ -687,3 +687,27 @@ Verified at 390 / 768 / 1024 / 1366 / 1440 / 1920 — photo inside the container
 rendered ratio 1.333–1.334 against a source ratio of 1.333, so the desk, the Petals wall and the patients are all in
 frame uncropped; and the h1, lead, Book button and three clinic areas all end inside the first screen at every one
 (at 1366×768 the last of them at y614 of 768; at 1920×1080 at y699 of 1080).
+
+# Round 4 — item 3: Clinic Location, one band per clinic (2026-09-22)
+
+The approved direction. The tile row and the card row are gone; each clinic is a band of its own, white / tint
+alternating with the shared seams, the photograph on alternating sides:
+- **The photograph** at its own 4:3, top-aligned with the heading, region pill on it. Stretching it to the detail
+  column's height was tried and reverted — it cropped the reception desk and the Petals wall out of frame, the two
+  things that prove the place is real.
+- **The detail column**: name, address, the phone as a `tel:` link, an **opening-hours slot tagged copy pending**
+  (client item 19 — hours are not in our data and are not invented), what the clinic offers as chips derived from the
+  specialties of the doctors who practise there (no new claims), **Book here** (preselecting that clinic) and
+  **Get directions** (a Google Maps search link, opening in a new tab).
+- **The doctors who practise there**, each as an avatar disc, name and specialty linking to the profile, plus
+  "All doctors at <clinic>" into Find a Doctor filtered to it. Live from the data: 4 · 2 · 2.
+- **No map on the page.** Directions link out. A static map would need a Maps Static key or a designed asset the
+  client has not sent; the stock map crop that used to head each card is gone rather than faked.
+- **The hero** is compact — eyebrow, h1, lead, facts and three jump pills — and from 1024 it lays out across the
+  width (title and lead left, facts and pills right) instead of leaving the right half empty.
+- **The FAQ** is its own band, a two-column layout that looks deliberate with one answer: the heading and the
+  "4 more questions are being answered" note on the left, the answered question as a ruled Q/A list on the right.
+  It grows down that list as answers arrive — no accordion doors that open onto nothing.
+- **The form** closes the page full width (copy and Call button beside it), then the navy "More at Petals Health"
+  panel. **No sticky form** here, as recommended and approved: the page is three photo bands, and the real action is
+  "Book here" on the clinic the visitor chose, which already preselects it.

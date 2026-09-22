@@ -186,3 +186,11 @@ rewritten it. Tell us if an aesthetics-only package should replace it and what i
   intimate wellness…") and the Women's Care hero paragraph ("…fertility, cosmetic gynaecology, aesthetics…"). None
   is a link, so nothing sends a visitor to a page that no longer covers it — but all three now describe a service the
   site has no page for. Say whether they should stay, be renamed, or go.
+
+**19. Clinic opening hours — we have none, so none are shown.**
+The Clinic Location page now gives each clinic a band of its own: the photograph, the address, Get directions, the
+phone, what it offers, and the doctors who practise there. The one thing missing is opening hours — they are not in
+anything you have sent, and we will not invent them. Each band carries an "Opening hours — copy pending" line until
+you send them. Per clinic, please: the days and times, and whether any clinic differs on Sunday or public holidays.
+Related, still open from item 13: the answers to FAQ questions 2–5 (only "Where is the clinic?" is answered, and its
+answer names Tollygunge alone although the page covers all three).
