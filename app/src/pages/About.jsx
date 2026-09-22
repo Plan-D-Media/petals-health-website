@@ -13,7 +13,7 @@ import './About.css'
 
 // About Us (design/svg/4.svg) — redesign 2026-09-21 (design/treatment-redesign.md, "About Us"). The mock's sections in
 // the mock's order, on the site's shared language:
-//   shelf hero (reception photo | h1 About Petals + its paragraph + the three clinics as facts) · Our Story as a
+//   hero: the whole reception photograph framed beside the copy on the hero tint (option C, 2026-09-22) · Our Story as a
 //   centred pull · The problem → The idea as one tint band with a turn and the payoff set apart · Our Approch as
 //   numbered cards, What we offer as a checklist, The journey so far as a timeline · Find us (shared clinic cards) ·
 //   the team (monogram role tiles until real people; hidden in production while none exist) · Want to join our Team?
@@ -80,34 +80,22 @@ function TeamTile({ m }) {
   )
 }
 
-const HERO = typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('hero') : null
-
 export default function About() {
   const showTeam = hasRealPeople || STAGING || import.meta.env.DEV   // production hides the section until a real person exists
   return (
     <div className="page">
       <Header current="about" />
       <main id="main" tabIndex={-1}>
-        {/* hero options for item 7 (2026-09-22), ?hero=a|b|c — a: the client's (full photo, text beneath); b: photo band with
-            an overlapping copy card; c: framed whole photo beside centred copy on the site's tint. Default: the current shelf. */}
-        {HERO === 'a' || HERO === 'b' ? (
-          <section className={'ah tb ah--' + HERO} aria-labelledby="about-title" data-hero>
-            <div className="ah__photo"><Img src="/assets/about/reception.jpg" alt="The reception desk at a Petals Health clinic" priority /></div>
-            <div className="inner"><div className="ah__panel">
-              <p className="th__crumb"><a href="/">Home</a> <span aria-hidden="true">›</span> About us</p>
-              <h1 id="about-title" className="th__title"><span className="th__line th__line--primary">About Petals</span></h1>
-              <p className="th__lead ah__lead">{ABOUT}</p>
-              <div className="ah__row">
-                <a className="th__cta" href="#book" data-form="book-appointment" data-section="about-hero">Book an appointment</a>
-                <ul className="th__facts" aria-label="Our clinics">{SITES.map((s) => <li key={s.id} title="Source: clinics.js">{s.region}</li>)}</ul>
-              </div>
-            </div></div>
-          </section>
-        ) : (
-        <section className={'th tb' + (HERO === 'c' ? ' ah--c' : '')} aria-labelledby="about-title" data-hero>
+        {/* Hero — option C, approved 2026-09-22 (client item 2 of the third round; the options were ?hero=a|b|c, see
+            design/treatment-redesign.md). The whole photograph, uncropped, framed beside the copy on the site's hero
+            tint: nothing of the reception desk, the Petals wall or the patients is cut, there is no white void, the
+            text never sits on the photo, and the first screen still answers "what is Petals" — h1, lead, Book button
+            and the three clinic areas. A real photograph, so it keeps its own frame rather than the treatment pages'
+            cut-out-on-the-gradient treatment. */}
+        <section className="th tb ah" aria-labelledby="about-title" data-hero>
           <div className="inner th__inner">
             <div className="th__stage ah__stage" data-overlap-ok>
-              <Img src="/assets/about/reception.jpg" alt="The reception desk at a Petals Health clinic" priority style={{ '--pos': '45% 60%' }} />
+              <Img src="/assets/about/reception.jpg" alt="The reception desk at a Petals Health clinic" priority />
             </div>
             <div className="th__copy">
               <p className="th__crumb"><a href="/">Home</a> <span aria-hidden="true">›</span> About us</p>
@@ -118,7 +106,6 @@ export default function About() {
             </div>
           </div>
         </section>
-        )}
 
         <section className="as tb" aria-labelledby="story-title">
           <div className="inner as__inner">

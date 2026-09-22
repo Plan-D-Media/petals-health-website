@@ -2,10 +2,23 @@
    This file adds: the hero photo crop, the story pull, the narrative band with its turn and payoff, the three
    shapes (numbered cards / checklist / timeline), the team tiles and the careers block. Tokens only. */
 
-/* hero: the reception photo keeps the desk and logo wall in frame */
-.ah__stage img { object-position: var(--pos, 45% 60%); }
-.ah__lead { max-width: 520px; font-size: 17px; line-height: 1.5; }
-@media (min-width: 1024px) { .ah__lead { font-size: 18px; line-height: 1.5; } }
+/* hero (option C, 2026-09-22): the photograph whole — the frame is the picture's own 4:3, so nothing is cropped —
+   on the site's hero tint, with the copy centred beside it. The shelf's 640 px floor and bottom alignment go: the
+   band is as tall as the picture needs and no taller, which is what removes the white void above the copy. */
+.ah.th { background: linear-gradient(to bottom, rgba(255, 255, 255, 0) calc(100% - 90px), var(--white) 100%), radial-gradient(900px circle at 50% 55%, var(--hero-bg-inner) 0%, var(--hero-bg-outer) 100%); }
+.ah .th__inner { align-items: center; }
+.ah .th__stage.ah__stage { margin: 0; aspect-ratio: 4 / 3; height: auto; min-height: 0; border-radius: var(--radius-card-lg); box-shadow: var(--shadow-card); overflow: hidden; }
+.ah .th__stage.ah__stage img { object-fit: cover; object-position: 50% 50%; }
+.ah__lead { max-width: min(520px, var(--measure)); font-size: 17px; line-height: 1.5; }
+@media (min-width: 768px) { .ah.th { padding: 32px 0 8px; } .ah .th__stage.ah__stage { margin: 0; min-height: 0; } }
+@media (min-width: 1024px) {
+  .ah__lead { font-size: 18px; line-height: 1.5; }
+  .ah .th__inner { grid-template-columns: 1fr 1fr; gap: 56px; min-height: 0; padding: 8px 0 24px; }
+  .ah .th__stage.ah__stage { margin: 0; min-height: 0; }
+  .ah .th__copy { padding: 0; }
+}
+@media (min-width: 1366px) { .ah .th__inner { grid-template-columns: 7fr 6fr; gap: 64px; min-height: 0; } .ah .th__stage.ah__stage { min-height: 0; } }
+@media (min-width: 1920px) { .ah .th__inner { grid-template-columns: 7fr 6fr; } }
 
 /* story: a centred pull */
 .as { padding: 40px 0 8px; }
@@ -101,25 +114,3 @@
 .aj__btn.is-pending { color: var(--grey-600); }
 @media (min-width: 768px) { .aj__actions { flex-direction: row; justify-content: center; gap: 16px; } }
 @media (min-width: 1024px) { .aj { padding: 56px 0 16px; } .aj__actions { margin-top: 32px; } }
-
-/* ---- hero options for item 7 (?hero=a|b|c), 2026-09-22 ---- */
-/* a (the client's): the whole photo as a full-width band, copy beneath */
-.ah--a .ah__photo { margin: 0; aspect-ratio: 16 / 9; overflow: hidden; }
-.ah--a .ah__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 62%; display: block; }
-.ah--a .ah__panel { padding: 32px 0 40px; max-width: 900px; }
-/* b: a photo band with the copy on a white card overlapping its foot (the chairs), never the desk or the wall */
-.ah--b { background: linear-gradient(to bottom, var(--white) 0, var(--white) 100%); }
-.ah--b .ah__photo { margin: 0; height: 480px; overflow: hidden; }
-.ah--b .ah__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; display: block; }
-.ah--b .ah__panel { position: relative; margin: -120px auto 0; max-width: 960px; padding: 32px 40px 36px; border-radius: var(--radius-card-lg); background: var(--white); box-shadow: var(--shadow-card), var(--ring-card); }
-.ah__row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px 24px; margin-top: 24px; }
-.ah__row .th__cta { margin-top: 0; }
-.ah__row .th__facts { margin-top: 0; }
-@media (max-width: 767px) { .ah--b .ah__photo { height: 300px; } .ah--b .ah__panel { margin-top: -60px; padding: 24px 20px 28px; } .ah--a .ah__panel { padding: 24px 0 32px; } }
-/* c: the whole photo framed (no crop) beside copy centred on the site's tint */
-.ah--c.th { background: linear-gradient(to bottom, rgba(255, 255, 255, 0) calc(100% - 100px), var(--white) 100%), radial-gradient(786.5px circle at 50% 60%, var(--hero-bg-inner) 0%, var(--hero-bg-outer) 100%); }
-.ah--c .th__inner { align-items: center; }
-.ah--c .th__stage { aspect-ratio: 4 / 3; height: auto; min-height: 0; margin: 0; border-radius: var(--radius-card-lg); box-shadow: var(--shadow-card); align-self: center; }
-.ah--c .th__stage img { object-fit: cover; object-position: 50% 50%; }
-@media (min-width: 1024px) { .ah--c .th__inner { min-height: 0; padding: 40px 0 56px; grid-template-columns: 1fr 1fr; gap: 56px; } .ah--c .th__stage { min-height: 0; } .ah--c .th__copy { padding: 0; } }
-@media (min-width: 1366px) { .ah--c .th__inner { grid-template-columns: 7fr 6fr; } }

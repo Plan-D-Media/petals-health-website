@@ -673,3 +673,17 @@ height and keep a 44 px floor: `clamp(44px, 5.6vh, 58px)` inputs, `clamp(48px, 6
 (Audiology) and longest (Petals IVF) page: form bottom = wrapper bottom = team top.
 
 Evidence: design/render/live/verify-item1.txt · womens-care_1920_before_after.png · wide-1920-sweep.png.
+
+# Round 4 — item 2: About hero, option C built (2026-09-22)
+
+Approved from the three mocked options (A the client's, B the overlapping card, C framed). The whole photograph on
+the site's hero tint, framed (rounded, card shadow) beside the copy, both vertically centred; the shelf's 640–700 px
+floor and bottom alignment are gone, so the band is as tall as the picture needs and no taller — which is what
+removes the white void. The frame is the picture's own 4:3, so nothing is cropped. The A/B/C `?hero=` switch is gone.
+Rules are written `.ah .th__stage.ah__stage` because the shared `.th__stage` rules in treatment.css load after
+About.css in the built bundle and were otherwise winning (the photo kept the shelf's negative margin).
+
+Verified at 390 / 768 / 1024 / 1366 / 1440 / 1920 — photo inside the container grid at every width, never bleeding;
+rendered ratio 1.333–1.334 against a source ratio of 1.333, so the desk, the Petals wall and the patients are all in
+frame uncropped; and the h1, lead, Book button and three clinic areas all end inside the first screen at every one
+(at 1366×768 the last of them at y614 of 768; at 1920×1080 at y699 of 1080).
