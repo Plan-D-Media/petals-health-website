@@ -562,3 +562,82 @@ styles/states.css (global). tools/slice.mjs added: viewport-height slices of a l
 sees screen by screen, where shot.mjs gives the whole scroll.
 
 **Weight.** Nothing added; FindDoctor.css and DoctorProfile.css are shorter, Clinics-faq.css is gone.
+
+# Client round of 2026-09-22 — seven items
+
+Order as briefed: report (hero-image audit, fertility-care finding, Clinics and About directions), then 3 · 5 · 4 · 1 · 2,
+each committed on a green gate; 6 and 7 wait for the directions to be approved. Evidence for the checklist is in
+design/render/live/verification-2026-09-22.txt (the probe's output) and the captures named below.
+
+## Hero image audit (item 1)
+Alpha measured per file (tools: PIL over public/assets/treatments). Eight of nine are true cut-outs with the figure on
+the bottom edge: Women's Care 43 % transparent, Child Care 67 % (touches the left edge), Petals IVF 47 %, Dentistry
+67 %, Aesthetics 64 % (two figures in one file, as in the mock), Pain 79 %, Multispecialty 40 % (the sofa is the
+ground; the whole bottom edge is opaque), Audiology 65 % (both figures cut hard at the file's left edge — flush left
+or nothing). Yoga is a 1919 × 820 rectangle with its own pale-blue backdrop. Contact sheet:
+design/render/live/hero-cutouts-audit.png. Yoga proposals: yoga_proposals.png — Y1 soft blend (chosen), Y2 framed card.
+
+## Fertility Care (item 3)
+/treatments/fertility-care is an alias of Petals IVF (content/treatments/list.js): the router renders the IVF content,
+postbuild writes a meta-refresh page there pointing at /treatments/petals-ivf/ with a canonical to it. Not in the
+sitemap (aliases are excluded; the canonical is) — left so. The only link to it was the dropdown item; Home's
+"Fertility Treatment" is a text chip and every related row uses petals-ivf.
+
+## Built
+
+**3. Dropdown.** Header.jsx TREATMENTS without the item; list.js keeps the alias. Verified: GET the alias → lands on
+/treatments/petals-ivf/, h1 Petals IVF; no header link names Fertility; dropdown = Women's Care · Child Care ·
+Aesthetics · Dentistry · Multispecialty Clinic · Yoga & Wellness · Pain Management & Rejuvenation · Audiology.
+
+**5. Clinics.** NAV entry without `chevron`; the drawer already rendered items without children as plain links.
+Verified: desktop `<a href=/clinics>` with no svg, no aria-haspopup/expanded; ArrowDown / Space / ArrowRight on it
+open nothing and stay on the page; Enter navigates; drawer `<a href="/clinics">Clinics</a>`, 0 buttons, 0 chevrons.
+
+**4. Aesthetics.** content/treatments/aesthetics.js (renamed file): one group (the dermatology track, four sub-groups,
+19 cards); the intimate-wellness (11) and surgical (5) tracks and the LuxMOM package gone; hero headline "Aesthetics"
++ pending tag, tagline dropped, lead = the track's own sub-line + pending tag; facts: the clinics line shown,
+"35 procedures across 3 tracks" and "1st consultation is complimentary" moved to `factsHidden`; specialtyId
+dermatology. Route: list.js `'aesthetics'` plus `'cosmetic-gynaecology-aesthetics': { redirect: 'aesthetics' }`;
+REDIRECTS exported (list.js, pages.js); routes.jsx `location.replace()` for a moved slug (query and hash kept);
+postbuild writes the meta-refresh page for the old path; hosting: `redirects` (permanent) in vercel.staging.json and
+in a new production vercel.json (buildCommand, outputDirectory, trailingSlash, the redirect — nothing else yet).
+References: Header label/href, treatmentData MENU + TITLES, LeadForm DEPARTMENTS ('Aesthetics'), TreatmentB comment,
+tools/sticky-probe.mjs; site-meta regenerated (title "Aesthetics — Petals Health", description = the lead, canonical
+/treatments/aesthetics/), sitemap lists /treatments/aesthetics/ only. Pills and sticky index: Template B derives
+both from `groups.length > 1`, so with one track neither renders — decided: they go. Client item 18; item 16's
+related-doctor proposal withdrawn. Verified: the old URL's static page lands on /treatments/aesthetics/; a host
+serving index.html for the old path (SPA fallback) lands on /treatments/aesthetics/?x=1#top via the router; no
+built HTML, sitemap or robots contains "Cosmetic Gynaecology" or the old slug; the rendered DOM of all 20 pages
+contains it only as text in the two places the client said to leave — Home's For Her Health chip and the Women's
+Care pillar — plus the Women's Care hero lead ("…fertility, cosmetic gynaecology, aesthetics…"), also text, also
+copy, listed for the client. The real 301 is verified on the next staging deploy (the preview server cannot 301).
+
+**1. Open hero.** treatment.css `.th--open`: the section is the gradient (radial 1100 px at 62 % 72 %, white →
+#e3f2ff, fading to white over the last 90 px), the stage has no background or radius, `object-fit: contain` with
+`object-position: var(--x) 100%` (x from the content file's photo.position; y always the bottom edge), the stage
+runs to the viewport's edge on its side (`min(-gutter, (content-width − 100vw) / 2)`, `overflow-x: clip` on the
+section for the scrollbar), copy centred, band height from the cut-out (520 / 560 / 620 px). Yoga: `blend: true` →
+cover + a wide feathered radial mask. Audiology position '0% 100%'. The shelf (`.th` default) stays on About,
+Clinics and Find a Doctor. Verified on all nine at 390 / 768 / 1366 / 1920: gradient hero, 0 px radius, contain
+(cover for Yoga), image bottom = hero bottom at 768+ and = stage bottom at 390 with the copy below it, no horizontal
+overflow. Sheets: open-hero-sheet.png (nine at 1366), open-hero-widths.png (1920 / 768 / 390).
+
+**2. Sticky form.** `.tsplit` (grid: content column | 380 / 400 px aside) inside the page container after the hero;
+`.tsplit__form` is `position: sticky; top: 58px` inside the aside, which stretches to the row, so it releases where
+the content column ends; no JavaScript. Team band and the closing panel follow outside the split, full width. Form:
+LeadForm `compact` (10 px gaps, 44 px inputs, 64 px textarea, 48 px Submit) = 616 px, Submit bottom at y652 at
+1366 × 768; department = `c.department || c.title` (petals-ivf.js gets `department: 'Fertility Care'`); source
+section treatment-sidebar. Removed: Template A's BeforeVisit band (now `Closing`: headline + Call + note at the end
+of the column, no Book) and Template B's FAQ-and-form block (FAQ or package as `.tv--column` in the column). In-column
+"book" links (IVF icon-grid CTA, the conversation panel's primary) point at #consult and focus the form (`focusForm`
+click handler on the column). Bands inside the column become rounded, inset panels; grids 2 across (3 from 1440,
+askSpan gained `three`); risks / feature / explained / featured / journey / why-choose / conversation reflowed.
+Below 1024 the aside stacks after the column, before the team band. Verified: nine pages × 1366 and 1920 pinned at
+58; nine × 390 and 768 inline after content, before team; shortest (Audiology, 3,270 px) and longest (Petals IVF,
+7,930 px): form bottom = wrapper bottom = team top at the release point, Submit at 652 mid-scroll. Site-walk clean on
+Women's Care, Petals IVF, Aesthetics, Audiology.
+
+## Waiting for approval
+**6. Clinics** — three directions in the report (one band per clinic, recommended; place cards; map first). Sticky
+form: not recommended for this page. **7. About hero** — A / B / C built behind `?hero=a|b|c` (About.jsx, About.css,
+default unchanged), captured with the 768 fold marked: design/render/live/about_hero_options.png. Recommended C.

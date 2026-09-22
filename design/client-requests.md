@@ -181,7 +181,8 @@ rewritten it. Tell us if an aesthetics-only package should replace it and what i
 - Two facts from the design's stats strip are hidden until you confirm them for aesthetics: "1st consultation is
   complimentary" (it was stated for the cosmetic gynaecology centre) and "35 procedures across 3 tracks of care"
   (now false — one track, 19 procedures).
-- Cosmetic gynaecology is still named in two places we have left as they are: the "For Her Health" card on Home
-  (the chip "Cosmetic Gynaecology & Aesthetics") and the Women's Care page's pillar of the same name ("Enhancing
-  intimate wellness…"). Neither is a link, so nothing sends a visitor to a page that no longer covers it — but both
-  now describe a service the site has no page for. Say whether they should stay, be renamed, or go.
+- Cosmetic gynaecology is still named in three places we have left as they are: the "For Her Health" card on Home
+  (the chip "Cosmetic Gynaecology & Aesthetics"), the Women's Care page's pillar of the same name ("Enhancing
+  intimate wellness…") and the Women's Care hero paragraph ("…fertility, cosmetic gynaecology, aesthetics…"). None
+  is a link, so nothing sends a visitor to a page that no longer covers it — but all three now describe a service the
+  site has no page for. Say whether they should stay, be renamed, or go.

@@ -80,13 +80,31 @@ function TeamTile({ m }) {
   )
 }
 
+const HERO = typeof window !== 'undefined' ? new URLSearchParams(window.location.search).get('hero') : null
+
 export default function About() {
   const showTeam = hasRealPeople || STAGING || import.meta.env.DEV   // production hides the section until a real person exists
   return (
     <div className="page">
       <Header current="about" />
       <main id="main" tabIndex={-1}>
-        <section className="th tb" aria-labelledby="about-title" data-hero>
+        {/* hero options for item 7 (2026-09-22), ?hero=a|b|c — a: the client's (full photo, text beneath); b: photo band with
+            an overlapping copy card; c: framed whole photo beside centred copy on the site's tint. Default: the current shelf. */}
+        {HERO === 'a' || HERO === 'b' ? (
+          <section className={'ah tb ah--' + HERO} aria-labelledby="about-title" data-hero>
+            <div className="ah__photo"><Img src="/assets/about/reception.jpg" alt="The reception desk at a Petals Health clinic" priority /></div>
+            <div className="inner"><div className="ah__panel">
+              <p className="th__crumb"><a href="/">Home</a> <span aria-hidden="true">›</span> About us</p>
+              <h1 id="about-title" className="th__title"><span className="th__line th__line--primary">About Petals</span></h1>
+              <p className="th__lead ah__lead">{ABOUT}</p>
+              <div className="ah__row">
+                <a className="th__cta" href="#book" data-form="book-appointment" data-section="about-hero">Book an appointment</a>
+                <ul className="th__facts" aria-label="Our clinics">{SITES.map((s) => <li key={s.id} title="Source: clinics.js">{s.region}</li>)}</ul>
+              </div>
+            </div></div>
+          </section>
+        ) : (
+        <section className={'th tb' + (HERO === 'c' ? ' ah--c' : '')} aria-labelledby="about-title" data-hero>
           <div className="inner th__inner">
             <div className="th__stage ah__stage" data-overlap-ok>
               <Img src="/assets/about/reception.jpg" alt="The reception desk at a Petals Health clinic" priority style={{ '--pos': '45% 60%' }} />
@@ -100,6 +118,7 @@ export default function About() {
             </div>
           </div>
         </section>
+        )}
 
         <section className="as tb" aria-labelledby="story-title">
           <div className="inner as__inner">
