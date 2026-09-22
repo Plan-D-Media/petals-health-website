@@ -26,7 +26,7 @@ const TREATMENTS = [   // the mock's order (spellings corrected: Womans, Cosmeti
 export const NAV = [
   { id: 'home', label: 'Home', href: '/' },
   { id: 'about', label: 'About us', href: '/about' },
-  { id: 'clinics', label: 'Clinics', href: '/clinics', chevron: true },
+  { id: 'clinics', label: 'Clinics', href: '/clinics' },   // a plain link since 2026-09-22 (client): no dropdown behind it
   { id: 'treatments', label: 'Treatments', items: TREATMENTS },
   { id: 'diagnostics', label: 'Diagnostic Services', href: null },   // no page yet (design/no-mock-pages.md)
   { id: 'patients', label: 'For Patients', href: null, chevron: true },
