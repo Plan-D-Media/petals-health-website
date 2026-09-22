@@ -30,8 +30,9 @@ export function rankServices(services, c, { noLead = false } = {}) {
   const compactFrom = c.compactFrom ?? (services.length > 8 ? 6 : Infinity)
   return services.map((s, i) => ({ ...s, rank: i === leadIndex ? 'lead' : i >= compactFrom ? 'compact' : 'standard', index: i }))
 }
-/** how many grid cells the "ask" tile must span to complete the last row (4 columns from 1024, 2 from 768) */
-export const askSpan = (cards) => { const cells = cards.reduce((a, s) => a + (s.rank === 'lead' ? 2 : 1), 0); return { four: (4 - (cells % 4)) % 4 || 4, two: (2 - (cells % 2)) % 2 || 2 } }
+/** how many grid cells the "ask" tile must span to complete the last row: 2 columns from 768 and inside the content
+    column from 1024, 3 inside the column from 1440, 4 on a full-width grid (treatment.css) */
+export const askSpan = (cards) => { const cells = cards.reduce((a, s) => a + (s.rank === 'lead' ? 2 : 1), 0); const fill = (n) => (n - (cells % n)) % n || n; return { four: fill(4), three: fill(3), two: fill(2) } }
 
 // the Treatments menu order (Header.jsx), by canonical slug
 const MENU = ['womens-care', 'child-care', 'petals-ivf', 'aesthetics', 'dentistry', 'multispecialty-clinic', 'yoga-wellness', 'pain-management-rejuvenation', 'audiology']
@@ -42,5 +43,6 @@ export function relatedFor(c) {
   return slugs.filter((s) => s !== c.slug && TITLES[s]).map((s) => ({ slug: s, title: TITLES[s], href: `/treatments/${s}` }))
 }
 
-// the lead form's department select uses the page title where it matches the department list
-export const departmentFor = (c) => c.title
+// the lead form's department select: the content file's `department` when the page title is not a department name
+// (Petals IVF → Fertility Care), else the page title
+export const departmentFor = (c) => c.department || c.title

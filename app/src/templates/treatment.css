@@ -161,6 +161,63 @@
 .tb--navy .tc--lead .tc__num, .tb--navy .tc--lead .tc__start { color: var(--accent-dark); }
 .tb--navy .tc:hover { box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.6); }
 
+/* ---- the split: content column | sticky consultation form (2026-09-22, client item 2) ----
+   .tsplit is a grid inside the page container holding only the content column and the form, so the form (CSS sticky,
+   no scroll JavaScript) stops where the content ends; the team band and the closing panel follow full width. Below
+   1024 there is no side column: the form sits inline after the content. Inside the column every band keeps its
+   background but at the column's width, as a soft panel (rounded, inset), and its grids reflow to fewer columns. */
+.tsplit { display: grid; gap: 32px; margin-top: 24px; }
+.tsplit__main { min-width: 0; }
+.tsplit .inner { width: 100%; }
+.tsplit__main > .tb--tint, .tsplit__main > .tb--cream, .tsplit__main > .tb--navy, .tsplit__main .tracks > .tb, .tsplit__main .tr2__band { border-radius: var(--radius-card-lg); padding-left: 20px; padding-right: 20px; }
+.tsplit__main .tg__divider { padding: 0 20px; }
+.tsplit__main > .tb + .tb, .tsplit__main .tracks > .tb + .tb { margin-top: 8px; }
+.tsplit__form { padding: 20px 20px 22px; border-radius: var(--radius-card-lg); background: var(--white); box-shadow: var(--shadow-card), var(--ring-card); }
+.tsplit__form .tv__form-title { font-size: 22px; }
+.tsplit__form .tv__form-sub { margin-bottom: 12px; }
+.tv--close { padding: 32px 0 8px; }
+.tv--column { padding: 32px 0 8px; }
+@media (min-width: 1024px) {
+  .tsplit { grid-template-columns: minmax(0, 1fr) 380px; gap: 40px; align-items: start; }
+  .tsplit__side { align-self: stretch; }
+  .tsplit__form { position: sticky; top: 58px; }   /* 42 px sticky nav + 16 */
+  .tsplit__main > .tb--tint, .tsplit__main > .tb--cream, .tsplit__main > .tb--navy, .tsplit__main .tracks > .tb, .tsplit__main .tr2__band { padding-left: 28px; padding-right: 28px; }
+  .tsplit__main .tg__divider { padding: 0 28px; }
+  /* grids in the column: two across (three from 1440) */
+  .tsplit__main .ts__grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .tsplit__main .tc { min-height: 0; }
+  .tsplit__main .tc--ask { grid-column: span var(--span2, 1); }
+  .tsplit__main .ts__compact { grid-template-columns: repeat(2, 1fr); }
+  .tsplit__main .ts__compact li { grid-template-columns: 1fr; }
+  .tsplit__main .tf__inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .tsplit__main .tf__list { font-size: 19px; }
+  .tsplit__main .tf__title { font-size: 34px; }
+  .tsplit__main .tr2__inner, .tsplit__main .tr2__inner--photo-first { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .tsplit__main .tr2__list { font-size: 18px; }
+  .tsplit__main .tx-explained__inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .tsplit__main .tx-explained__title { font-size: 40px; }
+  .tsplit__main .tf-band__inner { grid-template-columns: 1fr 260px; gap: 32px; }
+  .tsplit__main .tf-band__title { font-size: 36px; }
+  .tsplit__main .tw__list { grid-template-columns: 1fr 1fr; }
+  .tsplit__main .tj__steps { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+  .tsplit__main .tj__step + .tj__step::before { display: none; }
+  .tsplit__main .tn__inner { grid-template-columns: 1fr; padding: 36px 32px; }
+  .tsplit__main .tn__title { font-size: 36px; }
+  .tsplit__main .tb__title { font-size: var(--fs-display-md); }
+  .tsplit__main .tc--lead .tc__title { font-size: 26px; }
+  .tsplit__main .ts { padding: 36px 0 44px; }
+  .tsplit__main .tx { top: 42px; }
+}
+@media (min-width: 1366px) { .tsplit { grid-template-columns: minmax(0, 1fr) 400px; gap: 48px; } }
+@media (min-width: 1440px) {
+  .tsplit__main .ts__grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .tsplit__main .tc--ask { grid-column: span var(--span3, 1); }
+  .tsplit__main .ts__compact { grid-template-columns: repeat(3, 1fr); }
+  .tsplit__main .tj__steps { grid-template-columns: repeat(4, 1fr); gap: 0; }
+  .tsplit__main .tj__step + .tj__step::before { display: block; }
+  .tsplit__main .tw__list { grid-template-columns: repeat(3, 1fr); }
+}
+
 /* ---- team ---- */
 .tt { padding: 40px 0 44px; }
 .tt__grid { display: grid; gap: 16px; margin: 24px 0 0; padding: 0; list-style: none; justify-content: center; }

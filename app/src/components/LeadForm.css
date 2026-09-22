@@ -34,3 +34,12 @@
 .lead__meta { margin: 0; font-size: var(--fs-meta); color: var(--grey-600); }
 .lead__meta a { color: var(--blue-900); }
 @media (prefers-reduced-motion: reduce) { .lead__spinner { animation: none; border-top-color: transparent; } }
+
+/* compact (the sticky treatment-page form, 2026-09-22): the whole form — every field, the consent line and Submit —
+   fits a 1366 × 768 viewport under the sticky nav. Inputs keep 44+; the gaps, the textarea and the button tighten. */
+.lead--compact { gap: 10px; }
+.lead--compact .lead__field { gap: 4px; }
+.lead--compact input, .lead--compact select { height: 44px; }
+.lead--compact textarea { min-height: 64px; padding: 10px 14px; }
+.lead--compact .lead__consent { min-height: 40px; padding: 0; }
+.lead--compact .lead__submit, .lead--compact button[type="submit"] { height: 48px; margin-top: 0; }

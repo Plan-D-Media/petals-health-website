@@ -12,9 +12,10 @@ import './TreatmentA.css'
 
 // Template A (Child Care, Pain Management, Audiology, Yoga & Wellness, Multispecialty) — redesign 2026-09-21
 // (design/treatment-redesign.md). Section order from the mock, with the team moved up beside the services:
-//   hero on a shelf (photo | crumb, tagline?, headline, lead, CTA, verified facts) · intro (optional) · feature block
-//   (optional) · ranked service grid on a tint band · flagship band (optional) · team (matching specialists, or the
-//   Find a Doctor link) · before your visit (the closing copy + actions | the lead form) · related pages · footer.
+//   open hero (cut-out on the gradient | crumb, tagline?, headline, lead, CTA, verified facts) · a two-column split
+//   (2026-09-22): the content column — intro (optional) · feature block (optional) · ranked service grid on a tint
+//   band · flagship band (optional) · the closing line with the Call button — beside the sticky consultation form ·
+//   then full width: team (matching specialists, or the Find a Doctor link) · related pages · footer.
 // Copy is the content file's; the only page-added strings are UI labels (Start here, Find a doctor, More at Petals Health).
 
 const Pending = ({ title }) => <span className="pending" title={title}>Copy pending</span>
@@ -38,7 +39,7 @@ export function ServiceGrid({ services, c, noLead = false, ask = true }) {
           </li>
         ))}
         {showAsk && (
-          <li className="tc tc--ask" style={{ '--span4': span.four, '--span2': span.two }} aria-label="Not sure where to start?">
+          <li className="tc tc--ask" style={{ '--span4': span.four, '--span3': span.three, '--span2': span.two }} aria-label="Not sure where to start?">
             <span className="tc__num" aria-hidden="true">Not sure where to start?</span>
             <p className="tc__text">Tell us what is going on and we will match you to the right doctor and clinic.</p>
             <a className="tc__ask" href="#ask" data-form="ask-doctor" data-section="treatment-grid">Ask a Doctor <Arrow /></a>
@@ -77,22 +78,42 @@ export function Team({ c }) {
   )
 }
 
-export function BeforeVisit({ c, headline, call, book }) {
+// the sticky consultation form (2026-09-22, client item 2): the one form on a treatment page, beside the content column
+// from 1024 (CSS sticky inside .tsplit, so it stops where the content ends — no scroll JavaScript), inline after the
+// content below that. Department preselected from the page; submissions tagged treatment-sidebar. In-page
+// "book" links inside the column point at it (#consult) instead of opening the dialog — no second Book button
+// beside a visible form.
+export const FORM_ID = 'consult'
+export function SideForm({ c }) {
   return (
-    <section className="tv tb" aria-labelledby="t-visit-title">
-      <div className="inner tv__inner">
+    <aside className="tsplit__side" aria-labelledby="t-form-title">
+      <div className="tsplit__form" id={FORM_ID}>
+        <h2 id="t-form-title" className="tv__form-title">{c.form?.title || 'Book a consultation'}</h2>
+        <p className="tv__form-sub">Tell us what you need and we will call you back.</p>
+        <LeadForm form={c.form?.preset || 'book-consultation-page'} source={{ section: 'treatment-sidebar', page: c.slug, department: departmentFor(c) }} autoFocus={false} hideTitle compact />
+      </div>
+    </aside>
+  )
+}
+/** a click on an in-column link to #consult moves focus into the form (visible beside the column, or scrolled to below it) */
+export const focusForm = (e) => {
+  const a = e.target.closest('a[href="#consult"]'); if (!a) return
+  e.preventDefault()
+  const f = document.getElementById(FORM_ID); if (!f) return
+  f.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+  f.querySelector('input:not([type="hidden"]), select, textarea')?.focus({ preventScroll: true })
+}
+
+// Template A's closing line at the end of the content column: the headline and the Call button (the Book button went
+// with the form beside it), then the note.
+export function Closing({ headline, call }) {
+  return (
+    <section className="tv tb tv--close" aria-labelledby="t-visit-title">
+      <div className="inner">
         <div className="tv__copy">
           <h2 id="t-visit-title" className="tv__title">{headline[0]}<br />{headline[1]}</h2>
-          <div className="tv__actions">
-            {call && <a className="tv__call" href={call.href}>{call.label}</a>}
-            {book && <a className="tv__book" href="#book" data-form={book.form} data-section="treatment-closing">{book.label}</a>}
-          </div>
+          {call && <div className="tv__actions"><a className="tv__call" href={call.href}>{call.label}</a></div>}
           <p className="tv__note">Our team confirms by phone or WhatsApp, usually within an hour during clinic hours.</p>
-        </div>
-        <div className="tv__form" data-reveal>
-          <h3 className="tv__form-title">Book a consultation</h3>
-          <p className="tv__form-sub">Tell us what you need and we will call you back.</p>
-          <LeadForm form="book-consultation-page" source={{ section: 'treatment-form', page: c.slug, department: departmentFor(c) }} autoFocus={false} hideTitle />
         </div>
       </div>
     </section>
@@ -151,45 +172,51 @@ export default function TreatmentA({ content: c }) {
       <main id="main" tabIndex={-1}>
         <Hero c={c} />
 
-        {c.intro && <section className="ti tb"><div className="inner"><p className="ti__text">{c.intro}</p></div></section>}
+        <div className="inner"><div className="tsplit">
+          <div className="tsplit__main" onClick={focusForm}>
+            {c.intro && <section className="ti tb"><div className="inner"><p className="ti__text">{c.intro}</p></div></section>}
 
-        {c.feature && (
-          <section className="tf tb" aria-labelledby="t-feature-title">
-            <div className="inner tf__inner">
-              <div className="tf__photos">{c.feature.photos.map((p) => <Img key={p.src} src={p.src} alt={p.alt} />)}</div>
-              <div className="tf__copy">
-                <h2 id="t-feature-title" className="tf__title">{c.feature.heading}</h2>
-                <ul className="tf__list">{c.feature.bullets.map((b) => <li key={b}>{b}</li>)}</ul>
+            {c.feature && (
+              <section className="tf tb" aria-labelledby="t-feature-title">
+                <div className="inner tf__inner">
+                  <div className="tf__photos">{c.feature.photos.map((p) => <Img key={p.src} src={p.src} alt={p.alt} />)}</div>
+                  <div className="tf__copy">
+                    <h2 id="t-feature-title" className="tf__title">{c.feature.heading}</h2>
+                    <ul className="tf__list">{c.feature.bullets.map((b) => <li key={b}>{b}</li>)}</ul>
+                  </div>
+                </div>
+              </section>
+            )}
+
+            <section className="ts tb tb--tint" aria-labelledby="t-services-title">
+              <div className="inner">
+                <div className="tb__head">
+                  <p className="tb__eyebrow">{c.servicesEyebrow || 'What we treat'}</p>
+                  <h2 id="t-services-title" className="tb__title">{c.servicesTitle || `${c.title} services`}</h2>
+                </div>
+                <ServiceGrid services={c.services} c={c} />
               </div>
-            </div>
-          </section>
-        )}
+            </section>
 
-        <section className="ts tb tb--tint" aria-labelledby="t-services-title">
-          <div className="inner">
-            <div className="tb__head">
-              <p className="tb__eyebrow">{c.servicesEyebrow || 'What we treat'}</p>
-              <h2 id="t-services-title" className="tb__title">{c.servicesTitle || `${c.title} services`}</h2>
-            </div>
-            <ServiceGrid services={c.services} c={c} />
+            {c.flagship && (
+              <section className={'ts ts--flagship tb ' + (c.flagshipTone === 'tint' ? 'tb--tint' : 'tb--navy')} aria-labelledby="t-flagship-title">   {/* the page's one navy band; the lead card above goes light */}
+                <div className="inner">
+                  <div className="tb__head">
+                    <p className="tb__eyebrow">{c.flagship.eyebrow}</p>
+                    <h2 id="t-flagship-title" className="tb__title">{c.flagship.heading}</h2>
+                    <p className="tb__sub">{c.flagship.lead}</p>
+                  </div>
+                  <ServiceGrid services={c.flagship.services} c={{ ...c, serviceLabel: null, compactFrom: Infinity }} noLead ask={false} />
+                </div>
+              </section>
+            )}
+
+            <Closing headline={c.closing.headline} call={c.closing.call} />
           </div>
-        </section>
-
-        {c.flagship && (
-          <section className={'ts ts--flagship tb ' + (c.flagshipTone === 'tint' ? 'tb--tint' : 'tb--navy')} aria-labelledby="t-flagship-title">   {/* the page's one navy band; the lead card above goes light */}
-            <div className="inner">
-              <div className="tb__head">
-                <p className="tb__eyebrow">{c.flagship.eyebrow}</p>
-                <h2 id="t-flagship-title" className="tb__title">{c.flagship.heading}</h2>
-                <p className="tb__sub">{c.flagship.lead}</p>
-              </div>
-              <ServiceGrid services={c.flagship.services} c={{ ...c, serviceLabel: null, compactFrom: Infinity }} noLead ask={false} />
-            </div>
-          </section>
-        )}
+          <SideForm c={c} />
+        </div></div>
 
         <Team c={c} />
-        <BeforeVisit c={c} headline={c.closing.headline} call={c.closing.call} book={c.closing.book} />
         <Related c={c} />
       </main>
       <Footer />

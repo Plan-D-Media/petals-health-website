@@ -7,6 +7,7 @@
 // logged as a deviation. FAQ: only the first answer exists in the design; five questions are tagged pending.
 export default {
   slug: 'petals-ivf',
+  department: 'Fertility Care',   // the lead form's department for this page (the title is not a department name)
   template: 'B',
   title: 'Petals IVF',
   hero: {

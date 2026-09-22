@@ -19,7 +19,7 @@ export const FORM_PRESETS = {
   'book-consultation-page': { title: 'Book a Consultation', fields: ['name', 'mobile', 'email', 'department', 'message'], submit: 'Submit', thanks: 'Thank you. Our team will confirm your consultation by phone or WhatsApp.' },   // the treatment pages' on-page form (mock: Full Name, Email ID, Phone, Select Department, Message)
 }
 
-export default function LeadForm({ form = 'book-appointment', source = {}, preset, onSuccess, autoFocus = true, hideTitle = false }) {
+export default function LeadForm({ form = 'book-appointment', source = {}, preset, onSuccess, autoFocus = true, hideTitle = false, compact = false }) {
   const p = preset || FORM_PRESETS[form]
   const id = useId()
   const [values, setValues] = useState({ name: '', mobile: '', email: '', gender: '', age: '', doctor: source.doctor || '', department: source.department || '', date: '', message: '', consent: false, website: '' })
@@ -58,7 +58,7 @@ export default function LeadForm({ form = 'book-appointment', source = {}, prese
   const err = (k) => errors[k] ? <span className="lead__error" id={`${id}-${k}-err`}>{errors[k]}</span> : null
   const aria = (k) => ({ 'aria-invalid': errors[k] ? true : undefined, 'aria-describedby': errors[k] ? `${id}-${k}-err` : undefined })
   return (
-    <form className="lead" onSubmit={onSubmit} noValidate aria-busy={status === 'submitting'}>
+    <form className={'lead' + (compact ? ' lead--compact' : '')} onSubmit={onSubmit} noValidate aria-busy={status === 'submitting'}>
       {!hideTitle && <h3 className="lead__title">{p.title}</h3>}
       {has('name') && <label className="lead__field"><span>Full name</span><input ref={firstRef} name="name" autoComplete="name" value={values.name} onChange={set('name')} {...aria('name')} />{err('name')}</label>}
       {has('mobile') && <label className="lead__field"><span>Mobile number</span><input name="mobile" type="tel" inputMode="numeric" autoComplete="tel" placeholder="10-digit mobile" value={values.mobile} onChange={set('mobile')} {...aria('mobile')} />{err('mobile')}</label>}
