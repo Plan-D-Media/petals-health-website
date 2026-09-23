@@ -37,6 +37,11 @@ SOURCES = {
     '/assets/2_04c0f486.png': os.path.join(DESIGN, '2_04c0f486.png'),
     '/assets/2_a79aaebf.png': os.path.join(DESIGN, '2_a79aaebf.png'),
 }
+# Petals Clinic in Bangladesh (2026-09-23): the client's own images from petalshealth.in/petals-clinic-in-bangladesh/.
+# hero.jpg is their banner with its baked-in dark overlay lifted by a straight levels scale (x1.58, clipped) —
+# hero-original.jpg is the file as published; nothing else is changed.
+for _k, _f in {'hero': 'hero.jpg', 'gynaecology': 'Gynaecology-img.jpg', 'paediatrics': 'Paediatrics-1-img.jpg', 'cardiology': 'Cardiology-img.jpg', 'onco-gynaecology': 'Onco-Gynaecology-img.jpg', 'oncology': 'Oncology-img.jpg', 'gastroenterology': 'Gastroenterology-img.jpg', 'aesthetic-medicine': 'aesthetic-medicine-img.jpg', 'preventive-care': 'preventive-care-img.jpg'}.items():
+    SOURCES[f'/assets/bangladesh/{_k}.jpg'] = os.path.join(DESIGN, 'bangladesh', _f)
 # per-image overrides of the needed width (px): full-bleed backgrounds that are washed or blurred need less
 OVERRIDE_W = {
     '/assets/doctors/profile-hero-bg.jpg': 1600,   # 35 % opacity, desaturated wash — 1600 is indistinguishable

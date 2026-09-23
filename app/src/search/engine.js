@@ -2,6 +2,7 @@ import { DOCTORS, CLINICS, SPECIALTY_GROUPS, SPECIALTY_LABELS, clinicsOf, specia
 import { SITES } from '../data/clinics.js'
 import TREATMENTS from '../generated/search-treatments.js'
 import { SYNONYMS } from './synonyms.js'
+import { BANGLADESH } from '../content/bangladesh.js'
 
 // Site search (2026-09-23), client-side over the data files. Loads with the overlay on first open, never with a page.
 // Each source turns its data into records: { type, id, title, sub, href, item, fields: [[text, weight], …] }.
@@ -39,7 +40,10 @@ export const SOURCES = [
       type: 'clinic', id: s.id, title: s.name, href: `/clinics/#clinic-${s.id}`, item: s,
       sub: s.address.join(' '),
       fields: [[[s.name, ...s.tile].join(' '), 10], [[CLINICS[s.id]?.name, s.region].join(' '), 4], [s.address.join(' '), 2]],
-    })),
+    })).concat({   // Bangladesh: not open yet, no address — found by its name only, so it never crowds a Kolkata specialty search
+      type: 'clinic', id: 'bangladesh', title: BANGLADESH.title, href: '/petals-clinic-in-bangladesh/', item: null, sub: BANGLADESH.headline,
+      fields: [[BANGLADESH.title, 10]],
+    }),
   },
   { type: 'article', label: 'Articles', pending: true, records: () => [] },   // the blog does not exist yet; its posts plug in here
 ]

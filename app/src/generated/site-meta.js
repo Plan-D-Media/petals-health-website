@@ -24,6 +24,11 @@ export const SITE_META = [
   "description": "Search our specialists by name, specialty, or clinic. 100+ doctors across three clinics in Kolkata — filter by availability, video consult, language and rating."
  },
  {
+  "path": "/petals-clinic-in-bangladesh/",
+  "title": "Petals Clinic in Bangladesh — Petals Health",
+  "description": "Petals Healthcare, Soon in Bangladesh. A New Chapter in Compassionate Care Begins."
+ },
+ {
   "path": "/treatments/child-care/",
   "title": "Child Care — Petals Health",
   "description": "Children's health moves fast, a growth spurt, a new vaccine due, a fever that won't settle. Our pediatricians work alongside your family medicine and gynaecolog"

@@ -206,3 +206,23 @@ Application Privacy Policy, Mobile Application Terms of Service, Know your Tests
 which of these we should port. The other nine need content from you: Petal's App & Community, Career, Vlogs, Upload
 Prescription, Polyclinic/Multispecialty OPD, Petals Inner Circle, Social Media Policy, Grievance Redressal, Code of
 Ethics.
+
+**21. Petals Clinic in Bangladesh — the page is built from your page's own words; these are missing or held.**
+The new page (/petals-clinic-in-bangladesh, the same address as today) uses only what your current Bangladesh page
+says: its headings, the eight services with your photographs, and the phone number — shown as +880 1784-110044 so it
+can be dialled from India, where most of this site's visitors are. Nothing is taken from the Kolkata clinics. To finish
+it we need:
+- The clinic's address and city, the opening date, opening hours, and the doctors (same sheet as item 3).
+- How Bangladesh bookings should work: where requests go, which departments to offer, and whether the form should take
+  Bangladeshi numbers. The site's booking form is set up for Kolkata (Indian mobiles, Kolkata departments), so the page
+  asks visitors to call until you tell us.
+- Held for rewording, not published: "We are the most trusted Multi-specialty health clinic in Bangladesh because we
+  provide:"; the introduction paragraph, which says "we are your trusted multi-speciality health clinic in Bangladesh"
+  and that Petals "has transformed healthcare across Eastern India"; and three of the five points — "Renowned doctors
+  with global expertise", "Affordable care, uncompromised quality" and "Patients-centric approach for higher
+  satisfaction, trusted by families". For a clinic that has not opened, "trusted", "most trusted" and "higher
+  satisfaction" are claims no patient can check. The other two points are published as they are.
+- Photographs: the banner on your page has a dark layer over it, which we lifted; please send the original. Please
+  also confirm it shows the Bangladesh clinic — the poster on its wall lists the Kolkata clinics. The eight service
+  photos are 300 × 200 px and look soft on phones and high-resolution screens; larger originals would fix that.
+- Any registration or licence details you want shown for Bangladesh.

@@ -23,6 +23,60 @@
 "w": 1600,
 "webp": true
 },
+"/assets/bangladesh/aesthetic-medicine.jpg": {
+"h": 200,
+"m": false,
+"w": 301,
+"webp": true
+},
+"/assets/bangladesh/cardiology.jpg": {
+"h": 200,
+"m": false,
+"w": 300,
+"webp": true
+},
+"/assets/bangladesh/gastroenterology.jpg": {
+"h": 200,
+"m": false,
+"w": 301,
+"webp": true
+},
+"/assets/bangladesh/gynaecology.jpg": {
+"h": 200,
+"m": false,
+"w": 300,
+"webp": true
+},
+"/assets/bangladesh/hero.jpg": {
+"h": 595,
+"m": true,
+"w": 1400,
+"webp": true
+},
+"/assets/bangladesh/onco-gynaecology.jpg": {
+"h": 200,
+"m": false,
+"w": 301,
+"webp": true
+},
+"/assets/bangladesh/oncology.jpg": {
+"h": 200,
+"m": false,
+"w": 301,
+"webp": true
+},
+"/assets/bangladesh/paediatrics.jpg": {
+"h": 200,
+"m": false,
+"w": 300,
+"webp": true
+},
+"/assets/bangladesh/preventive-care.jpg": {
+"h": 200,
+"m": false,
+"w": 301,
+"webp": true
+},
 "/assets/clinics/kankurgachi.jpg": {
 "h": 1104,
 "m": true,

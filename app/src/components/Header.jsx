@@ -33,7 +33,7 @@ export const NAV = [
   { id: 'treatments', label: 'Treatments', items: TREATMENTS },
   { id: 'diagnostics', label: 'Diagnostic Services', href: null },   // no page yet (design/no-mock-pages.md)
   { id: 'patients', label: 'For Patients', href: null, chevron: true },
-  { id: 'bangladesh', label: 'Petals Clinic in Bangladesh', href: null },
+  { id: 'bangladesh', label: 'Petals Clinic in Bangladesh', href: '/petals-clinic-in-bangladesh' },   // page since 2026-09-23
 ]
 
 const UTILITY = [
