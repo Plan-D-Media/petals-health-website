@@ -38,3 +38,5 @@
   .sxo { right: 0; left: 0; bottom: 0; width: 100%; padding: 0 8px 76px; }
   .sxo__card { border-radius: var(--radius-card-lg); max-height: calc(100vh - 100px); }
 }
+/* tablets: the card stays bottom-right but lifts above the action bar (64 px, <1024 since 2026-09-23) */
+@media (min-width: 768px) and (max-width: 1023px) { .sxo { bottom: 80px; } .sxo__card { max-height: min(640px, calc(100vh - 96px)); } }

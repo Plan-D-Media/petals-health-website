@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Icon from './Icon.jsx'
 import NavMenu from './NavMenu.jsx'
+import ActionRail from './ActionRail.jsx'
 import './Header.css'
 import Img from './Img.jsx'
 import { PENDING_TITLE } from './pending.js'
@@ -8,7 +9,8 @@ import { PENDING_TITLE } from './pending.js'
 // Header, flow rewrite 2026-09-17.
 //   ≥1024: the desktop bars (utility row + sticky nav row, flex on the content container; design/hero-values.md sizes ×1.2).
 //   <1024: one sticky bar (logo, phone, menu) and a drawer holding the utility links and the nav; items with children
-//          are accordions. <768 adds a fixed bottom action bar (Call now / Book Appointment) once the hero has scrolled out.
+//          are accordions. <1024 adds a fixed bottom action bar (Call now / Book Appointment) once the hero has scrolled out
+//          (<768 until 2026-09-23; tablets had neither it nor the rail). ≥1024 gets the floating action rail instead.
 // Dropdown data: Treatments only (design/svg/8.svg); other menus await the client's answer.
 
 const TREATMENTS = [   // the mock's order (spellings corrected: Womans, Cosmetice, Welness, Rejuvination). Fertility Care removed
@@ -43,7 +45,9 @@ const UTILITY = [
 function useHeroScrolledOut() {
   const [out, setOut] = useState(false)
   useEffect(() => {
-    const hero = document.querySelector('.hero, .t-hero, [data-hero]'); if (!hero || !('IntersectionObserver' in window)) return undefined
+    // the page's first section is its hero (2026-09-23: the old '.hero, .t-hero' list missed the .th heroes, so the
+    // action bar and nav CTA never appeared on Find a Doctor or any treatment page)
+    const hero = document.querySelector('.hero, [data-hero]') || document.querySelector('main > section:first-child'); if (!hero || !('IntersectionObserver' in window)) return undefined
     const io = new IntersectionObserver(([e]) => setOut(!e.isIntersecting), { threshold: 0 })
     io.observe(hero); return () => io.disconnect()
   }, [])
@@ -171,11 +175,12 @@ export default function Header({ current = 'home' } = {}) {
         </div>
       </nav>
 
-      {/* ---- bottom action bar (<768): thumb-zone CTA path, after the hero, hidden while a dialog/drawer is open ---- */}
+      {/* ---- bottom action bar (<1024): thumb-zone CTA path, after the hero, hidden while a dialog/drawer is open ---- */}
       <div className={'actionbar' + (showCta ? ' actionbar--on' : '')} aria-hidden={!showCta}>
         <a className="actionbar__call" href="tel:9147405955" tabIndex={showCta ? 0 : -1}><Icon name="phone" />Call now</a>
         <a className="actionbar__book" href="#book" data-form="book-appointment" tabIndex={showCta ? 0 : -1}>Book Appointment</a>
       </div>
+      <ActionRail on={showCta} />
     </header>
   )
 }

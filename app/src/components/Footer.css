@@ -19,7 +19,7 @@
 .footer__col a:hover, .footer__col a:focus-visible { text-decoration-color: currentColor; }
 
 .footer__bottom { background: var(--blue-900); }
-.footer__bottom-inner { padding: 16px 0 88px; }   /* 88: clears the mobile action bar */
+.footer__bottom-inner { padding: 16px 0 88px; }   /* 88: clears the action bar (<1024) */
 .footer__copy { margin: 0; font-size: var(--fs-caption); font-weight: var(--fw-caption); line-height: 1.3; }
 .footer__phone { display: inline-flex; align-items: center; gap: 12px; margin-top: 12px; min-height: 44px; font-size: var(--fs-footer-phone); font-weight: var(--fw-footer-phone); color: var(--white); white-space: nowrap; }
 .footer__phone-icon svg { width: 15.4px; height: 20.8px; display: block; }
@@ -34,7 +34,7 @@
   /* every group open on wider screens: a closed <details> hides its content, so show it regardless */
   .footer__col:not([open]) > ul { display: block; }
   .footer__col li a { min-height: 44px; }
-  .footer__bottom-inner { padding-bottom: 24px; display: flex; justify-content: space-between; align-items: center; gap: 24px; }
+  .footer__bottom-inner { display: flex; justify-content: space-between; align-items: center; gap: 24px; }
   .footer__phone { margin: 0; }
 }
 @media (min-width: 1024px) {
