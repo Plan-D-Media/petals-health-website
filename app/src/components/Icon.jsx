@@ -9,8 +9,9 @@ import pin from '../icons/pin.svg?raw'
 import star from '../icons/star.svg?raw'
 import petalOutline from '../icons/petal-outline.svg?raw'
 import quoteMark from '../icons/quote-mark.svg?raw'
+import search from '../icons/search.svg?raw'   // stroke glyph: the magnifier Find a Doctor draws inline, added to the set for the rail and header
 
-const ICONS = { phone, calendar, findDoctor, askDoctor, chevron, pin, star, petalOutline, quoteMark }
+const ICONS = { phone, calendar, findDoctor, askDoctor, chevron, pin, star, petalOutline, quoteMark, search }
 
 export default function Icon({ name, className, style }) {
   const svg = ICONS[name].replace(/fill="#[0-9a-f]{6}"/gi, 'fill="currentColor"')

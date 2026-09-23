@@ -6,7 +6,7 @@ import DoctorCard from '../components/DoctorCard.jsx'
 import Icon from '../components/Icon.jsx'
 import Img from '../components/Img.jsx'
 import { track } from '../analytics.js'
-import { DOCTORS, CLINICS, SPECIALTY_GROUPS, SPECIALTY_LABELS, specialtyGroupOf, availableToday } from '../data/doctors.js'
+import { DOCTORS, CLINICS, SPECIALTY_GROUPS, SPECIALTY_LABELS, specialtyGroupOf, availableToday, LANGUAGES_CONFIRMED } from '../data/doctors.js'
 import '../templates/treatment.css'
 import './FindDoctor.css'
 
@@ -42,7 +42,7 @@ const DESKTOP = '(min-width: 1024px)'
 const readState = () => {
   const q = new URLSearchParams(window.location.search)
   const list = (k) => (q.get(k) || '').split(',').filter(Boolean)
-  return { q: q.get('q') || '', specialties: list('s'), clinics: list('c'), avail: list('a'), langs: list('l'), rating: Number(q.get('r')) || 0, sort: SORTS.some((s) => s.id === q.get('sort')) ? q.get('sort') : 'name-asc', page: Math.max(1, Number(q.get('page')) || 1) }
+  return { q: q.get('q') || '', specialties: list('s'), clinics: list('c'), avail: list('a'), langs: LANGUAGES_CONFIRMED ? list('l') : [], rating: Number(q.get('r')) || 0, sort: SORTS.some((s) => s.id === q.get('sort')) ? q.get('sort') : 'name-asc', page: Math.max(1, Number(q.get('page')) || 1) }
 }
 const writeState = (st) => {
   const q = new URLSearchParams()
@@ -93,7 +93,7 @@ export default function FindDoctor() {
     { title: 'Specialty', k: 'specialties', options: specialtyOptions },
     { title: 'Clinic', k: 'clinics', options: clinicOptions },
     { title: 'Availability', k: 'avail', options: availOptions },
-    { title: 'Speaks', k: 'langs', options: langOptions },
+    ...(LANGUAGES_CONFIRMED ? [{ title: 'Speaks', k: 'langs', options: langOptions }] : []),   // hidden while every doctor carries the placeholder language list (doctors.js)
   ]
 
   const results = useMemo(() => DOCTORS.filter((d) => matches(d, st)).sort(SORTS.find((s) => s.id === st.sort).fn), [st])

@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import Icon from './Icon.jsx'
 import NavMenu from './NavMenu.jsx'
 import ActionRail from './ActionRail.jsx'
+import SearchLauncher from './SearchLauncher.jsx'
 import './Header.css'
 import Img from './Img.jsx'
 import { PENDING_TITLE } from './pending.js'
@@ -136,6 +137,7 @@ export default function Header({ current = 'home' } = {}) {
           <a className="mbar__cta" href="#book" data-form="book-appointment">Book Appointment</a>
         </div>
         <div className="mbar__actions">
+          <button type="button" className="mbar__btn" data-search="header" aria-label="Search doctors, treatments and clinics"><Icon name="search" /></button>
           <a className="mbar__btn" href="tel:9147405955" aria-label="Call 9147405955"><Icon name="phone" /></a>
           <button ref={menuBtn} type="button" className="mbar__btn mbar__btn--menu" aria-label="Open menu" aria-expanded={drawer} onClick={() => setDrawer(true)}><span /><span /><span /></button>
         </div>
@@ -181,6 +183,7 @@ export default function Header({ current = 'home' } = {}) {
         <a className="actionbar__book" href="#book" data-form="book-appointment" tabIndex={showCta ? 0 : -1}>Book Appointment</a>
       </div>
       <ActionRail on={showCta} />
+      <SearchLauncher />
     </header>
   )
 }

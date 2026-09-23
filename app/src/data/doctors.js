@@ -38,6 +38,10 @@ export const SPECIALTY_GROUPS = [
 export const SPECIALTY_LABELS = { psychiatry: 'Psychiatry' }   // ids outside the groups above
 
 const ALL_LANGUAGES = ['Bengali', 'Hindi', 'English']
+// Languages are a placeholder: every doctor lists all three, so filtering or searching by language returns everyone.
+// While false, Find a Doctor hides its "Speaks" filter (and ignores ?l=) and the site search does not match languages.
+// Set true when the client's sheet gives real languages per doctor — both come back with no other change.
+export const LANGUAGES_CONFIRMED = false
 const MON_SAT = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
 /** @typedef {import('./doctor-schema').Doctor} Doctor */

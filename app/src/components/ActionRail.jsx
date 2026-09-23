@@ -10,10 +10,12 @@ import './ActionRail.css'
 //   Touch at ≥1024 (no hover): the first tap expands, a second tap on the expanded pill acts, a tap elsewhere collapses.
 // The label is a clipped pill inside the button — it paints over the page and takes no layout, so nothing shifts.
 // Book and Expert Opinion open the lead dialog through its data-form delegation (FormDialog); data-section="rail".
+// Search opens the site search through SearchLauncher's data-search delegation.
 const ITEMS = [
   { id: 'book', label: 'Book an Appointment', icon: 'calendar', form: 'book-appointment' },
   { id: 'opinion', label: 'Get Expert Opinion', icon: 'askDoctor', form: 'ask-doctor' },
   { id: 'clinic', label: 'Find a Clinic', icon: 'pin', href: '/clinics' },
+  { id: 'search', label: 'Search', icon: 'search', search: 'rail' },   // SearchLauncher opens the overlay (data-search)
 ]
 
 export default function ActionRail({ on }) {
@@ -62,7 +64,7 @@ export default function ActionRail({ on }) {
           <li key={it.id} className="rail__item">
             {it.href
               ? <a href={it.href} {...common(it)}>{body(it)}</a>
-              : <button type="button" data-form={it.form} data-section="rail" {...common(it)}>{body(it)}</button>}
+              : <button type="button" data-form={it.form} data-section={it.form ? 'rail' : undefined} data-search={it.search} {...common(it)}>{body(it)}</button>}
           </li>
         ))}
       </ul>
