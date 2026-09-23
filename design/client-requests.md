@@ -194,3 +194,15 @@ anything you have sent, and we will not invent them. Each band carries an "Openi
 you send them. Per clinic, please: the days and times, and whether any clinic differs on Sunday or public holidays.
 Related, still open from item 13: the answers to FAQ questions 2–5 (only "Where is the clinic?" is answered, and its
 answer names Tollygunge alone although the page covers all three).
+
+**20. Your ISO certificates, and six policy and service pages from the old site.**
+The new footer puts "We are ISO Certified — Tollygunge, Kankurgachi" in a trust block of its own, beside the medical
+disclaimer. Your current website links each clinic's certificate as a PDF. A certificate is a legal document, so we
+have not copied either file across: the line stays as plain text until you tell us in writing that we may host both
+PDFs on the new site (and send the current versions if these have been renewed).
+Separately, 15 of the footer's 19 links still have no page and show as plain text, not links. Six of them already exist
+on your current WordPress site and could be brought across as they are, with your approval: Terms of Service, Mobile
+Application Privacy Policy, Mobile Application Terms of Service, Know your Tests, Health Packages and Contact Us. Say
+which of these we should port. The other nine need content from you: Petal's App & Community, Career, Vlogs, Upload
+Prescription, Polyclinic/Multispecialty OPD, Petals Inner Circle, Social Media Policy, Grievance Redressal, Code of
+Ethics.
