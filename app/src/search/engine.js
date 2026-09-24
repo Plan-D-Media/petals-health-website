@@ -63,6 +63,9 @@ function quality(tok, words) {
   return best
 }
 
+// a phrase alternative ("mental health") matches at the quality of its weakest word; a single word is quality() itself
+const altQuality = (alt, words) => alt.split(' ').reduce((q, part) => Math.min(q, quality(part, words)), 1)
+
 let INDEX = null
 const index = () => INDEX || (INDEX = SOURCES.flatMap((s) => s.records().map((r) => ({ ...r, words: r.fields.map(([text, w]) => [normalize(text).split(' '), w]) }))))
 
@@ -77,7 +80,7 @@ export function search(q) {
     for (const t of toks) {
       const alts = [t, ...(SYNONYMS[t] || [])]
       let best = 0
-      for (const [words, weight] of r.words) for (const a of alts) best = Math.max(best, weight * quality(a, words) * (a === t ? 1 : 0.9))
+      for (const [words, weight] of r.words) for (const a of alts) best = Math.max(best, weight * altQuality(a, words) * (a === t ? 1 : 0.9))
       if (!best) { score = 0; break }   // every word of the query must match somewhere
       score += best
     }
