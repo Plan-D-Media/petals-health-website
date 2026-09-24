@@ -1,6 +1,5 @@
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
-import FormDialog from '../components/FormDialog.jsx'
 import Img from '../components/Img.jsx'
 import Icon from '../components/Icon.jsx'
 import { BANGLADESH as B } from '../content/bangladesh.js'
@@ -12,13 +11,14 @@ import './Bangladesh.css'
 //   shelf hero (the About hero's framed photograph, on the tint) · white band: the chapter heading and the two service
 //   bullets · tint band: the eight services as the site's service cards, with the client's photographs · the page's one
 //   navy band: the phone (the only Bangladesh contact the client gives) and a copy-pending row for every missing fact.
-// The next action is the call: the site's lead form is Kolkata-specific (see the content file).
+// The next action is the call: the site's lead form is Kolkata-specific (see the content file), so the page has no
+// FormDialog and its header, rail and footer are the Bangladesh region's (src/contact.js) — calls, not the dialog.
 const Pending = ({ title }) => <span className="pending" title={title}>Copy pending</span>
 
 export default function Bangladesh() {
   return (
     <div className="page">
-      <Header current="bangladesh" />
+      <Header current="bangladesh" region="bangladesh" />
       <main id="main" tabIndex={-1}>
         <section className="th tb bd-hero" aria-labelledby="bd-title" data-hero>
           <div className="inner th__inner">
@@ -71,8 +71,7 @@ export default function Bangladesh() {
           </div>
         </section>
       </main>
-      <Footer />
-      <FormDialog />
+      <Footer region="bangladesh" />
     </div>
   )
 }

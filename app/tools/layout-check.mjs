@@ -4,10 +4,12 @@
 import puppeteer from 'puppeteer-core'
 import { mkdirSync } from 'node:fs'
 import { resolve } from 'node:path'
+import { SITE_PAGES } from '../src/pages.js'
 
 const CHROME = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
 const OUT = resolve('../design/render/check'); mkdirSync(OUT, { recursive: true })
 const path = process.argv[2] || '/'
+const noForms = SITE_PAGES.find((p) => p.path === path)?.forms === false   // a page without the lead form (pages.js)
 const WIDTHS = [390, 768, 1024, 1280, 1366, 1920]
 const browser = await puppeteer.launch({ executablePath: CHROME, headless: 'new', args: ['--no-sandbox', '--autoplay-policy=no-user-gesture-required'] })
 const wait = (ms) => new Promise((r) => setTimeout(r, ms))
@@ -97,8 +99,13 @@ for (const width of WIDTHS) {
   })
   for (const c of car) log(width, c.lastVisible && c.manual && c.dupsHidden, `marquee "${c.label}" manual under reduced motion, last item reachable`, `${c.clicks} clicks`)
 
-  // 8 form usable: open from the first data-form trigger that is visible
-  const form = await page.evaluate(async () => {
+  // 8 form usable: open from the first data-form trigger that is visible. A page declared form-less (pages.js forms: false)
+  // must instead have no trigger and no dialog — a trigger there would open nothing.
+  if (noForms) {
+    const stray = await page.evaluate(() => ({ triggers: document.querySelectorAll('[data-form]').length, dialog: !!document.querySelector('dialog.fdialog') }))
+    log(width, stray.triggers === 0 && !stray.dialog, 'no lead-form triggers or dialog (page has no form)', JSON.stringify(stray))
+  }
+  const form = noForms ? null : await page.evaluate(async () => {
     const trig = [...document.querySelectorAll('[data-form]')].find((el) => { const b = el.getBoundingClientRect(); const cs = getComputedStyle(el); return b.width > 0 && cs.visibility !== 'hidden' && Number(cs.opacity) > 0 && !el.closest('.drawer') })
     if (!trig) return { opened: false }
     trig.click(); await new Promise((r) => setTimeout(r, 400))
@@ -113,7 +120,7 @@ for (const width of WIDTHS) {
     d.close()
     return { opened: true, fits, short, unlabeled, errs }
   })
-  log(width, form.opened && form.fits && form.short === 0 && form.unlabeled === 0 && form.errs > 0, 'form opens, fits, inputs ≥ 44 with labels, validation marks fields', JSON.stringify(form))
+  if (form) log(width, form.opened && form.fits && form.short === 0 && form.unlabeled === 0 && form.errs > 0, 'form opens, fits, inputs ≥ 44 with labels, validation marks fields', JSON.stringify(form))
 
   // 12 hygiene
   const imgs = await page.$$eval('img', (els) => els.filter((i) => !i.hasAttribute('alt')).length)

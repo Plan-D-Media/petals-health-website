@@ -15,6 +15,8 @@
 // international form, as agreed. The page's consultation form, consent text and Razorpay terms are a popup shared with
 // Ask a Doctor on the old site, not Bangladesh content, and are not used; the site's lead form is not used either (it
 // validates Indian mobiles and lists the Kolkata departments) until the client confirms how Bangladesh bookings work.
+import { CONTACT } from '../contact.js'
+
 export const BANGLADESH = {
   title: 'Petals Clinic in Bangladesh',                  // h1
   headline: 'Petals Healthcare, Soon in Bangladesh',     // h2
@@ -23,7 +25,7 @@ export const BANGLADESH = {
     'Smart monitoring & management of chronic conditions',
     'Holistic and preventive care for complete wellness',
   ],
-  phone: { label: '+880 1784-110044', href: 'tel:+8801784110044' },
+  phone: CONTACT.bangladesh.phone,                         // defined once in contact.js (the header, rail and footer use it too)
   hero: { src: '/assets/bangladesh/hero.jpg', alt: 'A reception desk with Petals Health Bangladesh signage' },
   offerTitle: 'Our Services',
   offer: [

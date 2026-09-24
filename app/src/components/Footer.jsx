@@ -3,6 +3,7 @@ import Icon from './Icon.jsx'
 import './Footer.css'
 import { linkOr } from './pending.js'
 import { SITES, directionsUrl } from '../data/clinics.js'
+import { contactFor } from '../contact.js'
 
 // Shared site footer. Redesign 2026-09-23 (direction A, "stacked tiers"): what a patient needs at the foot of a page
 // comes first — call, book, ask (tier 1), then the three clinics with directions (tier 2), then the trust signals —
@@ -22,7 +23,11 @@ const POLICIES = ['Terms of Service', 'Social Media Policy', 'Privacy Policy', '
 
 const FooterLink = ({ label }) => <a {...linkOr(FOOTER_HREFS[label], { className: 'footer__link' })}>{label}</a>
 
-export default function Footer() {
+// `region` (contact.js): on the Bangladesh page tier 1 is that clinic's number, named, with no Book / Ask buttons (the
+// dialog is Kolkata-only); the three Kolkata clinics stay below as the group's clinics.
+export default function Footer({ region } = {}) {
+  const contact = contactFor(region)
+  const call = <a className="footer__call" href={contact.phone.href}><Icon name="phone" className="footer__call-icon" /><span>{contact.phone.label}</span></a>
   // accordions only on phones: from 768 up both groups are open (a closed <details> hides its content)
   const [wide, setWide] = useState(() => typeof window !== 'undefined' && window.matchMedia('(min-width: 768px)').matches)
   useEffect(() => { const mq = window.matchMedia('(min-width: 768px)'); const on = (e) => setWide(e.matches); mq.addEventListener('change', on); return () => mq.removeEventListener('change', on) }, [])
@@ -31,12 +36,18 @@ export default function Footer() {
       <div className="inner footer__inner">
         {/* tier 1: reach us */}
         <section className="footer__act" aria-labelledby="footer-act">
-          <h2 id="footer-act" className="sr-only">Call or book</h2>
-          <a className="footer__call" href="tel:9147405955"><Icon name="phone" className="footer__call-icon" /><span>9147405955</span></a>
-          <div className="footer__btns">
-            <a className="footer__btn footer__btn--book" href="#book" data-form="book-appointment" data-section="footer">Book Appointment</a>
-            <a className="footer__btn footer__btn--ask" href="#ask" data-form="ask-doctor" data-section="footer">Ask a Doctor</a>
-          </div>
+          <h2 id="footer-act" className="sr-only">{contact.forms ? 'Call or book' : `Call ${contact.name}`}</h2>
+          {contact.forms ? (
+            <>
+              {call}
+              <div className="footer__btns">
+                <a className="footer__btn footer__btn--book" href="#book" data-form="book-appointment" data-section="footer">Book Appointment</a>
+                <a className="footer__btn footer__btn--ask" href="#ask" data-form="ask-doctor" data-section="footer">Ask a Doctor</a>
+              </div>
+            </>
+          ) : (
+            <div><p className="footer__region" aria-hidden="true">{contact.name}</p>{call}</div>
+          )}
         </section>
 
         {/* tier 2: where we are */}

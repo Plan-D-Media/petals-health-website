@@ -6,12 +6,14 @@ import SearchLauncher from './SearchLauncher.jsx'
 import './Header.css'
 import Img from './Img.jsx'
 import { PENDING_TITLE } from './pending.js'
+import { contactFor } from '../contact.js'
 
 // Header, flow rewrite 2026-09-17.
 //   ≥1024: the desktop bars (utility row + sticky nav row, flex on the content container; design/hero-values.md sizes ×1.2).
 //   <1024: one sticky bar (logo, phone, menu) and a drawer holding the utility links and the nav; items with children
 //          are accordions. <1024 adds a fixed bottom action bar (Call now / Book Appointment) once the hero has scrolled out
 //          (<768 until 2026-09-23; tablets had neither it nor the rail). ≥1024 gets the floating action rail instead.
+// `region` (contact.js): the Bangladesh page passes 'bangladesh' — its number everywhere, calls instead of the dialog.
 // Dropdown data: Treatments only (design/svg/8.svg); other menus await the client's answer.
 
 const TREATMENTS = [   // the mock's order (spellings corrected: Womans, Cosmetice, Welness, Rejuvination). Fertility Care removed
@@ -36,12 +38,18 @@ export const NAV = [
   { id: 'bangladesh', label: 'Petals Clinic in Bangladesh', href: '/petals-clinic-in-bangladesh' },   // page since 2026-09-23
 ]
 
-const UTILITY = [
-  { icon: 'phone', label: '9147405955', href: 'tel:9147405955' },
-  { icon: 'calendar', label: 'Book an Appt', href: '#book', form: 'book-appointment' },
+// Contact chrome follows the page's region (contact.js): the number, and whether Book / Ask open the dialog. Where the
+// region has no form (Bangladesh), the dialog actions leave the utility row and the CTAs become calls.
+const utilityFor = (c) => [
+  { icon: 'phone', label: c.phone.label, href: c.phone.href },
+  c.forms && { icon: 'calendar', label: 'Book an Appt', href: '#book', form: 'book-appointment' },
   { icon: 'findDoctor', label: 'Find a Doctor', href: '/find-a-doctor' },
-  { icon: 'askDoctor', label: 'Ask a Doctor', href: '#ask', form: 'ask-doctor' },
-]
+  c.forms && { icon: 'askDoctor', label: 'Ask a Doctor', href: '#ask', form: 'ask-doctor' },
+].filter(Boolean)
+// the primary CTA (compact bar, sticky nav, action bar): the booking dialog, or a call where there is no form
+const ctaFor = (c) => (c.forms
+  ? { href: '#book', form: 'book-appointment', label: 'Book Appointment' }
+  : { href: c.phone.href, label: c.call, aria: `${c.call}: ${c.name}, ${c.phone.label}` })
 
 function useHeroScrolledOut() {
   const [out, setOut] = useState(false)
@@ -55,7 +63,7 @@ function useHeroScrolledOut() {
   return out
 }
 
-function Drawer({ open, onClose, current }) {
+function Drawer({ open, onClose, current, utility }) {
   const panel = useRef(null)
   const [expanded, setExpanded] = useState(null)
   useEffect(() => {
@@ -80,7 +88,7 @@ function Drawer({ open, onClose, current }) {
       <div className="drawer__panel" ref={panel} role="dialog" aria-modal="true" aria-label="Menu">
         <button type="button" className="drawer__close" onClick={onClose} aria-label="Close menu">×</button>
         <ul className="drawer__utility">
-          {UTILITY.map((u) => (
+          {utility.map((u) => (
             <li key={u.label}><a href={u.href} data-form={u.form} onClick={u.form ? onClose : undefined}><Icon name={u.icon} className="drawer__icon" />{u.label}</a></li>
           ))}
         </ul>
@@ -107,7 +115,10 @@ function Drawer({ open, onClose, current }) {
   )
 }
 
-export default function Header({ current = 'home' } = {}) {
+export default function Header({ current = 'home', region } = {}) {
+  const contact = contactFor(region)
+  const utility = utilityFor(contact)
+  const cta = ctaFor(contact)
   const [openId, setOpenId] = useState(null)
   const tops = useRef({})
   const close = useCallback(() => setOpenId(null), [])
@@ -133,16 +144,16 @@ export default function Header({ current = 'home' } = {}) {
       <div className="mbar band">
         <a className="mbar__logo" href="/" aria-label="Petals Health — Your Family Clinic"><Img src="/assets/2_09c94b70.png" alt="" width="46" height="59" priority /></a>
         <div className="mbar__util">
-          <a href="/find-a-doctor">Find a Doctor</a><a href="#ask" data-form="ask-doctor">Ask a Doctor</a>
-          <a className="mbar__cta" href="#book" data-form="book-appointment">Book Appointment</a>
+          <a href="/find-a-doctor">Find a Doctor</a>{contact.forms && <a href="#ask" data-form="ask-doctor">Ask a Doctor</a>}
+          <a className="mbar__cta" href={cta.href} data-form={cta.form} aria-label={cta.aria}>{cta.label}</a>
         </div>
         <div className="mbar__actions">
           <button type="button" className="mbar__btn" data-search="header" aria-label="Search doctors, treatments and clinics"><Icon name="search" /></button>
-          <a className="mbar__btn" href="tel:9147405955" aria-label="Call 9147405955"><Icon name="phone" /></a>
+          <a className="mbar__btn" href={contact.phone.href} aria-label={`Call ${contact.phone.label}`}><Icon name="phone" /></a>
           <button ref={menuBtn} type="button" className="mbar__btn mbar__btn--menu" aria-label="Open menu" aria-expanded={drawer} onClick={() => setDrawer(true)}><span /><span /><span /></button>
         </div>
       </div>
-      <Drawer open={drawer} onClose={closeDrawer} current={current} />
+      <Drawer open={drawer} onClose={closeDrawer} current={current} utility={utility} />
 
       {/* ---- desktop bars (≥1024) ---- */}
       <div className="utility band"><div className="inner utility__inner">
@@ -150,7 +161,7 @@ export default function Header({ current = 'home' } = {}) {
           <Img src="/assets/2_09c94b70.png" alt="" width="65" height="83" priority />
         </a>
         <div className="utility__links">
-          {UTILITY.map((u, i) => [
+          {utility.map((u, i) => [
             i > 0 && <span key={'sep' + i} className="utility__sep" aria-hidden="true" />,
             <a key={u.label} className="utility__item" href={u.href} data-form={u.form}>
               <Icon name={u.icon} className={`utility__icon utility__icon--${u.icon}`} />
@@ -161,7 +172,7 @@ export default function Header({ current = 'home' } = {}) {
       </div></div>
 
       <nav className={'nav band' + (openId ? ' nav--menu-open' : '') + (showCta ? ' nav--cta' : '')} aria-label="Primary">
-        <a className="nav__cta" href="#book" data-form="book-appointment" tabIndex={showCta ? 0 : -1} aria-hidden={!showCta}>Book Appointment</a>
+        <a className="nav__cta" href={cta.href} data-form={cta.form} aria-label={cta.aria} tabIndex={showCta ? 0 : -1} aria-hidden={!showCta}>{cta.label}</a>
         <div className="inner nav__inner">
           {NAV.map((n, i) => [
             i > 1 && <span key={'sep' + i} className="nav__sep" aria-hidden="true" />,
@@ -179,10 +190,14 @@ export default function Header({ current = 'home' } = {}) {
 
       {/* ---- bottom action bar (<1024): thumb-zone CTA path, after the hero, hidden while a dialog/drawer is open ---- */}
       <div className={'actionbar' + (showCta ? ' actionbar--on' : '')} aria-hidden={!showCta}>
-        <a className="actionbar__call" href="tel:9147405955" tabIndex={showCta ? 0 : -1}><Icon name="phone" />Call now</a>
-        <a className="actionbar__book" href="#book" data-form="book-appointment" tabIndex={showCta ? 0 : -1}>Book Appointment</a>
+        {contact.forms
+          ? <>
+              <a className="actionbar__call" href={contact.phone.href} tabIndex={showCta ? 0 : -1}><Icon name="phone" />Call now</a>
+              <a className="actionbar__book" href={cta.href} data-form={cta.form} tabIndex={showCta ? 0 : -1}>{cta.label}</a>
+            </>
+          : <a className="actionbar__book" href={cta.href} aria-label={cta.aria} tabIndex={showCta ? 0 : -1}><Icon name="phone" />{cta.label}</a>}   {/* one action: the call, as the primary button */}
       </div>
-      <ActionRail on={showCta} />
+      <ActionRail on={showCta} contact={contact} />
       <SearchLauncher />
     </header>
   )

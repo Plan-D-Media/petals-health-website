@@ -11,14 +11,18 @@ import './ActionRail.css'
 // The label is a clipped pill inside the button — it paints over the page and takes no layout, so nothing shifts.
 // Book and Expert Opinion open the lead dialog through its data-form delegation (FormDialog); data-section="rail".
 // Search opens the site search through SearchLauncher's data-search delegation.
-const ITEMS = [
-  { id: 'book', label: 'Book an Appointment', icon: 'calendar', form: 'book-appointment' },
-  { id: 'opinion', label: 'Get Expert Opinion', icon: 'askDoctor', form: 'ask-doctor' },
+// Where the page's region has no form (contact.js — Bangladesh), Book and Expert Opinion give way to one Call item.
+const itemsFor = (c) => [
+  ...(c.forms
+    ? [{ id: 'book', label: 'Book an Appointment', icon: 'calendar', form: 'book-appointment' },
+       { id: 'opinion', label: 'Get Expert Opinion', icon: 'askDoctor', form: 'ask-doctor' }]
+    : [{ id: 'call', label: `${c.call} · ${c.phone.label}`, icon: 'phone', href: c.phone.href }]),
   { id: 'clinic', label: 'Find a Clinic', icon: 'pin', href: '/clinics' },
   { id: 'search', label: 'Search', icon: 'search', search: 'rail' },   // SearchLauncher opens the overlay (data-search)
 ]
 
-export default function ActionRail({ on }) {
+export default function ActionRail({ on, contact }) {
+  const ITEMS = itemsFor(contact)
   const [open, setOpen] = useState(null)        // expanded by tap (touch) — hover and focus expand through CSS
   const [hushed, setHushed] = useState(false)   // Escape: collapse the hovered/focused label until the pointer or focus moves on
   const touch = useRef(false)
