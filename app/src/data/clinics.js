@@ -2,7 +2,8 @@
 // CLINICS in doctors.js so a doctor's session links straight to its clinic card.
 // Copy is verbatim from the mock, including two spellings logged for the client (design/client-requests.md item 13):
 // "Cantre" (Centre) and "Oppsite" (Opposite). `mapsQuery` feeds the Get Direction link (Google Maps search); replace
-// with the clinics' own place links when the client sends them.
+// with the clinics' own place links when the client sends them. `searchAlso`: extra names the site search indexes (never
+// shown) — the correct spelling beside the verbatim one, so either finds the clinic without teaching search a typo.
 export const SITES = [
   {
     id: 'kankurgachi',
@@ -18,6 +19,7 @@ export const SITES = [
     region: 'Central Kolkata',
     name: 'Calcutta Medical Cantre - a unit of Petals',
     tile: ['Calcutta Medical Cantre', 'a unit of Petals health', 'Loudon Street'],
+    searchAlso: ['Calcutta Medical Centre'],
     address: ['Maruti Building, 1st Floor, 12 Loudon St,', 'Opp. Bellevue Hospital, Kolkata 700017'],
     mapsQuery: 'Calcutta Medical Centre, Maruti Building, 12 Loudon Street, Kolkata 700017',
     photo: { src: '/assets/clinics/loudon-street.jpg', alt: 'Reception at Calcutta Medical Centre, Loudon Street', position: '50% 50%' },

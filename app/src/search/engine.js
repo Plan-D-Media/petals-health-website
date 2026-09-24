@@ -39,7 +39,7 @@ export const SOURCES = [
     records: () => SITES.map((s) => ({
       type: 'clinic', id: s.id, title: s.name, href: `/clinics/#clinic-${s.id}`, item: s,
       sub: s.address.join(' '),
-      fields: [[[s.name, ...s.tile].join(' '), 10], [[CLINICS[s.id]?.name, s.region].join(' '), 4], [s.address.join(' '), 2]],
+      fields: [[[s.name, ...s.tile, ...(s.searchAlso || [])].join(' '), 10], [[CLINICS[s.id]?.name, s.region].join(' '), 4], [s.address.join(' '), 2]],
     })).concat({   // Bangladesh: not open yet, no address — found by its name only, so it never crowds a Kolkata specialty search
       type: 'clinic', id: 'bangladesh', title: BANGLADESH.title, href: '/petals-clinic-in-bangladesh/', item: null, sub: BANGLADESH.headline,
       fields: [[BANGLADESH.title, 10]],
