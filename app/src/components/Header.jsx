@@ -51,16 +51,32 @@ const ctaFor = (c) => (c.forms
   ? { href: '#book', form: 'book-appointment', label: 'Book Appointment', short: 'Book an Appt' }   // short: the action bar below 375 px (the utility row's label)
   : { href: c.phone.href, label: c.call, aria: `${c.call}: ${c.name}, ${c.phone.label}` })
 
+// the page's first section is its hero (2026-09-23: the old '.hero, .t-hero' list missed the .th heroes, so the
+// action bar and nav CTA never appeared on Find a Doctor or any treatment page)
+const findHero = () => document.querySelector('.hero, [data-hero]') || document.querySelector('main > section:first-child')
+
 function useHeroScrolledOut() {
   const [out, setOut] = useState(false)
   useEffect(() => {
-    // the page's first section is its hero (2026-09-23: the old '.hero, .t-hero' list missed the .th heroes, so the
-    // action bar and nav CTA never appeared on Find a Doctor or any treatment page)
-    const hero = document.querySelector('.hero, [data-hero]') || document.querySelector('main > section:first-child'); if (!hero || !('IntersectionObserver' in window)) return undefined
+    const hero = findHero(); if (!hero || !('IntersectionObserver' in window)) return undefined
     const io = new IntersectionObserver(([e]) => setOut(!e.isIntersecting), { threshold: 0 })
     io.observe(hero); return () => io.disconnect()
   }, [])
   return out
+}
+
+// The action rail's visibility (2026-09-24): on Home it waits until the hero has scrolled out above the viewport, then
+// stays — latched, so scrolling back up never hides it again; on every other page it is there from the first paint.
+// Observes the hero itself, so it holds at any viewport height. No IntersectionObserver or no hero: shown.
+function useRailOn(delayed) {
+  const [on, setOn] = useState(!delayed)
+  useEffect(() => {
+    if (!delayed) return undefined
+    const hero = findHero(); if (!hero || !('IntersectionObserver' in window)) { setOn(true); return undefined }
+    const io = new IntersectionObserver(([e]) => { if (!e.isIntersecting && e.boundingClientRect.top < 0) { setOn(true); io.disconnect() } }, { threshold: 0 })
+    io.observe(hero); return () => io.disconnect()
+  }, [delayed])
+  return on
 }
 
 function Drawer({ open, onClose, current, utility }) {
@@ -123,6 +139,7 @@ export default function Header({ current = 'home', region } = {}) {
   const tops = useRef({})
   const close = useCallback(() => setOpenId(null), [])
   const showCta = useHeroScrolledOut()
+  const railOn = useRailOn(current === 'home')
   const [drawer, setDrawer] = useState(false)
   const menuBtn = useRef(null)
   const closeDrawer = useCallback(() => { setDrawer(false); requestAnimationFrame(() => menuBtn.current?.focus()) }, [])   // focus returns to the button that opened it
@@ -197,7 +214,7 @@ export default function Header({ current = 'home', region } = {}) {
             </>
           : <a className="actionbar__book" href={cta.href} aria-label={cta.aria} tabIndex={showCta ? 0 : -1}><Icon name="phone" /><span>{cta.label}</span></a>}   {/* one action: the call, as the primary button */}
       </div>
-      <ActionRail on={showCta} contact={contact} />
+      <ActionRail on={railOn} contact={contact} />
       <SearchLauncher />
     </header>
   )

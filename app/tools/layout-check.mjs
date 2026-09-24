@@ -47,13 +47,20 @@ for (const width of WIDTHS) {
       if (right > width + 1 && b.left < width) out.overflow.push(desc(el) + ` right ${Math.round(right)}`)
     }
     // 2 overlaps between leaf-ish elements
-    const leaves = all.filter((el) => (/^(P|H1|H2|H3|A|BUTTON|LI|IMG|INPUT|SELECT|TEXTAREA|SPAN)$/.test(el.tagName)) && !el.closest('[data-overlap-ok], .proof, .carousel__controls, .drawer, dialog, .nav__menu, .actionbar, .video-slot, .care__petal, .sxo') && el.textContent.trim().length > 0 && !el.querySelector('p, h2, h3, ul'))
+    const leaves = all.filter((el) => (/^(P|H1|H2|H3|A|BUTTON|LI|IMG|INPUT|SELECT|TEXTAREA|SPAN)$/.test(el.tagName)) && !el.closest('[data-overlap-ok], .proof, .carousel__controls, .drawer, dialog, .nav__menu, .actionbar, .video-slot, .care__petal, .sxo, .rail') && el.textContent.trim().length > 0 && !el.querySelector('p, h2, h3, ul'))
     const rects = leaves.map((el) => ({ el, b: el.getBoundingClientRect() }))
     for (let i = 0; i < rects.length; i++) for (let j = i + 1; j < rects.length; j++) {
       const a = rects[i], c = rects[j]
       if (a.el.contains(c.el) || c.el.contains(a.el)) continue
       const ix = Math.min(a.b.right, c.b.right) - Math.max(a.b.left, c.b.left), iy = Math.min(a.b.bottom, c.b.bottom) - Math.max(a.b.top, c.b.top)
       if (ix > 4 && iy > 4) { out.overlaps.push(desc(a.el) + ' × ' + desc(c.el)); if (out.overlaps.length > 12) break }
+    }
+    // 2b the action rail is a fixed overlay whose labels are clip-path'd to their 44 px circle until revealed, so their
+    // boxes are not what is painted (excluded above); what shows at rest is the circles, which must sit clear of content
+    out.railOver = []
+    for (const ic of [...document.querySelectorAll('.rail--on .rail__icon')].filter(vis)) {
+      const b = ic.getBoundingClientRect()
+      for (const { el, b: c } of rects) { const ix = Math.min(b.right, c.right) - Math.max(b.left, c.left), iy = Math.min(b.bottom, c.bottom) - Math.max(b.top, c.top); if (ix > 2 && iy > 2) out.railOver.push(desc(ic.closest('.rail__btn')) + ' × ' + desc(el)) }
     }
     // 3 clipped text
     for (const el of all) {
@@ -79,6 +86,7 @@ for (const width of WIDTHS) {
 
   log(width, r.overflow.length === 0, 'no horizontal overflow', r.overflow.slice(0, 3).join(' | '))
   log(width, r.overlaps.length === 0, 'no overlapping elements', r.overlaps.slice(0, 4).join(' | '))
+  log(width, r.railOver.length === 0, 'action rail (collapsed) clear of content', r.railOver.slice(0, 4).join(' | '))
   log(width, r.clipped.length === 0, 'no clipped text', r.clipped.slice(0, 4).join(' | '))
   log(width, r.small.length === 0, 'type ≥ 13 px', r.small.slice(0, 4).join(' | '))
   if (width < 1024) log(width, r.targets.length === 0, 'touch targets ≥ 44', r.targets.slice(0, 5).join(' | '))

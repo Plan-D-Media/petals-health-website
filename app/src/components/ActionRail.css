@@ -4,8 +4,11 @@
    the lead dialog is in the top layer. The label is a pill clipped to the circle until revealed (clip-path, no layout). */
 .rail { display: none; }
 @media (min-width: 1024px) {
-  .rail { display: block; position: fixed; left: 6px; top: 50%; z-index: 35; translate: 0 -50%; visibility: hidden; opacity: 0; transition: opacity var(--dur) var(--ease), visibility 0s linear var(--dur); }
-  .rail--on { visibility: visible; opacity: 1; transition: opacity var(--dur) var(--ease); }
+  /* hidden = visibility: hidden, so the rail's buttons are out of the tab order too — a keyboard user can never land on an
+     invisible rail. Showing is a fade with a 12 px slide from the edge (transform: separate from the centring translate);
+     reduced motion drops the transition (states.css). Home only: Header.jsx holds it until the hero has scrolled out. */
+  .rail { display: block; position: fixed; left: 6px; top: 50%; z-index: 35; translate: 0 -50%; visibility: hidden; opacity: 0; transform: translateX(-12px); transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease), visibility 0s linear var(--dur); }
+  .rail--on { visibility: visible; opacity: 1; transform: none; transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease); }
   html[data-dialog] .rail { visibility: hidden; opacity: 0; }
   .rail__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
   .rail__item { width: 44px; height: 44px; }
