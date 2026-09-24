@@ -21,7 +21,7 @@ export const SITE_META = [
  {
   "path": "/find-a-doctor/",
   "title": "Find a Doctor — Petals Health",
-  "description": "Search our specialists by name, specialty, or clinic. 100+ doctors across three clinics in Kolkata — filter by availability, video consult, language and rating."
+  "description": "Search our specialists by name, specialty, or clinic. 100+ doctors across three clinics in Kolkata — filter by specialty, clinic, availability and video consult."
  },
  {
   "path": "/petals-clinic-in-bangladesh/",
