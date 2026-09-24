@@ -48,7 +48,7 @@ const utilityFor = (c) => [
 ].filter(Boolean)
 // the primary CTA (compact bar, sticky nav, action bar): the booking dialog, or a call where there is no form
 const ctaFor = (c) => (c.forms
-  ? { href: '#book', form: 'book-appointment', label: 'Book Appointment' }
+  ? { href: '#book', form: 'book-appointment', label: 'Book Appointment', short: 'Book an Appt' }   // short: the action bar below 375 px (the utility row's label)
   : { href: c.phone.href, label: c.call, aria: `${c.call}: ${c.name}, ${c.phone.label}` })
 
 function useHeroScrolledOut() {
@@ -193,9 +193,9 @@ export default function Header({ current = 'home', region } = {}) {
         {contact.forms
           ? <>
               <a className="actionbar__call" href={contact.phone.href} tabIndex={showCta ? 0 : -1}><Icon name="phone" />Call now</a>
-              <a className="actionbar__book" href={cta.href} data-form={cta.form} tabIndex={showCta ? 0 : -1}>{cta.label}</a>
+              <a className="actionbar__book" href={cta.href} data-form={cta.form} tabIndex={showCta ? 0 : -1}><span className="actionbar__long">{cta.label}</span><span className="actionbar__short">{cta.short}</span></a>
             </>
-          : <a className="actionbar__book" href={cta.href} aria-label={cta.aria} tabIndex={showCta ? 0 : -1}><Icon name="phone" />{cta.label}</a>}   {/* one action: the call, as the primary button */}
+          : <a className="actionbar__book" href={cta.href} aria-label={cta.aria} tabIndex={showCta ? 0 : -1}><Icon name="phone" /><span>{cta.label}</span></a>}   {/* one action: the call, as the primary button */}
       </div>
       <ActionRail on={showCta} contact={contact} />
       <SearchLauncher />
