@@ -5,6 +5,7 @@ import Img from './Img.jsx'
 // A media slot that renders a poster image first and, when a source exists, a muted looping video on top of it.
 //   poster / posterAlt  the still (always rendered: it is the first paint, the reduced-motion state and the fallback)
 //   src                 optional video URL; null/'' → poster only, no player, no request
+//   srcMobile           optional lighter encode for phones (<768)
 //   label               accessible name for the play/pause control
 // Behaviour
 //   - lazy: the <video> gets its src only once the slot is in the viewport (IntersectionObserver)
@@ -12,7 +13,7 @@ import Img from './Img.jsx'
 //   - prefers-reduced-motion: no autoplay and nothing is preloaded; the poster stays, the control offers a manual play
 //   - a source that fails to load unmounts the video and hides the control; the poster stays (no broken player)
 //   - visible play/pause control (aria-label reflects the state)
-export default function VideoSlot({ poster, posterAlt = '', src, label = 'video', className = '', variant = 'flush' }) {
+export default function VideoSlot({ poster, posterAlt = '', src, srcMobile, label = 'video', className = '', variant = 'flush' }) {
   const root = useRef(null)
   const video = useRef(null)
   const [armed, setArmed] = useState(false)          // slot has entered the viewport → attach the source
@@ -26,10 +27,18 @@ export default function VideoSlot({ poster, posterAlt = '', src, label = 'video'
     return () => mq.removeEventListener('change', onChange)
   }, [])
 
-  // 2026-09-19 (page-weight pass): the video is desktop-only (>=1024) and never under Save-Data; on phones and tablets
-  // the slot is the poster alone. On desktop the source is attached only after the window load event, so the
-  // 1.3 MB clip never competes with the LCP image, CSS and script.
-  const [allow] = useState(() => typeof window !== 'undefined' && window.matchMedia('(min-width: 1024px)').matches && !(navigator.connection && navigator.connection.saveData))
+  // Where the video may play (2026-09-24; it was desktop-only since the 2026-09-19 page-weight pass): at every width,
+  // except under Save-Data or on a connection the browser rates 3G or slower (Network Information API — Chromium only;
+  // elsewhere it is allowed). Reduced motion keeps the poster and offers a manual play (preload none, below). Phones
+  // (<768) get `srcMobile` when there is one. The source is attached only after the window load event and once the slot
+  // is in view, so the clip never competes with the LCP image, CSS and script. Autoplay refused (iOS Low Power Mode,
+  // browser policy) or a failed load leaves the poster in place.
+  const [allow] = useState(() => {
+    if (typeof window === 'undefined') return false
+    const c = navigator.connection
+    return !(c && (c.saveData || /^(slow-2g|2g|3g)$/.test(c.effectiveType || '')))
+  })
+  const [source] = useState(() => (srcMobile && typeof window !== 'undefined' && window.matchMedia('(max-width: 767px)').matches ? srcMobile : src))
   useEffect(() => {
     if (!src || armed || !allow || !root.current) return undefined
     let io; let timer
@@ -66,7 +75,7 @@ export default function VideoSlot({ poster, posterAlt = '', src, label = 'video'
         <video
           ref={video}
           className="video-slot__video"
-          src={src}
+          src={source}
           muted
           loop
           playsInline

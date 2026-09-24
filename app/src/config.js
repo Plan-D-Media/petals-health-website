@@ -5,6 +5,9 @@
 // client's footage: the card panel is 497.7 × 654.4 at 1366 (0.761:1) — 3:4 footage at 1080 × 1440 loses 1.4 % of its
 // width under object-fit: cover.
 export const HERO_VIDEO_SRC = '/media/standin-landscape.mp4'   // placeholder: CDC milestone clip (public domain), 16:9
+// Phones (<768) get this lighter encode. Both re-encoded 2026-09-24 (H.264, no audio, 25 fps, faststart):
+// 1280×720 ≈650 kbps 798 KB (was 1.30 MB at 1.06 Mbps) and 640×360 ≈220 kbps 270 KB. Client footage: same two outputs.
+export const HERO_VIDEO_SRC_MOBILE = '/media/standin-landscape-m.mp4'
 
 // The design's hero photo: poster frame and the fallback when there is no video or it fails to load.
 export const HERO_POSTER = '/media/hero-poster-landscape.jpg'   // landscape poster (first frame). The design's portrait photo (/assets/2_04c0f486.png + mask) is kept on disk, unused since hero concept B

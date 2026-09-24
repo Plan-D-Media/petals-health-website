@@ -51,7 +51,11 @@
 /* full (hero, round 3): edge to edge, 16:9, cover-cropped by the caller's max-height; control bottom-left */
 .video-slot--full { --video-inset: 0px; }
 .video-slot--full .video-slot__poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; }
-.video-slot--full .video-slot__video { border-radius: 0; object-position: 50% 45%; }
+.video-slot--full .video-slot__video { border-radius: 0; object-position: 50% 45%; transform: scaleY(0.996); transform-origin: 50% 0; }
+/* scaleY(0.996) from the top edge, 2026-09-24: keeps the video's painted area just under the poster's, so the poster stays the page's LCP.
+   Chrome scores the poster <img> at a whole-pixel box (390 × 219 at 390) but the <video> at its exact 16:9 box
+   (390 × 219.375), so the first video frame — 1–3 s later — replaced the poster as LCP on phones (+1.3 s measured).
+   0.4 % of the height (under 1 px, at the bottom only — a uniform scale showed a hairline of poster at the sides). */
 .video-slot--full .video-slot__control { right: auto; left: 16px; bottom: 16px; }
 @media (min-width: 1024px) { .video-slot--full .video-slot__control { left: 24px; bottom: 24px; } }
 /* tablet: the shelf overlaps the film's bottom edge, so the control moves to the top-right */

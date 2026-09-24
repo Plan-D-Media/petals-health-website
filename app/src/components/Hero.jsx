@@ -1,6 +1,6 @@
 import VideoSlot from './VideoSlot.jsx'
 import Proof from './Proof.jsx'
-import { HERO_VIDEO_SRC, HERO_POSTER, HERO_VIDEO_STYLE } from '../config.js'
+import { HERO_VIDEO_SRC, HERO_VIDEO_SRC_MOBILE, HERO_POSTER, HERO_VIDEO_STYLE } from '../config.js'
 import './Hero.css'   /* after VideoSlot.css */
 
 // Hero, round 3 (design/round3-report.md §4, approved): full-width video; on tablet and desktop a white "shelf" card
@@ -16,7 +16,7 @@ const videoSrc = () => qs().get('video') || HERO_VIDEO_SRC
 export default function Hero() {
   return (
     <section className="hero band" aria-labelledby="hero-title">
-      <VideoSlot className="hero__film" poster={HERO_POSTER} posterAlt="A parent holding a baby at a Petals clinic" src={videoSrc()} label="hero video" variant={videoStyle()} />
+      <VideoSlot className="hero__film" poster={HERO_POSTER} posterAlt="A parent holding a baby at a Petals clinic" src={videoSrc()} srcMobile={qs().get('video') ? null : HERO_VIDEO_SRC_MOBILE} label="hero video" variant={videoStyle()} />
       <div className="inner hero__inner">
         <div className="hero__shelf" data-overlap-ok>
           <div className="hero__copy">
