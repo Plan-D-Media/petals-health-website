@@ -23,7 +23,7 @@ if (process.argv.includes('--setup')) {
   run(`npx vercel link --yes --project ${PROJECT}`)
   for (const [k, v] of [['STAGING_USER', creds.user], ['STAGING_PASS', creds.pass], ['STAGING', '1'], ['VITE_STAGING', '1']]) {
     run(`npx vercel env rm ${k} production --yes`, { soft: true })
-    run(`npx vercel env add ${k} production`, { input: v + '\n' })
+    run(`npx vercel env add ${k} production --value ${JSON.stringify(v)} ${k.startsWith('VITE_') ? '--no-sensitive' : '--sensitive'} --yes`)   // a VITE_ value ships in the bundle, so it cannot be a secret   // --value, not stdin: a piped value was not stored as given (2026-10-30)
   }
 }
 run('npx vercel deploy --prod --yes --local-config vercel.staging.json')

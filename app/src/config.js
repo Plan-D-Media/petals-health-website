@@ -16,10 +16,12 @@ export const HERO_POSTER = '/media/hero-poster-landscape.jpg'   // landscape pos
 // Overridable for mock-ups with ?videoStyle=card|flush.
 export const HERO_VIDEO_STYLE = 'full'   // round 3: full-width 16:9 video (Shelf hero). 'film' (concept B card), 'card' and 'flush' remain available
 
-// ---- forms (decided 2026-09-17): every form posts to ONE Google Apps Script web app, which appends a row to a Google
-// Sheet and sends an email notification. Replace the placeholder with the client's deployed web-app URL
-// (https://script.google.com/macros/s/…/exec). While it says PLACEHOLDER, submissions are simulated (forms/submit.js).
-export const FORM_ENDPOINT = 'https://script.google.com/macros/s/PLACEHOLDER/exec'
+// ---- forms (decided 2026-09-17): every form posts to ONE Google Apps Script web app (apps-script/Code.gs), which
+// appends a row to the leads sheet and emails the notification addresses. The web-app URL
+// (https://script.google.com/macros/s/…/exec) is the Vercel environment variable VITE_FORM_ENDPOINT (2026-10-30), not
+// code: when the owning Google account changes, the new deployment's URL goes into that variable and the site is
+// redeployed — nothing here changes. Unset, the placeholder stands and submissions are simulated (forms/submit.js).
+export const FORM_ENDPOINT = (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env.VITE_FORM_ENDPOINT) || 'https://script.google.com/macros/s/PLACEHOLDER/exec'
 // Privacy notice linked from the consent line on every form. The page does not exist yet — client to supply the text.
 export const PRIVACY_URL = '/privacy-policy.html'   // interim standalone page (public/privacy-policy.html) until the client's policy text arrives
 

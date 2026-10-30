@@ -42,7 +42,7 @@ function pageHtml(p, { notFound = false } = {}) {
     `<meta property="og:url" content="${url}" />`,
     `<meta property="og:site_name" content="${esc(SITE_NAME)}" />`,
     `<meta property="og:type" content="website" />`,
-    notFound || STAGING ? `<meta name="robots" content="${STAGING ? 'noindex, nofollow' : 'noindex'}" />` : '',
+    notFound || p.noindex || STAGING ? `<meta name="robots" content="${STAGING ? 'noindex, nofollow' : 'noindex'}" />` : '',
     // LCP preloads mirror <Img>: phones get the 800 px "-m" variant, everything else the full file (media-split so only one is fetched)
     ...(p.lcp || []).flatMap((src) => {
       const key = src.replace(/\.webp$/, '.png'); const meta = IMAGES[key] || IMAGES[src.replace(/\.webp$/, '.jpg')]
@@ -72,7 +72,8 @@ for (const [from, to] of Object.entries({ ...ALIASES, ...REDIRECTS })) {
   writeFileSync(resolve(dir, 'index.html'), `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0; url=${to}"><link rel="canonical" href="${base}${to}"><title>Redirecting…</title></head><body><a href="${to}">Continue</a></body></html>`)
 }
 
-const urls = SITE_PAGES.map((p) => `  <url><loc>${base}${p.path}</loc><lastmod>${today}</lastmod><changefreq>${p.changefreq}</changefreq><priority>${p.priority.toFixed(1)}</priority></url>`).join('\n')
+const urls = SITE_PAGES.filter((p) => !p.noindex).map((p) =>   // noindex pages (the thank-you page) stay out of the sitemap
+ `  <url><loc>${base}${p.path}</loc><lastmod>${today}</lastmod><changefreq>${p.changefreq}</changefreq><priority>${p.priority.toFixed(1)}</priority></url>`).join('\n')
 if (STAGING) {
   // staging: nothing indexable — disallow-all robots, no sitemap; the noindex meta is on every page above and
   // vercel.staging.json adds the X-Robots-Tag header; middleware.js (basic auth) keeps it private
@@ -82,6 +83,6 @@ if (STAGING) {
 } else {
   writeFileSync(resolve(DIST, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`)
   writeFileSync(resolve(DIST, 'robots.txt'), `User-agent: *\nAllow: /\nDisallow: /404.html\nSitemap: ${base}/sitemap.xml\n`)
-  console.log(`postbuild: ${n} route pages, 404.html, sitemap (${SITE_PAGES.length} urls), robots.txt`)
+  console.log(`postbuild: ${n} route pages, 404.html, sitemap (${SITE_PAGES.filter((p) => !p.noindex).length} urls), robots.txt`)
 }
 if (!existsSync(resolve(DIST, 'index.html'))) throw new Error('no index.html')

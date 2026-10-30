@@ -3,7 +3,9 @@
 // With those variables unset (a production project) it does nothing.
 export const config = { matcher: '/:path*' }
 export default function middleware(request) {
-  const user = process.env.STAGING_USER, pass = process.env.STAGING_PASS
+  // trimmed: a value pasted into the dashboard or piped to `vercel env add` can carry a trailing newline, which made
+  // every correct sign-in fail (2026-10-30)
+  const user = (process.env.STAGING_USER || '').trim(), pass = (process.env.STAGING_PASS || '').trim()
   if (!user || !pass) return
   const auth = request.headers.get('authorization') || ''
   if (auth.startsWith('Basic ')) {

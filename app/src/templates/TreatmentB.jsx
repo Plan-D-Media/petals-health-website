@@ -4,7 +4,8 @@ import Footer from '../components/Footer.jsx'
 import FormDialog from '../components/FormDialog.jsx'
 import Img from '../components/Img.jsx'
 import { Arrow } from '../components/Specialists.jsx'
-import { Hero, ServiceGrid, Team, Related, SideForm, focusForm } from './TreatmentA.jsx'
+import { Hero, ServiceGrid, Team, WhoYoullSee, Related, SideForm, focusForm } from './TreatmentA.jsx'
+import { departmentFor } from './treatmentData.js'
 import './treatment.css'
 import './TreatmentB.css'
 
@@ -92,7 +93,7 @@ export default function TreatmentB({ content: c }) {
   return (
     <div className="page">
       <Header current={c.slug} />
-      <main id="main" tabIndex={-1}>
+      <main id="main" tabIndex={-1} data-department={departmentFor(c)}>
         <Hero c={{ ...c, tracks }} />
 
         <div className="inner"><div className="tsplit">
@@ -202,6 +203,8 @@ export default function TreatmentB({ content: c }) {
                 {groups.map((g, i) => <Group key={i} g={g} i={i} c={c} id={`track-${i + 1}`} />)}
               </div>
             )}
+
+            <WhoYoullSee c={c} />
 
             {c.risks && (
               <section className="tr2" aria-labelledby="t-risks-title">

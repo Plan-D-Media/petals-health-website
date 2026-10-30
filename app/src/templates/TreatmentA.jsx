@@ -1,7 +1,9 @@
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
 import FormDialog from '../components/FormDialog.jsx'
-import DoctorCard from '../components/DoctorCard.jsx'
+import DoctorCard, { Availability } from '../components/DoctorCard.jsx'
+import Icon from '../components/Icon.jsx'
+import { sessionLabel, photoSmall, monogram } from '../data/doctors.js'
 import Marquee from '../components/Marquee.jsx'
 import LeadForm from '../components/LeadForm.jsx'
 import Img from '../components/Img.jsx'
@@ -10,7 +12,8 @@ import { teamFor, factsFor, rankServices, askSpan, relatedFor, departmentFor } f
 import './treatment.css'
 import './TreatmentA.css'
 
-// Template A (Child Care, Pain Management, Audiology, Yoga & Wellness, Multispecialty) — redesign 2026-09-21
+// Template A (Child Care, Pain Management, Audiology, Yoga & Wellness, Multispecialty) — redesign 2026-09-21; the
+// 2026-10-30 audit moved the doctors into the column (WhoYoullSee, after the services) and left-aligned the column.
 // (design/treatment-redesign.md). Section order from the mock, with the team moved up beside the services:
 //   open hero (cut-out on the gradient | crumb, tagline?, headline, lead, CTA, verified facts) · a two-column split
 //   (2026-09-22): the content column — intro (optional) · feature block (optional) · ranked service grid on a tint
@@ -55,8 +58,43 @@ export function ServiceGrid({ services, c, noLead = false, ask = true }) {
   )
 }
 
+// "Who you'll see" (2026-10-30, audit item 1): the page's doctors as compact rows inside the content column, right after
+// the services — photo, name (to the profile), specialty, clinic and timings, today's availability, Book. Book opens the
+// booking dialog with the doctor preselected (the side form has no doctor field). Only doctors whose specialty matches
+// the page (teamFor); no matching doctor, no row — the full-width Find a doctor band below covers that case.
+export function WhoYoullSee({ c }) {
+  const team = teamFor(c)
+  if (!team.length) return null
+  return (
+    <section className="tb tsee" aria-labelledby="t-who-title">
+      <div className="inner">
+        <div className="tb__head"><h2 id="t-who-title" className="tb__eyebrow tsee__eyebrow">Who you’ll see</h2></div>
+        <ul className="tsee__list">
+          {team.map((d) => (
+            <li key={d.id} className="tsee__row" data-reveal>
+              <span className="tsee__avatar">{d.photo ? <Img src={photoSmall(d)} alt="" /> : <span aria-hidden="true">{monogram(d.name)}</span>}</span>
+              <div className="tsee__who">
+                <h3 className="tsee__name"><a href={`/doctors/${d.id}`}>{d.name}</a></h3>
+                <p className="tsee__spec">{d.specialty}</p>
+              </div>
+              <div className="tsee__when">
+                <ul className="tsee__sessions">{d.sessions.map((s, i) => <li key={i}><Icon name="pin" className="tsee__pin" />{sessionLabel(s)}</li>)}</ul>
+                <Availability d={d} className="tsee__avail" />
+              </div>
+              <a className="tsee__book" href="#book" data-form="book-appointment" data-doctor={d.id} data-section="treatment-who" aria-label={`Book ${d.name}`}>Book</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}
+
+// the full-width team band: now only the fallback for a page with no matching doctor (the doctors themselves moved up
+// into the content column, WhoYoullSee — the band had shown them after the closing call as a lone card)
 export function Team({ c }) {
   const team = teamFor(c)
+  if (team.length) return null
   return (
     <section className="tt tb tb--tint" aria-labelledby="t-team-title">
       <div className="inner">
@@ -169,7 +207,7 @@ export default function TreatmentA({ content: c }) {
   return (
     <div className="page">
       <Header current={c.slug} />
-      <main id="main" tabIndex={-1}>
+      <main id="main" tabIndex={-1} data-department={departmentFor(c)}>
         <Hero c={c} />
 
         <div className="inner"><div className="tsplit">
@@ -197,6 +235,8 @@ export default function TreatmentA({ content: c }) {
                 <ServiceGrid services={c.services} c={c} />
               </div>
             </section>
+
+            <WhoYoullSee c={c} />
 
             {c.flagship && (
               <section className={'ts ts--flagship tb ' + (c.flagshipTone === 'tint' ? 'tb--tint' : 'tb--navy')} aria-labelledby="t-flagship-title">   {/* the page's one navy band; the lead card above goes light */}

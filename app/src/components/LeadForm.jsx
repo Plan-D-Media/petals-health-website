@@ -8,7 +8,8 @@ import './LeadForm.css'
 
 // The one lead form. `fields` picks which inputs appear; `source` says which form/page/section/doctor it came from.
 //   fields: any of name, mobile, email, gender, age, doctor, date, message (name + mobile + consent are always required)
-// States: idle → submitting → success | error (data intact, retry). Honeypot + timing check in forms/submit.js.
+// States: idle → submitting → success (→ /thank-you/) | error (data intact, retry with the same submission id).
+// Honeypot + timing check in forms/submit.js.
 export const FORM_PRESETS = {
   'book-appointment': { title: 'Book an appointment', fields: ['name', 'mobile', 'email', 'doctor', 'date', 'message'], submit: 'Book Appointment', thanks: 'Thank you. Our team will confirm your appointment by phone or WhatsApp, usually within an hour during clinic hours.' },
   'request-callback': { title: 'Request a call back', fields: ['name', 'mobile', 'message'], submit: 'Request a Call Back', thanks: 'Thank you. We will call you back on this number, usually within an hour during clinic hours.' },
@@ -27,6 +28,7 @@ export default function LeadForm({ form = 'book-appointment', source = {}, prese
   const [status, setStatus] = useState('idle')   // idle | submitting | success | error
   const [message, setMessage] = useState('')
   const openedAt = useRef(Date.now())
+  const retryId = useRef(null)   // the failed attempt's submission id: "Try again" re-sends the same submission (forms/submit.js)
   const firstRef = useRef(null)
   useEffect(() => { if (autoFocus) firstRef.current?.focus() }, [autoFocus])
 
@@ -39,10 +41,13 @@ export default function LeadForm({ form = 'book-appointment', source = {}, prese
     setStatus('submitting'); setMessage('')
     const ev = { form, section: source.section || '', doctor: source.doctor || '' }
     track('form_submit', ev)
-    const r = await submitLead(values, p.fields, { form, ...source }, openedAt.current)
+    const r = await submitLead(values, p.fields, { form, ...source }, openedAt.current, retryId.current)
     if (r.status === 'invalid') { setErrors(r.errors); setStatus('idle'); return }
-    if (r.status === 'error') { track('form_error', ev); setStatus('error'); setMessage(r.message); return }
-    track('form_success', { ...ev, queued: r.status === 'queued' }); setStatus('success'); onSuccess?.(r)
+    if (r.status === 'error') { retryId.current = r.id || null; track('form_error', { ...ev, error: r.error }); setStatus('error'); setMessage(r.message); return }
+    track('form_success', ev); setStatus('success'); onSuccess?.(r)
+    // every successful form ends on the thank-you page (its own URL, noindex, the conversion event — ThankYou.jsx); the
+    // in-place thanks below shows for the moment the navigation takes
+    window.location.assign(`/thank-you/?form=${encodeURIComponent(form)}`)
   }
 
   if (status === 'success') {

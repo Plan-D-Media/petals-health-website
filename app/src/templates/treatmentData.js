@@ -5,7 +5,7 @@
 //                `source`), plus two derived from the matching doctors' records (their clinics; video consult when
 //                every one offers it). A page with no matching doctor and no explicit facts renders no row.
 //   rankServices lead / standard / compact ranks: `lead: true` in content marks the client's priority; default is the
-//                first card in the mock's order. Cards past `compactFrom` (default 8) render as compact rows.
+//                first card in the mock's order. Cards past `compactFrom` (none by default) render as compact rows.
 //   relatedFor   the "More at Petals Health" row: `related` slugs from content, else the page's neighbours in the
 //                Treatments menu order (navigation, not a clinical relation).
 import { DOCTORS, clinicsOf } from '../data/doctors.js'
@@ -26,8 +26,10 @@ export function factsFor(c, team = teamFor(c)) {
 
 export function rankServices(services, c, { noLead = false } = {}) {
   const leadIndex = noLead ? -1 : Math.max(0, services.findIndex((s) => s.lead || s.flagship))
-  // more than eight services: six cards, the rest as compact rows (never a single orphan row)
-  const compactFrom = c.compactFrom ?? (services.length > 8 ? 6 : Infinity)
+  // one card style (2026-10-30, audit item 4): every service is a card unless a page sets compactFrom explicitly — the
+  // old default (six cards, then compact rows past eight services) gave Multispecialty two styles, an "ask" tile
+  // stranded mid-page and General Surgery alone on its row
+  const compactFrom = c.compactFrom ?? Infinity
   return services.map((s, i) => ({ ...s, rank: i === leadIndex ? 'lead' : i >= compactFrom ? 'compact' : 'standard', index: i }))
 }
 /** how many grid cells the "ask" tile must span to complete the last row: 2 columns from 768 and inside the content

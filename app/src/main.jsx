@@ -8,12 +8,14 @@ import { initReveals } from './motion.js'
 import { pageFor } from './routes.jsx'
 import { applyMeta } from './seo.js'
 import { initAnalytics } from './analytics.js'
+import { captureAttribution } from './forms/attribution.js'
 import { landOnHash } from './hash.js'
 import { STAGING } from './config.js'
 
 
 const page = pageFor(window.location.pathname)   // may rewrite the path (static-fallback ?__p=)
 applyMeta(window.location.pathname)
+captureAttribution()   // landing page, outside referrer, UTMs and click ids for the lead sheet (forms/attribution.js)
 initAnalytics()
 landOnHash()
 initReveals()   // reveal layer: below-the-fold rows only; no-op under prefers-reduced-motion (design/decisions.md)

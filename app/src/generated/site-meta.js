@@ -39,6 +39,12 @@ export const SITE_META = [
   "description": "Book a test at Petals Health. Tell us what you need and we will call you back."
  },
  {
+  "path": "/thank-you/",
+  "title": "Thank you — Petals Health",
+  "description": "Thank you for contacting Petals Health. Our team will call you back.",
+  "noindex": true
+ },
+ {
   "path": "/treatments/child-care/",
   "title": "Child Care — Petals Health",
   "description": "Children's health moves fast, a growth spurt, a new vaccine due, a fever that won't settle. Our pediatricians work alongside your family medicine and gynaecolog"

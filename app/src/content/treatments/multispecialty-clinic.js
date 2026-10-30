@@ -17,7 +17,8 @@ export default {
   taglineFromMock: 'Trusted Care for, Healthier Smiles',
   intro: 'Family medicine at Petals Health covers the everyday and the ongoing: general consultations, chronic condition management, and preventive screening, all coordinated by doctors who know your history. Heart health is where we go deepest — our cardiology track is built for early detection and long-term management, not just one-off checks.',
   gridStyle: 'tiles',
-  serviceLabel: 'Vertical',   // the mock labels each tile "Vertical" and the first "Flagship"
+  // serviceLabel 'Vertical' (the mock's label on every tile) dropped 2026-10-30, audit item 4: the same word on eight
+  // cards told the visitor nothing; the tiles are numbered like every other page. The first keeps "Flagship".
   services: [
     { title: 'Cardiology', text: 'Heart health screening, hypertension management, and ongoing cardiac care.', flagship: true, label: 'Flagship' },
     { title: 'General Physician Consultations', text: 'A consistent doctor for everyday illness, referrals, and health concerns.' },

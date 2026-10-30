@@ -25,6 +25,6 @@ export function applyMeta(pathname) {
   setMeta('meta[property="og:url"]', { property: 'og:url', content: url })
   setMeta('meta[property="og:site_name"]', { property: 'og:site_name', content: SITE_NAME })
   setMeta('meta[property="og:type"]', { property: 'og:type', content: 'website' })
-  if (m.notFound || STAGING) setMeta('meta[name="robots"]', { name: 'robots', content: STAGING ? 'noindex, nofollow' : 'noindex' })
+  if (m.notFound || m.noindex || STAGING) setMeta('meta[name="robots"]', { name: 'robots', content: STAGING ? 'noindex, nofollow' : 'noindex' })   // noindex: pages.js flag (the thank-you page)
   return m
 }

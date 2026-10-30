@@ -234,6 +234,51 @@
   .tsplit__main .tw__list { grid-template-columns: repeat(3, 1fr); }
 }
 @media (min-width: 1680px) { .tsplit { --form-w: 480px; --rail-pad: 56px; } }
+/* 1024–1279 (2026-10-30, audit item 3): the form narrows to 360 and the service cards go one per row — two across in a
+   ~456 px column gave three-to-four-word lines. The lead card and the ask tile stop spanning. */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .tsplit { --form-w: 360px; --rail-pad: 28px; }
+  .tsplit__form { padding: 22px 22px 24px; }
+  .tsplit__form .tv__form-title { font-size: 26px; }
+  .tsplit__main .ts__grid { grid-template-columns: 1fr; }
+  .tsplit__main .tc--lead, .tsplit__main .tc--ask { grid-column: auto; }
+}
+
+/* the content column reads down one left edge (2026-10-30, audit item 2): the intro and every section head align with
+   the cards below them instead of centring above a left-aligned grid. Full-width bands outside the split keep theirs. */
+.tsplit__main .tb__head { text-align: left; }
+.tsplit__main .tb__sub { margin-left: 0; }
+.tsplit__main .ti__text { margin: 0; text-align: left; text-wrap: pretty; }
+
+/* who you'll see (WhoYoullSee, 2026-10-30, audit item 1): the page's doctors as rows between hairlines, right after the
+   services — photo, name and specialty, clinic and timings with today's availability, Book */
+.tsee { padding: 32px 0 36px; }
+.tsee__eyebrow { margin-bottom: 14px; }
+.tsee__list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--rule-card); }
+.tsee__row { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 12px 16px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--rule-card); }
+.tsee__avatar { display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 50%; overflow: hidden; background: var(--blue-900); color: var(--white); font-family: var(--font-serif); font-size: 18px; }
+.tsee__avatar img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%; }
+.tsee__name { margin: 0; font-size: var(--fs-title); font-weight: var(--fw-title); line-height: 1.2; color: var(--blue-900); }
+.tsee__name a:hover { color: var(--accent-dark); }
+.tsee__spec { margin: 4px 0 0; font-size: 15px; line-height: 1.3; color: var(--grey-600); }
+.tsee__when { grid-column: 1 / -1; }
+.tsee__sessions { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; font-size: 15px; line-height: 1.35; color: var(--black); }
+.tsee__sessions li { display: flex; align-items: center; gap: 6px; }
+.tsee__pin { width: 14px; height: 14px; flex: none; color: var(--blue-900); }
+.tsee__avail { margin: 6px 0 0; display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--grey-600); }
+.tsee__avail-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green-500); }
+.tsee__book { grid-column: 1 / -1; display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0 26px; justify-self: start; border-radius: var(--radius-pill); background: var(--blue-900); color: var(--white); font-size: 16px; font-weight: 700; }
+.tsee__book:hover { background: var(--blue-800); }
+@media (min-width: 768px) {
+  .tsee__row { grid-template-columns: 56px minmax(0, 5fr) minmax(0, 6fr) auto; gap: 16px 20px; }
+  .tsee__when, .tsee__book { grid-column: auto; }
+}
+/* the narrow column (1024–1439): the timings drop under the name, Book stays on the right */
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .tsee__row { grid-template-columns: 56px minmax(0, 1fr) auto; }
+  .tsee__when { grid-column: 2; grid-row: 2; }
+  .tsee__book { grid-column: 3; grid-row: 1 / span 2; }
+}
 
 /* ---- team ---- */
 .tt { padding: 40px 0 44px; }

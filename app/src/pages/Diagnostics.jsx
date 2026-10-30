@@ -22,7 +22,7 @@ export default function Diagnostics() {
   return (
     <div className="page">
       <Header current="diagnostics" />
-      <main id="main" tabIndex={-1}>
+      <main id="main" tabIndex={-1} data-department={D.title}>
         <section className="th tb dg-hero" aria-labelledby="dg-title" data-hero>
           <div className="inner">
             <div className="th__copy dg-hero__copy">
