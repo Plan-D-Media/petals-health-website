@@ -67,7 +67,7 @@ function Group({ g, i, c, id }) {
   )
 }
 
-function Faq({ faq }) {
+export function Faq({ faq }) {   // also Diagnostic Services
   const answered = faq.items.filter((it) => it.a)
   const pending = faq.items.length - answered.length
   if (!answered.length) return null

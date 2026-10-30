@@ -80,7 +80,10 @@
   .th--open .th__inner { align-items: end; }
   /* the stage runs to the viewport's edge on its side: the cut-out gets the room it had on the shelf and more, and a file
      cut at its own edge (Audiology, left) sits flush with the screen instead of showing the cut at the gutter */
-  .th--open .th__stage { margin: 0 0 0 min(calc(-1 * var(--gutter)), calc((var(--content-width) - 100vw) / 2)); aspect-ratio: auto; height: 100%; min-height: 0; border-radius: 0; }
+  /* the photo bleeds left to the action rail's strip, not under it (--rail-clear, base.css), and fades in over its first
+     48 px so a subject cropped by the frame edge has no hard line */
+  .th--open .th__stage { margin: 0 0 0 calc(min(calc(-1 * var(--gutter)), calc((var(--content-width) - 100vw) / 2)) + var(--rail-clear)); aspect-ratio: auto; height: 100%; min-height: 0; border-radius: 0; }
+  .th--open:not(.th--right) .th__stage:not(.th__stage--blend) img { -webkit-mask-image: linear-gradient(to right, transparent, #000 48px); mask-image: linear-gradient(to right, transparent, #000 48px); }
   .th--open.th--right .th__stage { margin: 0 min(calc(-1 * var(--gutter)), calc((var(--content-width) - 100vw) / 2)) 0 0; }
   .th--open .th__copy { align-self: center; padding: 40px 0 44px; }
 }
@@ -200,7 +203,6 @@
   .tsplit__main .tc--ask { grid-column: span var(--span2, 1); }
   .tsplit__main .ts__compact { grid-template-columns: repeat(2, 1fr); }
   .tsplit__main .ts__compact li { grid-template-columns: 1fr; }
-  .tsplit__main .tf__inner { grid-template-columns: 1fr 1fr; gap: 32px; }
   .tsplit__main .tf__list { font-size: 19px; }
   .tsplit__main .tf__title { font-size: 34px; }
   .tsplit__main .tr2__inner, .tsplit__main .tr2__inner--photo-first { grid-template-columns: 1fr 1fr; gap: 32px; }
@@ -216,7 +218,7 @@
   .tsplit__main .tn__title { font-size: 36px; }
   .tsplit__main .tb__title { font-size: var(--fs-display-md); }
   .tsplit__main .tc--lead .tc__title { font-size: 26px; }
-  .tsplit__main .ts { padding: 36px 0 44px; }
+  .tsplit__main .ts { padding-block: 36px 44px; }   /* block only: the shorthand reset the bleed padding above and put the cards under the action rail */
   .tsplit__main .tx { top: 42px; }
 }
 @media (min-width: 1366px) { .tsplit { --form-w: 440px; --rail-pad: 44px; } }

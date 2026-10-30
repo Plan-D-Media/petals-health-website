@@ -23,9 +23,9 @@ export default {
   intro: null,
   introFromMock: 'Family medicine at Petals Health covers the everyday and the ongoing: general consultations, chronic condition management, and preventive screening, all coordinated by doctors who know your history. Heart health is where we go deepest — our cardiology track is built for early detection and long-term management, not just one-off checks.',
   feature: {
-    photos: [
-      { src: '/assets/treatments/yoga-feature-1.jpg', alt: 'A mother stretching on a mat beside her baby' },
-      { src: '/assets/treatments/yoga-feature-2.jpg', alt: 'A pregnant woman stretching on a mat' },
+    photos: [   // prenatal first, as the heading reads; 4:3 crops of 3:2 sources, focal points on the subject (TreatmentA.css)
+      { src: '/assets/treatments/yoga-feature-2.jpg', alt: 'A pregnant woman stretching on a mat', position: '50% 60%' },
+      { src: '/assets/treatments/yoga-feature-1.jpg', alt: 'A mother stretching on a mat beside her baby', position: '62% 70%' },
     ],
     heading: 'Prenatal & Postnatal Yoga',
     bullets: [

@@ -1,10 +1,16 @@
-/* Template A additions on top of treatment.css: the Yoga feature block (photo pair | heading + bullets). */
+/* Template A additions on top of treatment.css: the Yoga feature block (photo pair, then heading + bullets).
+   Both sources are 3:2 landscapes of a horizontal stretch, so both crop to the same 4:3 (a portrait crop cut the
+   poses) at a per-photo focal point (content `position`). height: auto matters: <Img> carries the file's width and
+   height attributes, and without it the 829 px height attribute beat aspect-ratio and drew each photo as a sliver.
+   The pair always sits above the copy — beside it, in the split's content column, each photo was ~100 px wide. */
 .tf { padding: 36px 0 8px; }
 .tf__inner { display: grid; gap: 24px; }
 .tf__photos { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.tf__photos img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--radius-card); }
+.tf__photos img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; object-position: var(--pos, 50% 50%); border-radius: var(--radius-card); }
 .tf__title { margin: 0; font-size: var(--fs-display-md); font-weight: var(--fw-display-md); line-height: 1.1; color: var(--blue-900); }
 .tf__list { margin: 20px 0 0; padding-left: 24px; font-size: var(--fs-body); font-weight: 400; line-height: 1.35; color: var(--blue-900); }
 .tf__list li + li { margin-top: 14px; }
-@media (min-width: 768px) { .tf__inner { grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; } }
-@media (min-width: 1024px) { .tf { padding: 48px 0 16px; } .tf__inner { grid-template-columns: 7fr 5fr; gap: 56px; } .tf__photos img { aspect-ratio: 4 / 5; } .tf__list { font-size: 22px; line-height: 1.35; } .tf__list li + li { margin-top: 20px; } .tf__title { font-size: 40px; } }
+@media (min-width: 768px) { .tf__photos { gap: 16px; } }
+@media (min-width: 1024px) { .tf { padding: 48px 0 16px; } .tf__inner { gap: 32px; } .tf__list { font-size: 22px; line-height: 1.35; } .tf__list li + li { margin-top: 20px; } .tf__title { font-size: 40px; } }
+/* wide enough for heading and list side by side under the photos: the heading takes the left third */
+@media (min-width: 1440px) { .tf__copy { display: grid; grid-template-columns: 5fr 7fr; gap: 48px; align-items: start; } .tf__list { margin-top: 4px; } }

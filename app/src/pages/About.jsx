@@ -14,8 +14,8 @@ import './About.css'
 // About Us (design/svg/4.svg) — redesign 2026-09-21 (design/treatment-redesign.md, "About Us"). The mock's sections in
 // the mock's order, on the site's shared language:
 //   hero: the whole reception photograph framed beside the copy on the hero tint (option C, 2026-09-22) · Our Story as a
-//   centred pull · The problem → The idea as one tint band with a turn and the payoff set apart · Our Approch as
-//   numbered cards, What we offer as a checklist, The journey so far as a timeline · Find us (shared clinic cards) ·
+//   centred pull · The problem → The idea as one reading column, the 80% line as its pull-quote, a turn, the payoff set
+//   apart · Our Approch as numbered rows, What we offer as a checklist, The journey so far as a timeline across the page · Find us (shared clinic cards) ·
 //   the team (monogram role tiles until real people; hidden in production while none exist) · Want to join our Team?
 //   as a light block · the "More at Petals Health" navy closing panel · footer.
 // Copy verbatim. Logged (client-requests.md items 13 and 17): "Our Approch"; "infertility specialist you go to";
@@ -115,37 +115,39 @@ export default function About() {
           </div>
         </section>
 
+        {/* The problem → the idea as one reading column (direction A1, 2026-10-30): the Problem runs twice the Idea's length,
+            so side-by-side columns always left a hole. The 80% line opens as the pull-quote under its label, a turn marks
+            the change, the closing statement is set apart. Copy and order as before. */}
         <section className="an tb tb--tint" aria-label="The problem and the idea">
           <div className="inner an__inner">
-            <div className="an__col an__col--problem">
-              <h2 className="tb__eyebrow an__eyebrow">The problem</h2>
-              <p className="about__p about__p--strong">80% of a Gynaecologist’s consultations are Pregnancy and Infertility related.</p>
-              {PROBLEM.map((p, i) => <Para key={i} p={p} />)}
-            </div>
+            <h2 className="tb__eyebrow an__eyebrow">The problem</h2>
+            <p className="an__quote">80% of a Gynaecologist’s consultations are Pregnancy and Infertility related.</p>
+            {PROBLEM.map((p, i) => <Para key={i} p={p} />)}
             <div className="an__turn" aria-hidden="true"><span /></div>
-            <div className="an__col an__col--idea">
-              <h2 className="tb__eyebrow an__eyebrow">The idea</h2>
-              {IDEA.slice(0, -1).map((p) => <Para key={p} p={p} />)}
-            </div>
+            <h2 className="tb__eyebrow an__eyebrow">The idea</h2>
+            {IDEA.slice(0, -1).map((p) => <Para key={p} p={p} />)}
             <p className="an__payoff" data-reveal>{IDEA[IDEA.length - 1]}</p>
           </div>
         </section>
 
+        {/* Approach, offer and journey stacked on one shared row (directions B1 and C1, 2026-10-30): the label in a left
+            column, the content across the rest — five numbered rows between hairlines, a two-across checklist, and the
+            timeline running across the page. Nothing sits side by side any more, so there is no gutter to go dead. */}
         <section className="a3 tb" aria-label="Our approach, what we offer and the journey so far">
           <div className="inner">
-            <h2 className="tb__eyebrow a3__eyebrow">Our Approch</h2>
-            <ol className="a3__approach">
-              {APPROACH.map(([t, d], i) => <li key={t} className="a3__card" data-reveal data-reveal-order={i}><span className="a3__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span><strong>{t}</strong><span>{d}</span></li>)}
-            </ol>
-            <div className="a3__pair">
-              <div className="a3__offer">
-                <h2 className="tb__eyebrow a3__eyebrow">What we offer</h2>
-                <ul className="a3__check">{OFFER.map((p) => <li key={p} data-reveal><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg><span>{p}</span></li>)}</ul>
-              </div>
-              <div className="a3__journey">
-                <h2 className="tb__eyebrow a3__eyebrow">The journey so far</h2>
-                <ol className="a3__timeline">{JOURNEY.map((p) => <li key={p} data-reveal><span>{p}</span></li>)}</ol>
-              </div>
+            <div className="a3__row">
+              <h2 className="tb__eyebrow a3__eyebrow">Our Approch</h2>
+              <ol className="a3__approach">
+                {APPROACH.map(([t, d], i) => <li key={t} className="a3__item" data-reveal data-reveal-order={i}><span className="a3__num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span><strong>{t}</strong><span className="a3__line">{d}</span></li>)}
+              </ol>
+            </div>
+            <div className="a3__row">
+              <h2 className="tb__eyebrow a3__eyebrow">What we offer</h2>
+              <ul className="a3__check">{OFFER.map((p) => <li key={p} data-reveal><svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M4 10.5l4 4 8-9" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg><span>{p}</span></li>)}</ul>
+            </div>
+            <div className="a3__row">
+              <h2 className="tb__eyebrow a3__eyebrow">The journey so far</h2>
+              <ol className="a3__timeline">{JOURNEY.map((p) => <li key={p} data-reveal><span>{p}</span></li>)}</ol>
             </div>
           </div>
         </section>

@@ -1,6 +1,6 @@
 /* About Us — redesign 2026-09-21 on the shared treatment layer (treatment.css: .th hero, .tb bands, .tr close).
-   This file adds: the hero photo crop, the story pull, the narrative band with its turn and payoff, the three
-   shapes (numbered cards / checklist / timeline), the team tiles and the careers block. Tokens only. */
+   This file adds: the hero photo crop, the story pull, the narrative column with its quote, turn and payoff, the
+   three shapes (numbered rows / checklist / timeline), the team tiles and the careers block. Tokens only. */
 
 /* hero (option C, 2026-09-22): the photograph whole — the frame is the picture's own 4:3, so nothing is cropped —
    on the site's hero tint, with the copy centred beside it. The shelf's 640 px floor and bottom alignment go: the
@@ -27,44 +27,41 @@
 .as__p--pull { margin-top: 18px; font-size: var(--fs-heading-sm); font-weight: 700; line-height: 1.2; color: var(--blue-900); }
 @media (min-width: 1024px) { .as { padding: 56px 0 16px; } .as__p { line-height: 31px; } }
 
-/* narrative: the problem → the idea, one band, a turn between, the payoff set apart */
+/* narrative (A1, 2026-10-30): one reading column — label, the 80% line as pull-quote, the Problem, a turn, the Idea,
+   the payoff. The column is the paragraphs' own measure (52ch at their 16 px), centred in the tint band; the quote and
+   the payoff keep that edge, so the column reads as one shape and nothing is left to sit empty beside it. */
 .an { padding: 40px 0 48px; }
-.an__inner { display: grid; gap: 28px; }
-.an__eyebrow { text-align: left; margin-bottom: 12px; color: var(--blue-900); }
+.an__inner { font-size: 16px; max-width: var(--measure); }
+.an__eyebrow { text-align: left; margin: 0 0 12px; color: var(--blue-900); }
 .about__p { margin: 0 0 14px; max-width: var(--measure); font-size: 16px; font-weight: 400; line-height: 1.45; color: var(--black); }
-.about__p:last-child { margin-bottom: 0; }
 .about__p--strong { font-weight: 700; }
-.an__turn { display: flex; justify-content: center; }
-.an__turn span { display: block; width: 44px; height: 44px; border-radius: 50%; background: var(--blue-900); position: relative; }
+.an__quote { margin: 0 0 24px; padding-left: 20px; border-left: 4px solid var(--accent); font-size: var(--fs-heading-sm); font-weight: var(--fw-heading-sm); line-height: 1.2; color: var(--blue-900); text-wrap: balance; }
+/* the turn: a hairline, the navy circle with its down-chevron, a hairline — the column changes direction here */
+.an__turn { display: flex; align-items: center; gap: 16px; margin: 32px 0; }
+.an__turn::before, .an__turn::after { content: ''; flex: 1; height: 1.5px; background: var(--rule-card); }
+.an__turn span { flex: none; display: block; width: 44px; height: 44px; border-radius: 50%; background: var(--blue-900); position: relative; }
 .an__turn span::after { content: ''; position: absolute; left: 50%; top: 50%; width: 12px; height: 12px; margin: -9px 0 0 -6px; border-right: 2.5px solid var(--white); border-bottom: 2.5px solid var(--white); transform: rotate(45deg); }
-.an__payoff { margin: 8px 0 0; max-width: var(--measure); padding: 24px 24px 26px; border-radius: var(--radius-card-lg); background: var(--white); box-shadow: var(--shadow-card-rest), var(--ring-card); border-left: 6px solid var(--blue-900); font-size: 20px; font-weight: 600; line-height: 1.35; color: var(--blue-900); text-wrap: balance; }
-@media (min-width: 768px) {
-  .an__inner { grid-template-columns: 1fr 44px 1fr; grid-template-areas: 'problem turn idea' 'payoff payoff payoff'; gap: 24px 20px; align-items: start; }
-  .an__col--idea { align-self: center; }
-  .an__col--problem { grid-area: problem; } .an__col--idea { grid-area: idea; } .an__payoff { grid-area: payoff; }
-  .an__turn { grid-area: turn; align-self: stretch; align-items: center; }
-  .an__turn::before { content: ''; position: absolute; }
-  .an__turn { position: relative; }
-  .an__turn span::after { margin: -6px 0 0 -9px; transform: rotate(-45deg); }
-  .an__turn::before { left: 50%; top: 0; bottom: 0; width: 1.5px; margin-left: -0.75px; background: var(--rule-card); }
-  .an__turn span { z-index: 1; }
-}
+.an__payoff { margin: 28px 0 0; padding: 24px 24px 26px; border-radius: var(--radius-card-lg); background: var(--white); box-shadow: var(--shadow-card-rest), var(--ring-card); border-left: 6px solid var(--blue-900); font-size: 20px; font-weight: 600; line-height: 1.35; color: var(--blue-900); text-wrap: balance; }
 @media (min-width: 1024px) {
-  .an { padding: 56px 0 64px; }
-  .an__inner { gap: 32px 40px; }
+  .an { padding: 64px 0 72px; }
+  .an__quote { margin-bottom: 32px; padding-left: 24px; }
   .about__p { line-height: 24px; }
-  .an__payoff { margin-top: 12px; padding: 32px 40px 34px; font-size: 24px; }
+  .an__turn { margin: 40px 0; }
+  .an__payoff { margin-top: 36px; padding: 32px 36px 34px; font-size: 24px; }
 }
 
-/* three shapes */
+/* approach, offer, journey (B1 + C1, 2026-10-30): three stacked rows on one structure — the label in a left column,
+   the content across the rest (from 1366; below that the label sits on top). Approach: five numbered rows between
+   hairlines. Offer: a checklist two across. Journey: the timeline running across the page (two to a row, four from
+   1366), the line carried through each row behind the markers. */
 .a3 { padding: 40px 0 48px; }
-.a3__eyebrow { text-align: left; margin-bottom: 16px; color: var(--blue-900); }
-.a3__approach { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
-.a3__card { display: grid; gap: 4px; padding: 16px 18px 18px; border-radius: var(--radius-card); background: var(--white); box-shadow: var(--shadow-card-rest), var(--ring-card); }
-.a3__num { font-size: var(--fs-caption); font-weight: 500; letter-spacing: 0.04em; color: var(--accent-dark); }
-.a3__card strong { font-size: 18px; font-weight: 600; line-height: 1.2; color: var(--blue-900); }
-.a3__card span:last-child { font-size: 15px; line-height: 1.35; color: var(--black); }
-.a3__pair { display: grid; gap: 36px; margin-top: 40px; }
+.a3__row + .a3__row { margin-top: 40px; }
+.a3__eyebrow { text-align: left; margin: 0 0 16px; color: var(--blue-900); }
+.a3__approach { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--rule-card); }
+.a3__item { display: grid; grid-template-columns: 40px 1fr; gap: 2px 12px; padding: 16px 0; border-bottom: 1px solid var(--rule-card); }
+.a3__num { grid-row: span 2; font-size: var(--fs-caption); font-weight: 500; letter-spacing: 0.04em; line-height: 22px; color: var(--accent-dark); }
+.a3__item strong { font-size: 18px; font-weight: 600; line-height: 1.2; color: var(--blue-900); }
+.a3__line { font-size: 15px; line-height: 1.35; color: var(--black); }
 .a3__check { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
 .a3__check li { display: grid; grid-template-columns: 24px 1fr; gap: 12px; align-items: start; max-width: calc(var(--measure) + 36px); font-size: 16px; line-height: 1.45; color: var(--black); }
 .a3__check svg { width: 22px; height: 22px; margin-top: 1px; color: var(--green-500); background: var(--white); border-radius: 50%; box-shadow: var(--ring-card); padding: 3px; }
@@ -75,16 +72,34 @@
 .a3__timeline li::before { content: ''; position: absolute; left: -26px; top: 6px; width: 16px; height: 16px; border-radius: 50%; background: var(--white); border: 3px solid var(--blue-900); box-sizing: border-box; }
 .a3__timeline li:last-child::before { background: var(--orange-500); border-color: var(--orange-500); }
 @media (min-width: 768px) {
-  .a3__approach { grid-template-columns: repeat(5, 1fr); gap: 12px; }
-  .a3__pair { grid-template-columns: 1fr 1fr; gap: 48px; }
+  .a3__check { grid-template-columns: 1fr 1fr; gap: 14px 40px; }
+  .a3__item { grid-template-columns: 48px minmax(0, 5fr) minmax(0, 7fr); align-items: baseline; gap: 16px; padding: 18px 0; }
+  .a3__num { grid-row: auto; }
+}
+/* the timeline runs across from 768: two to a row, four from 1366; the line runs along the top of each row, the
+   markers sit on it, the text hangs below */
+@media (min-width: 768px) {
+  .a3__timeline { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 28px; padding: 0; }
+  .a3__timeline::before { display: none; }
+  .a3__timeline li { padding: 30px 0 0; }
+  .a3__timeline li::after { content: ''; position: absolute; left: 0; right: -28px; top: 7px; height: 2px; background: var(--rule-card); }
+  .a3__timeline li:nth-child(2n)::after, .a3__timeline li:last-child::after { right: 0; }
+  .a3__timeline li::before { left: 0; top: 0; z-index: 1; }
 }
 @media (min-width: 1024px) {
-  .a3 { padding: 56px 0 64px; }
-  .a3__approach { gap: 16px; }
-  .a3__card { padding: 20px 20px 22px; }
-  .a3__pair { grid-template-columns: 7fr 5fr; gap: 72px; margin-top: 52px; }
-  .a3__check { gap: 14px; } .a3__check li { font-size: 17px; }
-  .a3__timeline li { font-size: 17px; padding-bottom: 20px; }
+  .a3 { padding: 64px 0 72px; }
+  .a3__row + .a3__row { margin-top: 56px; }
+  .a3__check { gap: 16px 48px; } .a3__check li { font-size: 17px; }
+  .a3__timeline li { font-size: 17px; }
+}
+/* the label column from 1366, where "The journey so far" fits on one line beside the content */
+@media (min-width: 1366px) {
+  .a3__row { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 9fr); gap: 48px; align-items: start; }
+  .a3__row + .a3__row { margin-top: 64px; }
+  .a3__eyebrow { margin: 0; padding-top: 2px; }
+  .a3__timeline { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .a3__timeline li:nth-child(2n)::after { right: -28px; }
+  .a3__timeline li:nth-child(4n)::after, .a3__timeline li:last-child::after { right: 0; }
 }
 
 /* team: monogram role tiles until real people arrive; person cards after */

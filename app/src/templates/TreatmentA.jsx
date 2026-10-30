@@ -179,7 +179,7 @@ export default function TreatmentA({ content: c }) {
             {c.feature && (
               <section className="tf tb" aria-labelledby="t-feature-title">
                 <div className="inner tf__inner">
-                  <div className="tf__photos">{c.feature.photos.map((p) => <Img key={p.src} src={p.src} alt={p.alt} />)}</div>
+                  <div className="tf__photos">{c.feature.photos.map((p) => <Img key={p.src} src={p.src} alt={p.alt} style={p.position ? { '--pos': p.position } : undefined} />)}</div>
                   <div className="tf__copy">
                     <h2 id="t-feature-title" className="tf__title">{c.feature.heading}</h2>
                     <ul className="tf__list">{c.feature.bullets.map((b) => <li key={b}>{b}</li>)}</ul>

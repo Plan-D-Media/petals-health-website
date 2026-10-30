@@ -14,7 +14,7 @@ import { contactFor } from '../contact.js'
 // focusable, no underline) and only live links are underlined, so a dead link never looks clickable.
 // Mobile: tiers stack; the two link groups are accordions (closed); the policies stay open as a compact row.
 
-const FOOTER_HREFS = { 'Privacy Policy': '/privacy-policy.html', 'About Us': '/about', 'Our Story': '/about', 'Clinic Guide': '/clinics' }
+const FOOTER_HREFS = { 'Privacy Policy': '/privacy-policy.html', 'About Us': '/about', 'Our Story': '/about', 'Clinic Guide': '/clinics', 'Know your Tests': '/know-your-tests' }
 const GROUPS = [
   { heading: 'About Petals', links: ['About Us', 'Our Story', 'Petal’s App & Community', 'Career', 'Vlogs', 'Contact Us', 'Petals Inner Circle'] },
   { heading: 'Patient Services', links: ['Clinic Guide', 'Know your Tests', 'Health Packages', 'Upload Prescription', 'Polyclinic/Multispecialty OPD'] },

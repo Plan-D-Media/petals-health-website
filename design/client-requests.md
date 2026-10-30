@@ -2,6 +2,13 @@
 
 In priority order. Each item is blocking the part of the site named beside it.
 
+**Urgent, before anything else: a phone number on your Diagnostic Services page.** Your current Diagnostic page's FAQ
+tells patients to call **1800 1205 1600**, and its search-result description gives **9147405960**. Every other page,
+on your site and ours, gives **9147405955**. We have not published either of the other two numbers. Please tell us
+which number(s) are live and which department each one reaches. If 1800 1205 1600 or 9147405960 is not answered,
+please also correct it on your current website now: a patient who calls a dead number is a lost booking. (Full list
+for the page: item 22.)
+
 **1. Where appointment requests should go.** We have built every form on the site (Book Appointment, Request a Call
 Back, and the pop-up assistant) to send each request to a Google Sheet and to an email address at the same time. To
 switch it on we need two things from you: the web address of the Google "Apps Script" that writes to your sheet (we can
@@ -226,3 +233,56 @@ it we need:
   also confirm it shows the Bangladesh clinic — the poster on its wall lists the Kolkata clinics. The eight service
   photos are 300 × 200 px and look soft on phones and high-resolution screens; larger originals would fix that.
 - Any registration or licence details you want shown for Bangladesh.
+
+**22. Diagnostic Services — the page is built from your page's own words; these are held or missing.**
+The new page (/diagnostic-services, linked from the Diagnostic Services menu item) carries your heading, all twenty
+services in your order with your wording, and two of your five FAQ answers. Nothing is written by us. Everything below
+is either held (on your page, not published on ours) or missing (not on your page at all). In each held case the rest
+of the paragraph is published and the held sentence shows as "Copy pending".
+- **Phone number (see the urgent note at the top).** The FAQ gives 1800 1205 1600; your page's search description gives
+  9147405960; the site uses 9147405955 everywhere else. Held.
+- **Opening hours.** "We are open from 8:00 AM to 8:00 PM, Monday to Saturday … Sundays are available by prior
+  appointment." Held: we have no clinic hours anywhere else (item 19), and the page does not say which clinic.
+- **"Emergency services available 24/7."** Held. Nothing else on the site offers emergency care, and a patient in an
+  emergency must not be sent to a clinic that is closed. Please confirm where, and what, if this is true.
+- **Confirmation time.** "Our team generally confirms appointments within 2 hours on working days." Held: every other
+  page says "usually within an hour during clinic hours". Which is right?
+- **Same-day reports.** "Yes, most diagnostic reports are available on the same day." Held until you confirm it holds
+  at all three clinics, and which tests take longer.
+- **Four superlatives**, held as claims a patient cannot check:
+  - Pregnancy Scans: "…at Petals Health, the leading pregnancy test centre in kolkata."
+  - Thyroid USG: "…at Petals Health, a renowned thyroid USG test centre in Kolkata…"
+  - Soft tissue USG: "Contact us for a thorough and finest soft tissue USG scan and expert care in kolkata."
+  - Kidney USG: "…and other renal conditions with great accuracy."
+- **Three staffing claims**, held until you confirm the staff exist at every clinic offering the test:
+  - Breast USG: "Our female specialists perform thorough breast USG scans in a comfortable, private setting in Kolkata."
+  - Vascular USG: "…with our vascular specialists for a comprehensive circulatory health assessment."
+  - Sonohysterography: "Our expert doctors in the sonohysterography test centre in Kolkata use ultrasound and saline
+    solutions…"
+- **Your page's search description** ("a reputed Diagnostic Clinic in Kolkata … State-of-the-art facilities for
+  accurate results") is not used: two unverifiable claims and the 9147405960 number. Ours lists your test names.
+- **Missing, so marked "Copy pending" or not shown:** an introduction under the page heading; prices; turnaround time
+  per test; preparation notes (fasting, full bladder, what to bring); which clinic offers which test; a photograph
+  for the top of the page (item 4).
+- **Grouping.** The twenty services are shown in your order, ungrouped, because your page has no group names. Do you
+  want them grouped (for example by pregnancy, fertility and other scans), and if so, what should each group be called?
+- **Booking.** The page's form is the site's call-back form (name, mobile, message), tagged "Diagnostic Services". The
+  consultation form's department list has no diagnostics entry; say if you want one added, and where diagnostic
+  requests should go (item 1).
+
+**23. Know your Tests — your page has no guide yet.**
+The For Patients menu now has its first item, Know your Tests (/know-your-tests, the same address as today). Your
+current page is titled "Diagnostic Test Guide", but it contains only a "Book a Test" banner and a form that does not
+submit anywhere. So the new page has a "Copy pending" slot where the guide goes, the site's call-back form under your
+heading "Book a Test", and the three clinics from the site's clinic list. Please send:
+- The guide itself: which tests, and for each what it is for, how to prepare, how long results take, and the price if
+  you want prices shown.
+- **Your form's clinic list:** it offers Tollygunge, "Rawdon Street" and "Kakurgachi". The site's clinics are
+  Kankurgachi, Loudon Street (Calcutta Medical Centre) and Tollygunge. Is "Rawdon Street" the Loudon Street clinic, or
+  a fourth location? We have not reproduced it.
+- **"Home Blood Collection":** your form offers it as a test type, but no other page mentions it. If you offer it, tell
+  us where it is available and how it is booked; until then the site does not offer it, so no one books a service the
+  clinic cannot fulfil. (The other options, "Test at Clinic" and "Ultrasound Scan", are also held until the guide
+  arrives.)
+- Which two items should follow Know your Tests under For Patients. The menu is built to take them.
+

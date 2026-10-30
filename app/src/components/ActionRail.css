@@ -1,6 +1,6 @@
 /* Floating action rail (ActionRail.jsx). ≥1024 only. Sits in the left gutter: 44 px circles at left 6 px end at 50 px,
-   inside the 56 px laptop gutter (base.css) and far inside the 64–95 px gutters above it — the collapsed rail never
-   covers content. z-index 35: above the sticky nav (30), below the action bar (40), SXO card (45) and drawer (50);
+   inside the 56 px laptop gutter (base.css) and far inside the 64–95 px gutters above it. That strip is --rail-clear
+   (base.css): nothing may bleed into it, and tools/layout-check.mjs fails any content that would scroll under the rail. z-index 35: above the sticky nav (30), below the action bar (40), SXO card (45) and drawer (50);
    the lead dialog is in the top layer. The label is a pill clipped to the circle until revealed (clip-path, no layout). */
 .rail { display: none; }
 @media (min-width: 1024px) {

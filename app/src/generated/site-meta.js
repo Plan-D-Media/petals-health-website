@@ -29,6 +29,16 @@ export const SITE_META = [
   "description": "Petals Healthcare, Soon in Bangladesh. A New Chapter in Compassionate Care Begins."
  },
  {
+  "path": "/diagnostic-services/",
+  "title": "Diagnostic Services — Petals Health",
+  "description": "Diagnostic Services at Petals Health, Kolkata: Pregnancy Scans, Fetal Diagnosis, Anomaly Scan, 3D/4D USG, Follicular Scan, fertility tests and more."
+ },
+ {
+  "path": "/know-your-tests/",
+  "title": "Know your Tests — Petals Health",
+  "description": "Book a test at Petals Health. Tell us what you need and we will call you back."
+ },
+ {
   "path": "/treatments/child-care/",
   "title": "Child Care — Petals Health",
   "description": "Children's health moves fast, a growth spurt, a new vaccine due, a fever that won't settle. Our pediatricians work alongside your family medicine and gynaecolog"

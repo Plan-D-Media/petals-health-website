@@ -12,6 +12,8 @@ const FindDoctor = lazy(() => import('./pages/FindDoctor.jsx'))
 const DoctorProfile = lazy(() => import('./pages/DoctorProfile.jsx'))
 const Treatment = lazy(() => import('./pages/Treatment.jsx'))
 const Bangladesh = lazy(() => import('./pages/Bangladesh.jsx'))
+const Diagnostics = lazy(() => import('./pages/Diagnostics.jsx'))
+const KnowYourTests = lazy(() => import('./pages/KnowYourTests.jsx'))
 const NotFound = lazy(() => import('./pages/NotFound.jsx'))
 
 export function pageFor(pathname) {
@@ -27,6 +29,8 @@ export function pageFor(pathname) {
   if (path === '/clinics') return <Clinics />
   if (path === '/find-a-doctor') return <FindDoctor />
   if (path === '/petals-clinic-in-bangladesh') return <Bangladesh />   // the old site's URL, kept
+  if (path === '/diagnostic-services') return <Diagnostics />
+  if (path === '/know-your-tests') return <KnowYourTests />   // the old site's URL, kept
   const doc = path.match(/^\/doctors\/([a-z0-9-]+)$/)
   if (doc && byId(doc[1])) return <DoctorProfile doctor={byId(doc[1])} />
   return <NotFound path={path} />

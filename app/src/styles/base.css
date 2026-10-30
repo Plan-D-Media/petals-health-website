@@ -31,6 +31,11 @@ body { background: transparent; }   /* z-index -1 tint layers (Process) paint ab
    every band and the footer move together because they all read --content-width through .inner */
 @media (min-width: 1680px) { :root { --content-width: 1600px; } }
 :root { --bleed: max(var(--gutter), calc((100vw - var(--content-width)) / 2)); }
+/* --rail-clear: the strip at the viewport's left edge the floating action rail owns at ≥1024 (left 6 + 44 px circle + 6,
+   ActionRail.css). The gutters already clear it; anything that bleeds to the left edge (a hero photo) starts here
+   instead. tools/layout-check.mjs fails any content that would scroll under the rail. */
+:root { --rail-clear: 0px; }
+@media (min-width: 1024px) { :root { --rail-clear: 56px; } }
 
 .page { width: 100%; position: relative; overflow-x: clip; }
 .band { position: relative; width: 100%; }

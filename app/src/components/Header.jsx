@@ -33,8 +33,12 @@ export const NAV = [
   { id: 'about', label: 'About us', href: '/about' },
   { id: 'clinics', label: 'Clinics', href: '/clinics' },   // a plain link since 2026-09-22 (client): no dropdown behind it
   { id: 'treatments', label: 'Treatments', items: TREATMENTS },
-  { id: 'diagnostics', label: 'Diagnostic Services', href: null },   // no page yet (design/no-mock-pages.md)
-  { id: 'patients', label: 'For Patients', href: null, chevron: true },
+  { id: 'diagnostics', label: 'Diagnostic Services', href: '/diagnostic-services' },   // page since 2026-10-30
+  // For Patients (2026-10-30): one item so far; each further item is one more line here — the menu, the drawer, the
+  // active state and the keyboard handling all read this list
+  { id: 'patients', label: 'For Patients', items: [
+    { label: 'Know your Tests', href: '/know-your-tests' },
+  ] },
   { id: 'bangladesh', label: 'Petals Clinic in Bangladesh', href: '/petals-clinic-in-bangladesh' },   // page since 2026-09-23
 ]
 
@@ -194,7 +198,7 @@ export default function Header({ current = 'home', region } = {}) {
           {NAV.map((n, i) => [
             i > 1 && <span key={'sep' + i} className="nav__sep" aria-hidden="true" />,
             n.items ? (
-              <NavMenu key={n.id} id={n.id} label={n.label} items={n.items} open={openId === n.id} activeHref={`/treatments/${current}`} onOpen={setOpenId} onClose={close} onArrow={onArrow} triggerRef={(el) => { tops.current[n.id] = el }} />
+              <NavMenu key={n.id} id={n.id} label={n.label} items={n.items} open={openId === n.id} activeHref={n.id === 'treatments' ? `/treatments/${current}` : `/${current}`} onOpen={setOpenId} onClose={close} onArrow={onArrow} triggerRef={(el) => { tops.current[n.id] = el }} />
             ) : (
               <a key={n.id} ref={(el) => { tops.current[n.id] = el }} className={'nav__item' + (n.id === current ? ' nav__item--active' : '') + (n.href ? '' : ' is-pending')} href={n.href || undefined} aria-disabled={n.href ? undefined : 'true'} title={n.href ? undefined : PENDING_TITLE} tabIndex={n.href ? undefined : -1} aria-current={n.id === current ? 'page' : undefined} onKeyDown={onTopKey(n.id)}>
                 {n.label}
